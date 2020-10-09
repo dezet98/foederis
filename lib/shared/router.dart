@@ -1,6 +1,7 @@
 import 'package:engineering_thesis/screens/home_screen.dart';
 import 'package:engineering_thesis/screens/login_screen.dart';
 import 'package:engineering_thesis/screens/register_screen.dart';
+import 'package:engineering_thesis/screens/settings_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ class Routes {
   static const String home = "/";
   static const String login = "/login";
   static const String register = "/register";
+  static const String settings = "/settings";
 }
 
 class Router {
@@ -19,8 +21,10 @@ class Router {
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case Routes.register:
         return MaterialPageRoute(builder: (_) => RegisterScreen());
+      case Routes.settings:
+        return MaterialPageRoute(builder: (_) => SettingsScreen());
       default:
-      return MaterialPageRoute(builder: (_) => InformationScreen());
+        return MaterialPageRoute(builder: (_) => InformationScreen());
     }
   }
 }

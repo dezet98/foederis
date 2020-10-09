@@ -10,9 +10,11 @@ class TemplateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: body,
+      body: SafeArea(
+              child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: body,
+        ),
       ),
     );
   }

@@ -13,9 +13,13 @@ class HomeScreen extends StatelessWidget {
             child: Text('login'),
             onPressed: () => Navigator.pushNamed(context, Routes.login),
           ),
-            RaisedButton(
+          RaisedButton(
             child: Text('register'),
             onPressed: () => Navigator.pushNamed(context, Routes.register),
+          ),
+            RaisedButton(
+            child: Text('settings'),
+            onPressed: () => Navigator.pushNamed(context, Routes.settings),
           ),
         ],
       ),
