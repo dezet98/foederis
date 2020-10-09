@@ -9,5 +9,8 @@
         "**/.dart_tool": true,
         "**/.metadata": true,
         "**/.packages": true,
+        "**/android": true,
+        "**/ios": false,
+        "**/build": true,
     }
 }
