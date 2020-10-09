@@ -1,0 +1,13 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/.hg": true,
+        "**/.svn": true,
+        "**/CVS": true,
+        "**/.idea": true,
+        "**/.dart_tool": true,
+        "**/.metadata": true,
+        "**/.packages": true,
+    }
+}
