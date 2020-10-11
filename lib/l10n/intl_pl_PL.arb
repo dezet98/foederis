@@ -1,4 +1,5 @@
 {
     "@@locale": "pl_PL",
-    "login": "zaloguj się"
+    "login": "zaloguj się",
+    "settings": "ustawienia"
 }
