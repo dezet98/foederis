@@ -1,4 +1,5 @@
 import 'package:engineering_thesis/shared/router.dart' as Routing;
+import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -38,11 +39,10 @@ Iterable<LocalizationsDelegate<dynamic>> get _getLocalizationsDelegates => [
     ];
 
 MaterialAppData _getMaterialAppData(_, __) => MaterialAppData(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: lightTheme,
+      darkTheme: darkTheme,
     );
 
-CupertinoAppData _getCupertinoAppData(_, __) =>
-    CupertinoAppData(theme: CupertinoThemeData());
+CupertinoAppData _getCupertinoAppData(context, __) => CupertinoAppData(
+      theme: cupertinoTheme,
+    );
