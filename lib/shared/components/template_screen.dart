@@ -1,3 +1,4 @@
+import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -14,7 +15,7 @@ class TemplateScreen extends StatelessWidget {
       appBar: platformAppBar,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(Dimensions.gutterMedium),
           child: body,
         ),
       ),

@@ -5,6 +5,8 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TemplateScreen(platformAppBar: PlatformAppBar(),);
+    return TemplateScreen(
+      platformAppBar: PlatformAppBar(),
+    );
   }
 }
