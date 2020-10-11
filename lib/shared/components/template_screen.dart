@@ -1,17 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class TemplateScreen extends StatelessWidget {
   final Widget body;
-  final Widget appBar;
+  final PlatformAppBar platformAppBar;
 
-  TemplateScreen({this.body, this.appBar});
+  TemplateScreen({this.body, this.platformAppBar});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar,
+    return PlatformScaffold(
+      appBar: platformAppBar,
       body: SafeArea(
-              child: Padding(
+        child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: body,
         ),

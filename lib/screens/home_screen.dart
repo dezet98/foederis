@@ -1,23 +1,26 @@
+import 'package:engineering_thesis/shared/components/template_screen.dart';
 import 'package:engineering_thesis/shared/router.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return TemplateScreen(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          RaisedButton(
+          PlatformButton(
             child: Text('login'),
             onPressed: () => Navigator.pushNamed(context, Routes.login),
           ),
-          RaisedButton(
+          PlatformButton(
             child: Text('register'),
             onPressed: () => Navigator.pushNamed(context, Routes.register),
           ),
-            RaisedButton(
+          PlatformButton(
             child: Text('settings'),
             onPressed: () => Navigator.pushNamed(context, Routes.settings),
           ),
