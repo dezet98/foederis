@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
     return PlatformProvider(
       builder: (BuildContext context) => PlatformApp(
         title: 'Engineering thesis',
-        localizationsDelegates: _getLocalizationsDelegates ,
+        localizationsDelegates: _getLocalizationsDelegates,
         supportedLocales: S.delegate.supportedLocales,
         material: _getMaterialAppData,
         cupertino: _getCupertinoAppData,
