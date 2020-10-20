@@ -1,4 +1,6 @@
+import 'package:bloc/bloc.dart';
 import 'package:engineering_thesis/shared/router.dart' as Routing;
+import 'package:engineering_thesis/shared/simple_bloc_observer.dart';
 import 'package:engineering_thesis/shared/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,6 +12,7 @@ import 'generated/l10n.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  Bloc.observer = SimpleBlocObserver();
   runApp(MyApp());
 }
 

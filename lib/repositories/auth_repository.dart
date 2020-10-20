@@ -1,14 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:engineering_thesis/shared/services/firebase_auth_service.dart';
+import 'package:meta/meta.dart';
 
 class AuthRepository {
-  final FirebaseAuth _firebaseAuth;
+  final FirebaseAuthService firebaseAuthService;
 
-  AuthRepository({FirebaseAuth firebaseAuth})
-      : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
+  AuthRepository({@required this.firebaseAuthService});
 
-  Future<UserCredential> signAnon() async {
-    var x = await _firebaseAuth.signInAnonymously();
-    print(x); // TODO
-    return x;
+  Future<void> signAnon() async {
+    firebaseAuthService.signAnon();
   }
 }
