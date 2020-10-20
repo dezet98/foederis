@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "268799438998",
+    "firebase_url": "https://engineering-thesis-fa85c.firebaseio.com",
+    "project_id": "engineering-thesis-fa85c",
+    "storage_bucket": "engineering-thesis-fa85c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268799438998:android:b2d0140bd61bfb94c192b7",
+        "android_client_info": {
+          "package_name": "com.dezet98.engineering_thesis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268799438998-sfekbd095opf419b6dp90j28hb4pqqf6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dezet98.engineering_thesis",
+            "certificate_hash": "fcca63e0436ae0c8626eadac9906f059bf11f162"
+          }
+        },
+        {
+          "client_id": "268799438998-7n20mfusakahvpi1fs90m085einkvemv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCY6wbbNVsfjqUNjAiCJWylK5zGGuQFRLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268799438998-7n20mfusakahvpi1fs90m085einkvemv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "268799438998-2h809uieql7fhfuncafqdgjph2ek2tel.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dezet98.engineering-thesis"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
