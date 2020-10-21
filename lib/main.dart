@@ -74,11 +74,15 @@ Widget get _buildFirstScreen {
         return HomeScreen();
       } else if (state is AuthUserUnauthenticatedState) {
         return LoginScreen();
-      } else {
+      } else if (state is AuthInitialState) {
         return Routing.InformationScreen(
-          content: Text('Splash Screen'),
+          content: Text('AuthInitialState'),
         );
       }
+      return Routing.InformationScreen(
+        // TODO never listen !
+        content: Text('AuthVerificationState'),
+      );
     },
   );
 }

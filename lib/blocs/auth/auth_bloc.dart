@@ -12,7 +12,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
   StreamSubscription<AppUser> _userStreamSubscription;
 
-  AuthBloc({@required this.authRepository}) : super(AuthInitial()) {
+  AuthBloc({@required this.authRepository}) : super(AuthInitialState()) {
     _userStreamSubscription =
         authRepository.authStream.listen((AppUser newUser) {
       add(AuthUserChangedEvent(user: newUser));
@@ -23,8 +23,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(
     AuthEvent event,
   ) async* {
-    yield AuthInitial();
     if (event is AuthUserChangedEvent) {
+      yield AuthVerificationState(); // TODO it's never use in listener
       yield* mapAuthUserChangedEvent(event.user);
     }
   }
