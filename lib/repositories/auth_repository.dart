@@ -16,4 +16,8 @@ class AuthRepository {
   Stream<AppUser> get authStream {
     return _firebaseAuth.authStateChanges().asyncMap(AppUser.toAppUser);
   }
+
+  Future<void> signOut() async {
+    return Future.wait([_firebaseAuth.signOut()]);
+  }
 }

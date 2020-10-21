@@ -10,6 +10,6 @@ class AppUser {
   AppUser({@required this.id, this.firstName, this.secondName, this.email});
 
   static AppUser toAppUser(User firebaseUser) {
-    return AppUser(id: firebaseUser.uid);
+    return firebaseUser == null ? null : AppUser(id: firebaseUser?.uid);
   }
 }

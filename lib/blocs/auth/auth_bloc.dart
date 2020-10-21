@@ -23,6 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(
     AuthEvent event,
   ) async* {
+    yield AuthInitial();
     if (event is AuthUserChangedEvent) {
       yield* mapAuthUserChangedEvent(event.user);
     }
@@ -37,7 +38,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapAuthUserChangedEvent(AppUser user) async* {
     if (user == null) {
       yield AuthUserUnauthenticatedState();
+    } else {
+      yield AuthUserAuthenticatedState();
     }
-    yield AuthUserAuthenticatedState();
   }
 }
