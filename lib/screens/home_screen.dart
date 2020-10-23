@@ -15,15 +15,8 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           PlatformButton(
-            child: Text('login'),
-            onPressed: () => Navigator.pushNamed(context, Routes.login),
-          ),
-          PlatformButton(
-            child: Text('register'),
-            onPressed: () => Navigator.pushNamed(context, Routes.register),
-          ),
-          PlatformButton(
-            child: Text('sign out'),
+            child: Text(
+                'sign out'), // todo be aware that somebody can click that more than one time
             onPressed: () =>
                 RepositoryProvider.of<AuthRepository>(context).signOut(),
           ),
