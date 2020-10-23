@@ -9,8 +9,10 @@
         "**/.dart_tool": true,
         "**/.metadata": true,
         "**/.packages": true,
-        "**/android": false,
+        "**/android": true,
         "**/ios": true,
         "**/build": true,
+        "**/generated": true,
+        "**/.flutter*": true
     }
 }
