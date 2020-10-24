@@ -54,6 +54,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Bad credentials`
+  String get bad_credentials {
+    return Intl.message(
+      'Bad credentials',
+      name: 'bad_credentials',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

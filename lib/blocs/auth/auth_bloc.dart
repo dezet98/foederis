@@ -9,12 +9,14 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthRepository authRepository;
+  final AuthRepository _authRepository;
   StreamSubscription<AppUser> _userStreamSubscription;
 
-  AuthBloc({@required this.authRepository}) : super(AuthInitialState()) {
+  AuthBloc({@required authRepository})
+      : _authRepository = authRepository,
+        super(AuthInitialState()) {
     _userStreamSubscription =
-        authRepository.authStream.listen((AppUser newUser) {
+        _authRepository.authStream.listen((AppUser newUser) {
       add(AuthUserChangedEvent(user: newUser));
     });
   }
@@ -23,9 +25,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(
     AuthEvent event,
   ) async* {
+    yield AuthInProgressState(); // TODO it's never use in listener
     if (event is AuthUserChangedEvent) {
-      yield AuthVerificationState(); // TODO it's never use in listener
       yield* mapAuthUserChangedEvent(event.user);
+    } else if (event is AuthSignOutEvent) {
+      yield AuthSigningOutState();
+      yield* mapAuthSignOutEvent();
     }
   }
 
@@ -40,6 +45,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       yield AuthUserUnauthenticatedState();
     } else {
       yield AuthUserAuthenticatedState();
+    }
+  }
+
+  Stream<AuthState> mapAuthSignOutEvent() async* {
+    try {
+      await _authRepository.signOut();
+      yield AuthSignOutSuccessState();
+    } catch (e) {
+      yield AuthSignOutFailureState();
     }
   }
 }

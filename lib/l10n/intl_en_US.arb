@@ -1,5 +1,7 @@
 {
     "@@locale": "en_US",
     "login": "log in",
-    "settings": "settings"
+    "settings": "settings",
+
+    "bad_credentials": "Bad credentials"
 }
