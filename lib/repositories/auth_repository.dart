@@ -1,4 +1,5 @@
 import 'package:engineering_thesis/models/app_user.dart';
+import 'package:engineering_thesis/shared/app_logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepository {
@@ -9,7 +10,11 @@ class AuthRepository {
 
   Future<UserCredential> signAnon() async {
     var x = await _firebaseAuth.signInAnonymously();
-    print(x); // TODO
+    x != null
+        ? AppLogger()
+            .log(message: 'Logged in (anonymously)', logLevel: LogLevel.info)
+        : AppLogger().log(
+            message: 'Not logged in (anonymously)', logLevel: LogLevel.error);
     return x;
   }
 
