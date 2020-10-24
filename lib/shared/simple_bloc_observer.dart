@@ -10,13 +10,17 @@ class SimpleBlocObserver extends BlocObserver {
 
   @override
   void onChange(Cubit cubit, Change change) {
-    AppLogger().log(message: change.toString(), logLevel: LogLevel.info);
+    String msg =
+        "Changing state: '${change.currentState}' -> '${change.nextState}'";
+    AppLogger().log(message: msg, logLevel: LogLevel.info);
     super.onChange(cubit, change);
   }
 
   @override
   void onTransition(Bloc bloc, Transition transition) {
-    AppLogger().log(message: transition.toString(), logLevel: LogLevel.info);
+    String msg =
+        "Transition(event: ${transition.event}): '${transition.currentState}' -> '${transition.nextState}'";
+    AppLogger().log(message: msg, logLevel: LogLevel.info);
     super.onTransition(bloc, transition);
   }
 
