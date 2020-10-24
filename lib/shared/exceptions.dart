@@ -7,3 +7,9 @@ class LoginException implements Exception {
 
   LoginException({@required this.loginError, this.message});
 }
+
+class SignOutException implements Exception {
+  final String error;
+
+  SignOutException({this.error});
+}

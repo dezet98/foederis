@@ -1,33 +1,26 @@
 part of 'auth_bloc.dart';
 
 @immutable
-abstract class AuthState {
-  @override
-  String toString() => 'Auth User Authenticated State';
-}
+abstract class AuthState {}
 
-class AuthInitialState extends AuthState {
-  @override
-  String toString() => 'Auth User Authenticated State';
-}
+class AuthInitialState extends AuthState {}
 
 class AuthInProgressState extends AuthState {
-  @override
-  String toString() => 'Auth Verification State';
 } // TODO it's never use in listener
 
-class AuthUserAuthenticatedState extends AuthState {
-  @override
-  String toString() => 'Auth User Authenticated State';
-}
+class AuthUserAuthenticatedState extends AuthState {}
 
-class AuthUserUnauthenticatedState extends AuthState {
-  @override
-  String toString() => 'Auth User Unauthenticated State';
-}
+class AuthUserUnauthenticatedState extends AuthState {}
 
 class AuthSigningOutState extends AuthState {}
 
 class AuthSignOutSuccessState extends AuthState {}
 
-class AuthSignOutFailureState extends AuthState {}
+class AuthSignOutFailureState extends AuthState {
+  final String message;
+
+  AuthSignOutFailureState({this.message});
+
+  @override
+  String toString() => 'AuthSignOutFailureState {error: $message}';
+}
