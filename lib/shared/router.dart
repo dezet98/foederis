@@ -71,6 +71,26 @@ class Router {
         return MaterialPageRoute(builder: (context) => InformationScreen());
     }
   }
+
+  static Widget get buildFirstScreen {
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        if (state is AuthUserAuthenticatedState) {
+          return HomeScreen();
+        } else if (state is AuthUserUnauthenticatedState) {
+          return LoginScreen();
+        } else if (state is AuthInitialState) {
+          return InformationScreen(
+            content: Text('AuthInitialState'),
+          );
+        }
+        return InformationScreen(
+          // TODO never listen !
+          content: Text('AuthVerificationState'),
+        );
+      },
+    );
+  }
 }
 
 class InformationScreen extends StatelessWidget {

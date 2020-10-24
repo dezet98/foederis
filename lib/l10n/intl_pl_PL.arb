@@ -1,5 +1,6 @@
 {
     "@@locale": "pl_PL",
     "login": "zaloguj się",
-    "settings": "ustawienia"
+    "settings": "ustawienia",
+    "bad_credentials": "Złe dane"
 }

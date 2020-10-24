@@ -8,7 +8,6 @@ import 'package:flutter/cupertino.dart';
 part 'login_event.dart';
 part 'login_state.dart';
 
-
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepository _authRepository;
   LoginBloc({@required AuthRepository authRepository})
@@ -20,6 +19,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginEvent event,
   ) async* {
     if (event is LoginWithEmailAndPasswordEvent) {
+      yield LoginInProgressState();
       yield* mapLoginWithEmailAndPasswordEvent(
           email: event.email, password: event.password);
     }
@@ -30,8 +30,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       await _authRepository.signInWithEmailAndPassword(
           email: email, password: password);
-    } catch (e) {
-      AppLogger().log(message: e, logLevel: LogLevel.warning);
+      yield LoginSuccessState();
+    } catch (message) {
+      AppLogger().log(message: message, logLevel: LogLevel.warning);
+      yield LoginFailureState(error: message);
     }
   }
 }
