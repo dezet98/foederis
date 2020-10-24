@@ -9,7 +9,7 @@ class Dimensions {
   static const double gutterSmall = 8.0;
   static const double gutterMedium = 16.0;
   static const double gutterHuge = 24.0;
- }
+}
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
@@ -21,6 +21,5 @@ ThemeData darkTheme = ThemeData(
   primaryColor: Palette.blue,
 );
 
-CupertinoThemeData cupertinoTheme = CupertinoThemeData(
-  primaryColor: Palette.blue
-);
+CupertinoThemeData cupertinoTheme =
+    CupertinoThemeData(primaryColor: Palette.blue);

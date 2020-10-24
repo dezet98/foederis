@@ -1,5 +1,5 @@
 import 'package:engineering_thesis/repositories/auth_repository.dart';
-import 'package:engineering_thesis/shared/components/template_screen.dart';
+import 'package:engineering_thesis/shared/templates/template_screen.dart';
 import 'package:engineering_thesis/shared/router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
