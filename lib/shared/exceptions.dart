@@ -1,3 +1,6 @@
+import 'package:engineering_thesis/constants/enums.dart';
+import 'package:flutter/cupertino.dart';
+
 class AppException implements Exception {
   String errorMsg;
 
@@ -10,4 +13,9 @@ class AppException implements Exception {
   String get errors => errorMsg;
 }
 
-class SignInWithEmailAndPasswordFailure extends AppException {}
+class LoginException implements Exception {
+  LoginError loginError;
+  String message;
+
+  LoginException({@required this.loginError, this.message});
+}

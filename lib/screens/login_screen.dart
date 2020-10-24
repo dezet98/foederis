@@ -1,4 +1,6 @@
 import 'package:engineering_thesis/blocs/login/login_bloc.dart';
+import 'package:engineering_thesis/constants/enums.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/shared/templates/template_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,8 +58,18 @@ class _LoginScreenState extends State<LoginScreen> {
         loading = true;
       });
     } else if (state is LoginFailureState) {
+      String text;
+      switch (state.loginError) {
+        case LoginError.bad_credentials:
+          text = S.of(context).bad_credentials;
+          break;
+        case LoginError.other:
+          text = state.message;
+          break;
+      }
       setState(() {
         loading = false;
+        showPlatformModalSheet(context: context, builder: (_) => Text(text));
       });
     } else if (state is LoginSuccessState) {
       setState(() {

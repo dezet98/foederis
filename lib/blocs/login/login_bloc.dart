@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:engineering_thesis/constants/enums.dart';
 import 'package:engineering_thesis/repositories/auth_repository.dart';
 import 'package:engineering_thesis/shared/app_logger.dart';
+import 'package:engineering_thesis/shared/exceptions.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -31,9 +33,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       await _authRepository.signInWithEmailAndPassword(
           email: email, password: password);
       yield LoginSuccessState();
-    } catch (message) {
-      AppLogger().log(message: message, logLevel: LogLevel.warning);
-      yield LoginFailureState(error: message);
+    } on LoginException catch (loginException) {
+      AppLogger().log(
+          message: loginException.loginError.toString(),
+          logLevel: LogLevel.warning);
+      yield LoginFailureState(
+          loginError: loginException.loginError,
+          message: loginException.message);
     }
   }
 }

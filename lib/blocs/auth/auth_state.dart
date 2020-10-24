@@ -1,14 +1,17 @@
 part of 'auth_bloc.dart';
 
 @immutable
-abstract class AuthState {}
+abstract class AuthState {
+  @override
+  String toString() => 'Auth User Authenticated State';
+}
 
 class AuthInitialState extends AuthState {
   @override
   String toString() => 'Auth User Authenticated State';
 }
 
-class AuthVerificationState extends AuthState {
+class AuthInProgressState extends AuthState {
   @override
   String toString() => 'Auth Verification State';
 } // TODO it's never use in listener
@@ -22,3 +25,9 @@ class AuthUserUnauthenticatedState extends AuthState {
   @override
   String toString() => 'Auth User Unauthenticated State';
 }
+
+class AuthSigningOutState extends AuthState {}
+
+class AuthSignOutSuccessState extends AuthState {}
+
+class AuthSignOutFailureState extends AuthState {}

@@ -1,4 +1,6 @@
+import 'package:engineering_thesis/constants/enums.dart';
 import 'package:engineering_thesis/models/app_user.dart';
+import 'package:engineering_thesis/shared/exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
@@ -15,8 +17,13 @@ class AuthRepository {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
     } catch (e) {
-      if (e is PlatformException && (e.code == "user-not_found"))
-        throw ("Bad C");
+      if (e is FirebaseAuthException &&
+          (e.code == "user-not-found" || e.code == "wrong-password")) {
+        throw LoginException(loginError: LoginError.bad_credentials);
+      } else if (e is PlatformException) {
+        throw LoginException(loginError: LoginError.other, message: e.code);
+      }
+      throw LoginException(loginError: LoginError.other, message: e.toString());
     }
   }
 
