@@ -1,17 +1,5 @@
 import 'package:engineering_thesis/constants/enums.dart';
-import 'package:flutter/cupertino.dart';
-
-class AppException implements Exception {
-  String errorMsg;
-
-  AppException({this.errorMsg});
-
-  set setError(String error) {
-    errorMsg = error;
-  }
-
-  String get errors => errorMsg;
-}
+import 'package:meta/meta.dart';
 
 class LoginException implements Exception {
   LoginError loginError;
