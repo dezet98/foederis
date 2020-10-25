@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
         case LoginError.bad_credentials:
           text = S.of(context).bad_credentials;
           break;
-        case LoginError.other:
+        case LoginError.undefined:
           text = state.message;
           break;
       }

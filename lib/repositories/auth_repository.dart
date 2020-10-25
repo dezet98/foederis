@@ -20,10 +20,33 @@ class AuthRepository {
       if (e is FirebaseAuthException &&
           (e.code == "user-not-found" || e.code == "wrong-password")) {
         throw LoginException(loginError: LoginError.bad_credentials);
-      } else if (e is PlatformException) {
-        throw LoginException(loginError: LoginError.other, message: e.code);
       }
-      throw LoginException(loginError: LoginError.other, message: e.toString());
+      throw LoginException(
+          loginError: LoginError.undefined, message: e.toString());
+    }
+  }
+
+  Future<void> register({@required email, @required password}) async {
+    try {
+      await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        switch (e.code) {
+          case "invalid-email":
+            throw RegisterException(registerError: RegisterError.invalid_email);
+          case "email-already-in-use":
+            throw RegisterException(
+                registerError: RegisterError.email_already_in_use);
+          case "weak-password":
+            throw RegisterException(registerError: RegisterError.weak_password);
+          case "operation-not-allowed":
+            throw RegisterException(
+                registerError: RegisterError.operation_not_allowed);
+        }
+      }
+      throw RegisterException(
+          registerError: RegisterError.undefined, message: e.toString());
     }
   }
 
