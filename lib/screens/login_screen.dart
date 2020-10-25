@@ -1,6 +1,8 @@
+import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
 import 'package:engineering_thesis/blocs/login/login_bloc.dart';
 import 'package:engineering_thesis/constants/enums.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
+import 'package:engineering_thesis/shared/routing.dart';
 import 'package:engineering_thesis/shared/templates/template_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,34 +22,50 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginBloc, LoginState>(
-      listener: loginBlocListener,
-      child: TemplateScreen(
-        platformAppBar: PlatformAppBar(
-          title: Text("Login"),
-        ),
-        body: Column(
-          children: [
-            PlatformTextField(controller: _emailController),
-            PlatformTextField(
-              controller: _passwordController,
-            ),
-            RaisedButton(
-              onPressed: loading
-                  ? null
-                  : () {
-                      BlocProvider.of<LoginBloc>(context).add(
-                        LoginWithEmailAndPasswordEvent(
-                            email: _emailController.text,
-                            password: _passwordController.text),
-                      );
-                    },
-              child: loading
-                  ? PlatformCircularProgressIndicator()
-                  : Text('log in with credentials'),
-            )
-          ],
-        ),
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        if (state is AuthUserAuthenticatedState) {
+          return Routing.onGenerate(UserRoutes.home);
+        }
+        return BlocListener<LoginBloc, LoginState>(
+          listener: loginBlocListener,
+          child: _buildLoginScreen(),
+        );
+      },
+    );
+  }
+
+  Widget _buildLoginScreen() {
+    return TemplateScreen(
+      platformAppBar: PlatformAppBar(
+        title: Text("Login"),
+      ),
+      body: Column(
+        children: [
+          PlatformTextField(controller: _emailController),
+          PlatformTextField(
+            controller: _passwordController,
+          ),
+          PlatformButton(
+            onPressed: () =>
+                Routing.popAndPushNamed(context, GuestRoutes.register),
+            child: Text(S.of(context).text_button_go_to_register),
+          ),
+          PlatformButton(
+            onPressed: loading
+                ? null
+                : () {
+                    BlocProvider.of<LoginBloc>(context).add(
+                      LoginWithEmailAndPasswordEvent(
+                          email: _emailController.text,
+                          password: _passwordController.text),
+                    );
+                  },
+            child: loading
+                ? PlatformCircularProgressIndicator()
+                : Text('log in with credentials'),
+          )
+        ],
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
+import 'package:engineering_thesis/shared/routing.dart';
 import 'package:engineering_thesis/shared/templates/template_screen.dart';
-import 'package:engineering_thesis/shared/router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,8 +24,13 @@ class HomeScreen extends StatelessWidget {
                   BlocProvider.of<AuthBloc>(context).add(AuthSignOutEvent()),
             ),
             PlatformButton(
+              onPressed: () =>
+                  Routing.popAndPushNamed(context, GuestRoutes.login),
+              child: Text(S.of(context).text_button_go_to_login),
+            ),
+            PlatformButton(
               child: Text('settings'),
-              onPressed: () => Navigator.pushNamed(context, Routes.settings),
+              onPressed: () => Routing.pushNamed(context, UserRoutes.settings),
             ),
           ],
         ),

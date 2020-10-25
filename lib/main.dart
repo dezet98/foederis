@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:engineering_thesis/shared/localizations.dart';
 import 'package:engineering_thesis/shared/providers.dart';
-import 'package:engineering_thesis/shared/router.dart' as Routing;
+import 'package:engineering_thesis/shared/routing.dart';
 import 'package:engineering_thesis/shared/simple_bloc_observer.dart';
 import 'package:engineering_thesis/shared/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -37,8 +37,7 @@ class _MyAppState extends State<MyApp> {
             supportedLocales: S.delegate.supportedLocales,
             material: getMaterialAppData,
             cupertino: getCupertinoAppData,
-            home: Routing.Router.buildFirstScreen,
-            onGenerateRoute: Routing.Router.onGenerateRoute,
+            home: Routing.buildFirstScreen,
           ),
         ),
       ),

@@ -45,6 +45,36 @@ class S {
     );
   }
 
+  /// `Create account`
+  String get app_bar_title_register {
+    return Intl.message(
+      'Create account',
+      name: 'app_bar_title_register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `create account`
+  String get text_button_go_to_register {
+    return Intl.message(
+      'create account',
+      name: 'text_button_go_to_register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `go to login`
+  String get text_button_go_to_login {
+    return Intl.message(
+      'go to login',
+      name: 'text_button_go_to_login',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `settings`
   String get settings {
     return Intl.message(
