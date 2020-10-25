@@ -59,12 +59,12 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     } else if (state is LoginFailureState) {
       String text;
-      switch (state.loginError) {
+      switch (state.loginException.loginError) {
         case LoginError.bad_credentials:
           text = S.of(context).bad_credentials;
           break;
         case LoginError.undefined:
-          text = state.message;
+          text = state.loginException.message;
           break;
       }
       setState(() {

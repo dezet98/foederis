@@ -2,7 +2,6 @@ import 'package:engineering_thesis/constants/enums.dart';
 import 'package:engineering_thesis/models/app_user.dart';
 import 'package:engineering_thesis/shared/exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 
 class AuthRepository {
@@ -26,7 +25,8 @@ class AuthRepository {
     }
   }
 
-  Future<void> register({@required email, @required password}) async {
+  Future<void> createUserWithEmailAndPassword(
+      {@required email, @required password}) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
