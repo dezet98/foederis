@@ -25,8 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthUserAuthenticatedState) {
-            Routing.pushNamedAndRemoveUntil(
-                context, UserRoutes.home, UserRoutes.home);
+            Routing.pushReplacement(context, UserRoutes.home);
           }
         },
         child: _buildRegisterScreen());

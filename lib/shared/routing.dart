@@ -83,7 +83,7 @@ bool _isEligible(BuildContext context, String routeName) {
     if (authenticated) return true;
     Routing.pushNamedAndRemoveUntil(
         context, GuestRoutes.login, GuestRoutes.login);
-    // todo, maybe message that you have to log in again in login attributes
+    // TODO, maybe message that you have to log in again in login attributes
   } else if (GuestRoutes.props.contains(routeName)) {
     if (!authenticated) return true;
     showPlatformModalSheet(

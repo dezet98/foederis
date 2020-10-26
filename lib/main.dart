@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/screens/splash_screen.dart';
 import 'package:engineering_thesis/shared/localizations.dart';
 import 'package:engineering_thesis/shared/providers.dart';
 import 'package:engineering_thesis/shared/routing.dart';

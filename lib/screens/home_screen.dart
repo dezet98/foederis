@@ -19,9 +19,9 @@ class HomeScreen extends StatelessWidget {
           children: [
             PlatformButton(
               child: Text(
-                  'sign out'), // todo be aware that somebody can click that more than one time
-              onPressed: () =>
-                  BlocProvider.of<AuthBloc>(context).add(AuthSignOutEvent()),
+                  'sign out'), // TODO be aware that somebody can click that more than one time
+              onPressed: () => BlocProvider.of<AuthBloc>(context).add(
+                  AuthSignOutEvent()), //TODO create alert and send to splash screen or sth
             ),
             PlatformButton(
               onPressed: () =>
@@ -39,6 +39,6 @@ class HomeScreen extends StatelessWidget {
   }
 
   void authBlocListener(context, state) {
-    // todo maybe alert, to check
+    // TODO maybe alert, to check
   }
 }
