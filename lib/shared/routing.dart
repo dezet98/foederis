@@ -2,12 +2,16 @@ import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
 import 'package:engineering_thesis/screens/home_screen.dart';
 import 'package:engineering_thesis/screens/login_screen.dart';
 import 'package:engineering_thesis/screens/register/register_screen.dart';
-import 'package:engineering_thesis/screens/register/splash_screen.dart';
 import 'package:engineering_thesis/screens/settings_screen.dart';
+import 'package:engineering_thesis/screens/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
+class CommonRoutes {
+  static const String splash = "/splash";
+}
 
 class GuestRoutes {
   static const String login = "/login";
@@ -34,9 +38,15 @@ class Routing {
         return RegisterScreen();
       case UserRoutes.settings:
         return SettingsScreen();
+      case CommonRoutes.splash:
+        return SplashScreen();
       default:
         assert(false, '$routeName is not define as a routeName');
-        return MaterialPageRoute(builder: (_) => SplashScreen());
+        return PlatformScaffold(
+          body: Center(
+            child: Text('$routeName is not define as a routeName'),
+          ),
+        );
     }
   }
 
@@ -47,32 +57,21 @@ class Routing {
     }
   }
 
-  static void popAndPushNamed(context, String routeName) {
+  static void pushReplacement(context, String routeName) {
     if (_isEligible(context, routeName)) {
-      Navigator.pop(context);
-      Navigator.push(
+      Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (_) => onGenerate(routeName)));
     }
   }
 
-  static Widget get buildFirstScreen {
-    return BlocBuilder<AuthBloc, AuthState>(
-      builder: (context, state) {
-        if (state is AuthUserAuthenticatedState) {
-          return HomeScreen();
-        } else if (state is AuthUserUnauthenticatedState) {
-          return LoginScreen();
-        } else if (state is AuthInitialState) {
-          return SplashScreen(
-            content: Text('AuthInitialState'),
-          );
-        }
-        return SplashScreen(
-          // TODO never listen !
-          content: Text('AuthVerificationState'),
-        );
-      },
-    );
+  static void pushNamedAndRemoveUntil(
+      context, String pushName, String untilName) {
+    if (_isEligible(context, pushName)) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => onGenerate(pushName)),
+          ModalRoute.withName(untilName));
+    }
   }
 }
 
@@ -82,11 +81,8 @@ bool _isEligible(BuildContext context, String routeName) {
 
   if (UserRoutes.props.contains(routeName)) {
     if (authenticated) return true;
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (_) => Routing.onGenerate(GuestRoutes.login)),
-      ModalRoute.withName(GuestRoutes.login),
-    );
+    Routing.pushNamedAndRemoveUntil(
+        context, GuestRoutes.login, GuestRoutes.login);
     // todo, maybe message that you have to log in again in login attributes
   } else if (GuestRoutes.props.contains(routeName)) {
     if (!authenticated) return true;

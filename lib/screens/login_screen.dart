@@ -22,16 +22,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthBloc, AuthState>(
-      builder: (context, state) {
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
         if (state is AuthUserAuthenticatedState) {
-          return Routing.onGenerate(UserRoutes.home);
+          Routing.pushNamedAndRemoveUntil(
+              context, UserRoutes.home, UserRoutes.home);
+          setState(() {
+            // loading = false;
+          });
         }
-        return BlocListener<LoginBloc, LoginState>(
-          listener: loginBlocListener,
-          child: _buildLoginScreen(),
-        );
       },
+      child: BlocListener<LoginBloc, LoginState>(
+        listener: loginBlocListener,
+        child: _buildLoginScreen(),
+      ),
     );
   }
 
@@ -48,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           PlatformButton(
             onPressed: () =>
-                Routing.popAndPushNamed(context, GuestRoutes.register),
+                Routing.pushReplacement(context, GuestRoutes.register),
             child: Text(S.of(context).text_button_go_to_register),
           ),
           PlatformButton(
@@ -91,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     } else if (state is LoginSuccessState) {
       setState(() {
-        loading = false;
+        //loading = false;
       });
     }
   }

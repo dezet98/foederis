@@ -22,12 +22,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
-      if (state is AuthUserAuthenticatedState) {
-        return Routing.onGenerate(UserRoutes.home);
-      }
-      return _buildRegisterScreen();
-    });
+    return BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthUserAuthenticatedState) {
+            Routing.pushNamedAndRemoveUntil(
+                context, UserRoutes.home, UserRoutes.home);
+          }
+        },
+        child: _buildRegisterScreen());
   }
 
   Widget _buildRegisterScreen() {
@@ -45,7 +47,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             PlatformButton(
               onPressed: () =>
-                  Routing.popAndPushNamed(context, GuestRoutes.login),
+                  Routing.pushReplacement(context, GuestRoutes.login),
               child: Text(S.of(context).text_button_go_to_login),
             ),
             PlatformButton(
@@ -99,7 +101,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       });
     } else if (state is RegisterSuccessState) {
       setState(() {
-        loading = false;
+        //loading = false;
       });
     }
   }

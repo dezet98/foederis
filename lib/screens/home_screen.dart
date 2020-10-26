@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
             ),
             PlatformButton(
               onPressed: () =>
-                  Routing.popAndPushNamed(context, GuestRoutes.login),
+                  Routing.pushReplacement(context, GuestRoutes.login),
               child: Text(S.of(context).text_button_go_to_login),
             ),
             PlatformButton(
