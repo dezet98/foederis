@@ -1,6 +1,9 @@
 {
     "@@locale": "en_US",
     "login": "log in",
+    "app_bar_title_register": "Create account",
+    "text_button_go_to_register": "create account",
+    "text_button_go_to_login": "go to login",
     "settings": "settings",
 
     "bad_credentials": "Bad credentials"

@@ -12,13 +12,13 @@ class LoginInitialState extends LoginState {}
 class LoginInProgressState extends LoginState {}
 
 class LoginFailureState extends LoginState {
-  final LoginError loginError;
-  final String message;
+  final LoginException loginException;
 
-  LoginFailureState({this.loginError, this.message});
+  LoginFailureState({this.loginException});
 
   @override
-  String toString() => 'LoginFailureState {error: ${loginError.toString()}}';
+  String toString() =>
+      'LoginFailureState {error: ${loginException.loginError.toString()}}';
 }
 
 class LoginSuccessState extends LoginState {}

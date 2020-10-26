@@ -1,6 +1,7 @@
 import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
+import 'package:engineering_thesis/shared/routing.dart';
 import 'package:engineering_thesis/shared/templates/template_screen.dart';
-import 'package:engineering_thesis/shared/router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,13 +19,18 @@ class HomeScreen extends StatelessWidget {
           children: [
             PlatformButton(
               child: Text(
-                  'sign out'), // todo be aware that somebody can click that more than one time
+                  'sign out'), // TODO be aware that somebody can click that more than one time
+              onPressed: () => BlocProvider.of<AuthBloc>(context).add(
+                  AuthSignOutEvent()), //TODO create alert and send to splash screen or sth
+            ),
+            PlatformButton(
               onPressed: () =>
-                  BlocProvider.of<AuthBloc>(context).add(AuthSignOutEvent()),
+                  Routing.pushReplacement(context, GuestRoutes.login),
+              child: Text(S.of(context).text_button_go_to_login),
             ),
             PlatformButton(
               child: Text('settings'),
-              onPressed: () => Navigator.pushNamed(context, Routes.settings),
+              onPressed: () => Routing.pushNamed(context, UserRoutes.settings),
             ),
           ],
         ),
@@ -33,6 +39,6 @@ class HomeScreen extends StatelessWidget {
   }
 
   void authBlocListener(context, state) {
-    // todo maybe alert, to check
+    // TODO maybe alert, to check
   }
 }

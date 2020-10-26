@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/constants/enums.dart';
 import 'package:engineering_thesis/repositories/auth_repository.dart';
 import 'package:engineering_thesis/shared/app_logger.dart';
 import 'package:engineering_thesis/shared/exceptions.dart';
@@ -37,9 +36,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       AppLogger().log(
           message: loginException.loginError.toString(),
           logLevel: LogLevel.warning);
-      yield LoginFailureState(
-          loginError: loginException.loginError,
-          message: loginException.message);
+      yield LoginFailureState(loginException: loginException);
     }
   }
 }

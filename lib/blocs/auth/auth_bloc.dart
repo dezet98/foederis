@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:engineering_thesis/models/app_user.dart';
 import 'package:engineering_thesis/repositories/auth_repository.dart';
+import 'package:engineering_thesis/shared/exceptions.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -52,8 +53,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       await _authRepository.signOut();
       yield AuthSignOutSuccessState();
-    } catch (e) {
-      yield AuthSignOutFailureState();
+    } on SignOutException catch (e) {
+      yield AuthSignOutFailureState(message: e.error);
     }
   }
 }
