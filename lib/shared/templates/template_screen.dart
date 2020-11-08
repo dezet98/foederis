@@ -11,9 +11,15 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class TemplateScreen extends StatelessWidget {
   final Widget body;
   final PlatformAppBar platformAppBar;
+  final PlatformNavBar platformNavBar;
   final String routeName;
 
-  TemplateScreen({@required this.body, this.routeName, this.platformAppBar});
+  TemplateScreen({
+    @required this.body,
+    this.routeName,
+    this.platformAppBar,
+    this.platformNavBar,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +31,7 @@ class TemplateScreen extends StatelessWidget {
           child: body,
         ),
       ),
+      bottomNavBar: platformNavBar,
     );
   }
 

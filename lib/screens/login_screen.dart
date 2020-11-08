@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
         if (state is AuthUserAuthenticatedState) {
           Routing.pushReplacement(context, UserRoutes.home);
           setState(() {
-            // loading = false;
+            loading = false;
           });
         }
       },
