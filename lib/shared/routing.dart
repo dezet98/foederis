@@ -47,14 +47,14 @@ class Routing {
   }
 
   static void pushNamed(context, String routeName) {
-    if (_isEligible(context, routeName)) {
+    if (_routeGuard(context, routeName)) {
       Navigator.push(
           context, MaterialPageRoute(builder: (_) => onGenerate(routeName)));
     }
   }
 
   static void pushReplacement(context, String routeName) {
-    if (_isEligible(context, routeName)) {
+    if (_routeGuard(context, routeName)) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (_) => onGenerate(routeName)));
     }
@@ -62,7 +62,7 @@ class Routing {
 
   static void pushNamedAndRemoveUntil(
       context, String pushName, String untilName) {
-    if (_isEligible(context, pushName)) {
+    if (_routeGuard(context, pushName)) {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (_) => onGenerate(pushName)),
@@ -71,7 +71,7 @@ class Routing {
   }
 }
 
-bool _isEligible(BuildContext context, String routeName) {
+bool _routeGuard(BuildContext context, String routeName) {
   bool authenticated =
       BlocProvider.of<AuthBloc>(context).state is AuthUserAuthenticatedState;
 

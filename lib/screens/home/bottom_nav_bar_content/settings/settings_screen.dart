@@ -1,16 +1,15 @@
 import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class SettingsHomeContent extends StatefulWidget {
+class SettingsScreen extends StatefulWidget {
   @override
-  _SettingsHomeContentState createState() => _SettingsHomeContentState();
+  _SettingsScreenState createState() => _SettingsScreenState();
 }
 
-class _SettingsHomeContentState extends State<SettingsHomeContent> {
+class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,7 +17,7 @@ class _SettingsHomeContentState extends State<SettingsHomeContent> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          RaisedButton(
+          PlatformButton(
             child: Text('en'),
             onPressed: () {
               setState(() {
@@ -28,7 +27,7 @@ class _SettingsHomeContentState extends State<SettingsHomeContent> {
               });
             },
           ),
-          RaisedButton(
+          PlatformButton(
             child: Text('pl'),
             onPressed: () {
               setState(() {
@@ -38,7 +37,7 @@ class _SettingsHomeContentState extends State<SettingsHomeContent> {
               });
             },
           ),
-          RaisedButton(
+          PlatformButton(
             child: isMaterial(context)
                 ? Text('change to Cupertino')
                 : Text('change to Material'),
@@ -50,7 +49,7 @@ class _SettingsHomeContentState extends State<SettingsHomeContent> {
               }
             },
           ),
-          RaisedButton(
+          PlatformButton(
             child: Text(
               'sign out',
             ), // TODO be aware that somebody can click that more than one time
