@@ -1,8 +1,7 @@
 import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
-import 'package:engineering_thesis/screens/home_screen.dart';
-import 'package:engineering_thesis/screens/login_screen.dart';
+import 'package:engineering_thesis/screens/home/home_screen.dart';
+import 'package:engineering_thesis/screens/login/login_screen.dart';
 import 'package:engineering_thesis/screens/register/register_screen.dart';
-import 'package:engineering_thesis/screens/settings_screen.dart';
 import 'package:engineering_thesis/screens/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +21,8 @@ class GuestRoutes {
 
 class UserRoutes {
   static const String home = "/";
-  static const String settings = "/settings";
 
-  static List<String> get props => [home, settings];
+  static List<String> get props => [home];
 }
 
 class Routing {
@@ -36,8 +34,6 @@ class Routing {
         return LoginScreen();
       case GuestRoutes.register:
         return RegisterScreen();
-      case UserRoutes.settings:
-        return SettingsScreen();
       case CommonRoutes.splash:
         return SplashScreen();
       default:
@@ -51,14 +47,14 @@ class Routing {
   }
 
   static void pushNamed(context, String routeName) {
-    if (_isEligible(context, routeName)) {
+    if (_routeGuard(context, routeName)) {
       Navigator.push(
           context, MaterialPageRoute(builder: (_) => onGenerate(routeName)));
     }
   }
 
   static void pushReplacement(context, String routeName) {
-    if (_isEligible(context, routeName)) {
+    if (_routeGuard(context, routeName)) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (_) => onGenerate(routeName)));
     }
@@ -66,7 +62,7 @@ class Routing {
 
   static void pushNamedAndRemoveUntil(
       context, String pushName, String untilName) {
-    if (_isEligible(context, pushName)) {
+    if (_routeGuard(context, pushName)) {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (_) => onGenerate(pushName)),
@@ -75,7 +71,7 @@ class Routing {
   }
 }
 
-bool _isEligible(BuildContext context, String routeName) {
+bool _routeGuard(BuildContext context, String routeName) {
   bool authenticated =
       BlocProvider.of<AuthBloc>(context).state is AuthUserAuthenticatedState;
 

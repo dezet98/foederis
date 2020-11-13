@@ -4,7 +4,7 @@ import 'package:engineering_thesis/constants/enums.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/shared/routing.dart';
 import 'package:engineering_thesis/shared/templates/template_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
         if (state is AuthUserAuthenticatedState) {
           Routing.pushReplacement(context, UserRoutes.home);
           setState(() {
-            // loading = false;
+            loading = false;
           });
         }
       },
