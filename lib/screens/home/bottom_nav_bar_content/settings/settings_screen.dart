@@ -53,8 +53,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Text(
               'sign out',
             ), // TODO be aware that somebody can click that more than one time
-            onPressed: () => BlocProvider.of<AuthBloc>(context).add(
-                AuthSignOutEvent()), // TODO create alert and send to splash screen or sth
+            onPressed: () =>
+                BlocProvider.of<AuthBloc>(context).add(AuthSignOutEvent()),
           ),
         ],
       ),

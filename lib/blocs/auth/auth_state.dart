@@ -5,8 +5,7 @@ abstract class AuthState {}
 
 class AuthInitialState extends AuthState {}
 
-class AuthInProgressState extends AuthState {
-} // TODO it's never use in listener
+class AuthInProgressState extends AuthState {}
 
 class AuthUserAuthenticatedState extends AuthState {}
 

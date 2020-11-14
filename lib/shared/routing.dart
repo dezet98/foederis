@@ -10,6 +10,8 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class CommonRoutes {
   static const String splash = "/splash";
+
+  static List<String> get props => [splash];
 }
 
 class GuestRoutes {
@@ -79,11 +81,12 @@ bool _routeGuard(BuildContext context, String routeName) {
     if (authenticated) return true;
     Routing.pushNamedAndRemoveUntil(
         context, GuestRoutes.login, GuestRoutes.login);
-    // TODO, maybe message that you have to log in again in login attributes
   } else if (GuestRoutes.props.contains(routeName)) {
     if (!authenticated) return true;
     showPlatformModalSheet(
         context: context, builder: (_) => Text('You are logged in'));
+  } else if (CommonRoutes.props.contains(routeName)) {
+    return true;
   } else {
     assert(false, '$routeName is not define as a routeName');
   }

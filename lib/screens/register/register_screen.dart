@@ -22,50 +22,44 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is AuthUserAuthenticatedState) {
-            Routing.pushReplacement(context, UserRoutes.home);
-          }
-        },
-        child: _buildRegisterScreen());
+    return BlocListener<RegisterBloc, RegisterState>(
+      listener: registerBlocListener,
+      child: _buildRegisterScreen(),
+    );
   }
 
   Widget _buildRegisterScreen() {
-    return BlocListener<RegisterBloc, RegisterState>(
-      listener: registerBlocListener,
-      child: TemplateScreen(
-        platformAppBar: PlatformAppBar(
-          title: Text(S.of(context).app_bar_title_register),
-        ),
-        body: Column(
-          children: [
-            PlatformTextField(controller: _emailController),
-            PlatformTextField(
-              controller: _passwordController,
-            ),
-            PlatformButton(
-              onPressed: () =>
-                  Routing.pushReplacement(context, GuestRoutes.login),
-              child: Text(S.of(context).text_button_go_to_login),
-            ),
-            PlatformButton(
-              onPressed: loading
-                  ? null
-                  : () {
-                      BlocProvider.of<RegisterBloc>(context).add(
-                        RegisterUserWithEmailAndPasswordEvent(
-                          email: _emailController.text,
-                          password: _passwordController.text,
-                        ),
-                      );
-                    },
-              child: loading
-                  ? PlatformCircularProgressIndicator()
-                  : Text('register'),
-            )
-          ],
-        ),
+    return TemplateScreen(
+      platformAppBar: PlatformAppBar(
+        title: Text(S.of(context).app_bar_title_register),
+      ),
+      body: Column(
+        children: [
+          PlatformTextField(controller: _emailController),
+          PlatformTextField(
+            controller: _passwordController,
+          ),
+          PlatformButton(
+            onPressed: () =>
+                Routing.pushReplacement(context, GuestRoutes.login),
+            child: Text(S.of(context).text_button_go_to_login),
+          ),
+          PlatformButton(
+            onPressed: loading
+                ? null
+                : () {
+                    BlocProvider.of<RegisterBloc>(context).add(
+                      RegisterUserWithEmailAndPasswordEvent(
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      ),
+                    );
+                  },
+            child: loading
+                ? PlatformCircularProgressIndicator()
+                : Text('register'),
+          )
+        ],
       ),
     );
   }
@@ -99,9 +93,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
         showPlatformModalSheet(context: context, builder: (_) => Text(text));
       });
     } else if (state is RegisterSuccessState) {
-      setState(() {
-        //loading = false;
-      });
+      if (BlocProvider.of<AuthBloc>(context).state
+          is AuthUserAuthenticatedState) {
+        Routing.pushReplacement(context, UserRoutes.home);
+      } else {
+        Routing.pushReplacement(context, CommonRoutes.splash);
+      }
     }
   }
 }
