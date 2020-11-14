@@ -10,15 +10,15 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool determined = false;
+  bool _determined = false;
 
   @override
   Widget build(BuildContext context) {
-    determine(context, BlocProvider.of<AuthBloc>(context).state);
+    _determine(context, BlocProvider.of<AuthBloc>(context).state);
 
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        determine(context, state);
+        _determine(context, state);
       },
       child: PlatformScaffold(
         body: Center(
@@ -35,16 +35,16 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  void determine(context, state) {
+  void _determine(context, state) {
     Future.delayed(Duration(seconds: 1)).then((value) {
-      if (state is AuthUserAuthenticatedState && !determined) {
+      if (state is AuthUserAuthenticatedState && !_determined) {
         setState(() {
-          determined = true;
+          _determined = true;
         });
         Routing.pushReplacement(context, UserRoutes.home);
-      } else if (state is AuthUserUnauthenticatedState && !determined) {
+      } else if (state is AuthUserUnauthenticatedState && !_determined) {
         setState(() {
-          determined = true;
+          _determined = true;
         });
         Routing.pushReplacement(context, GuestRoutes.login);
       }

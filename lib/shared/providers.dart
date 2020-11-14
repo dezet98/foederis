@@ -11,7 +11,6 @@ dynamic getRepositoryProviders() => [
     ];
 
 dynamic getBlocProviders() => [
-      //TODO   it's a good idea?
       BlocProvider(
         create: (context) => AuthBloc(
           authRepository: RepositoryProvider.of<AuthRepository>(context),
