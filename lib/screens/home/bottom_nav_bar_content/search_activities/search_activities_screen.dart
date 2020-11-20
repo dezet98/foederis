@@ -3,6 +3,8 @@ import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import 'custom_search.dart';
+
 class SearchActivitiesScreen extends StatefulWidget {
   @override
   _SearchActivitiesScreenState createState() => _SearchActivitiesScreenState();
@@ -11,28 +13,23 @@ class SearchActivitiesScreen extends StatefulWidget {
 class _SearchActivitiesScreenState extends State<SearchActivitiesScreen> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Text('Search activity screen'),
-        FutureBuilder(
-          future: ActivityRepository().getAllActivities(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              print(snapshot.error.toString());
-              return Text(snapshot.error.toString());
-            } else if (snapshot.hasData) {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    for (Activity i in snapshot.data) _buildActivityCard(i)
-                  ],
-                ),
-              );
-            }
-            return Text('3 option');
-          },
-        )
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          title: Text('Search activity'),
+          elevation: 4,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () =>
+                  showSearch(context: context, delegate: CustomSearch()),
+            ),
+            IconButton(
+              icon: Icon(Icons.filter_list),
+              onPressed: () {},
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -46,3 +43,28 @@ class _SearchActivitiesScreenState extends State<SearchActivitiesScreen> {
     );
   }
 }
+
+//  Column(
+//       crossAxisAlignment: CrossAxisAlignment.stretch,
+//       children: <Widget>[
+//         Text('Search activity screen'),
+//         FutureBuilder(
+//           future: ActivityRepository().getAllActivities(),
+//           builder: (context, snapshot) {
+//             if (snapshot.hasError) {
+//               print(snapshot.error.toString());
+//               return Text(snapshot.error.toString());
+//             } else if (snapshot.hasData) {
+//               return SingleChildScrollView(
+//                 child: Column(
+//                   children: [
+//                     for (Activity i in snapshot.data) _buildActivityCard(i)
+//                   ],
+//                 ),
+//               );
+//             }
+//             return Text('3 option');
+//           },
+//         )
+//       ],
+//     );

@@ -3,7 +3,6 @@
 // import 'package:engineering_thesis/screens/register/splash_screen.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import '../routing.dart';
-import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -25,10 +24,7 @@ class TemplateScreen extends StatelessWidget {
     return PlatformScaffold(
       appBar: platformAppBar,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(Dimensions.gutterMedium),
-          child: body,
-        ),
+        child: body,
       ),
       bottomNavBar: platformNavBar,
     );

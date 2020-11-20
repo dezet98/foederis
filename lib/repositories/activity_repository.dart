@@ -15,16 +15,28 @@ class ActivityRepository {
         .toList();
   }
 
-  Future<dynamic> getAllActivities() async {
+  Future<List<Activity>> getAllActivities() async {
     try {
-      dynamic x = await _firestore
+      return await _firestore
           .collection(Collections.activity)
           .get()
           .then(fromQuerySnapshot);
-      return x;
     } catch (e) {
       if (e is QueryException) {
         return Future.wait([]);
+      }
+    }
+  }
+
+  Stream<List<Activity>> getAllActivitiesStream() {
+    try {
+      return _firestore
+          .collection(Collections.activity)
+          .snapshots()
+          .asyncMap(fromQuerySnapshot);
+    } catch (e) {
+      if (e is QueryException) {
+        return [] as Stream<List<Activity>>;
       }
     }
   }
