@@ -3,7 +3,7 @@ import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'custom_search.dart';
+import '../../../../shared/components/search_bar/custom_search.dart';
 
 class SearchActivitiesScreen extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ class _SearchActivitiesScreenState extends State<SearchActivitiesScreen> {
     return CustomScrollView(
       slivers: [
         SliverAppBar(
-          title: Text('Search activity'),
+          title: Text('Choose city'),
           elevation: 4,
           actions: [
             IconButton(
