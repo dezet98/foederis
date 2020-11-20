@@ -12,4 +12,6 @@ class AppUser {
   static AppUser toAppUser(User firebaseUser) {
     return firebaseUser == null ? null : AppUser(id: firebaseUser?.uid);
   }
+
+  // AppUser.fromDocument(QueryDocumentSnapshot doc) {}
 }
