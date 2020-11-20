@@ -11,6 +11,11 @@ enum RegisterError {
   undefined,
 }
 
+enum QueryError {
+  field_not_exist, // when using get() method on document and attribute doesn't exist
+  undefined,
+}
+
 // // enum TO string
 // String enumToString(Object o) {
 //   if (o == null) return null;
