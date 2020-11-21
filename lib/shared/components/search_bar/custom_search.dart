@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CustomSearch<T> extends SearchDelegate {
-  List<dynamic> solutions;
+  List<T> solutions;
   List<T> suggestions;
-  List<T> recentSearches;
+  List<T> recentSearches; // TODO implement recentSearch
   dynamic Function(T) getCompare;
 
   CustomSearch({
@@ -35,8 +35,8 @@ class CustomSearch<T> extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    showSuggestions(context);
-    return Column();
+    if (results.isEmpty) return Center(child: Text("Result not found"));
+    return buildSuggestions(context);
   }
 
   @override
@@ -69,7 +69,7 @@ class CustomSearch<T> extends SearchDelegate {
   }
 
   List<T> get results => solutions
-      .where((element) =>
+      .where((T element) =>
           getCompare(element).toUpperCase().startsWith(query.toUpperCase()))
       .toList();
 }

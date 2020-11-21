@@ -23,7 +23,7 @@ class _SearchActivitiesScreenState extends State<SearchActivitiesScreen> {
               icon: Icon(Icons.search),
               onPressed: () => showSearch(
                 context: context,
-                delegate: CustomSearch(
+                delegate: CustomSearch<Geolocation>(
                   getCompare: (element) => element.city,
                   solutions: [
                     Geolocation(
