@@ -1,10 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:engineering_thesis/models/activity.dart';
-import 'package:engineering_thesis/repositories/activity_repository.dart';
-import 'package:engineering_thesis/shared/components/center_screen.dart';
 import 'package:flutter/material.dart';
 
-class CustomSearch extends SearchDelegate {
+class CustomSearch<T> extends SearchDelegate {
+  List<dynamic> solutions;
+  List<T> suggestions;
+  List<T> recentSearches;
+  dynamic Function(T) getCompare;
+
+  CustomSearch({
+    @required this.solutions,
+    @required this.getCompare,
+    @required this.suggestions,
+    @required this.recentSearches,
+  });
+
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -27,65 +35,41 @@ class CustomSearch extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    if (query.length < 3) {
-      return CenterScreen(
-          content: Text("Search term must be longer than two letter"));
-    }
-    return StreamBuilder(
-      stream: ActivityRepository().getAllActivitiesStream(),
-      builder: (context, AsyncSnapshot<List<Activity>> snapshot) {
-        if (snapshot.hasError) {
-          return CenterScreen(content: Text('No results found'));
-        } else if (snapshot.hasData) {
-          if (snapshot.data.length == 0) {
-            return CenterScreen(content: Text('No results found'));
-          }
-
-          return _buildResultsList(snapshot.data);
-        }
-
-        return CenterScreen(content: CircularProgressIndicator());
-      },
-    );
-  }
-
-  Widget _buildResultsList(List<Activity> activities) {
-    return ListView.builder(
-      itemCount: activities.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(
-            activities[index].title,
-          ),
-          onTap: () => close(
-            context,
-            activities[index],
-          ),
-        );
-      },
-    );
+    showSuggestions(context);
+    return Column();
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return _buildSuggestionsList([Activity(title: 'asdasd', ref: null)]);
+    return query.isEmpty
+        ? _buildList(suggestions, Icons.search)
+        : _buildList(results, Icons.assistant_navigation);
   }
 
-  Widget _buildSuggestionsList(List<Activity> activities) {
+  Widget _buildList(List<T> elements, IconData iconData) {
     return ListView.builder(
-      itemCount: activities.length,
+      itemCount: elements.length,
       itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(
-            activities[index].title,
-          ),
-          leading: Icon(Icons.assistant_navigation),
-          onTap: () => close(
-            context,
-            activities[index],
-          ),
-        );
+        return _buildListTile(context, elements[index], iconData: iconData);
       },
     );
   }
+
+  Widget _buildListTile(BuildContext context, T element, {IconData iconData}) {
+    return ListTile(
+      title: Text(
+        getCompare(element),
+      ),
+      leading: Icon(iconData),
+      onTap: () => close(
+        context,
+        element,
+      ),
+    );
+  }
+
+  List<T> get results => solutions
+      .where((element) =>
+          getCompare(element).toUpperCase().startsWith(query.toUpperCase()))
+      .toList();
 }

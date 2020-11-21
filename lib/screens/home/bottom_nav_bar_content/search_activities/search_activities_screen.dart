@@ -1,5 +1,5 @@
 import 'package:engineering_thesis/models/activity.dart';
-import 'package:engineering_thesis/repositories/activity_repository.dart';
+import 'package:engineering_thesis/models/geolocation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -21,8 +21,66 @@ class _SearchActivitiesScreenState extends State<SearchActivitiesScreen> {
           actions: [
             IconButton(
               icon: Icon(Icons.search),
-              onPressed: () =>
-                  showSearch(context: context, delegate: CustomSearch()),
+              onPressed: () => showSearch(
+                context: context,
+                delegate: CustomSearch(
+                  getCompare: (element) => element.city,
+                  solutions: [
+                    Geolocation(
+                      ref: null,
+                      city: "Kraków",
+                      latitude: 3,
+                      longitude: 23,
+                    ),
+                    Geolocation(
+                      ref: null,
+                      city: "Krynica",
+                      latitude: 3,
+                      longitude: 23,
+                    ),
+                    Geolocation(
+                      ref: null,
+                      city: "Kobierzów",
+                      latitude: 3,
+                      longitude: 23,
+                    ),
+                    Geolocation(
+                      ref: null,
+                      city: "Krzyszkowcie",
+                      latitude: 3,
+                      longitude: 23,
+                    ),
+                  ],
+                  suggestions: [
+                    Geolocation(
+                      ref: null,
+                      city: "Kraków",
+                      latitude: 3,
+                      longitude: 23,
+                    ),
+                    Geolocation(
+                      ref: null,
+                      city: "Krzyszkowcie",
+                      latitude: 3,
+                      longitude: 23,
+                    ),
+                  ],
+                  recentSearches: [
+                    Geolocation(
+                      ref: null,
+                      city: "Kraków",
+                      latitude: 3,
+                      longitude: 23,
+                    ),
+                    Geolocation(
+                      ref: null,
+                      city: "Krzyszkowcie",
+                      latitude: 3,
+                      longitude: 23,
+                    ),
+                  ],
+                ),
+              ),
             ),
             IconButton(
               icon: Icon(Icons.filter_list),
