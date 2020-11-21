@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/constants/collections.dart';
 import 'package:engineering_thesis/models/activity.dart';
+import 'package:engineering_thesis/models/geolocation.dart';
 import 'package:engineering_thesis/shared/exceptions.dart';
 
 class ActivityRepository {
@@ -15,10 +16,11 @@ class ActivityRepository {
         .toList();
   }
 
-  Future<List<Activity>> getAllActivities() async {
+  Future<List<Activity>> getAllActivities(Geolocation geoFiltr) async {
     try {
       return await _firestore
           .collection(Collections.activity)
+          //.where('city', isEqualTo: geoFiltr.city)
           .get()
           .then(fromQuerySnapshot);
     } catch (e) {
