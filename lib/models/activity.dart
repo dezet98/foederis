@@ -31,8 +31,8 @@ class Activity {
     this.ref = doc.reference;
     this.title = doc.getField('title');
     this.categoryRef = doc.getField('categoryRef');
-    this.startDate = doc.getDataTimeField('startDate');
-    this.endDate = doc.getDataTimeField('endDate');
+    this.startDate = doc.getField<DateTime>('startDate');
+    this.endDate = doc.getField<DateTime>('endDate');
     this.maxEntry = doc.getField('maxEntry');
     this.minEntry = doc.getField('minEntry');
     this.freeJoin = doc.getField('freeJoin');
