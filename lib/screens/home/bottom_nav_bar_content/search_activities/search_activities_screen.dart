@@ -1,9 +1,9 @@
+import 'package:engineering_thesis/blocs/geolocation_filter/geolocation_filter_bloc.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/geolocation.dart';
-import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../shared/components/search_bar/custom_search.dart';
 import 'build_list.dart';
 
@@ -30,9 +30,7 @@ class _SearchActivitiesScreenState extends State<SearchActivitiesScreen> {
                     context: context,
                     delegate: CustomSearch<Geolocation>(
                       getCompare: (element) => element.city,
-                      solutions: solutions,
-                      suggestions: suggestions,
-                      recentSearches: recentSearches,
+                      bloc: BlocProvider.of<GeolocationFilterBloc>(context),
                     ),
                   );
                   if (newGeoFiltr != null)
@@ -47,7 +45,8 @@ class _SearchActivitiesScreenState extends State<SearchActivitiesScreen> {
           ],
         ),
         SliverList(
-          delegate: SliverChildListDelegate(buildActivitiesList(geoFiltr)),
+          delegate:
+              SliverChildListDelegate(buildActivitiesList(geoFiltr, context)),
         )
       ],
     );
@@ -61,62 +60,6 @@ class _SearchActivitiesScreenState extends State<SearchActivitiesScreen> {
       ),
     );
   }
-
-  get solutions => [
-        Geolocation(
-          ref: null,
-          city: "Kraków",
-          latitude: 3,
-          longitude: 23,
-        ),
-        Geolocation(
-          ref: null,
-          city: "Krynica",
-          latitude: 3,
-          longitude: 23,
-        ),
-        Geolocation(
-          ref: null,
-          city: "Kobierzów",
-          latitude: 3,
-          longitude: 23,
-        ),
-        Geolocation(
-          ref: null,
-          city: "Krzyszkowcie",
-          latitude: 3,
-          longitude: 23,
-        ),
-      ];
-
-  get suggestions => [
-        Geolocation(
-          ref: null,
-          city: "Kraków",
-          latitude: 3,
-          longitude: 23,
-        ),
-        Geolocation(
-          ref: null,
-          city: "Krzyszkowcie",
-          latitude: 3,
-          longitude: 23,
-        ),
-      ];
-  get recentSearches => [
-        Geolocation(
-          ref: null,
-          city: "Kraków",
-          latitude: 3,
-          longitude: 23,
-        ),
-        Geolocation(
-          ref: null,
-          city: "Krzyszkowcie",
-          latitude: 3,
-          longitude: 23,
-        ),
-      ];
 }
 
 class CustomWidget extends StatelessWidget {

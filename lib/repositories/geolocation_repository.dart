@@ -21,16 +21,10 @@ class GeolocationRepository {
   }
 
   Future<List<Geolocation>> getAllGeolocations() async {
-    try {
-      return await _firestore
-          .collection(Collections.geolocation)
-          .get()
-          .then(fromQuerySnapshot);
-    } catch (e) {
-      if (e is QueryException) {
-        return Future.wait([]);
-      }
-    }
+    return await _firestore
+        .collection(Collections.geolocation)
+        .get()
+        .then(fromQuerySnapshot);
   }
 
   Stream<List<Geolocation>> getAllGeolocationsStream() {

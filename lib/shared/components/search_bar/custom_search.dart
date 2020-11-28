@@ -1,16 +1,15 @@
+import 'package:engineering_thesis/blocs/geolocation_filter/geolocation_filter_bloc.dart';
+import 'package:engineering_thesis/models/geolocation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomSearch<T> extends SearchDelegate {
-  List<T> solutions;
-  List<T> suggestions;
-  List<T> recentSearches; // TODO implement recentSearch
-  dynamic Function(T) getCompare;
+  GeolocationFilterBloc bloc;
+  dynamic Function(Geolocation) getCompare;
 
   CustomSearch({
-    @required this.solutions,
     @required this.getCompare,
-    @required this.suggestions,
-    @required this.recentSearches,
+    @required this.bloc,
   });
 
   @override
@@ -35,18 +34,25 @@ class CustomSearch<T> extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    if (results.isEmpty) return Center(child: Text("Result not found"));
+    if (bloc.results(query).isEmpty)
+      return Center(child: Text("Result not found"));
     return buildSuggestions(context);
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return query.isEmpty
-        ? _buildList(suggestions, Icons.search)
-        : _buildList(results, Icons.assistant_navigation);
+    return BlocBuilder<GeolocationFilterBloc, GeolocationFilterState>(
+        builder: (context, state) {
+      if (state is GeolocationFilterLoadResultsSuccessState) {
+        return query.isEmpty
+            ? _buildList(bloc.suggestion, Icons.search)
+            : _buildList(bloc.results(query), Icons.assistant_navigation);
+      }
+      return Center(child: CircularProgressIndicator());
+    });
   }
 
-  Widget _buildList(List<T> elements, IconData iconData) {
+  Widget _buildList(List<Geolocation> elements, IconData iconData) {
     return ListView.builder(
       itemCount: elements.length,
       itemBuilder: (context, index) {
@@ -55,7 +61,8 @@ class CustomSearch<T> extends SearchDelegate {
     );
   }
 
-  Widget _buildListTile(BuildContext context, T element, {IconData iconData}) {
+  Widget _buildListTile(BuildContext context, Geolocation element,
+      {IconData iconData}) {
     return ListTile(
       title: Text(
         getCompare(element),
@@ -67,9 +74,4 @@ class CustomSearch<T> extends SearchDelegate {
       ),
     );
   }
-
-  List<T> get results => solutions
-      .where((T element) =>
-          getCompare(element).toUpperCase().startsWith(query.toUpperCase()))
-      .toList();
 }
