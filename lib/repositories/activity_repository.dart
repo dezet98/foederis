@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:engineering_thesis/blocs/filter.dart';
+import 'package:engineering_thesis/constants/enums.dart';
+import 'package:engineering_thesis/models/filter.dart';
 import 'package:engineering_thesis/constants/collections.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/shared/exceptions.dart';
@@ -24,9 +25,11 @@ class ActivityRepository {
           .get()
           .then(fromQuerySnapshot);
     } catch (e) {
-      if (e is QueryException) {
-        return Future.wait([]);
+      if (e is FetchingException) {
+        throw e;
       }
+      throw FetchingException(
+          fetchingError: FetchingError.undefined, message: e.toString());
     }
   }
 
@@ -37,9 +40,11 @@ class ActivityRepository {
           .snapshots()
           .asyncMap(fromQuerySnapshot);
     } catch (e) {
-      if (e is QueryException) {
-        return [] as Stream<List<Activity>>;
+      if (e is FetchingException) {
+        throw e;
       }
+      throw FetchingException(
+          fetchingError: FetchingError.undefined, message: e.toString());
     }
   }
 }

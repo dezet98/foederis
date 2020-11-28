@@ -1,6 +1,9 @@
 import 'package:engineering_thesis/blocs/geolocation_filter/geolocation_filter_bloc.dart';
+import 'package:engineering_thesis/blocs/search_activities_fetching_bloc.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/geolocation.dart';
+import 'package:engineering_thesis/repositories/activity_repository.dart';
+import 'package:engineering_thesis/shared/components/fetching_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,38 +20,46 @@ class _SearchActivitiesScreenState extends State<SearchActivitiesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          title: Text(geoFiltr == null ? 'Choose city' : geoFiltr.city),
-          elevation: 4,
-          actions: [
-            IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () async {
-                  var newGeoFiltr = await showSearch<dynamic>(
-                    context: context,
-                    delegate: CustomSearch<Geolocation>(
-                      getCompare: (element) => element.city,
-                      bloc: BlocProvider.of<GeolocationFilterBloc>(context),
-                    ),
-                  );
-                  if (newGeoFiltr != null)
-                    setState(() {
-                      geoFiltr = newGeoFiltr;
-                    });
-                }),
-            IconButton(
-              icon: Icon(Icons.filter_list),
-              onPressed: () {},
+    return FetchingBuilder(
+      fetchingCubit: SearchActivitiesFetchingBloc(
+        activityRepository: RepositoryProvider.of<ActivityRepository>(context),
+      ),
+      buildSuccess: (activities) {
+        return CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              title: Text(geoFiltr == null ? 'Choose city' : geoFiltr.city),
+              elevation: 4,
+              actions: [
+                IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () async {
+                      var newGeoFiltr = await showSearch<dynamic>(
+                        context: context,
+                        delegate: CustomSearch<Geolocation>(
+                          getCompare: (element) => element.city,
+                          bloc: BlocProvider.of<GeolocationFilterBloc>(context),
+                        ),
+                      );
+                      if (newGeoFiltr != null)
+                        setState(() {
+                          geoFiltr = newGeoFiltr;
+                        });
+                    }),
+                IconButton(
+                  icon: Icon(Icons.filter_list),
+                  onPressed: () {},
+                ),
+              ],
             ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                buildActivitiesList(activities as List<Activity>, context),
+              ),
+            )
           ],
-        ),
-        SliverList(
-          delegate:
-              SliverChildListDelegate(buildActivitiesList(geoFiltr, context)),
-        )
-      ],
+        );
+      },
     );
   }
 

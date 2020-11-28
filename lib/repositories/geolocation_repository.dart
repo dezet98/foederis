@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/constants/collections.dart';
+import 'package:engineering_thesis/constants/enums.dart';
 import 'package:engineering_thesis/models/geolocation.dart';
 import 'package:engineering_thesis/shared/exceptions.dart';
 
@@ -34,9 +35,11 @@ class GeolocationRepository {
           .snapshots()
           .asyncMap(fromQuerySnapshot);
     } catch (e) {
-      if (e is QueryException) {
-        return [] as Stream<List<Geolocation>>;
+      if (e is FetchingException) {
+        throw e;
       }
+      throw FetchingException(
+          fetchingError: FetchingError.undefined, message: e.toString());
     }
   }
 }
