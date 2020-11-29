@@ -21,9 +21,9 @@ class SignOutException implements Exception {
   SignOutException({this.error});
 }
 
-class QueryException implements Exception {
-  final QueryError queryError;
+class FetchingException implements Exception {
+  final FetchingError fetchingError;
   final String message;
 
-  QueryException({@required this.queryError, this.message});
+  FetchingException({@required this.fetchingError, this.message});
 }

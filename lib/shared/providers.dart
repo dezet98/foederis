@@ -1,13 +1,22 @@
 import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
+import 'package:engineering_thesis/blocs/geolocation_search_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/login/login_bloc.dart';
 import 'package:engineering_thesis/blocs/register/register_bloc.dart';
+import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/auth_repository.dart';
+import 'package:engineering_thesis/repositories/geolocation_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 dynamic getRepositoryProviders() => [
       RepositoryProvider<AuthRepository>(
         create: (_) => AuthRepository(),
-      )
+      ),
+      RepositoryProvider<GeolocationRepository>(
+        create: (_) => GeolocationRepository(),
+      ),
+      RepositoryProvider<ActivityRepository>(
+        create: (_) => ActivityRepository(),
+      ),
     ];
 
 dynamic getBlocProviders() => [
@@ -24,6 +33,12 @@ dynamic getBlocProviders() => [
       BlocProvider(
         create: (context) => RegisterBloc(
           authRepository: RepositoryProvider.of<AuthRepository>(context),
+        ),
+      ),
+      BlocProvider(
+        create: (context) => GeolocationSearchFilterBloc(
+          geolocationRepository:
+              RepositoryProvider.of<GeolocationRepository>(context),
         ),
       ),
     ];

@@ -11,7 +11,7 @@ enum RegisterError {
   undefined,
 }
 
-enum QueryError {
+enum FetchingError {
   field_not_exist, // when using get() method on document and attribute doesn't exist
   undefined,
 }

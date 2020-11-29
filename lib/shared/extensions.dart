@@ -19,12 +19,12 @@ extension catchQueryExceptions on QueryDocumentSnapshot {
       return this.get(field);
     } catch (e) {
       if (e is StateError) {
-        throw (QueryException(
-          queryError: QueryError.field_not_exist,
+        throw (FetchingException(
+          fetchingError: FetchingError.field_not_exist,
           message: "${e.message} / for $field field",
         ));
       }
-      throw QueryException(queryError: QueryError.undefined);
+      throw FetchingException(fetchingError: FetchingError.undefined);
     }
   }
 }
