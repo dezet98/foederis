@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class FetchingBuilder extends StatefulWidget {
   final FetchBloc fetchingCubit;
   final Widget Function(dynamic data) buildSuccess;
-  final Widget Function() buildError;
-  final Widget Function() buildInProgress;
+  final Widget buildError;
+  final Widget buildInProgress;
 
   FetchingBuilder(
       {@required this.fetchingCubit,
@@ -26,19 +26,27 @@ class _FetchingBuilderState extends State<FetchingBuilder> {
         cubit: widget.fetchingCubit,
         builder: (BuildContext context, state) {
           if (state is FetchFailureState) {
-            return _buildInitialError();
+            return _buildError();
           } else if (state is FetchSuccessState) {
             return widget.buildSuccess(state.data);
           }
-          return _buildInitialInProgress();
+          return _buildInProgress();
         });
   }
 
-  Widget _buildInitialInProgress() {
+  Widget _buildInProgress() {
+    if (widget.buildInProgress != null) {
+      return widget.buildInProgress;
+    }
+
     return CircularProgressIndicator();
   }
 
-  Widget _buildInitialError() {
-    return CircularProgressIndicator();
+  Widget _buildError() {
+    if (widget.buildError != null) {
+      return widget.buildError;
+    }
+
+    return Text('Error');
   }
 }

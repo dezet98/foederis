@@ -1,16 +1,12 @@
-import 'package:engineering_thesis/blocs/geolocation_filter/geolocation_filter_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/search_filter/search_filter_bloc.dart';
 import 'package:engineering_thesis/models/geolocation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomSearch<T> extends SearchDelegate {
-  GeolocationFilterBloc bloc;
-  dynamic Function(Geolocation) getCompare;
+class CustomSearch extends SearchDelegate {
+  SearchFilterBloc searchFilterBloc;
 
-  CustomSearch({
-    @required this.getCompare,
-    @required this.bloc,
-  });
+  CustomSearch({@required this.searchFilterBloc});
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -34,22 +30,24 @@ class CustomSearch<T> extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    if (bloc.results(query).isEmpty)
+    if (searchFilterBloc.results(query).isEmpty)
       return Center(child: Text("Result not found"));
     return buildSuggestions(context);
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return BlocBuilder<GeolocationFilterBloc, GeolocationFilterState>(
+    return BlocBuilder(
+        cubit: searchFilterBloc,
         builder: (context, state) {
-      if (state is GeolocationFilterLoadResultsSuccessState) {
-        return query.isEmpty
-            ? _buildList(bloc.suggestion, Icons.search)
-            : _buildList(bloc.results(query), Icons.assistant_navigation);
-      }
-      return Center(child: CircularProgressIndicator());
-    });
+          if (state is SearchFilterLoadResultsSuccessState) {
+            return query.isEmpty
+                ? _buildList(searchFilterBloc.suggestion, Icons.search)
+                : _buildList(searchFilterBloc.results(query),
+                    Icons.assistant_navigation);
+          }
+          return Center(child: CircularProgressIndicator());
+        });
   }
 
   Widget _buildList(List<Geolocation> elements, IconData iconData) {
@@ -65,7 +63,7 @@ class CustomSearch<T> extends SearchDelegate {
       {IconData iconData}) {
     return ListTile(
       title: Text(
-        getCompare(element),
+        searchFilterBloc.display(element),
       ),
       leading: Icon(iconData),
       onTap: () => close(
