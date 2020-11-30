@@ -26,27 +26,27 @@ class _FetchingBuilderState extends State<FetchingBuilder> {
         cubit: widget.fetchingCubit,
         builder: (BuildContext context, state) {
           if (state is FetchFailureState) {
-            return _buildError();
+            return Text('Error');
           } else if (state is FetchSuccessState) {
             return widget.buildSuccess(state.data);
           }
-          return _buildInProgress();
+          return CircularProgressIndicator();
         });
   }
 
-  Widget _buildInProgress() {
-    if (widget.buildInProgress != null) {
-      return widget.buildInProgress;
-    }
+  // Widget _buildInProgress() {
+  //   if (widget.buildInProgress != null) {
+  //     return widget.buildInProgress;
+  //   }
 
-    return CircularProgressIndicator();
-  }
+  //   return CircularProgressIndicator();
+  // }
 
-  Widget _buildError() {
-    if (widget.buildError != null) {
-      return widget.buildError;
-    }
+  // Widget _buildError() {
+  //   if (widget.buildError != null) {
+  //     return widget.buildError;
+  //   }
 
-    return Text('Error');
-  }
+  //   return Text('Error');
+  // }
 }
