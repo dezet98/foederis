@@ -6,13 +6,14 @@ import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/geolocation.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/geolocation_repository.dart';
-import 'package:engineering_thesis/screens/home/bottom_nav_bar_content/search_activities/filters.dart';
-import 'package:engineering_thesis/screens/home/bottom_nav_bar_content/search_activities/multi_choice_filter.dart';
-import 'package:engineering_thesis/shared/components/fetching_builder.dart';
+import 'package:engineering_thesis/shared/builders/single_choice_filter.dart';
+import 'package:engineering_thesis/shared/builders/multi_choice_filter.dart';
+import 'package:engineering_thesis/shared/builders/fetching_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../shared/components/search_bar/custom_search.dart';
+import '../../../../shared/builders/custom_search.dart';
+import 'build_filters_screen.dart';
 
 class SearchActivitiesScreen extends StatefulWidget {
   @override
@@ -33,15 +34,7 @@ class _SearchActivitiesScreenState extends State<SearchActivitiesScreen> {
         return CustomScrollView(
           slivers: [
             _buildAppBar(),
-            if (showFilters)
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    MultiChoiceFilter(SearchActivitiesMultiFilterBloc()),
-                    SingleChoiceFilter(SearchActivitiesRegularFilter())
-                  ],
-                ),
-              ),
+            if (showFilters) FiltersScreen(),
             _buildActivitiesList(activities),
           ],
         );
