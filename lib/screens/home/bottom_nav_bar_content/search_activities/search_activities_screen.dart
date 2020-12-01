@@ -1,28 +1,28 @@
 import 'package:engineering_thesis/blocs/geolocation_search_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities_fetching_bloc.dart';
-import 'package:engineering_thesis/blocs/search_activities_multi_filter_bloc.dart';
-import 'package:engineering_thesis/blocs/search_activities_regular_filter.dart';
+import 'package:engineering_thesis/blocs/search_activity_filters_bloc.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/geolocation.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/geolocation_repository.dart';
-import 'package:engineering_thesis/shared/builders/single_choice_filter.dart';
-import 'package:engineering_thesis/shared/builders/multi_choice_filter.dart';
 import 'package:engineering_thesis/shared/builders/fetching_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../shared/builders/custom_search.dart';
-import 'build_filters_screen.dart';
+import '../../../../shared/builders/filters_screen.dart';
 
 class SearchActivitiesScreen extends StatefulWidget {
   @override
+  var filtersBloc = SearchActivitiesFiltersBloc();
   _SearchActivitiesScreenState createState() => _SearchActivitiesScreenState();
 }
 
 class _SearchActivitiesScreenState extends State<SearchActivitiesScreen> {
   Geolocation geoFiltr;
   bool showFilters = true;
+  // ignore: close_sinks
+  //var searchActivitiesBloc = SearchActivitiesFiltersBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +34,18 @@ class _SearchActivitiesScreenState extends State<SearchActivitiesScreen> {
         return CustomScrollView(
           slivers: [
             _buildAppBar(),
-            if (showFilters) FiltersScreen(),
-            _buildActivitiesList(activities),
+            if (showFilters)
+              FiltersScreen(
+                filtersBloc: widget.filtersBloc,
+              ),
+            BlocBuilder(
+              cubit: widget.filtersBloc,
+              builder: (BuildContext context, state) {
+                return _buildActivitiesList(
+                  widget.filtersBloc.filter(activities),
+                );
+              },
+            ),
           ],
         );
       },

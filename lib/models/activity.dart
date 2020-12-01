@@ -2,6 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/shared/extensions.dart';
 import 'package:flutter/cupertino.dart';
 
+enum ActivityAttributes {
+  ref,
+  title,
+  categoryRef,
+  startDate,
+  maxEntry,
+  minEntry,
+  freeJoin,
+  regular,
+  geolocationRef
+}
+
 class Activity {
   DocumentReference ref;
   String title;
@@ -38,5 +50,37 @@ class Activity {
     this.freeJoin = doc.getField('freeJoin');
     this.regular = doc.getField('regular');
     this.geolocationRef = doc.getField('geolocationRef');
+  }
+
+  dynamic getValue(ActivityAttributes activityAttributes) {
+    switch (activityAttributes) {
+      case ActivityAttributes.ref:
+        return this.ref;
+        break;
+      case ActivityAttributes.title:
+        return this.title;
+        break;
+      case ActivityAttributes.categoryRef:
+        return this.categoryRef;
+        break;
+      case ActivityAttributes.startDate:
+        return this.startDate;
+        break;
+      case ActivityAttributes.maxEntry:
+        return this.maxEntry;
+        break;
+      case ActivityAttributes.minEntry:
+        return this.minEntry;
+        break;
+      case ActivityAttributes.freeJoin:
+        return this.freeJoin;
+        break;
+      case ActivityAttributes.regular:
+        return this.regular;
+        break;
+      case ActivityAttributes.geolocationRef:
+        return this.geolocationRef;
+        break;
+    }
   }
 }

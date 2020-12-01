@@ -16,6 +16,20 @@ enum FetchingError {
   undefined,
 }
 
+enum FilterType {
+  isEqualTo,
+  isNotEqualTo,
+  isLessThan,
+  isLessThanOrEqualTo,
+  isGreaterThan,
+  isGreaterThanOrEqualTo,
+  arrayContains,
+  arrayContainsAny,
+  whereIn,
+  whereNotIn,
+  isNull
+}
+
 // // enum TO string
 // String enumToString(Object o) {
 //   if (o == null) return null;

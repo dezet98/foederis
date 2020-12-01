@@ -21,6 +21,8 @@ class ActivityRepository {
     try {
       return await _firestore
           .collection(Collections.activity)
+          //.where(field)
+          //.where('city', isEqualTo: 'dasas')
           //.where('city', isEqualTo: geoFiltr.city)
           .get()
           .then(fromQuerySnapshot);
@@ -48,3 +50,14 @@ class ActivityRepository {
     }
   }
 }
+
+// extension filter on CollectionReference {
+//   @override
+//   Query whereFilter(List<Filter> filters) {
+//     return this.where(filters[0].name, : );
+//   }
+
+//   dynamic getMethod() {
+//     return <dynamic> isEqualTo;
+//   }
+// }

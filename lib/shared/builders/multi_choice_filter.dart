@@ -27,7 +27,7 @@ class _MultiChoiceFilterState extends State<MultiChoiceFilter> {
     return [
       for (int i = 0; i < widget.bloc.optionsLenght; i++)
         ChoiceChip(
-          label: Text(widget.bloc.display(widget.bloc.options()[i])),
+          label: Text(widget.bloc.display(widget.bloc.options[i])),
           selected: widget.bloc.isSelected(i),
           onSelected: (bool value) {
             setState(() {

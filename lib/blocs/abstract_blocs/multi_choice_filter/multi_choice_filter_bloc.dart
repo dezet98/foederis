@@ -1,21 +1,31 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/filter/filter_bloc.dart';
+import 'package:flutter/cupertino.dart';
 
-abstract class MultiChoiceFilterBloc<T> extends FilterBloc {
-  List<T> options();
-  String display(T option);
+class MultiChoiceFilterBloc<OptionType, FilterDataType>
+    extends FilterBloc<FilterDataType> {
+  final List<OptionType> options;
+  final List<FilterDataType> Function(List<FilterDataType>, List<OptionType>)
+      filter;
+  final String Function(OptionType) display;
+  MultiChoiceFilterBloc(
+      {@required this.options, @required this.filter, @required this.display});
 
-  int get optionsLenght => options().length;
+  int get optionsLenght => options.length;
 
   bool isSelected(int optionIndex) =>
-      selectedOptions.contains(options()[optionIndex]);
+      selectedOptions.contains(options[optionIndex]);
 
-  List<T> selectedOptions = [];
+  List<FilterDataType> filterData(List<FilterDataType> data) {
+    return filter(data, selectedOptions);
+  }
+
+  List<OptionType> selectedOptions = [];
 
   void filterDataChanged(int selectedIndex) {
     if (isSelected(selectedIndex)) {
-      selectedOptions.remove(options()[selectedIndex]);
+      selectedOptions.remove(options[selectedIndex]);
     } else {
-      selectedOptions.add(options()[selectedIndex]);
+      selectedOptions.add(options[selectedIndex]);
     }
   }
 }

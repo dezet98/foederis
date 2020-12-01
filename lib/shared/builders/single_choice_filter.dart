@@ -27,7 +27,7 @@ class _SingleChoiceFilterState extends State<SingleChoiceFilter> {
     return [
       for (int i = 0; i < widget.bloc.optionsLenght; i++)
         ChoiceChip(
-          label: Text(widget.bloc.display(widget.bloc.options()[i])),
+          label: Text(widget.bloc.display(widget.bloc.options[i]).toString()),
           selected: widget.bloc.isSelected(i),
           onSelected: (bool value) {
             setState(() {

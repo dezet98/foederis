@@ -6,10 +6,13 @@ import 'package:meta/meta.dart';
 part 'filter_event.dart';
 part 'filter_state.dart';
 
-abstract class FilterBloc extends Bloc<FilterEvent, FilterState> {
+abstract class FilterBloc<FilterDataType>
+    extends Bloc<FilterEvent, FilterState> {
   FilterBloc() : super(FilterInitialState());
 
   void filterDataChanged(int selectedIndex);
+
+  List<FilterDataType> filterData(List<FilterDataType> data);
 
   @override
   Stream<FilterState> mapEventToState(
