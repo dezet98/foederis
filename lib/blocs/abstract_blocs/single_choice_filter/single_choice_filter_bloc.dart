@@ -6,8 +6,15 @@ class SingleChoiceFilterBloc<OptionType, FilterDataType>
   final List<OptionType> options;
   final List<FilterDataType> Function(List<FilterDataType>, OptionType) filter;
   final String Function(OptionType) display;
-  SingleChoiceFilterBloc(
-      {@required this.options, @required this.filter, @required this.display});
+  final OptionType initialOption;
+  SingleChoiceFilterBloc({
+    @required this.options,
+    @required this.filter,
+    @required this.display,
+    this.initialOption,
+  }) {
+    if (initialOption != null) selectedOption = initialOption;
+  }
 
   int get optionsLenght => options.length;
 
