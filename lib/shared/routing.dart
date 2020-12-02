@@ -3,6 +3,7 @@ import 'package:engineering_thesis/screens/home/home_screen.dart';
 import 'package:engineering_thesis/screens/login/login_screen.dart';
 import 'package:engineering_thesis/screens/register/register_screen.dart';
 import 'package:engineering_thesis/screens/splash_screen.dart';
+import 'package:engineering_thesis/shared/builders/filters_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,8 +11,9 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class CommonRoutes {
   static const String splash = "/splash";
+  static const String filter = "/filter";
 
-  static List<String> get props => [splash];
+  static List<String> get props => [splash, filter];
 }
 
 class GuestRoutes {
@@ -28,7 +30,7 @@ class UserRoutes {
 }
 
 class Routing {
-  static onGenerate(String routeName) {
+  static onGenerate(String routeName, {dynamic options}) {
     switch (routeName) {
       case UserRoutes.home:
         return HomeScreen();
@@ -38,6 +40,8 @@ class Routing {
         return RegisterScreen();
       case CommonRoutes.splash:
         return SplashScreen();
+      case CommonRoutes.filter:
+        return FiltersScreen(filtersBloc: options);
       default:
         assert(false, '$routeName is not define as a routeName');
         return PlatformScaffold(
@@ -48,28 +52,38 @@ class Routing {
     }
   }
 
-  static void pushNamed(context, String routeName) {
+  static void pushNamed(context, String routeName, {dynamic options}) {
     if (_routeGuard(context, routeName)) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (_) => onGenerate(routeName)));
+          context,
+          MaterialPageRoute(
+              builder: (_) => onGenerate(routeName, options: options)));
     }
   }
 
-  static void pushReplacement(context, String routeName) {
+  static void pushReplacement(context, String routeName, {dynamic options}) {
     if (_routeGuard(context, routeName)) {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => onGenerate(routeName)));
+          context,
+          MaterialPageRoute(
+              builder: (_) => onGenerate(routeName, options: options)));
     }
   }
 
   static void pushNamedAndRemoveUntil(
-      context, String pushName, String untilName) {
+      context, String pushName, String untilName,
+      {dynamic options}) {
     if (_routeGuard(context, pushName)) {
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (_) => onGenerate(pushName)),
+          MaterialPageRoute(
+              builder: (_) => onGenerate(pushName, options: options)),
           ModalRoute.withName(untilName));
     }
+  }
+
+  static void pop(context) {
+    Navigator.pop(context);
   }
 }
 

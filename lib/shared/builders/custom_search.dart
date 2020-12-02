@@ -40,13 +40,13 @@ class CustomSearch extends SearchDelegate {
     return BlocBuilder(
         cubit: searchFilterBloc,
         builder: (context, state) {
-          if (state is SearchFilterLoadResultsSuccessState) {
-            return query.isEmpty
-                ? _buildList(searchFilterBloc.suggestion, Icons.search)
-                : _buildList(searchFilterBloc.results(query),
-                    Icons.assistant_navigation);
-          }
-          return Center(child: CircularProgressIndicator());
+          if (state is SearchFilterInProgressState)
+            return Center(child: CircularProgressIndicator());
+
+          return query.isEmpty
+              ? _buildList(searchFilterBloc.suggestion, Icons.search)
+              : _buildList(
+                  searchFilterBloc.results(query), Icons.assistant_navigation);
         });
   }
 
@@ -62,14 +62,20 @@ class CustomSearch extends SearchDelegate {
   Widget _buildListTile(BuildContext context, Geolocation element,
       {IconData iconData}) {
     return ListTile(
-      title: Text(
-        searchFilterBloc.display(element),
-      ),
-      leading: Icon(iconData),
-      onTap: () => close(
-        context,
-        element,
-      ),
-    );
+        title: Text(
+          searchFilterBloc.display(element),
+        ),
+        leading: Icon(iconData),
+        onTap: () {
+          searchFilterBloc.add(
+            SearchFilterSelectOptionEvent<Geolocation>(
+              selectedElement: element,
+            ),
+          );
+          close(
+            context,
+            element,
+          );
+        });
   }
 }

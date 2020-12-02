@@ -1,19 +1,23 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/filters/filters_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FetchingBuilder extends StatefulWidget {
   final FetchBloc fetchingCubit;
+  final FiltersBloc filtersCubit;
   final Widget Function(dynamic data) buildSuccess;
   final Widget buildError;
   final Widget buildInProgress;
 
-  FetchingBuilder(
-      {@required this.fetchingCubit,
-      @required this.buildSuccess,
-      this.buildError,
-      this.buildInProgress});
+  FetchingBuilder({
+    @required this.fetchingCubit,
+    @required this.buildSuccess,
+    this.filtersCubit,
+    this.buildError,
+    this.buildInProgress,
+  });
 
   @override
   _FetchingBuilderState createState() => _FetchingBuilderState();
@@ -26,27 +30,28 @@ class _FetchingBuilderState extends State<FetchingBuilder> {
         cubit: widget.fetchingCubit,
         builder: (BuildContext context, state) {
           if (state is FetchFailureState) {
-            return _buildError();
+            return widget.buildError;
           } else if (state is FetchSuccessState) {
             return widget.buildSuccess(state.data);
           }
-          return _buildInProgress();
+
+          return widget.buildInProgress;
         });
   }
 
-  Widget _buildInProgress() {
-    if (widget.buildInProgress != null) {
-      return widget.buildInProgress;
-    }
+  // Widget _buildInProgress() {
+  //   if (widget.buildInProgress != null) {
+  //     return widget.buildInProgress;
+  //   }
 
-    return CircularProgressIndicator();
-  }
+  //   return CircularProgressIndicator();
+  // }
 
-  Widget _buildError() {
-    if (widget.buildError != null) {
-      return widget.buildError;
-    }
+  // Widget _buildError() {
+  //   if (widget.buildError != null) {
+  //     return widget.buildError;
+  //   }
 
-    return Text('Error');
-  }
+  //   return Text('Error');
+  // }
 }

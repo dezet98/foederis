@@ -7,6 +7,8 @@ abstract class SearchFilterState extends Equatable {
   List<Object> get props => [];
 }
 
+class SearchFilterInProgressState extends SearchFilterState {}
+
 class SearchFilterInitialState extends SearchFilterState {}
 
 class SearchFilterLoadResultsState extends SearchFilterState {}
@@ -48,4 +50,11 @@ class SearchFilterLoadRecentSearchesFailureState extends SearchFilterState {
   @override
   String toString() =>
       'SearchFilterLoadRecentSearchesFailureState {error: $message}';
+}
+
+class SearchFilterSelectedOptionState<FilterDataType>
+    extends SearchFilterState {
+  final FilterDataType selectedElement;
+
+  SearchFilterSelectedOptionState({@required this.selectedElement});
 }
