@@ -3,12 +3,12 @@ import 'package:engineering_thesis/models/fetch_filter.dart';
 import 'package:engineering_thesis/models/geolocation.dart';
 import 'package:engineering_thesis/repositories/geolocation_repository.dart';
 import 'package:flutter/cupertino.dart';
-import 'abstract_blocs/search_filter/search_filter_bloc.dart';
+import '../abstract_blocs/search_filter/search_filter_bloc.dart';
 
-class GeolocationSearchFilterBloc extends SearchFilterBloc<Geolocation> {
+class SearchActivitiesSearchFilterBloc extends SearchFilterBloc<Geolocation> {
   GeolocationRepository geolocationRepository;
 
-  GeolocationSearchFilterBloc({@required this.geolocationRepository});
+  SearchActivitiesSearchFilterBloc({@required this.geolocationRepository});
 
   @override
   Future<List<Geolocation>> fetchRecentSearches() {
@@ -43,7 +43,7 @@ class GeolocationSearchFilterBloc extends SearchFilterBloc<Geolocation> {
     return FetchFilter(
       fieldName: 'geolocationRef',
       fieldValue: selectedOption.ref,
-      filterType: FilterType.isEqualTo,
+      filterType: FetchFilterType.isEqualTo,
     );
   }
 }

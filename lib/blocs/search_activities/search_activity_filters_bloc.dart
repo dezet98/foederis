@@ -1,7 +1,7 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/filter/filter_bloc.dart';
 import 'package:engineering_thesis/models/activity.dart';
-import 'abstract_blocs/filters/filters_bloc.dart';
-import 'abstract_blocs/choice_filters/single_choice_filter_bloc.dart';
+import '../abstract_blocs/filters/filters_bloc.dart';
+import '../abstract_blocs/choice_filters/single_choice_filter_bloc.dart';
 
 class SearchActivitiesFiltersBloc extends FiltersBloc<Activity> {
   final String Function(String) display = (String data) => data;

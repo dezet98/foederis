@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: TemplateScreen(
         body: homeScreenContents.elementAt(_selectedIndex),
+        usePadding: false,
         platformNavBar: PlatformNavBar(
           currentIndex: _selectedIndex,
           items: _homeNavBarItems,

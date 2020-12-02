@@ -1,8 +1,8 @@
 import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
-import 'package:engineering_thesis/blocs/geolocation_search_filter_bloc.dart';
+import 'package:engineering_thesis/blocs/search_activities/search_activities_search_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/login/login_bloc.dart';
 import 'package:engineering_thesis/blocs/register/register_bloc.dart';
-import 'package:engineering_thesis/blocs/search_activity_filters_bloc.dart';
+import 'package:engineering_thesis/blocs/search_activities/search_activity_filters_bloc.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/auth_repository.dart';
 import 'package:engineering_thesis/repositories/geolocation_repository.dart';
@@ -37,7 +37,7 @@ dynamic getBlocProviders() => [
         ),
       ),
       BlocProvider(
-        create: (context) => GeolocationSearchFilterBloc(
+        create: (context) => SearchActivitiesSearchFilterBloc(
           geolocationRepository:
               RepositoryProvider.of<GeolocationRepository>(context),
         ),

@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 class FetchFilter<FieldValueType> {
   String fieldName;
   FieldValueType fieldValue;
-  FilterType filterType;
+  FetchFilterType filterType;
 
   FetchFilter(
       {@required this.fieldName,

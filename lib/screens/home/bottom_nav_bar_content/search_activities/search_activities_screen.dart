@@ -1,7 +1,7 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/search_filter/search_filter_bloc.dart';
-import 'package:engineering_thesis/blocs/geolocation_search_filter_bloc.dart';
-import 'package:engineering_thesis/blocs/search_activities_fetching_bloc.dart';
-import 'package:engineering_thesis/blocs/search_activity_filters_bloc.dart';
+import 'package:engineering_thesis/blocs/search_activities/search_activities_search_filter_bloc.dart';
+import 'package:engineering_thesis/blocs/search_activities/search_activities_fetching_bloc.dart';
+import 'package:engineering_thesis/blocs/search_activities/search_activity_filters_bloc.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/geolocation_repository.dart';
@@ -26,7 +26,7 @@ class _SearchActivitiesScreenState extends State<SearchActivitiesScreen> {
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    searchFilterBloc = GeolocationSearchFilterBloc(
+    searchFilterBloc = SearchActivitiesSearchFilterBloc(
       geolocationRepository:
           RepositoryProvider.of<GeolocationRepository>(context),
     );

@@ -20,6 +20,8 @@ class Dimensions {
   static const double gutterSmall = 8.0;
   static const double gutterMedium = 16.0;
   static const double gutterHuge = 24.0;
+
+  static const double screenPadding = 16.0;
 }
 
 // material themes

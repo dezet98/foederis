@@ -16,7 +16,7 @@ enum FetchingError {
   undefined,
 }
 
-enum FilterType {
+enum FetchFilterType {
   isEqualTo,
   isNotEqualTo,
   isLessThan,
