@@ -1,5 +1,5 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/filter/filter_bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/single_choice_filter/single_choice_filter_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/single_choice_filter_bloc.dart';
 import 'package:flutter/material.dart';
 
 class SingleChoiceFilter extends StatefulWidget {

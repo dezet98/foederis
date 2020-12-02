@@ -1,3 +1,5 @@
+import 'package:engineering_thesis/constants/enums.dart';
+import 'package:engineering_thesis/models/fetch_filter.dart';
 import 'package:engineering_thesis/models/geolocation.dart';
 import 'package:engineering_thesis/repositories/geolocation_repository.dart';
 import 'package:flutter/cupertino.dart';
@@ -34,5 +36,14 @@ class GeolocationSearchFilterBloc extends SearchFilterBloc<Geolocation> {
   @override
   String display(Geolocation element) {
     return element.city;
+  }
+
+  @override
+  FetchFilter getFetchFilter(Geolocation selectedOption) {
+    return FetchFilter(
+      fieldName: 'geolocationRef',
+      fieldValue: selectedOption.ref,
+      filterType: FilterType.isEqualTo,
+    );
   }
 }

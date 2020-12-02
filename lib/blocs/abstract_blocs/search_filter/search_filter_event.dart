@@ -8,3 +8,9 @@ abstract class SearchFilterEvent extends Equatable {
 }
 
 class SearchFilterLoadEvent extends SearchFilterEvent {}
+
+class SearchFilterSelectOptionEvent<FilterDataType> extends SearchFilterEvent {
+  final FilterDataType selectedElement;
+
+  SearchFilterSelectOptionEvent({@required this.selectedElement});
+}

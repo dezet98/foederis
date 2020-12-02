@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/constants/enums.dart';
-import 'package:engineering_thesis/models/filter.dart';
 import 'package:engineering_thesis/constants/collections.dart';
 import 'package:engineering_thesis/models/activity.dart';
+import 'package:engineering_thesis/models/fetch_filter.dart';
 import 'package:engineering_thesis/shared/exceptions.dart';
+import 'package:flutter/material.dart';
 
 class ActivityRepository {
   final FirebaseFirestore _firestore;
@@ -17,13 +18,11 @@ class ActivityRepository {
         .toList();
   }
 
-  Future<List<Activity>> getAllActivities(List<Filter> filters) async {
+  Future<List<Activity>> getAllActivities(List<FetchFilter> filters) async {
     try {
       return await _firestore
           .collection(Collections.activity)
-          //.where(field)
-          //.where('city', isEqualTo: 'dasas')
-          //.where('city', isEqualTo: geoFiltr.city)
+          .whereWithFilters(filters)
           .get()
           .then(fromQuerySnapshot);
     } catch (e) {
@@ -51,13 +50,63 @@ class ActivityRepository {
   }
 }
 
-// extension filter on CollectionReference {
-//   @override
-//   Query whereFilter(List<Filter> filters) {
-//     return this.where(filters[0].name, : );
-//   }
+extension filter on CollectionReference {
+  Query whereWithFilters(List<FetchFilter> filters) {
+    if (filters.length == 0) return this;
 
-//   dynamic getMethod() {
-//     return <dynamic> isEqualTo;
-//   }
-// }
+    Query query;
+    for (FetchFilter filter in filters) {
+      if (filter != null) {
+        if (query == null) {
+          query = whereWithFilter(filter);
+        } else {
+          query = query.where(filter.fieldName, isEqualTo: filter.fieldValue);
+        }
+      }
+    }
+
+    return query != null ? query : this;
+  }
+
+  Query whereWithFilter(FetchFilter filter) {
+    switch (filter.filterType) {
+      case FilterType.isEqualTo:
+        return this.where(filter.fieldName, isEqualTo: filter.fieldValue);
+        break;
+      case FilterType.isNotEqualTo:
+        return this.where(filter.fieldName, isNotEqualTo: filter.fieldValue);
+        break;
+      case FilterType.isLessThan:
+        return this.where(filter.fieldName, isLessThan: filter.fieldValue);
+        break;
+      case FilterType.isLessThanOrEqualTo:
+        return this
+            .where(filter.fieldName, isLessThanOrEqualTo: filter.fieldValue);
+        break;
+      case FilterType.isGreaterThan:
+        return this.where(filter.fieldName, isGreaterThan: filter.fieldValue);
+        break;
+      case FilterType.isGreaterThanOrEqualTo:
+        return this
+            .where(filter.fieldName, isGreaterThanOrEqualTo: filter.fieldValue);
+        break;
+      case FilterType.arrayContains:
+        return this.where(filter.fieldName, arrayContains: filter.fieldValue);
+        break;
+      case FilterType.arrayContainsAny:
+        return this
+            .where(filter.fieldName, arrayContainsAny: filter.fieldValue);
+        break;
+      case FilterType.whereIn:
+        this.where(filter.fieldName, whereIn: filter.fieldValue);
+        break;
+      case FilterType.whereNotIn:
+        return this.where(filter.fieldName, whereNotIn: filter.fieldValue);
+        break;
+      case FilterType.isNull:
+        return this.where(filter.fieldName, isNull: filter.fieldValue);
+        break;
+    }
+    return this;
+  }
+}

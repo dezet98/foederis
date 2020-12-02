@@ -7,15 +7,20 @@ class MultiChoiceFilterBloc<OptionType, FilterDataType>
   final List<FilterDataType> Function(List<FilterDataType>, List<OptionType>)
       filter;
   final String Function(OptionType) display;
+  final String filterLabel;
   final List<OptionType> initialOptions;
+
   MultiChoiceFilterBloc({
     @required this.options,
     @required this.filter,
     @required this.display,
+    this.filterLabel,
     this.initialOptions,
   }) {
     if (initialOptions != null) selectedOptions = initialOptions;
   }
+
+  String get filterTitle => filterLabel;
 
   int get optionsLenght => options.length;
 

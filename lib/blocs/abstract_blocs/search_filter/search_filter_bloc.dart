@@ -1,35 +1,49 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:engineering_thesis/models/fetch_filter.dart';
 import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
 
 part 'search_filter_event.dart';
 part 'search_filter_state.dart';
 
-abstract class SearchFilterBloc<T>
+abstract class SearchFilterBloc<FilterDataType>
     extends Bloc<SearchFilterEvent, SearchFilterState> {
   SearchFilterBloc() : super(SearchFilterInitialState()) {
     add(SearchFilterLoadEvent());
   }
 
-  Future<List<T>> fetchResults();
-  Future<List<T>> fetchSuggestion();
-  Future<List<T>> fetchRecentSearches();
-  List<T> filterResults(String query, List<T> results);
-  String display(T element);
+  Future<List<FilterDataType>> fetchResults();
+  Future<List<FilterDataType>> fetchSuggestion();
+  Future<List<FilterDataType>> fetchRecentSearches();
+  List<FilterDataType> filterResults(
+      String query, List<FilterDataType> results);
+  String display(FilterDataType element);
 
-  List<T> _results = <T>[];
-  List<T> _suggestion = <T>[];
-  List<T> _recentSearches = <T>[];
-  List<T> results(String query) => filterResults(query, _results);
-  List<T> get suggestion => _suggestion;
-  List<T> get recentSearches => _recentSearches;
+  List<FilterDataType> _results = <FilterDataType>[];
+  List<FilterDataType> _suggestion = <FilterDataType>[];
+  List<FilterDataType> _recentSearches = <FilterDataType>[];
+  List<FilterDataType> results(String query) => filterResults(query, _results);
+  List<FilterDataType> get suggestion => _suggestion;
+  List<FilterDataType> get recentSearches => _recentSearches;
+
+  FilterDataType selectedOption;
+
+  FetchFilter getFetchFilter(FilterDataType selectedOption);
+
+  FetchFilter get fetchFilter => selectedOption == null ? null : getFetchFilter(selectedOption);
 
   @override
   Stream<SearchFilterState> mapEventToState(
     SearchFilterEvent event,
   ) async* {
+    yield SearchFilterInProgressState();
     if (event is SearchFilterLoadEvent) {
       yield* mapGeolocationFilterLoadEvent();
+    } else if (event is SearchFilterSelectOptionEvent) {
+      selectedOption = event.selectedElement;
+      yield SearchFilterSelectedOptionState(
+          selectedElement: event.selectedElement);
     }
   }
 

@@ -11,12 +11,13 @@ class FetchingBuilder extends StatefulWidget {
   final Widget buildError;
   final Widget buildInProgress;
 
-  FetchingBuilder(
-      {@required this.fetchingCubit,
-      @required this.buildSuccess,
-      this.filtersCubit,
-      this.buildError,
-      this.buildInProgress});
+  FetchingBuilder({
+    @required this.fetchingCubit,
+    @required this.buildSuccess,
+    this.filtersCubit,
+    this.buildError,
+    this.buildInProgress,
+  });
 
   @override
   _FetchingBuilderState createState() => _FetchingBuilderState();
@@ -29,12 +30,12 @@ class _FetchingBuilderState extends State<FetchingBuilder> {
         cubit: widget.fetchingCubit,
         builder: (BuildContext context, state) {
           if (state is FetchFailureState) {
-            return Text('Error');
+            return widget.buildError;
           } else if (state is FetchSuccessState) {
             return widget.buildSuccess(state.data);
           }
 
-          return CircularProgressIndicator();
+          return widget.buildInProgress;
         });
   }
 

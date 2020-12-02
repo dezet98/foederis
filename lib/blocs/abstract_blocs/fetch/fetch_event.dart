@@ -1,7 +1,7 @@
 part of 'fetch_bloc.dart';
 
 class FetchEvent extends Equatable {
-  final List<Filter> filters;
+  final List<dynamic> filters;
 
   FetchEvent({this.filters});
 

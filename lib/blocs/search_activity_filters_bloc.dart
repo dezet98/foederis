@@ -1,8 +1,7 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/filter/filter_bloc.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'abstract_blocs/filters/filters_bloc.dart';
-import 'abstract_blocs/multi_choice_filter/multi_choice_filter_bloc.dart';
-import 'abstract_blocs/single_choice_filter/single_choice_filter_bloc.dart';
+import 'abstract_blocs/choice_filters/single_choice_filter_bloc.dart';
 
 class SearchActivitiesFiltersBloc extends FiltersBloc<Activity> {
   final String Function(String) display = (String data) => data;
@@ -19,25 +18,24 @@ class SearchActivitiesFiltersBloc extends FiltersBloc<Activity> {
         return data;
       },
       display: (dynamic data) => data,
+      filterLabel: 'Activity status',
       initialOption: 'disposable',
     ),
-    MultiChoiceFilterBloc<String, Activity>(
-      options: ['regular', 'disposable'],
-      filter: (List<Activity> data, List<String> options) {
-        List<Activity> newData = [];
-        if (options.contains(SearchActivitiesRegularFilterOptions.regular)) {
-          newData.addAll(
-              data.where((Activity element) => element.regular).toList());
-        }
-        if (options.contains(SearchActivitiesRegularFilterOptions.disposable)) {
-          newData.addAll(
-              data.where((Activity element) => !element.regular).toList());
-        }
-        return newData;
-      },
-      display: (dynamic option) => option,
-      initialOptions: SearchActivitiesRegularFilterOptions.props,
-    )
+    SingleChoiceFilterBloc<String, Activity>(
+        options: ['asc', 'desc'],
+        filter: (List<Activity> data, String option) {
+          if (option == 'asc') {
+            data.sort((a, b) => a.title.compareTo(b.title));
+            return data;
+          } else if (option == 'desc') {
+            data.sort((a, b) => b.title.compareTo(a.title));
+            return data;
+          }
+          return data;
+        },
+        display: (dynamic data) => data,
+        initialOption: 'asc',
+        filterLabel: 'Sort by'),
   ];
 
   @override

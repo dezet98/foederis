@@ -12,6 +12,8 @@ abstract class FilterBloc<FilterDataType>
 
   void filterDataChanged(int selectedIndex);
 
+  String get filterTitle;
+
   List<FilterDataType> filterData(List<FilterDataType> data);
 
   @override
