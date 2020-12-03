@@ -1,18 +1,16 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/filter/filter_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/filter/filter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 
 part 'filters_event.dart';
 part 'filters_state.dart';
 
-abstract class FiltersBloc<FilterDataType>
-    extends Bloc<FiltersEvent, FiltersState> {
-  FiltersBloc() : super(FiltersInitialState());
+class FiltersBloc<FilterDataType> extends Bloc<FiltersEvent, FiltersState> {
+  List<FilterBloc> filtersBlocs;
 
-  List<FilterBloc> getFilters();
-
-  List<FilterBloc> get filtersBlocs => getFilters();
+  FiltersBloc({@required this.filtersBlocs}) : super(FiltersInitialState());
 
   List<FilterDataType> filter(List<FilterDataType> data) {
     List<FilterDataType> filteredData = data;

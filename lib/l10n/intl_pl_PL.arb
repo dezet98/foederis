@@ -8,5 +8,8 @@
 
     "settings": "ustawienia",
 
+    "filter_screen_nav_title": "Filtry",
+    "filter_screen_apply_button_text": "Zastosuj filtry",
+
     "bad_credentials": "Złe dane"
 }

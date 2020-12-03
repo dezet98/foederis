@@ -1,20 +1,20 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/filter/filter_bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/multi_choice_filter_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/sort_choice_filter_bloc.dart';
 import 'package:engineering_thesis/shared/components/chips/custom_chip.dart';
 import 'package:flutter/material.dart';
 
 import '../theme.dart';
 
-class MultiChoiceFilter extends StatefulWidget {
-  final MultiChoiceFilterBloc bloc;
+class SortChoiceFilter extends StatefulWidget {
+  final SortChoiceFilterBloc bloc;
 
-  MultiChoiceFilter(this.bloc);
+  SortChoiceFilter(this.bloc);
 
   @override
-  _MultiChoiceFilterState createState() => _MultiChoiceFilterState();
+  _SortChoiceFilterState createState() => _SortChoiceFilterState();
 }
 
-class _MultiChoiceFilterState extends State<MultiChoiceFilter> {
+class _SortChoiceFilterState extends State<SortChoiceFilter> {
   @override
   Widget build(BuildContext context) {
     return Container(

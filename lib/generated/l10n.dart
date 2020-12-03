@@ -85,6 +85,26 @@ class S {
     );
   }
 
+  /// `Filters`
+  String get filter_screen_nav_title {
+    return Intl.message(
+      'Filters',
+      name: 'filter_screen_nav_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply filters`
+  String get filter_screen_apply_button_text {
+    return Intl.message(
+      'Apply filters',
+      name: 'filter_screen_apply_button_text',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Bad credentials`
   String get bad_credentials {
     return Intl.message(

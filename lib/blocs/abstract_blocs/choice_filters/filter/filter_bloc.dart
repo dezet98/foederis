@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 part 'filter_event.dart';
 part 'filter_state.dart';
 
-abstract class FilterBloc<FilterDataType>
+abstract class FilterBloc<FilterFieldType>
     extends Bloc<FilterEvent, FilterState> {
   FilterBloc() : super(FilterInitialState());
 
@@ -14,7 +14,7 @@ abstract class FilterBloc<FilterDataType>
 
   String get filterTitle;
 
-  List<FilterDataType> filterData(List<FilterDataType> data);
+  List<FilterFieldType> filterData(List<FilterFieldType> data);
 
   @override
   Stream<FilterState> mapEventToState(

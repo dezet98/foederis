@@ -14,12 +14,15 @@ CupertinoAppData getCupertinoAppData(context, __) => CupertinoAppData(
 // properties
 class Palette {
   static Color blue = Colors.blue;
+  static Color white = Colors.white;
 }
 
 class Dimensions {
+  static const double gutterVerySmall = 4.0;
   static const double gutterSmall = 8.0;
   static const double gutterMedium = 16.0;
-  static const double gutterHuge = 24.0;
+  static const double gutterLarge = 24.0;
+  static const double gutterHuge = 32.0;
 
   static const double screenPadding = 16.0;
 }
@@ -28,6 +31,11 @@ class Dimensions {
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: Palette.blue,
+  textTheme: TextTheme(
+    headline6: TextStyle(
+      color: Palette.white,
+    ),
+  ),
 );
 
 ThemeData darkTheme = ThemeData(

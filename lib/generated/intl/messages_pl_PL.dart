@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static _notInlinedMessages(_) => <String, Function> {
     "app_bar_title_register" : MessageLookupByLibrary.simpleMessage("Rejestracja"),
     "bad_credentials" : MessageLookupByLibrary.simpleMessage("Złe dane"),
+    "filter_screen_apply_button_text" : MessageLookupByLibrary.simpleMessage("Zastosuj filtry"),
+    "filter_screen_nav_title" : MessageLookupByLibrary.simpleMessage("Filtry"),
     "login" : MessageLookupByLibrary.simpleMessage("zaloguj się"),
     "settings" : MessageLookupByLibrary.simpleMessage("ustawienia"),
     "text_button_go_to_login" : MessageLookupByLibrary.simpleMessage("login")

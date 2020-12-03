@@ -1,7 +1,10 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/filter_option/filter_option_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/filters/filters_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/single_choice_filter_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/sort_choice_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/search_filter/search_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_search_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_fetching_bloc.dart';
-import 'package:engineering_thesis/blocs/search_activities/search_activity_filters_bloc.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/geolocation_repository.dart';
@@ -14,7 +17,26 @@ import '../../../../shared/builders/custom_search.dart';
 
 class SearchActivitiesScreen extends StatefulWidget {
   // ignore: close_sinks
-  final filtersBloc = SearchActivitiesFiltersBloc();
+  final filtersBloc = FiltersBloc(filtersBlocs: [
+    SortChoiceFilterBloc<Activity, String>(
+      options: [
+        FilterOptionBloc<SortWay>(
+            filterFieldValue: SortWay.asc, label: 'Rosnąco'),
+        FilterOptionBloc<SortWay>(
+            filterFieldValue: SortWay.desc, label: 'Malejąco')
+      ],
+      getField: (Activity activity) => activity.title,
+      initialSelected: 0,
+    ),
+    SingleChoiceFilterBloc<Activity, bool>(
+      getField: (Activity activity) => activity.regular,
+      initialSelected: 0,
+      options: [
+        FilterOptionBloc<bool>(filterFieldValue: true, label: 'regular'),
+        FilterOptionBloc<bool>(filterFieldValue: false, label: 'one-time')
+      ],
+    )
+  ]);
 
   @override
   _SearchActivitiesScreenState createState() => _SearchActivitiesScreenState();

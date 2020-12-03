@@ -4,7 +4,6 @@ import 'package:engineering_thesis/constants/collections.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/fetch_filter.dart';
 import 'package:engineering_thesis/shared/exceptions.dart';
-import 'package:flutter/material.dart';
 
 class ActivityRepository {
   final FirebaseFirestore _firestore;

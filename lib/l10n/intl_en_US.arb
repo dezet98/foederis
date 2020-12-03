@@ -6,5 +6,8 @@
     "text_button_go_to_login": "go to login",
     "settings": "settings",
 
+    "filter_screen_nav_title": "Filters",
+    "filter_screen_apply_button_text": "Apply filters",
+    
     "bad_credentials": "Bad credentials"
 }
