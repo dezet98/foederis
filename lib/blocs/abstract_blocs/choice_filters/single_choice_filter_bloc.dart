@@ -3,7 +3,7 @@ import 'filter/filter_bloc.dart';
 import 'filter_option/filter_option_bloc.dart';
 
 class SingleChoiceFilterBloc<FilterDataType, FilterFieldType>
-    extends FilterBloc<FilterDataType> {
+    extends FilterBloc<FilterDataType, FilterFieldType> {
   final List<FilterOptionBloc> options;
   final FilterFieldType Function(FilterDataType) getField;
   final String filterTitle;
@@ -18,16 +18,7 @@ class SingleChoiceFilterBloc<FilterDataType, FilterFieldType>
     this.options[initialSelected].add(FilterOptionSelectEvent());
   }
 
-  int get optionsLenght => options.length;
-
-  bool isSelected(int optionIndex) => options[optionIndex].isSelected;
-
-  int selectedOptionIndex() {
-    for (int i = 0; i < options.length; i++) {
-      if (options[i].isSelected) return i;
-    }
-  }
-
+  @override
   List<FilterDataType> filterData(List<FilterDataType> data) {
     List<FilterDataType> filteredData = data;
 
@@ -45,7 +36,7 @@ class SingleChoiceFilterBloc<FilterDataType, FilterFieldType>
   @override
   void filterDataChanged(int selectedIndex) {
     if (!isSelected(selectedIndex)) {
-      options[selectedOptionIndex()].add(FilterOptionUncheckEvent());
+      options[firstIndexOfSelectedOption].add(FilterOptionUncheckEvent());
       options[selectedIndex].add(FilterOptionSelectEvent());
     }
   }

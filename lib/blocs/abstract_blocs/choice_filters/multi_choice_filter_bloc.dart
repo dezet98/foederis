@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
-
 import 'filter/filter_bloc.dart';
 import 'filter_option/filter_option_bloc.dart';
 
 class MultiChoiceFilterBloc<FilterDataType, FilterFieldType>
-    extends FilterBloc<FilterDataType> {
+    extends FilterBloc<FilterDataType, FilterFieldType> {
   final List<FilterOptionBloc> options;
   final FilterFieldType Function(FilterDataType) getField;
   final String filterTitle;
@@ -19,10 +18,7 @@ class MultiChoiceFilterBloc<FilterDataType, FilterFieldType>
     for (int i in initialSelected) options[i].add(FilterOptionSelectEvent());
   }
 
-  int get optionsLenght => options.length;
-
-  bool isSelected(int optionIndex) => options[optionIndex].isSelected;
-
+  @override
   List<FilterDataType> filterData(List<FilterDataType> data) {
     List<FilterDataType> filteredData = data;
 

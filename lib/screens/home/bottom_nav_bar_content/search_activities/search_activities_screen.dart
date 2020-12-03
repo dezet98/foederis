@@ -19,15 +19,15 @@ class SearchActivitiesScreen extends StatefulWidget {
   // ignore: close_sinks
   final filtersBloc = FiltersBloc(filtersBlocs: [
     SortChoiceFilterBloc<Activity, String>(
-      options: [
-        FilterOptionBloc<SortWay>(
-            filterFieldValue: SortWay.asc, label: 'Rosnąco'),
-        FilterOptionBloc<SortWay>(
-            filterFieldValue: SortWay.desc, label: 'Malejąco')
-      ],
-      getField: (Activity activity) => activity.title,
-      initialSelected: 0,
-    ),
+        options: [
+          FilterOptionBloc<SortWay>(
+              filterFieldValue: SortWay.asc, label: 'Rosnąco'),
+          FilterOptionBloc<SortWay>(
+              filterFieldValue: SortWay.desc, label: 'Malejąco')
+        ],
+        getField: (Activity activity) => activity.title,
+        initialSelected: 0,
+        filterTitle: 'Sort by'),
     SingleChoiceFilterBloc<Activity, bool>(
       getField: (Activity activity) => activity.regular,
       initialSelected: 0,
@@ -35,6 +35,7 @@ class SearchActivitiesScreen extends StatefulWidget {
         FilterOptionBloc<bool>(filterFieldValue: true, label: 'regular'),
         FilterOptionBloc<bool>(filterFieldValue: false, label: 'one-time')
       ],
+      filterTitle: 'Regular',
     )
   ]);
 
