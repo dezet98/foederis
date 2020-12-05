@@ -1,14 +1,10 @@
-import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/filter_option/filter_option_bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/filters/filters_bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/multi_choice_filter_bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/sort_choice_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/search_filter/search_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_filters_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_search_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_fetching_bloc.dart';
-import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/activity.dart';
+import 'package:engineering_thesis/shared/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/shared/builders/fetching_builder.dart';
 import 'package:engineering_thesis/shared/builders/filtered_data.dart';
 import 'package:engineering_thesis/shared/components/buttons/custom_button.dart';
@@ -18,51 +14,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import '../../../../shared/builders/custom_search.dart';
 
-class SearchActivitiesScreen extends StatelessWidget {
-  // ignore: close_sinks
-  //FiltersBloc filtersBloc;
-
+class SearchActivitiesScreen extends NavBarTab {
   @override
   Widget build(BuildContext context) {
-    // filtersBloc = SearchActivitiesFiltersBloc(
-    //   filters: [
-    //     SortChoiceFilterBloc<Activity, String>(
-    //       options: [
-    //         FilterOptionBloc<SortWay>(
-    //           filterFieldValue: SortWay.asc,
-    //           isSelected: true,
-    //           label: S.of(context).filters_screen_filter_value_asc,
-    //         ),
-    //         FilterOptionBloc<SortWay>(
-    //           filterFieldValue: SortWay.desc,
-    //           isSelected: false,
-    //           label: S.of(context).filters_screen_filter_value_desc,
-    //         )
-    //       ],
-    //       getField: (Activity activity) => activity.title,
-    //       filterTitle: S.of(context).filters_screen_filter_subtitile_sort_by,
-    //     ),
-    //     MultiChoiceFilterBloc<Activity, bool>(
-    //       getField: (Activity activity) => activity.regular,
-    //       options: [
-    //         FilterOptionBloc<bool>(
-    //           filterFieldValue: true,
-    //           isSelected: true,
-    //           label: S.of(context).filters_screen_filter_value_regular,
-    //         ),
-    //         FilterOptionBloc<bool>(
-    //           filterFieldValue: false,
-    //           isSelected: true,
-    //           label: S.of(context).filters_screen_filter_value_one_time,
-    //         )
-    //       ],
-    //       filterTitle: S.of(context).filters_screen_filter_subtitile_frequency,
-    //     )
-    //   ],
-    // );
-
     return BlocListener(
       cubit: BlocProvider.of<SearchActivitiesSearchFilterBloc>(context),
       listener: (context, state) {
@@ -155,4 +112,10 @@ class SearchActivitiesScreen extends StatelessWidget {
       subtitle: activity.categoryRef.toString(),
     );
   }
+
+  @override
+  Icon getIcon(BuildContext context) => Icon(PlatformIcons(context).search);
+
+  @override
+  String get label => 'Search';
 }

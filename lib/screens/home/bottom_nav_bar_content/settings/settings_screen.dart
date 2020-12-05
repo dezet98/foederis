@@ -1,15 +1,11 @@
 import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
+import 'package:engineering_thesis/shared/abstract/nav_bar_tab.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class SettingsScreen extends StatefulWidget {
-  @override
-  _SettingsScreenState createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
+class SettingsScreen extends NavBarTab {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,21 +16,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
           PlatformButton(
             child: Text('en'),
             onPressed: () {
-              setState(() {
-                S.load(
-                  Locale('en', 'US'),
-                );
-              });
+              S.load(
+                Locale('en', 'US'),
+              );
             },
           ),
           PlatformButton(
             child: Text('pl'),
             onPressed: () {
-              setState(() {
-                S.load(
-                  Locale('pl', 'PL'),
-                );
-              });
+              S.load(
+                Locale('pl', 'PL'),
+              );
             },
           ),
           PlatformButton(
@@ -60,4 +52,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
     );
   }
+
+  @override
+  Icon getIcon(BuildContext context) => Icon(PlatformIcons(context).settings);
+
+  @override
+  String get label => 'Account';
 }

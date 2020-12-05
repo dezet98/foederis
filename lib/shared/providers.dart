@@ -1,6 +1,7 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/filter_option/filter_option_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/multi_choice_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/sort_choice_filter_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/nav_bar/nav_bar_bloc.dart';
 import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_fetching_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_filters_bloc.dart';
@@ -45,6 +46,9 @@ dynamic getMainBlocProviders() => [
     ];
 
 dynamic getHomeScreenBlocProviders() => [
+      BlocProvider(
+        create: (context) => NavBarBloc(innitialIndex: 0),
+      ),
       BlocProvider(
         create: (context) => SearchActivitiesSearchFilterBloc(
           geolocationRepository:
