@@ -4,7 +4,6 @@ import 'package:engineering_thesis/constants/collections.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/fetch_filter.dart';
 import 'package:engineering_thesis/shared/exceptions.dart';
-import 'package:flutter/material.dart';
 
 class ActivityRepository {
   final FirebaseFirestore _firestore;
@@ -52,7 +51,7 @@ class ActivityRepository {
 
 extension filter on CollectionReference {
   Query whereWithFilters(List<FetchFilter> filters) {
-    if (filters.length == 0) return this;
+    if (filters == null || filters.length == 0) return this;
 
     Query query;
     for (FetchFilter filter in filters) {
@@ -70,40 +69,40 @@ extension filter on CollectionReference {
 
   Query whereWithFilter(FetchFilter filter) {
     switch (filter.filterType) {
-      case FilterType.isEqualTo:
+      case FetchFilterType.isEqualTo:
         return this.where(filter.fieldName, isEqualTo: filter.fieldValue);
         break;
-      case FilterType.isNotEqualTo:
+      case FetchFilterType.isNotEqualTo:
         return this.where(filter.fieldName, isNotEqualTo: filter.fieldValue);
         break;
-      case FilterType.isLessThan:
+      case FetchFilterType.isLessThan:
         return this.where(filter.fieldName, isLessThan: filter.fieldValue);
         break;
-      case FilterType.isLessThanOrEqualTo:
+      case FetchFilterType.isLessThanOrEqualTo:
         return this
             .where(filter.fieldName, isLessThanOrEqualTo: filter.fieldValue);
         break;
-      case FilterType.isGreaterThan:
+      case FetchFilterType.isGreaterThan:
         return this.where(filter.fieldName, isGreaterThan: filter.fieldValue);
         break;
-      case FilterType.isGreaterThanOrEqualTo:
+      case FetchFilterType.isGreaterThanOrEqualTo:
         return this
             .where(filter.fieldName, isGreaterThanOrEqualTo: filter.fieldValue);
         break;
-      case FilterType.arrayContains:
+      case FetchFilterType.arrayContains:
         return this.where(filter.fieldName, arrayContains: filter.fieldValue);
         break;
-      case FilterType.arrayContainsAny:
+      case FetchFilterType.arrayContainsAny:
         return this
             .where(filter.fieldName, arrayContainsAny: filter.fieldValue);
         break;
-      case FilterType.whereIn:
+      case FetchFilterType.whereIn:
         this.where(filter.fieldName, whereIn: filter.fieldValue);
         break;
-      case FilterType.whereNotIn:
+      case FetchFilterType.whereNotIn:
         return this.where(filter.fieldName, whereNotIn: filter.fieldValue);
         break;
-      case FilterType.isNull:
+      case FetchFilterType.isNull:
         return this.where(filter.fieldName, isNull: filter.fieldValue);
         break;
     }

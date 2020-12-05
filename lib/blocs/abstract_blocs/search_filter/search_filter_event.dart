@@ -7,7 +7,7 @@ abstract class SearchFilterEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SearchFilterLoadEvent extends SearchFilterEvent {}
+class SearchFilterLoadDataEvent extends SearchFilterEvent {}
 
 class SearchFilterSelectOptionEvent<FilterDataType> extends SearchFilterEvent {
   final FilterDataType selectedElement;

@@ -10,7 +10,7 @@ part 'search_filter_state.dart';
 abstract class SearchFilterBloc<FilterDataType>
     extends Bloc<SearchFilterEvent, SearchFilterState> {
   SearchFilterBloc() : super(SearchFilterInitialState()) {
-    add(SearchFilterLoadEvent());
+    add(SearchFilterLoadDataEvent());
   }
 
   Future<List<FilterDataType>> fetchResults();
@@ -31,30 +31,41 @@ abstract class SearchFilterBloc<FilterDataType>
 
   FetchFilter getFetchFilter(FilterDataType selectedOption);
 
-  FetchFilter get fetchFilter => selectedOption == null ? null : getFetchFilter(selectedOption);
+  FetchFilter get fetchFilter =>
+      selectedOption == null ? null : getFetchFilter(selectedOption);
 
   @override
   Stream<SearchFilterState> mapEventToState(
     SearchFilterEvent event,
   ) async* {
-    yield SearchFilterInProgressState();
-    if (event is SearchFilterLoadEvent) {
-      yield* mapGeolocationFilterLoadEvent();
+    if (event is SearchFilterLoadDataEvent) {
+      yield* mapSearchFilterLoadDataEvent();
     } else if (event is SearchFilterSelectOptionEvent) {
-      selectedOption = event.selectedElement;
-      yield SearchFilterSelectedOptionState(
+      yield* mapSearchFilterSelectOptionEvent(
           selectedElement: event.selectedElement);
     }
   }
 
-  Stream<SearchFilterState> mapGeolocationFilterLoadEvent() async* {
+  Stream<SearchFilterState> mapSearchFilterLoadDataEvent() async* {
     try {
+      yield SearchFilterLoadDataInProgressState();
       _suggestion = await fetchSuggestion();
       _results = await fetchResults();
       _recentSearches = await fetchRecentSearches();
-      yield SearchFilterLoadResultsSuccessState();
+      yield SearchFilterLoadDataSuccessState();
     } catch (e) {
-      yield SearchFilterLoadSuggestionFailureState(message: e.toString());
+      yield SearchFilterLoadDataFailureState(message: e.toString());
+    }
+  }
+
+  Stream<SearchFilterState> mapSearchFilterSelectOptionEvent(
+      {@required selectedElement}) async* {
+    try {
+      yield SearchFilterSelectOptionInProgressState();
+      selectedOption = selectedElement;
+      yield SearchFilterSelectedOptionState(fetchFilter: fetchFilter);
+    } catch (e) {
+      yield SearchFilterSelectOptionFailureState(message: e.toString());
     }
   }
 }

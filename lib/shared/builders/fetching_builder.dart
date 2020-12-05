@@ -1,10 +1,10 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/filters/filters_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/filters/filters_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FetchingBuilder extends StatefulWidget {
+class FetchingBuilder extends StatelessWidget {
   final FetchBloc fetchingCubit;
   final FiltersBloc filtersCubit;
   final Widget Function(dynamic data) buildSuccess;
@@ -19,39 +19,17 @@ class FetchingBuilder extends StatefulWidget {
     this.buildInProgress,
   });
 
-  @override
-  _FetchingBuilderState createState() => _FetchingBuilderState();
-}
-
-class _FetchingBuilderState extends State<FetchingBuilder> {
-  @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-        cubit: widget.fetchingCubit,
+        cubit: fetchingCubit,
         builder: (BuildContext context, state) {
           if (state is FetchFailureState) {
-            return widget.buildError;
+            return buildError;
           } else if (state is FetchSuccessState) {
-            return widget.buildSuccess(state.data);
+            return buildSuccess(state.data);
           }
 
-          return widget.buildInProgress;
+          return buildInProgress;
         });
   }
-
-  // Widget _buildInProgress() {
-  //   if (widget.buildInProgress != null) {
-  //     return widget.buildInProgress;
-  //   }
-
-  //   return CircularProgressIndicator();
-  // }
-
-  // Widget _buildError() {
-  //   if (widget.buildError != null) {
-  //     return widget.buildError;
-  //   }
-
-  //   return Text('Error');
-  // }
 }

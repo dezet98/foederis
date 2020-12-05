@@ -7,54 +7,34 @@ abstract class SearchFilterState extends Equatable {
   List<Object> get props => [];
 }
 
-class SearchFilterInProgressState extends SearchFilterState {}
-
 class SearchFilterInitialState extends SearchFilterState {}
 
-class SearchFilterLoadResultsState extends SearchFilterState {}
+class SearchFilterLoadDataInProgressState extends SearchFilterState {}
 
-class SearchFilterLoadResultsSuccessState extends SearchFilterState {}
+class SearchFilterLoadDataSuccessState extends SearchFilterState {}
 
-class SearchFilterLoadResultsFailureState extends SearchFilterState {
+class SearchFilterLoadDataFailureState extends SearchFilterState {
   final String message;
 
-  SearchFilterLoadResultsFailureState({this.message});
+  SearchFilterLoadDataFailureState({this.message});
 
   @override
-  String toString() => 'GeolocationFilterLoadFailureState {error: $message}';
+  String toString() => 'SearchFilterLoadDataFailureState {error: $message}';
 }
 
-class SearchFilterLoadSuggestionState extends SearchFilterState {}
+class SearchFilterSelectOptionInProgressState extends SearchFilterState {}
 
-class SearchFilterLoadSuggestionSuccessState extends SearchFilterState {}
+class SearchFilterSelectedOptionState extends SearchFilterState {
+  final FetchFilter fetchFilter;
 
-class SearchFilterLoadSuggestionFailureState extends SearchFilterState {
+  SearchFilterSelectedOptionState({this.fetchFilter});
+}
+
+class SearchFilterSelectOptionFailureState extends SearchFilterState {
   final String message;
 
-  SearchFilterLoadSuggestionFailureState({this.message});
+  SearchFilterSelectOptionFailureState({this.message});
 
   @override
-  String toString() =>
-      'SearchFilterLoadSuggestionFailureState {error: $message}';
-}
-
-class SearchFilterLoadRecentSearchesState extends SearchFilterState {}
-
-class SearchFilterLoadRecentSearchesSuccessState extends SearchFilterState {}
-
-class SearchFilterLoadRecentSearchesFailureState extends SearchFilterState {
-  final String message;
-
-  SearchFilterLoadRecentSearchesFailureState({this.message});
-
-  @override
-  String toString() =>
-      'SearchFilterLoadRecentSearchesFailureState {error: $message}';
-}
-
-class SearchFilterSelectedOptionState<FilterDataType>
-    extends SearchFilterState {
-  final FilterDataType selectedElement;
-
-  SearchFilterSelectedOptionState({@required this.selectedElement});
+  String toString() => 'SearchFilterSelectOptionFailureState {error: $message}';
 }

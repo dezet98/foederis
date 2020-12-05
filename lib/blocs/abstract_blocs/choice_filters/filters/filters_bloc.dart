@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/filter/filter_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/filter/filter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
 part 'filters_event.dart';
@@ -10,9 +10,7 @@ abstract class FiltersBloc<FilterDataType>
     extends Bloc<FiltersEvent, FiltersState> {
   FiltersBloc() : super(FiltersInitialState());
 
-  List<FilterBloc> getFilters();
-
-  List<FilterBloc> get filtersBlocs => getFilters();
+  List<FilterBloc> get filtersBlocs;
 
   List<FilterDataType> filter(List<FilterDataType> data) {
     List<FilterDataType> filteredData = data;

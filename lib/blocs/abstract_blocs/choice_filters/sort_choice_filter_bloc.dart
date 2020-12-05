@@ -3,13 +3,15 @@ import 'package:meta/meta.dart';
 import 'filter/filter_bloc.dart';
 import 'filter_option/filter_option_bloc.dart';
 
-class SingleChoiceFilterBloc<FilterDataType, FilterFieldType>
+enum SortWay { desc, asc }
+
+class SortChoiceFilterBloc<FilterDataType, FilterFieldType>
     extends FilterBloc<FilterDataType, FilterFieldType> {
-  final List<FilterOptionBloc> options;
-  final FilterFieldType Function(FilterDataType) getField;
+  final List<FilterOptionBloc<SortWay>> options;
+  final String Function(FilterDataType) getField;
   final String Function(BuildContext) getTitle;
 
-  SingleChoiceFilterBloc({
+  SortChoiceFilterBloc({
     @required this.options,
     @required this.getField,
     @required this.getTitle,
@@ -19,17 +21,17 @@ class SingleChoiceFilterBloc<FilterDataType, FilterFieldType>
 
   @override
   List<FilterDataType> filterData(List<FilterDataType> data) {
-    List<FilterDataType> filteredData = data;
+    SortWay filterFieldValue =
+        options.firstWhere((element) => element.isSelected).filterFieldValue;
 
-    for (FilterOptionBloc option in options) {
-      if (option.isSelected) {
-        filteredData = filteredData
-            .where((element) => getField(element) == option.filterFieldValue)
-            .toList();
-      }
+    if (filterFieldValue == SortWay.asc) {
+      data.sort((a, b) => getField(a).compareTo(getField(b)));
+      return data;
+    } else if (filterFieldValue == SortWay.desc) {
+      data.sort((a, b) => getField(b).compareTo(getField(a)));
+      return data;
     }
-
-    return filteredData;
+    return data;
   }
 
   @override

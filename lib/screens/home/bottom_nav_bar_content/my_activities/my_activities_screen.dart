@@ -1,11 +1,8 @@
+import 'package:engineering_thesis/shared/abstract/nav_bar_tab.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class MyActivitiesScreen extends StatefulWidget {
-  @override
-  _MyActivitiesScreenState createState() => _MyActivitiesScreenState();
-}
-
-class _MyActivitiesScreenState extends State<MyActivitiesScreen> {
+class MyActivitiesScreen extends NavBarTab {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,4 +15,10 @@ class _MyActivitiesScreenState extends State<MyActivitiesScreen> {
       ),
     );
   }
+
+  @override
+  Icon getIcon(BuildContext context) => Icon(PlatformIcons(context).book);
+
+  @override
+  String get label => 'My activity';
 }
