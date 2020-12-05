@@ -6,35 +6,36 @@ class MultiChoiceFilterBloc<FilterDataType, FilterFieldType>
     extends FilterBloc<FilterDataType, FilterFieldType> {
   final List<FilterOptionBloc> options;
   final FilterFieldType Function(FilterDataType) getField;
-  final String filterTitle;
-  final List<int> initialSelected;
+  final String Function(BuildContext) getTitle;
 
-  MultiChoiceFilterBloc({
-    @required this.options,
-    @required this.getField,
-    @required this.initialSelected,
-    this.filterTitle = '',
-  }) {
-    for (int i in initialSelected) options[i].add(FilterOptionSelectEvent());
+  MultiChoiceFilterBloc(
+      {@required this.options,
+      @required this.getField,
+      @required this.getTitle}) {
+    //for (int i in initialSelected) options[i].add(FilterOptionSelectEvent());
   }
 
   @override
   List<FilterDataType> filterData(List<FilterDataType> data) {
-    List<FilterDataType> filteredData = data;
+    List<FilterDataType> filteredData = [];
 
     for (FilterOptionBloc option in options) {
       if (option.isSelected) {
-        filteredData = filteredData
+        filteredData += data
             .where((element) => getField(element) == option.filterFieldValue)
             .toList();
       }
     }
 
-    return filteredData;
+    return filteredData.toSet().toList();
   }
 
   @override
-  void filterDataChanged(int selectedIndex) {
-    options[selectedIndex].add(FilterOptionClickEvent());
+  void filterDataChanged(FilterOptionBloc filterOptionBloc) {
+    filterOptionBloc.add(
+      filterOptionBloc.isSelected
+          ? FilterOptionUncheckEvent()
+          : FilterOptionSelectEvent(),
+    );
   }
 }

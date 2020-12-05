@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/filter_option/filter_option_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
 part 'filter_event.dart';
@@ -10,7 +11,8 @@ part 'filter_state.dart';
 abstract class FilterBloc<FilterFieldType, FilterDataType>
     extends Bloc<FilterEvent, FilterState> {
   List<FilterOptionBloc> options;
-  String get filterTitle;
+  String Function(BuildContext) getTitle;
+
   FilterBloc() : super(FilterInitialState());
 
   bool isSelected(int optionIndex) => options[optionIndex].isSelected;
@@ -20,7 +22,7 @@ abstract class FilterBloc<FilterFieldType, FilterDataType>
   int get firstIndexOfSelectedOption =>
       options.indexWhere((element) => element.isSelected);
 
-  void filterDataChanged(int selectedIndex);
+  void filterDataChanged(FilterOptionBloc filterOptionBloc);
   List<FilterFieldType> filterData(List<FilterFieldType> data);
 
   @override
@@ -28,7 +30,7 @@ abstract class FilterBloc<FilterFieldType, FilterDataType>
     FilterEvent event,
   ) async* {
     if (event is FilterChangeEvent) {
-      filterDataChanged(event.selectedIndex);
+      filterDataChanged(event.filterOptionBloc);
       yield FilterChangedState();
     }
   }

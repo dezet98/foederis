@@ -51,7 +51,7 @@ class ActivityRepository {
 
 extension filter on CollectionReference {
   Query whereWithFilters(List<FetchFilter> filters) {
-    if (filters.length == 0) return this;
+    if (filters == null || filters.length == 0) return this;
 
     Query query;
     for (FetchFilter filter in filters) {

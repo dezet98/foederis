@@ -2,6 +2,7 @@ import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_content/my_activities/my_activities_screen.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_content/settings/settings_screen.dart';
 import 'package:engineering_thesis/shared/app_logger.dart';
+import 'package:engineering_thesis/shared/providers.dart';
 import 'package:engineering_thesis/shared/routing.dart';
 import 'package:engineering_thesis/shared/templates/template_screen.dart';
 import 'package:flutter/widgets.dart';
@@ -19,20 +20,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) {
-        if (state is AuthUserUnauthenticatedState) {
-          Routing.pushNamedAndRemoveUntil(context, CommonRoutes.splash,
-              CommonRoutes.splash); // TODO change security maybe
-        }
-      },
-      child: TemplateScreen(
-        body: homeScreenContents.elementAt(_selectedIndex),
-        usePadding: false,
-        platformNavBar: PlatformNavBar(
-          currentIndex: _selectedIndex,
-          items: _homeNavBarItems,
-          itemChanged: itemChanged,
+    return MultiBlocProvider(
+      providers: getHomeScreenBlocProviders(),
+      child: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthUserUnauthenticatedState) {
+            Routing.pushNamedAndRemoveUntil(context, CommonRoutes.splash,
+                CommonRoutes.splash); // TODO change security maybe
+          }
+        },
+        child: TemplateScreen(
+          body: homeScreenContents.elementAt(_selectedIndex),
+          usePadding: false,
+          platformNavBar: PlatformNavBar(
+            currentIndex: _selectedIndex,
+            items: _homeNavBarItems,
+            itemChanged: itemChanged,
+          ),
         ),
       ),
     );

@@ -25,6 +25,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "bad_credentials" : MessageLookupByLibrary.simpleMessage("Złe dane"),
     "filter_screen_apply_button_text" : MessageLookupByLibrary.simpleMessage("Zastosuj filtry"),
     "filter_screen_nav_title" : MessageLookupByLibrary.simpleMessage("Filtry"),
+    "filters_screen_filter_subtitile_frequency" : MessageLookupByLibrary.simpleMessage("Częsotliwość"),
+    "filters_screen_filter_subtitile_sort_by" : MessageLookupByLibrary.simpleMessage("Sortuj"),
+    "filters_screen_filter_value_asc" : MessageLookupByLibrary.simpleMessage("rosnąco"),
+    "filters_screen_filter_value_desc" : MessageLookupByLibrary.simpleMessage("malejąco"),
+    "filters_screen_filter_value_one_time" : MessageLookupByLibrary.simpleMessage("jednorazowe"),
+    "filters_screen_filter_value_regular" : MessageLookupByLibrary.simpleMessage("regularne"),
     "login" : MessageLookupByLibrary.simpleMessage("zaloguj się"),
     "settings" : MessageLookupByLibrary.simpleMessage("ustawienia"),
     "text_button_go_to_login" : MessageLookupByLibrary.simpleMessage("login")

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -9,27 +10,25 @@ part 'filter_option_state.dart';
 class FilterOptionBloc<FilterFieldType>
     extends Bloc<FilterOptionEvent, FilterOptionState> {
   FilterFieldType filterFieldValue;
-  String label;
+  bool isSelected;
+  String Function(BuildContext) getLabel;
 
   FilterOptionBloc({
     @required this.filterFieldValue,
-    @required this.label,
-  }) : super(FilterOptionInitial()) {
-    isSelected = false;
-  }
-
-  bool isSelected;
+    this.getLabel,
+    @required this.isSelected,
+  }) : super(FilterOptionInitial());
 
   @override
   Stream<FilterOptionState> mapEventToState(
     FilterOptionEvent event,
   ) async* {
-    if (event is FilterOptionClickEvent) {
-      isSelected = !isSelected;
-    } else if (event is FilterOptionUncheckEvent) {
+    if (event is FilterOptionUncheckEvent) {
       isSelected = false;
+      yield FilterOptionUncheckState();
     } else if (event is FilterOptionSelectEvent) {
       isSelected = true;
+      yield FilterOptionSelectedState();
     }
   }
 }

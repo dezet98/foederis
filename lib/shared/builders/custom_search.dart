@@ -40,7 +40,7 @@ class CustomSearch extends SearchDelegate {
     return BlocBuilder(
         cubit: searchFilterBloc,
         builder: (context, state) {
-          if (state is SearchFilterInProgressState)
+          if (state is SearchFilterLoadDataInProgressState)
             return Center(child: CircularProgressIndicator());
 
           return query.isEmpty

@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
     return MultiRepositoryProvider(
       providers: getRepositoryProviders(),
       child: MultiBlocProvider(
-        providers: getBlocProviders(),
+        providers: getMainBlocProviders(),
         child: PlatformProvider(
           builder: (BuildContext context) => PlatformApp(
             title: 'Engineering thesis',

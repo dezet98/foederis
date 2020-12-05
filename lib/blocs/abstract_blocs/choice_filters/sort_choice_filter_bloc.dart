@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 import 'filter/filter_bloc.dart';
 import 'filter_option/filter_option_bloc.dart';
@@ -8,16 +9,14 @@ class SortChoiceFilterBloc<FilterDataType, FilterFieldType>
     extends FilterBloc<FilterDataType, FilterFieldType> {
   final List<FilterOptionBloc<SortWay>> options;
   final String Function(FilterDataType) getField;
-  final String filterTitle;
-  final int initialSelected;
+  final String Function(BuildContext) getTitle;
 
   SortChoiceFilterBloc({
     @required this.options,
     @required this.getField,
-    @required this.initialSelected,
-    this.filterTitle,
+    @required this.getTitle,
   }) {
-    this.options[initialSelected].add(FilterOptionSelectEvent());
+    //this.options[initialSelected].add(FilterOptionSelectEvent());
   }
 
   @override
@@ -36,10 +35,10 @@ class SortChoiceFilterBloc<FilterDataType, FilterFieldType>
   }
 
   @override
-  void filterDataChanged(int selectedIndex) {
-    if (!isSelected(selectedIndex)) {
+  void filterDataChanged(FilterOptionBloc filterOptionBloc) {
+    if (!filterOptionBloc.isSelected) {
       options[firstIndexOfSelectedOption].add(FilterOptionUncheckEvent());
-      options[selectedIndex].add(FilterOptionSelectEvent());
+      filterOptionBloc.add(FilterOptionSelectEvent());
     }
   }
 }

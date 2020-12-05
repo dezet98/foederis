@@ -15,6 +15,7 @@ CupertinoAppData getCupertinoAppData(context, __) => CupertinoAppData(
 class Palette {
   static Color blue = Colors.blue;
   static Color white = Colors.white;
+  static Color black = Colors.black;
 }
 
 class Dimensions {
@@ -32,8 +33,31 @@ ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: Palette.blue,
   textTheme: TextTheme(
-    headline6: TextStyle(
+    headline1: TextStyle(
       color: Palette.white,
+      fontSize: 20.0,
+      fontWeight: FontWeight.w500,
+    ),
+    headline2: TextStyle(fontSize: 16),
+    headline3: TextStyle(
+      fontSize: 14.0,
+      fontWeight: FontWeight.w500,
+    ),
+    bodyText1: TextStyle(
+      fontSize: 14.0,
+      fontWeight: FontWeight.w400,
+    ),
+    bodyText2: TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w400,
+    ),
+    button: TextStyle(
+      fontSize: 14.0,
+      fontWeight: FontWeight.w500,
+    ),
+    subtitle2: TextStyle(
+      fontSize: 12.0,
+      fontWeight: FontWeight.w400,
     ),
   ),
 );
@@ -41,8 +65,36 @@ ThemeData lightTheme = ThemeData(
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   primaryColor: Palette.blue,
+  textTheme: TextTheme(
+    headline1: TextStyle(
+      color: Palette.white,
+      fontSize: 20.0,
+      fontWeight: FontWeight.w500,
+    ),
+    headline2: TextStyle(fontSize: 16),
+    headline3: TextStyle(
+      fontSize: 14.0,
+      fontWeight: FontWeight.w500,
+    ),
+    bodyText1: TextStyle(
+      fontSize: 14.0,
+      fontWeight: FontWeight.w400,
+    ),
+    bodyText2: TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w400,
+    ),
+    button: TextStyle(
+      fontSize: 14.0,
+      fontWeight: FontWeight.w500,
+    ),
+    subtitle2: TextStyle(
+      fontSize: 12.0,
+      fontWeight: FontWeight.w400,
+    ),
+  ),
 );
 
 //cupertino themes
-CupertinoThemeData cupertinoTheme =
-    CupertinoThemeData(primaryColor: Palette.blue);
+CupertinoThemeData cupertinoTheme = CupertinoThemeData(
+    primaryColor: Palette.blue, textTheme: CupertinoTextThemeData());

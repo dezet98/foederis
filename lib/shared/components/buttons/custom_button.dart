@@ -60,6 +60,8 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed != null ? onPressed : () {},
       materialIcon: Icon(materialIconData),
       cupertinoIcon: Icon(cupertinoIconData),
+      material: (_, __) => MaterialIconButtonData(),
+      cupertino: (_, __) => CupertinoIconButtonData(),
     );
   }
 }

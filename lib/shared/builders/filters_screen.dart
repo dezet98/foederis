@@ -4,9 +4,7 @@ import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/multi_cho
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/single_choice_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/sort_choice_filter_bloc.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
-import 'package:engineering_thesis/shared/builders/multi_choice_filter.dart';
-import 'package:engineering_thesis/shared/builders/single_choice_filter.dart';
-import 'package:engineering_thesis/shared/builders/sort_choice_filter.dart';
+import 'package:engineering_thesis/shared/builders/filter_choice.dart';
 import 'package:engineering_thesis/shared/components/buttons/custom_button.dart';
 import 'package:engineering_thesis/shared/components/text/cutom_text.dart';
 import 'package:engineering_thesis/shared/templates/template_screen.dart';
@@ -15,23 +13,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import '../routing.dart';
 
-class FiltersScreen extends StatefulWidget {
+class FiltersScreen extends StatelessWidget {
   final FiltersBloc filtersBloc;
 
   FiltersScreen({@required this.filtersBloc});
 
-  @override
-  _FiltersScreenState createState() => _FiltersScreenState();
-}
-
-class _FiltersScreenState extends State<FiltersScreen> {
   @override
   Widget build(BuildContext context) {
     return TemplateScreen(
       usePadding: false,
       platformAppBar: PlatformAppBar(
         title: CustomText(S.of(context).filter_screen_nav_title,
-            textType: TextType.screen_bar_title),
+            textType: TextType.page_title),
       ),
       body: Scaffold(
         body: Padding(
@@ -39,7 +32,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
           child: CustomScrollView(
             slivers: [
               SliverList(
-                delegate: SliverChildListDelegate(_buildFilters()),
+                delegate: SliverChildListDelegate(_buildFilters(context)),
               ),
             ],
           ),
@@ -48,14 +41,17 @@ class _FiltersScreenState extends State<FiltersScreen> {
     );
   }
 
-  List<Widget> _buildFilters() {
+  List<Widget> _buildFilters(context) {
     return [
-      for (FilterBloc bloc in widget.filtersBloc.filtersBlocs)
+      for (FilterBloc bloc in filtersBloc.filtersBlocs)
         _buildFilterWrapping(
-            filter: _getFilterWidget(bloc), title: bloc.filterTitle),
+            filter: _getFilterWidget(bloc), title: bloc.getTitle(context)),
       CustomButton(
         buttonType: ButtonType.raised_next_button,
-        onPressed: filtersApply,
+        onPressed: () {
+          filtersBloc.add(FiltersChangedEvent());
+          Routing.pop(context);
+        },
         text: S.of(context).filter_screen_apply_button_text,
       )
     ];
@@ -73,7 +69,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
             Padding(
               padding: const EdgeInsets.only(bottom: Dimensions.gutterSmall),
               child: Align(
-                child: CustomText(title, textType: TextType.subtitle1),
+                child: CustomText(title, textType: TextType.menu_title),
                 alignment: Alignment.centerLeft,
               ),
             ),
@@ -85,18 +81,13 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   Widget _getFilterWidget(FilterBloc bloc) {
     if (bloc is MultiChoiceFilterBloc) {
-      return MultiChoiceFilter(bloc);
+      return FilterChoice(bloc);
     } else if (bloc is SingleChoiceFilterBloc) {
-      return SingleChoiceFilter(bloc);
+      return FilterChoice(bloc);
     } else if (bloc is SortChoiceFilterBloc) {
-      return SortChoiceFilter(bloc);
+      return FilterChoice(bloc);
     }
     assert(false);
     return Container();
-  }
-
-  void filtersApply() {
-    widget.filtersBloc.add(FiltersChangedEvent());
-    Routing.pop(context);
   }
 }

@@ -7,8 +7,6 @@ abstract class FilterOptionEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FilterOptionClickEvent extends FilterOptionEvent {}
-
 class FilterOptionUncheckEvent extends FilterOptionEvent {}
 
 class FilterOptionSelectEvent extends FilterOptionEvent {}

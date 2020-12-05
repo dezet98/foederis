@@ -8,7 +8,7 @@ abstract class FilterEvent extends Equatable {
 }
 
 class FilterChangeEvent extends FilterEvent {
-  final int selectedIndex;
+  final FilterOptionBloc filterOptionBloc;
 
-  FilterChangeEvent({@required this.selectedIndex});
+  FilterChangeEvent({@required this.filterOptionBloc});
 }

@@ -105,6 +105,66 @@ class S {
     );
   }
 
+  /// `Frequency`
+  String get filters_screen_filter_subtitile_frequency {
+    return Intl.message(
+      'Frequency',
+      name: 'filters_screen_filter_subtitile_frequency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort by`
+  String get filters_screen_filter_subtitile_sort_by {
+    return Intl.message(
+      'Sort by',
+      name: 'filters_screen_filter_subtitile_sort_by',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `desc`
+  String get filters_screen_filter_value_desc {
+    return Intl.message(
+      'desc',
+      name: 'filters_screen_filter_value_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `asc`
+  String get filters_screen_filter_value_asc {
+    return Intl.message(
+      'asc',
+      name: 'filters_screen_filter_value_asc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `regular`
+  String get filters_screen_filter_value_regular {
+    return Intl.message(
+      'regular',
+      name: 'filters_screen_filter_value_regular',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `one-time`
+  String get filters_screen_filter_value_one_time {
+    return Intl.message(
+      'one-time',
+      name: 'filters_screen_filter_value_one_time',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Bad credentials`
   String get bad_credentials {
     return Intl.message(
