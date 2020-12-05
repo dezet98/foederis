@@ -1,4 +1,4 @@
-import 'package:engineering_thesis/blocs/abstract_blocs/nav_bar/nav_bar_bloc.dart';
+import 'package:engineering_thesis/blocs/nav_bar/nav_bar_bloc.dart';
 import 'package:engineering_thesis/shared/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/shared/templates/template_screen.dart';
 import 'package:flutter/cupertino.dart';

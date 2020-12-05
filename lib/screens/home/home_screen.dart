@@ -1,5 +1,5 @@
-import 'package:engineering_thesis/blocs/abstract_blocs/nav_bar/nav_bar_bloc.dart';
 import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
+import 'package:engineering_thesis/blocs/nav_bar/nav_bar_bloc.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_content/my_activities/my_activities_screen.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_content/settings/settings_screen.dart';
 import 'package:engineering_thesis/shared/builders/nav_bar.dart';
