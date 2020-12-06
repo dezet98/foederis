@@ -98,18 +98,25 @@ class SearchActivitiesScreen extends NavBarTab {
     );
   }
 
-  Widget _buildActivitiesList(List<Activity> activities) {
+  Widget _buildActivitiesList(BuildContext context, List<Activity> activities) {
     return SliverList(
       delegate: SliverChildListDelegate(
-        [for (Activity activity in activities) _buildActivityTile(activity)],
+        [
+          for (Activity activity in activities)
+            _buildActivityTile(context, activity)
+        ],
       ),
     );
   }
 
-  Widget _buildActivityTile(Activity activity) {
+  Widget _buildActivityTile(BuildContext context, Activity activity) {
     return CustomCard(
       title: activity.title,
       subtitle: activity.categoryRef.toString(),
+      onTap: () {
+        Routing.pushNamed(context, UserRoutes.activityDetails,
+            options: activity);
+      },
     );
   }
 

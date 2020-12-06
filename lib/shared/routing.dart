@@ -1,4 +1,5 @@
 import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
+import 'package:engineering_thesis/screens/activity_details/activity_details_screen.dart';
 import 'package:engineering_thesis/screens/home/home_screen.dart';
 import 'package:engineering_thesis/screens/login/login_screen.dart';
 import 'package:engineering_thesis/screens/register/register_screen.dart';
@@ -25,8 +26,9 @@ class GuestRoutes {
 
 class UserRoutes {
   static const String home = "/";
+  static const String activityDetails = '/activityDetails';
 
-  static List<String> get props => [home];
+  static List<String> get props => [home, activityDetails];
 }
 
 class Routing {
@@ -42,6 +44,8 @@ class Routing {
         return SplashScreen();
       case CommonRoutes.filter:
         return FiltersScreen(filtersBloc: options);
+      case UserRoutes.activityDetails:
+        return ActivityDetailsScreen(activity: options);
       default:
         assert(false, '$routeName is not define as a routeName');
         return PlatformScaffold(

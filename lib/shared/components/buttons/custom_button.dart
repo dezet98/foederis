@@ -56,6 +56,16 @@ class CustomButton extends StatelessWidget {
   }
 
   Widget _builIconButton() {
+    // return PlatformWidget(
+    //   material: (_, __) => IconButton(
+    //     icon: Icon(materialIconData),
+    //     onPressed: onPressed != null ? onPressed : () {},
+    //   ),
+    //   cupertino: (_, __) => CupertinoButton(
+    //     child: Icon(Icons.ac_unit),
+    //     onPressed: onPressed != null ? onPressed : () {},
+    //   ),
+    // );
     return PlatformIconButton(
       onPressed: onPressed != null ? onPressed : () {},
       materialIcon: Icon(materialIconData),

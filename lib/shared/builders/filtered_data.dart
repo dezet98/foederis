@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class FilteredData<FilterDataType> extends StatelessWidget {
   final FiltersBloc filtersBloc;
   final List<FilterDataType> data;
-  final Widget Function(List<FilterDataType> data) child;
+  final Widget Function(BuildContext context, List<FilterDataType> data) child;
 
   FilteredData(
       {@required this.filtersBloc, @required this.data, @required this.child});
@@ -17,6 +17,7 @@ class FilteredData<FilterDataType> extends StatelessWidget {
       cubit: filtersBloc,
       builder: (BuildContext context, state) {
         return child(
+          context,
           filtersBloc.filter(data),
         );
       },
