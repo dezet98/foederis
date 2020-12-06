@@ -25,16 +25,44 @@ class SearchActivitiesScreen extends NavBarTab {
       listener: (context, state) {
         if (state is SearchFilterSelectedOptionState) {
           BlocProvider.of<SearchActivitiesFetchingBloc>(context)
-              .add(FetchRefreshEvent(filters: [state.fetchFilter]));
+              .add(FetchInitialEvent(initialFilters: [state.fetchFilter]));
         }
       },
-      child: CustomScrollView(
-        slivers: [
-          _buildAppBar(context,
-              BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)),
-          _buildSearchedActivities(context),
-        ],
+      child: PlatformWidget(
+        material: (_, __) => RefreshIndicator(
+          displacement: 60.0,
+          onRefresh: () async {
+            await Future.delayed(Duration(seconds: 2));
+            BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
+                FetchRefreshEvent(filters: [
+              BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
+                  .fetchFilter
+            ]));
+          },
+          child: _buildCustomScrollView(context),
+        ),
+        cupertino: (_, __) => _buildCustomScrollView(context),
       ),
+    );
+  }
+
+  Widget _buildCustomScrollView(BuildContext context) {
+    return CustomScrollView(
+      slivers: [
+        _buildAppBar(context,
+            BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)),
+        CupertinoSliverRefreshControl(
+          onRefresh: () async {
+            await Future.delayed(Duration(seconds: 2));
+            BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
+                FetchRefreshEvent(filters: [
+              BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
+                  .fetchFilter
+            ]));
+          },
+        ),
+        _buildSearchedActivities(context),
+      ],
     );
   }
 

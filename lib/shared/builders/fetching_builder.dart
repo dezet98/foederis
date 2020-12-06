@@ -23,10 +23,16 @@ class FetchingBuilder extends StatelessWidget {
     return BlocBuilder(
         cubit: fetchingCubit,
         builder: (BuildContext context, state) {
-          if (state is FetchFailureState) {
+          if (state is FetchInitialFailureState ||
+              state is FetchRefreshFailureState) {
             return buildError;
-          } else if (state is FetchSuccessState) {
+          } else if (state is FetchInitialSuccessState ||
+              state is FetchRefreshSuccessState) {
             return buildSuccess(state.data);
+          } else if (state is FetchRefreshInProgressState) {
+            return SliverFillRemaining(
+              child: Container(),
+            );
           }
 
           return buildInProgress;

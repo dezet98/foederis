@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/shared/components/buttons/custom_button.dart';
 import 'package:engineering_thesis/shared/routing.dart';
