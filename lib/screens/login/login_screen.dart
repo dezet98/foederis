@@ -2,6 +2,7 @@ import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
 import 'package:engineering_thesis/blocs/login/login_bloc.dart';
 import 'package:engineering_thesis/constants/enums.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
+import 'package:engineering_thesis/shared/components/app_bars/custom_app_bar.dart';
 import 'package:engineering_thesis/shared/routing.dart';
 import 'package:engineering_thesis/shared/templates/template_screen.dart';
 import 'package:flutter/widgets.dart';
@@ -30,8 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildLoginScreen() {
     return TemplateScreen(
-      platformAppBar: PlatformAppBar(
-        title: Text("Login"),
+      platformAppBar: CustomAppBar(
+        title: 'Login',
       ),
       body: Column(
         children: [

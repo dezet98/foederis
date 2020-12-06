@@ -1,18 +1,41 @@
 import 'package:engineering_thesis/shared/abstract/nav_bar_tab.dart';
+import 'package:engineering_thesis/shared/components/buttons/custom_button.dart';
+import 'package:engineering_thesis/shared/routing.dart';
+import 'package:engineering_thesis/shared/theme.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class MyActivitiesScreen extends NavBarTab {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(54.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Text('My activities screen'),
-        ],
+    return Stack(children: [
+      Positioned(
+        child: _buildFloatingButton(context),
+        right: Dimensions.gutterMedium,
+        bottom: Dimensions.gutterMedium,
       ),
+      Padding(
+        padding: const EdgeInsets.all(54.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Text('My activities screen'),
+          ],
+        ),
+      ),
+    ]);
+  }
+
+  Widget _buildFloatingButton(BuildContext context) {
+    return CustomButton(
+      buttonType: ButtonType.floating_button,
+      materialIconData: Icons.add,
+      cupertinoIconData: CupertinoIcons.add,
+      onPressed: () {
+        Routing.pushNamed(context, UserRoutes.addActivity);
+      },
     );
   }
 

@@ -165,6 +165,16 @@ class S {
     );
   }
 
+  /// `Create activity`
+  String get create_activity_screen_nav_title {
+    return Intl.message(
+      'Create activity',
+      name: 'create_activity_screen_nav_title',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Bad credentials`
   String get bad_credentials {
     return Intl.message(

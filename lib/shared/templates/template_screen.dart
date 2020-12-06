@@ -3,13 +3,14 @@
 // import 'package:engineering_thesis/screens/register/splash_screen.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import '../routing.dart';
+import 'package:engineering_thesis/shared/components/app_bars/custom_app_bar.dart';
 import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class TemplateScreen extends StatelessWidget {
   final Widget body;
-  final PlatformAppBar platformAppBar;
+  final CustomAppBar platformAppBar;
   final PlatformNavBar platformNavBar;
   final String routeName;
   final bool usePadding;
@@ -25,7 +26,7 @@ class TemplateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
-      appBar: platformAppBar,
+      appBar: platformAppBar?.getdPlatformAppBar(context),
       body: SafeArea(
         child: usePadding
             ? Padding(

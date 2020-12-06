@@ -2,12 +2,9 @@
     "@@locale": "pl_PL",
     "login": "zaloguj się",
     "app_bar_title_register": "Rejestracja",
-
     "text_button_create_account": "zarejestruj się",
     "text_button_go_to_login": "login",
-
     "settings": "ustawienia",
-    
     "filter_screen_nav_title": "Filtry",
     "filter_screen_apply_button_text": "Zastosuj filtry",
     "filters_screen_filter_subtitile_frequency": "Częsotliwość",
@@ -16,6 +13,6 @@
     "filters_screen_filter_value_asc": "rosnąco",
     "filters_screen_filter_value_regular": "regularne",
     "filters_screen_filter_value_one_time": "jednorazowe",
-
+    "create_activity_screen_nav_title": "Dodaj aktywność",
     "bad_credentials": "Złe dane"
 }

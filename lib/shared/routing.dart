@@ -4,6 +4,7 @@ import 'package:engineering_thesis/screens/home/home_screen.dart';
 import 'package:engineering_thesis/screens/login/login_screen.dart';
 import 'package:engineering_thesis/screens/register/register_screen.dart';
 import 'package:engineering_thesis/screens/splash_screen.dart';
+import 'package:engineering_thesis/shared/builders/create_activity_screen.dart';
 import 'package:engineering_thesis/shared/builders/filters_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +28,9 @@ class GuestRoutes {
 class UserRoutes {
   static const String home = "/";
   static const String activityDetails = '/activityDetails';
+  static const String addActivity = "/addActivity";
 
-  static List<String> get props => [home, activityDetails];
+  static List<String> get props => [home, activityDetails, addActivity];
 }
 
 class Routing {
@@ -46,6 +48,8 @@ class Routing {
         return FiltersScreen(filtersBloc: options);
       case UserRoutes.activityDetails:
         return ActivityDetailsScreen(activity: options);
+      case UserRoutes.addActivity:
+        return CreateActivityScreen();
       default:
         assert(false, '$routeName is not define as a routeName');
         return PlatformScaffold(

@@ -3,7 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-enum ButtonType { raised_next_button, flat_next_button, icon_button }
+enum ButtonType {
+  raised_next_button,
+  flat_next_button,
+  icon_button,
+  floating_button
+}
 
 class CustomButton extends StatelessWidget {
   final ButtonType buttonType;
@@ -31,6 +36,9 @@ class CustomButton extends StatelessWidget {
 
       case ButtonType.icon_button:
         return _builIconButton();
+        break;
+      case ButtonType.floating_button:
+        return _buildFloatingButton();
         break;
     }
     assert(false);
@@ -72,6 +80,21 @@ class CustomButton extends StatelessWidget {
       cupertinoIcon: Icon(cupertinoIconData),
       material: (_, __) => MaterialIconButtonData(),
       cupertino: (_, __) => CupertinoIconButtonData(),
+    );
+  }
+
+  Widget _buildFloatingButton() {
+    return PlatformWidget(
+      material: (_, __) => FloatingActionButton(
+        child: Icon(materialIconData),
+        onPressed: onPressed != null ? onPressed : () {},
+        mini: true,
+      ),
+      cupertino: (_, __) => FloatingActionButton(
+        child: Icon(cupertinoIconData),
+        onPressed: onPressed != null ? onPressed : () {},
+        mini: true,
+      ),
     );
   }
 }
