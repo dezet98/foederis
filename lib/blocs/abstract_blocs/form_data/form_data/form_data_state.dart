@@ -1,0 +1,10 @@
+part of 'form_data_bloc.dart';
+
+abstract class FormDataState extends Equatable {
+  const FormDataState();
+
+  @override
+  List<Object> get props => [];
+}
+
+class FormDataInitialState extends FormDataState {}
