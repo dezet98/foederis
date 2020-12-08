@@ -6,7 +6,7 @@ import 'package:engineering_thesis/blocs/search_activities/search_activities_fet
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/shared/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/shared/builders/fetching_builder.dart';
-import 'package:engineering_thesis/shared/builders/filtered_data.dart';
+import 'package:engineering_thesis/shared/builders/filters/filtered_data.dart';
 import 'package:engineering_thesis/shared/components/buttons/custom_button.dart';
 import 'package:engineering_thesis/shared/components/card/custom_card.dart';
 import 'package:engineering_thesis/shared/routing.dart';

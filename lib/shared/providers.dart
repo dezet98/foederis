@@ -1,7 +1,7 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/filter_option/filter_option_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/multi_choice_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/sort_choice_filter_bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/form_data/single_text_form.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_option/form_field_bloc.dart';
 import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
 import 'package:engineering_thesis/blocs/create_activity/create_activity_form_data.dart';
 import 'package:engineering_thesis/blocs/nav_bar/nav_bar_bloc.dart';
@@ -15,6 +15,8 @@ import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/auth_repository.dart';
 import 'package:engineering_thesis/repositories/geolocation_repository.dart';
+import 'package:engineering_thesis/shared/utils/validators.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 dynamic getRepositoryProviders() => [
@@ -108,11 +110,32 @@ dynamic getHomeScreenBlocProviders() => [
         ),
       ),
       BlocProvider(
-        create: (context) => CreateActvityFormDataBloc(formOption: [
-          SingleTextFormBloc(
-            initialResults: 'daniel',
-            sth: (String result) => result.isEmpty,
-          )
+        create: (context) => CreateActvityFormDataBloc(formsData: [
+          FormFieldBloc<String>(
+            initialResult: 'daniel',
+            validators: [LenghtValidator(min: 3, max: 130)],
+            getLabel: (BuildContext context) => "Activity title",
+          ),
+          FormFieldBloc<bool>(
+            initialResult: false,
+            getLabel: (BuildContext context) => "Regular acitvity",
+          ),
+          FormFieldBloc<bool>(
+            initialResult: true,
+            getLabel: (BuildContext context) => "Free join",
+          ),
+          FormFieldBloc<DateTime>(
+            initialResult: DateTime.now(),
+            getLabel: (BuildContext context) => "Start date",
+          ),
+          FormFieldBloc<int>(
+            initialResult: 5,
+            getLabel: (BuildContext context) => "Max entry",
+          ),
+          FormFieldBloc<int>(
+            initialResult: 5,
+            getLabel: (BuildContext context) => "Min entry",
+          ),
         ]),
       ),
     ];

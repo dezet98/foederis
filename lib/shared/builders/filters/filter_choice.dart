@@ -4,7 +4,7 @@ import 'package:engineering_thesis/shared/components/chips/custom_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../theme.dart';
+import '../../theme.dart';
 
 class FilterChoice extends StatelessWidget {
   final FilterBloc bloc;

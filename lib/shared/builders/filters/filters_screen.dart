@@ -4,14 +4,14 @@ import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/multi_cho
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/single_choice_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/sort_choice_filter_bloc.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
-import 'package:engineering_thesis/shared/builders/filter_choice.dart';
+import 'package:engineering_thesis/shared/builders/filters/filter_choice.dart';
 import 'package:engineering_thesis/shared/components/app_bars/custom_app_bar.dart';
 import 'package:engineering_thesis/shared/components/buttons/custom_button.dart';
 import 'package:engineering_thesis/shared/components/text/cutom_text.dart';
 import 'package:engineering_thesis/shared/templates/template_screen.dart';
 import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/material.dart';
-import '../routing.dart';
+import '../../routing.dart';
 
 class FiltersScreen extends StatelessWidget {
   final FiltersBloc filtersBloc;

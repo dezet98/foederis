@@ -4,8 +4,8 @@ import 'package:engineering_thesis/screens/home/home_screen.dart';
 import 'package:engineering_thesis/screens/login/login_screen.dart';
 import 'package:engineering_thesis/screens/register/register_screen.dart';
 import 'package:engineering_thesis/screens/splash_screen.dart';
-import 'package:engineering_thesis/shared/builders/fill_form_screen.dart';
-import 'package:engineering_thesis/shared/builders/filters_screen.dart';
+import 'package:engineering_thesis/shared/builders/forms/form_data_screen.dart';
+import 'package:engineering_thesis/shared/builders/filters/filters_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,7 +49,7 @@ class Routing {
       case UserRoutes.activityDetails:
         return ActivityDetailsScreen(activity: options);
       case UserRoutes.addActivity:
-        return FillFormScreen(formDataBloc: options);
+        return FormDataScreen(formDataBloc: options);
       default:
         assert(false, '$routeName is not define as a routeName');
         return PlatformScaffold(

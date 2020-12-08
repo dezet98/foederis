@@ -86,11 +86,13 @@ class CustomButton extends StatelessWidget {
   Widget _buildFloatingButton() {
     return PlatformWidget(
       material: (_, __) => FloatingActionButton(
+        heroTag: null,
         child: Icon(materialIconData),
         onPressed: onPressed != null ? onPressed : () {},
         mini: true,
       ),
       cupertino: (_, __) => FloatingActionButton(
+        heroTag: null,
         child: Icon(cupertinoIconData),
         onPressed: onPressed != null ? onPressed : () {},
         mini: true,
