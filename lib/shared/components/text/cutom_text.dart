@@ -12,6 +12,7 @@ enum TextType {
   tab,
   button,
   text_button,
+  unavailable_text_button,
   form_text,
   error_text,
   valid_form_title,
@@ -67,6 +68,9 @@ class CustomText extends StatelessWidget {
         break;
       case TextType.invalid_form_title:
         return invalidFormTitle(text);
+        break;
+      case TextType.unavailable_text_button:
+        return unavailableTextButton(text);
         break;
     }
     assert(false);
@@ -131,6 +135,15 @@ Widget bodyText(text) => PlatformWidget(
 Widget button(text) => PlatformWidget(
       material: (context, platform) =>
           Text(text, style: Theme.of(context).textTheme.button),
+      cupertino: (context, platform) => Text(text),
+    );
+
+Widget unavailableTextButton(text) => PlatformWidget(
+      material: (context, platform) => Text(text,
+          style: Theme.of(context)
+              .textTheme
+              .button
+              .copyWith(color: Colors.black26)),
       cupertino: (context, platform) => Text(text),
     );
 

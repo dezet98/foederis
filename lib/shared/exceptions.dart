@@ -27,3 +27,15 @@ class FetchingException implements Exception {
 
   FetchingException({@required this.fetchingError, this.message});
 }
+
+class UploadDataException implements Exception {
+  final UploadDataError sendingDataError;
+  final String message;
+
+  UploadDataException({@required this.sendingDataError, this.message});
+
+  @override
+  String toString() {
+    return 'UploadDataException {errorCode: ${sendingDataError.toString()}, message: $message}';
+  }
+}

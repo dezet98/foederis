@@ -11,7 +11,7 @@ class SearchActivitiesFetchingBloc extends FetchBloc<List<Activity>> {
 
   @override
   Future<List<Activity>> fetch(List<FetchFilter> filters) async {
-    return await activityRepository.getAllActivities(filters);
+    return await activityRepository.fetchAllActivities(filters);
   }
 
   @override

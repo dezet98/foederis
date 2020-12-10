@@ -10,11 +10,15 @@ part 'form_field_state.dart';
 class FormFieldBloc<ResultType> extends Bloc<FormFieldEvent, FormFieldState> {
   ResultType result;
   List<Validator> validators;
+  String queryFieldName;
   String Function(BuildContext) getLabel;
 
-  FormFieldBloc(
-      {@required initialResult, this.validators = const [], this.getLabel})
-      : super(FormFieldInitialState()) {
+  FormFieldBloc({
+    @required initialResult,
+    this.validators = const [],
+    this.getLabel,
+    this.queryFieldName,
+  }) : super(FormFieldInitialState()) {
     result = initialResult;
   }
 

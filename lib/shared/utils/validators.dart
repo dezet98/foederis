@@ -30,3 +30,27 @@ class LenghtValidator extends Validator<String> {
     return false;
   }
 }
+
+class DateTimeRangeValidator extends Validator<DateTime> {
+  final DateTime minDate;
+  final DateTime maxDate;
+
+  DateTimeRangeValidator({this.minDate, this.maxDate});
+
+  @override
+  bool isValid(DateTime value) {
+    return value.isBefore(maxDate) && value.isAfter(minDate);
+  }
+}
+
+class NumberRangeValidator extends Validator {
+  final int min;
+  final int max;
+  NumberRangeValidator({this.min, this.max});
+
+  @override
+  bool isValid(value) {
+    return (min == null ? value : min) <= value &&
+        value >= (max == null ? value : max);
+  }
+}

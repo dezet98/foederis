@@ -7,7 +7,8 @@ enum ButtonType {
   raised_next_button,
   flat_next_button,
   icon_button,
-  floating_button
+  floating_button,
+  loading_button,
 }
 
 class CustomButton extends StatelessWidget {
@@ -40,6 +41,9 @@ class CustomButton extends StatelessWidget {
       case ButtonType.floating_button:
         return _buildFloatingButton();
         break;
+      case ButtonType.loading_button:
+        return _builLoadingButton();
+        break;
     }
     assert(false);
     return Text('unavailable');
@@ -47,8 +51,11 @@ class CustomButton extends StatelessWidget {
 
   Widget _buildRaisedNextButton() {
     return PlatformButton(
-      child: CustomText(text, textType: TextType.button),
-      onPressed: onPressed != null ? onPressed : () {},
+      child: CustomText(text,
+          textType: onPressed == null
+              ? TextType.unavailable_text_button
+              : TextType.button),
+      onPressed: onPressed,
       material: (context, platform) => MaterialRaisedButtonData(),
       cupertino: (context, platform) => CupertinoButtonData(),
     );
@@ -56,8 +63,20 @@ class CustomButton extends StatelessWidget {
 
   Widget _builFlatNextButton() {
     return PlatformButton(
-      child: CustomText(text, textType: TextType.button),
-      onPressed: onPressed != null ? onPressed : () {},
+      child: CustomText(text,
+          textType: onPressed == null
+              ? TextType.unavailable_text_button
+              : TextType.button),
+      onPressed: onPressed,
+      materialFlat: (context, platform) => MaterialFlatButtonData(),
+      cupertinoFilled: (context, platform) => CupertinoFilledButtonData(),
+    );
+  }
+
+  Widget _builLoadingButton() {
+    return PlatformButton(
+      child: PlatformCircularProgressIndicator(),
+      onPressed: null,
       materialFlat: (context, platform) => MaterialFlatButtonData(),
       cupertinoFilled: (context, platform) => CupertinoFilledButtonData(),
     );
@@ -75,7 +94,7 @@ class CustomButton extends StatelessWidget {
     //   ),
     // );
     return PlatformIconButton(
-      onPressed: onPressed != null ? onPressed : () {},
+      onPressed: onPressed,
       materialIcon: Icon(materialIconData),
       cupertinoIcon: Icon(cupertinoIconData),
       material: (_, __) => MaterialIconButtonData(),
@@ -88,13 +107,13 @@ class CustomButton extends StatelessWidget {
       material: (_, __) => FloatingActionButton(
         heroTag: null,
         child: Icon(materialIconData),
-        onPressed: onPressed != null ? onPressed : () {},
+        onPressed: onPressed,
         mini: true,
       ),
       cupertino: (_, __) => FloatingActionButton(
         heroTag: null,
         child: Icon(cupertinoIconData),
-        onPressed: onPressed != null ? onPressed : () {},
+        onPressed: onPressed,
         mini: true,
       ),
     );

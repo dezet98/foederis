@@ -6,3 +6,12 @@ abstract class FormDataEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class FormDataEditingEvent<ResultType> extends FormDataEvent {
+  final FormFieldBloc formFieldBloc;
+  final ResultType result;
+
+  FormDataEditingEvent({@required this.formFieldBloc, @required this.result});
+}
+
+class FormDataSendingEvent extends FormDataEvent {}

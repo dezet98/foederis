@@ -9,8 +9,17 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class CustomDateTimePicker extends StatelessWidget {
   final DateTime date;
   final Function(DateTime newDate) dateChanged;
+  final DateTime minDate;
+  final DateTime maxDate;
+  final bool enabled;
 
-  CustomDateTimePicker({@required this.date, @required this.dateChanged});
+  CustomDateTimePicker({
+    @required this.date,
+    @required this.dateChanged,
+    @required this.minDate,
+    @required this.maxDate,
+    this.enabled = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,22 +36,25 @@ class CustomDateTimePicker extends StatelessWidget {
             buttonType: ButtonType.icon_button,
             materialIconData: Icons.date_range,
             cupertinoIconData: CupertinoIcons.time,
-            onPressed: () {
-              if (isMaterial(context))
-                materialDatePicker(context);
-              else
-                cupertinoDatePicker(context);
-            }),
+            onPressed: !enabled
+                ? null
+                : () {
+                    if (isMaterial(context))
+                      materialDatePicker(context);
+                    else
+                      cupertinoDatePicker(context);
+                  }),
       ],
     );
   }
 
   void materialDatePicker(BuildContext context) async {
     DateTime newDate = await showDatePicker(
-        context: context,
-        initialDate: date,
-        firstDate: date,
-        lastDate: date.add(Duration(days: 31)));
+      context: context,
+      initialDate: date,
+      firstDate: minDate,
+      lastDate: maxDate,
+    );
     if (newDate != null) {
       TimeOfDay newTimeOfDay =
           await showTimePicker(context: context, initialTime: TimeOfDay.now());
@@ -64,9 +76,13 @@ class CustomDateTimePicker extends StatelessWidget {
           return Container(
             color: Palette.white,
             height: MediaQuery.of(context).copyWith().size.height / 3,
-            child: CupertinoDatePicker(onDateTimeChanged: (DateTime newDate) {
-              dateChanged(newDate);
-            }),
+            child: CupertinoDatePicker(
+              onDateTimeChanged: (DateTime newDate) {
+                dateChanged(newDate);
+              },
+              minimumDate: minDate,
+              maximumDate: maxDate,
+            ),
           );
         });
   }

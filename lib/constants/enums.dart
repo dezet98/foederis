@@ -30,6 +30,12 @@ enum FetchFilterType {
   isNull
 }
 
+enum UploadDataError {
+  wrongFieldName,
+  undefined,
+  required_field_not_provider,
+}
+
 // // enum TO string
 // String enumToString(Object o) {
 //   if (o == null) return null;

@@ -9,11 +9,13 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController textEditingController;
   final Function(String) onChamged;
   final TextFormType textFormType;
+  final bool enabled;
 
   CustomTextFormField({
     @required this.textEditingController,
     this.onChamged,
     this.textFormType = TextFormType.normal,
+    this.enabled = true,
   });
 
   @override
@@ -32,12 +34,14 @@ class CustomTextFormField extends StatelessWidget {
     return PlatformTextField(
       controller: textEditingController,
       onChanged: onChamged,
+      enabled: enabled,
     );
   }
 
   Widget _buildDigitsTextFormField(BuildContext context) {
     return PlatformTextField(
       controller: textEditingController,
+      enabled: enabled,
       onChanged: onChamged,
       keyboardType: TextInputType.number,
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],

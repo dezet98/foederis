@@ -6,8 +6,12 @@ import 'package:engineering_thesis/shared/builders/forms/single_date_form.dart';
 import 'package:engineering_thesis/shared/builders/forms/single_number_form.dart';
 import 'package:engineering_thesis/shared/builders/forms/single_text_form.dart';
 import 'package:engineering_thesis/shared/components/app_bars/custom_app_bar.dart';
+import 'package:engineering_thesis/shared/components/buttons/custom_button.dart';
+import 'package:engineering_thesis/shared/components/snack_bar.dart/custom_snack_bar.dart';
 import 'package:engineering_thesis/shared/templates/template_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FormDataScreen extends StatelessWidget {
   final FormDataBloc formDataBloc;
@@ -16,14 +20,51 @@ class FormDataScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TemplateScreen(
-      platformAppBar: _buildAppBar(context),
-      body: Column(
-        children: [
-          for (FormFieldBloc optionBloc in formDataBloc.formsData)
-            _buildSingleForm(optionBloc)
-        ],
+    return BlocListener(
+      cubit: formDataBloc,
+      listener: formDataBlocListener,
+      child: TemplateScreen(
+        platformAppBar: _buildAppBar(context),
+        body: Form(
+          child: Column(
+            children: [
+              for (FormFieldBloc optionBloc in formDataBloc.formsData)
+                _buildSingleForm(optionBloc),
+              _buildApplyButton(context),
+            ],
+          ),
+        ),
       ),
+    );
+  }
+
+  void formDataBlocListener(BuildContext context, dynamic state) {
+    if (state is FormDataUploadFailureState) {
+      CustomSnackBar.show(
+          context, SnackBarType.error, state.uploadDataException.toString());
+    } else if (state is FormDataUploadSuccessState) {
+      CustomSnackBar.show(context, SnackBarType.error, 'Success');
+    }
+  }
+
+  Widget _buildApplyButton(BuildContext context) {
+    return BlocBuilder(
+      cubit: formDataBloc,
+      builder: (context, state) {
+        if (state is FormDataUploadInProgressState) {
+          return CustomButton(buttonType: ButtonType.loading_button);
+        }
+
+        return CustomButton(
+          buttonType: ButtonType.flat_next_button,
+          text: 'create',
+          onPressed: !formDataBloc.isValid
+              ? null
+              : () {
+                  formDataBloc.add(FormDataSendingEvent());
+                },
+        );
+      },
     );
   }
 
@@ -36,13 +77,17 @@ class FormDataScreen extends StatelessWidget {
 
   Widget _buildSingleForm(FormFieldBloc optionBloc) {
     if (optionBloc is FormFieldBloc<String>)
-      return SingleTextForm(singleTextFormBloc: optionBloc);
+      return SingleTextForm(
+          formFieldBloc: optionBloc, formDataBloc: formDataBloc);
     else if (optionBloc is FormFieldBloc<bool>) {
-      return SingleCheckForm(singleCheckFormBloc: optionBloc);
+      return SingleCheckForm(
+          formFieldBloc: optionBloc, formDataBloc: formDataBloc);
     } else if (optionBloc is FormFieldBloc<DateTime>) {
-      return SingleDateForm(singleDataFormBloc: optionBloc);
+      return SingleDateForm(
+          formFieldBloc: optionBloc, formDataBloc: formDataBloc);
     } else if (optionBloc is FormFieldBloc<int>) {
-      return SingleNumberForm(singleNumberFormBloc: optionBloc);
+      return SingleNumberForm(
+          formFieldBloc: optionBloc, formDataBloc: formDataBloc);
     }
     assert(false, "optionBloc not provided");
     return Container();

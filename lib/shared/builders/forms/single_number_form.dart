@@ -1,3 +1,4 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_data/form_data_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_option/form_field_bloc.dart';
 import 'package:engineering_thesis/shared/components/text/cutom_text.dart';
 import 'package:engineering_thesis/shared/components/text_form_field/custom_text_form_field.dart';
@@ -6,39 +7,47 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SingleNumberForm extends StatelessWidget {
-  final FormFieldBloc singleNumberFormBloc;
+  final FormFieldBloc formFieldBloc;
+  final FormDataBloc formDataBloc;
 
   final TextEditingController textFieldController = TextEditingController();
 
-  SingleNumberForm({@required this.singleNumberFormBloc});
+  SingleNumberForm({@required this.formFieldBloc, @required this.formDataBloc});
 
   @override
   Widget build(BuildContext context) {
-    textFieldController.text = singleNumberFormBloc.result.toString();
+    textFieldController.text = formFieldBloc.result.toString();
 
     return Column(
       children: [
         BlocBuilder(
-          cubit: singleNumberFormBloc,
+          cubit: formFieldBloc,
           builder: (context, state) {
             return CustomText(
-              singleNumberFormBloc.getLabel(context),
-              textType: singleNumberFormBloc.isValid
+              formFieldBloc.getLabel(context),
+              textType: formFieldBloc.isValid
                   ? TextType.valid_form_title
                   : TextType.invalid_form_title,
               alignment: Alignment.centerLeft,
             );
           },
         ),
-        CustomTextFormField(
-          textEditingController: textFieldController,
-          textFormType: TextFormType.digits,
-          onChamged: (String result) {
-            singleNumberFormBloc.add(FormFieldChangeOptionEvent(
-              result: int.parse(result.isEmpty ? '0' : result),
-            ));
-          },
-        ),
+        BlocBuilder(
+            cubit: formDataBloc,
+            builder: (context, state) {
+              return CustomTextFormField(
+                textEditingController: textFieldController,
+                textFormType: TextFormType.digits,
+                enabled: formDataBloc.editingEnabled,
+                onChamged: (String result) {
+                  if (formDataBloc.editingEnabled)
+                    formDataBloc.add(FormDataEditingEvent(
+                      formFieldBloc: formFieldBloc,
+                      result: int.parse(result.isEmpty ? '0' : result),
+                    ));
+                },
+              );
+            }),
       ],
     );
   }
