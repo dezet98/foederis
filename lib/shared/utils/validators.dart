@@ -54,3 +54,14 @@ class NumberRangeValidator extends Validator {
         value >= (max == null ? value : max);
   }
 }
+
+class NotNullValidator extends Validator {
+  final dynamic value;
+
+  NotNullValidator({this.value});
+
+  @override
+  bool isValid(value) {
+    return value != null;
+  }
+}

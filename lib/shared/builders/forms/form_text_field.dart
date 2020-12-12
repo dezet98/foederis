@@ -1,16 +1,16 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_data/form_data_bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_option/form_field_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_text_field_bloc.dart';
 import 'package:engineering_thesis/shared/components/text/cutom_text.dart';
 import 'package:engineering_thesis/shared/components/text_form_field/custom_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SingleTextForm extends StatelessWidget {
-  final FormFieldBloc formFieldBloc;
+class FormTextField extends StatelessWidget {
+  final FormTextFieldBloc formFieldBloc;
   final FormDataBloc formDataBloc;
 
-  SingleTextForm({@required this.formFieldBloc, @required this.formDataBloc});
+  FormTextField({@required this.formFieldBloc, @required this.formDataBloc});
 
   final TextEditingController textFieldController = TextEditingController();
 

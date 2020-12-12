@@ -1,12 +1,24 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:engineering_thesis/constants/enums.dart';
+import 'package:engineering_thesis/models/collections/query_field.dart';
+import 'package:engineering_thesis/shared/exceptions.dart';
 
 abstract class Collection {
-  final String collectionName;
+  static Map<String, dynamic> fillRemainsData(
+      Map<String, dynamic> data, List<QueryField> allFields) {
+    Map<String, dynamic> emptyData = Map();
 
-  Collection({@required this.collectionName});
+    for (QueryField queryField in allFields) {
+      if (queryField.isRequired && !data.containsKey(queryField.fieldName)) {
+        throw UploadDataException(
+          sendingDataError: UploadDataError.required_field_not_provider,
+          message: '{ requiredField: ${queryField.fieldName} })',
+        );
+      } else if (!data.containsKey(queryField.fieldName)) {
+        emptyData[queryField.fieldName] = null;
+      }
+    }
 
-  dynamic fromQuerySnapshot(QuerySnapshot querySnapshot);
-
-  Map<String, dynamic> fillRemainsData(Map<String, dynamic> data);
+    data.addAll(emptyData);
+    return data;
+  }
 }

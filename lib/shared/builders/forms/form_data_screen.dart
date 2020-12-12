@@ -1,10 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_check_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_data/form_data_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_date_field_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_number_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_option/form_field_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_option_list_field_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_text_field_bloc.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
-import 'package:engineering_thesis/shared/builders/forms/single_check_form.dart';
-import 'package:engineering_thesis/shared/builders/forms/single_date_form.dart';
-import 'package:engineering_thesis/shared/builders/forms/single_number_form.dart';
-import 'package:engineering_thesis/shared/builders/forms/single_text_form.dart';
+import 'package:engineering_thesis/models/category.dart';
+import 'package:engineering_thesis/shared/builders/forms/form_option_list_field.dart';
+import 'package:engineering_thesis/shared/builders/forms/form_check_field.dart';
+import 'package:engineering_thesis/shared/builders/forms/form_date_field.dart';
+import 'package:engineering_thesis/shared/builders/forms/form_number_field.dart';
+import 'package:engineering_thesis/shared/builders/forms/form_text_field.dart';
 import 'package:engineering_thesis/shared/components/app_bars/custom_app_bar.dart';
 import 'package:engineering_thesis/shared/components/buttons/custom_button.dart';
 import 'package:engineering_thesis/shared/components/snack_bar.dart/custom_snack_bar.dart';
@@ -76,20 +84,24 @@ class FormDataScreen extends StatelessWidget {
   }
 
   Widget _buildSingleForm(FormFieldBloc optionBloc) {
-    if (optionBloc is FormFieldBloc<String>)
-      return SingleTextForm(
+    if (optionBloc is FormTextFieldBloc)
+      return FormTextField(
           formFieldBloc: optionBloc, formDataBloc: formDataBloc);
-    else if (optionBloc is FormFieldBloc<bool>) {
-      return SingleCheckForm(
+    else if (optionBloc is FormCheckFieldBloc) {
+      return FormCheckField(
           formFieldBloc: optionBloc, formDataBloc: formDataBloc);
-    } else if (optionBloc is FormFieldBloc<DateTime>) {
-      return SingleDateForm(
+    } else if (optionBloc is FormDateFieldBloc) {
+      return FormDateField(
           formFieldBloc: optionBloc, formDataBloc: formDataBloc);
-    } else if (optionBloc is FormFieldBloc<int>) {
-      return SingleNumberForm(
+    } else if (optionBloc is FormNumberFieldBloc) {
+      return FormNumberField(
+          formFieldBloc: optionBloc, formDataBloc: formDataBloc);
+    } else if (optionBloc
+        is FormOptionListFieldBloc<Category, DocumentReference>) {
+      return FormOptionListField(
           formFieldBloc: optionBloc, formDataBloc: formDataBloc);
     }
-    assert(false, "optionBloc not provided");
+    assert(false, "{ error: optionBloc not provided }");
     return Container();
   }
 }

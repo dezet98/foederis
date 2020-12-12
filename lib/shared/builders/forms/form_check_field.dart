@@ -1,16 +1,16 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_check_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_data/form_data_bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_option/form_field_bloc.dart';
 import 'package:engineering_thesis/shared/components/switch/custom_switch.dart';
 import 'package:engineering_thesis/shared/components/text/cutom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SingleCheckForm extends StatelessWidget {
-  final FormFieldBloc formFieldBloc;
+class FormCheckField extends StatelessWidget {
+  final FormCheckFieldBloc formFieldBloc;
   final FormDataBloc formDataBloc;
 
-  SingleCheckForm({@required this.formFieldBloc, @required this.formDataBloc});
+  FormCheckField({@required this.formFieldBloc, @required this.formDataBloc});
 
   @override
   Widget build(BuildContext context) {

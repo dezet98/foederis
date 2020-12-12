@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/constants/enums.dart';
-import 'package:engineering_thesis/models/collections/collection.dart';
 import 'package:engineering_thesis/models/fetch_filter.dart';
 import 'package:engineering_thesis/shared/extensions.dart';
 

@@ -3,11 +3,11 @@ import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/collections/activity_collection.dart';
 import 'package:engineering_thesis/models/fetch_filter.dart';
 import 'package:engineering_thesis/shared/datebase.dart';
-import 'package:meta/meta.dart';
 
 class ActivityRepository {
-  final Database database;
-  ActivityRepository({@required this.database});
+  final Database _database;
+
+  ActivityRepository(this._database);
 
   List<Activity> _fromQuerySnapshot(QuerySnapshot querySnapshot) {
     return querySnapshot.docs
@@ -16,7 +16,7 @@ class ActivityRepository {
   }
 
   Future<List<Activity>> fetchAllActivities(List<FetchFilter> filters) async {
-    return await database.fetchCollection<List<Activity>>(
+    return await _database.fetchCollection<List<Activity>>(
         filters, ActivityCollection.collectionName, _fromQuerySnapshot);
   }
 
@@ -36,7 +36,7 @@ class ActivityRepository {
   // }
 
   Future<DocumentReference> createActivity(Activity activity) async {
-    return await database.addDocumentToCollection(
+    return await _database.addDocumentToCollection(
         activity.toMap(), ActivityCollection.collectionName);
   }
 }

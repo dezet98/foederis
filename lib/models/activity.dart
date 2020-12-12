@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:engineering_thesis/models/collections/collection.dart';
 import 'package:engineering_thesis/shared/extensions.dart';
-import 'package:meta/meta.dart';
 
 import 'collections/activity_collection.dart';
 
@@ -56,7 +56,7 @@ class Activity {
   }
 
   Activity.fromMap(Map<String, dynamic> data) {
-    data = ActivityCollection.fillRemainsData(data);
+    data = Collection.fillRemainsData(data, ActivityCollection.allFields);
     this.title = data[ActivityCollection.title.fieldName];
     this.categoryRef = data[ActivityCollection.categoryRef.fieldName];
     this.startDate = data[ActivityCollection.startDate.fieldName];

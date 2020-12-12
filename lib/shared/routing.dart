@@ -51,10 +51,10 @@ class Routing {
       case UserRoutes.addActivity:
         return FormDataScreen(formDataBloc: options);
       default:
-        assert(false, '$routeName is not define as a routeName');
+        assert(false, '{ error: $routeName is not define as a routeName }');
         return PlatformScaffold(
           body: Center(
-            child: Text('$routeName is not define as a routeName'),
+            child: Text('{ error: $routeName is not define as a routeName }'),
           ),
         );
     }

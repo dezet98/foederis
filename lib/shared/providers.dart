@@ -2,6 +2,7 @@ import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/filter_op
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/multi_choice_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/sort_choice_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
+import 'package:engineering_thesis/blocs/create_activity/category_fetching_bloc.dart';
 import 'package:engineering_thesis/blocs/create_activity/create_activity_form_data.dart';
 import 'package:engineering_thesis/blocs/nav_bar/nav_bar_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_fetching_bloc.dart';
@@ -13,6 +14,7 @@ import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/auth_repository.dart';
+import 'package:engineering_thesis/repositories/category_repository.dart';
 import 'package:engineering_thesis/repositories/geolocation_repository.dart';
 import 'package:engineering_thesis/shared/datebase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,9 +29,13 @@ dynamic getRepositoryProviders() => [
       RepositoryProvider<GeolocationRepository>(
         create: (_) => GeolocationRepository(),
       ),
-      RepositoryProvider<ActivityRepository>(
-        create: (context) => ActivityRepository(
+      RepositoryProvider<CategoryRepository>(
+        create: (context) => CategoryRepository(
             database: RepositoryProvider.of<Database>(context)),
+      ),
+      RepositoryProvider<ActivityRepository>(
+        create: (context) =>
+            ActivityRepository(RepositoryProvider.of<Database>(context)),
       ),
     ];
 
@@ -112,9 +118,18 @@ dynamic getHomeScreenBlocProviders() => [
         ),
       ),
       BlocProvider(
-        create: (context) => CreateActvityFormDataBloc(
-          activityRepository:
-              RepositoryProvider.of<ActivityRepository>(context),
+        create: (context) => CategoryFetchingBloc(
+          categoryRepository:
+              RepositoryProvider.of<CategoryRepository>(context),
         ),
+      ),
+      BlocProvider(
+        create: (context) => CreateActvityFormDataBloc(
+            activityRepository:
+                RepositoryProvider.of<ActivityRepository>(context),
+            categoryRepository:
+                RepositoryProvider.of<CategoryRepository>(context),
+            categoryFetchingBloc:
+                BlocProvider.of<CategoryFetchingBloc>(context)),
       ),
     ];

@@ -7,28 +7,31 @@ import 'package:flutter/cupertino.dart';
 part 'form_field_event.dart';
 part 'form_field_state.dart';
 
-class FormFieldBloc<ResultType> extends Bloc<FormFieldEvent, FormFieldState> {
+abstract class FormFieldBloc<ResultType>
+    extends Bloc<FormFieldEvent, FormFieldState> {
   ResultType result;
-  List<Validator> validators;
+  List<Validator> Function(ResultType) validators;
   String queryFieldName;
   String Function(BuildContext) getLabel;
 
   FormFieldBloc({
     @required initialResult,
-    this.validators = const [],
-    this.getLabel,
-    this.queryFieldName,
+    @required this.validators,
+    @required this.getLabel,
+    @required this.queryFieldName,
   }) : super(FormFieldInitialState()) {
     result = initialResult;
   }
 
-  bool _checkValid() {
-    for (Validator validator in validators)
-      if (!validator.isValid(result)) return false;
+  bool _checkValid(result) {
+    List<Validator> v = validators(result);
+    for (Validator validator in v) if (!validator.isValid(result)) return false;
     return true;
   }
 
-  bool get isValid => _checkValid();
+  bool get isValid => _checkValid(result);
+
+  ResultType get getFinalResult => result;
 
   @override
   Stream<FormFieldState> mapEventToState(

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_option/form_field_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_option_list_field_bloc.dart';
 import 'package:engineering_thesis/shared/exceptions.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,9 +11,9 @@ part 'form_data_event.dart';
 part 'form_data_state.dart';
 
 abstract class FormDataBloc extends Bloc<FormDataEvent, FormDataState> {
-  FormDataBloc() : super(FormDataInitialState());
+  List<FormFieldBloc> formsData;
 
-  List<FormFieldBloc> get formsData;
+  FormDataBloc(this.formsData) : super(FormDataInitialState());
 
   bool get isValid {
     for (FormFieldBloc optionBloc in formsData)
@@ -26,8 +27,13 @@ abstract class FormDataBloc extends Bloc<FormDataEvent, FormDataState> {
     Map<String, dynamic> queryFields = Map();
 
     for (FormFieldBloc formFieldBloc in formsData) {
-      if (formFieldBloc.queryFieldName != null)
+      if (formFieldBloc.queryFieldName != null) {
+        if (formFieldBloc is FormOptionListFieldBloc) {
+          queryFields[formFieldBloc.queryFieldName] =
+              formFieldBloc.getResultFromOption(formFieldBloc.result);
+        }
         queryFields[formFieldBloc.queryFieldName] = formFieldBloc.result;
+      }
     }
     return queryFields;
   }
