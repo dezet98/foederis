@@ -66,11 +66,10 @@ class FormDataScreen extends StatelessWidget {
         return CustomButton(
           buttonType: ButtonType.flat_next_button,
           text: 'create',
-          onPressed: !formDataBloc.isValid
-              ? null
-              : () {
-                  formDataBloc.add(FormDataSendingEvent());
-                },
+          enabled: formDataBloc.isValid,
+          onPressed: () {
+            formDataBloc.add(FormDataSendingEvent());
+          },
         );
       },
     );

@@ -36,14 +36,13 @@ class CustomDateTimePicker extends StatelessWidget {
             buttonType: ButtonType.icon_button,
             materialIconData: Icons.date_range,
             cupertinoIconData: CupertinoIcons.time,
-            onPressed: !enabled
-                ? null
-                : () {
-                    if (isMaterial(context))
-                      materialDatePicker(context);
-                    else
-                      cupertinoDatePicker(context);
-                  }),
+            enabled: enabled,
+            onPressed: () {
+              if (isMaterial(context))
+                materialDatePicker(context);
+              else
+                cupertinoDatePicker(context);
+            }),
       ],
     );
   }

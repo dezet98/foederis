@@ -17,13 +17,16 @@ class CustomButton extends StatelessWidget {
   final String text;
   final IconData materialIconData;
   final IconData cupertinoIconData;
+  final bool enabled;
 
-  CustomButton(
-      {@required this.buttonType,
-      this.onPressed,
-      this.text = '',
-      this.materialIconData,
-      this.cupertinoIconData});
+  CustomButton({
+    @required this.buttonType,
+    this.onPressed,
+    this.text = '',
+    this.materialIconData,
+    this.cupertinoIconData,
+    this.enabled = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +58,7 @@ class CustomButton extends StatelessWidget {
           textType: onPressed == null
               ? TextType.unavailable_text_button
               : TextType.button),
-      onPressed: onPressed,
+      onPressed: enabled ? onPressed : null,
       material: (context, platform) => MaterialRaisedButtonData(),
       cupertino: (context, platform) => CupertinoButtonData(),
     );
@@ -67,7 +70,7 @@ class CustomButton extends StatelessWidget {
           textType: onPressed == null
               ? TextType.unavailable_text_button
               : TextType.button),
-      onPressed: onPressed,
+      onPressed: enabled ? onPressed : null,
       materialFlat: (context, platform) => MaterialFlatButtonData(),
       cupertinoFilled: (context, platform) => CupertinoFilledButtonData(),
     );
@@ -76,7 +79,7 @@ class CustomButton extends StatelessWidget {
   Widget _builLoadingButton() {
     return PlatformButton(
       child: PlatformCircularProgressIndicator(),
-      onPressed: null,
+      onPressed: enabled ? onPressed : null,
       materialFlat: (context, platform) => MaterialFlatButtonData(),
       cupertinoFilled: (context, platform) => CupertinoFilledButtonData(),
     );
@@ -107,13 +110,13 @@ class CustomButton extends StatelessWidget {
       material: (_, __) => FloatingActionButton(
         heroTag: null,
         child: Icon(materialIconData),
-        onPressed: onPressed,
+        onPressed: enabled ? onPressed : null,
         mini: true,
       ),
       cupertino: (_, __) => FloatingActionButton(
         heroTag: null,
         child: Icon(cupertinoIconData),
-        onPressed: onPressed,
+        onPressed: enabled ? onPressed : null,
         mini: true,
       ),
     );

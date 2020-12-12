@@ -24,6 +24,13 @@ class MyActivitiesScreen extends NavBarTab {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Text('My activities screen'),
+            CustomButton(
+              buttonType: ButtonType.flat_next_button,
+              text: 'Choose location',
+              onPressed: () {
+                Routing.pushNamed(context, UserRoutes.chooseLocation);
+              },
+            ),
           ],
         ),
       ),
