@@ -4,55 +4,30 @@ import 'package:engineering_thesis/shared/extensions.dart';
 
 import 'collections/activity_collection.dart';
 
-class ActivityAttributes {
-  static String ref = 'ref';
-  static String title = 'title';
-  static String categoryRef = 'categoryRef';
-  static String startDate = 'startDate';
-  static String endDate = 'endDate';
-  static String maxEntry = 'maxEntry';
-  static String minEntry = 'minEntry';
-  static String freeJoin = "freeJoin";
-  static String regular = 'regular';
-  static String geolocationRef = 'geolocationRef';
-}
-
 class Activity {
   DocumentReference ref;
   String title;
   DocumentReference categoryRef;
   DateTime startDate;
-  DateTime endDate;
   int maxEntry;
   int minEntry;
   bool freeJoin;
   bool regular;
-  DocumentReference geolocationRef;
-
-  // Activity({
-  //   @required this.ref,
-  //   @required this.title,
-  //   @required this.categoryRef,
-  //   @required this.endDate,
-  //   @required this.freeJoin,
-  //   @required this.geolocationRef,
-  //   @required this.maxEntry,
-  //   @required this.minEntry,
-  //   @required this.regular,
-  //   @required this.startDate,
-  // });
+  String geohash;
+  String address;
 
   Activity.fromDocument(QueryDocumentSnapshot doc) {
     this.ref = doc.reference;
-    this.title = doc.getField(ActivityAttributes.title);
-    this.categoryRef = doc.getField(ActivityAttributes.categoryRef);
-    this.startDate = doc.getField<DateTime>(ActivityAttributes.startDate);
-    this.endDate = doc.getField<DateTime>(ActivityAttributes.endDate);
-    this.maxEntry = doc.getField(ActivityAttributes.maxEntry);
-    this.minEntry = doc.getField(ActivityAttributes.minEntry);
-    this.freeJoin = doc.getField(ActivityAttributes.freeJoin);
-    this.regular = doc.getField(ActivityAttributes.regular);
-    this.geolocationRef = doc.getField(ActivityAttributes.geolocationRef);
+    this.title = doc.getField(ActivityCollection.title.fieldName);
+    this.categoryRef = doc.getField(ActivityCollection.categoryRef.fieldName);
+    this.startDate =
+        doc.getField<DateTime>(ActivityCollection.startDate.fieldName);
+    this.maxEntry = doc.getField(ActivityCollection.maxEntry.fieldName);
+    this.minEntry = doc.getField(ActivityCollection.minEntry.fieldName);
+    this.freeJoin = doc.getField(ActivityCollection.freeJoin.fieldName);
+    this.regular = doc.getField(ActivityCollection.regular.fieldName);
+    this.geohash = doc.getField(ActivityCollection.geohash.fieldName);
+    this.address = doc.getField(ActivityCollection.address.fieldName);
   }
 
   Activity.fromMap(Map<String, dynamic> data) {
@@ -60,26 +35,25 @@ class Activity {
     this.title = data[ActivityCollection.title.fieldName];
     this.categoryRef = data[ActivityCollection.categoryRef.fieldName];
     this.startDate = data[ActivityCollection.startDate.fieldName];
-    this.endDate = data[ActivityCollection.endDate.fieldName];
     this.maxEntry = data[ActivityCollection.maxEntry.fieldName];
     this.minEntry = data[ActivityCollection.minEntry.fieldName];
     this.freeJoin = data[ActivityCollection.freeJoin.fieldName];
     this.regular = data[ActivityCollection.regular.fieldName];
-    this.geolocationRef = data[ActivityCollection.geolocationRef.fieldName];
+    this.geohash = data[ActivityCollection.geohash.fieldName];
+    this.address = data[ActivityCollection.address.fieldName];
   }
 
   toMap() {
     return {
-      ActivityCollection.ref.fieldName: null,
       ActivityCollection.title.fieldName: title,
       ActivityCollection.regular.fieldName: regular,
-      ActivityCollection.endDate.fieldName: endDate,
       ActivityCollection.startDate.fieldName: startDate,
       ActivityCollection.freeJoin.fieldName: freeJoin,
-      ActivityCollection.geolocationRef.fieldName: geolocationRef,
+      ActivityCollection.geohash.fieldName: geohash,
       ActivityCollection.categoryRef.fieldName: categoryRef,
       ActivityCollection.maxEntry.fieldName: maxEntry,
       ActivityCollection.minEntry.fieldName: minEntry,
+      ActivityCollection.address.fieldName: address,
     };
   }
 }

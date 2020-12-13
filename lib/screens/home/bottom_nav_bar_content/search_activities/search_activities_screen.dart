@@ -5,17 +5,17 @@ import 'package:engineering_thesis/blocs/search_activities/search_activities_sea
 import 'package:engineering_thesis/blocs/search_activities/search_activities_fetching_bloc.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/shared/abstract/nav_bar_tab.dart';
-import 'package:engineering_thesis/shared/builders/fetching_builder.dart';
+import 'package:engineering_thesis/shared/builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/shared/builders/filters/filtered_data.dart';
 import 'package:engineering_thesis/shared/components/buttons/custom_button.dart';
 import 'package:engineering_thesis/shared/components/card/custom_card.dart';
 import 'package:engineering_thesis/shared/routing.dart';
+import 'package:engineering_thesis/shared/search_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import '../../../../shared/builders/custom_search.dart';
 
 class SearchActivitiesScreen extends NavBarTab {
   @override
@@ -24,8 +24,14 @@ class SearchActivitiesScreen extends NavBarTab {
       cubit: BlocProvider.of<SearchActivitiesSearchFilterBloc>(context),
       listener: (context, state) {
         if (state is SearchFilterSelectedOptionState) {
-          BlocProvider.of<SearchActivitiesFetchingBloc>(context)
-              .add(FetchInitialEvent(initialFilters: [state.fetchFilter]));
+          BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
+            FetchInitialEvent(
+              initialFilters: [
+                BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
+                    .getFetchFilter()
+              ],
+            ),
+          );
         }
       },
       child: PlatformWidget(
@@ -36,7 +42,7 @@ class SearchActivitiesScreen extends NavBarTab {
             BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
                 FetchRefreshEvent(filters: [
               BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
-                  .fetchFilter
+                  .getFetchFilter()
             ]));
           },
           child: _buildCustomScrollView(context),
@@ -57,7 +63,7 @@ class SearchActivitiesScreen extends NavBarTab {
             BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
                 FetchRefreshEvent(filters: [
               BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
-                  .fetchFilter
+                  .getFetchFilter()
             ]));
           },
         ),
@@ -67,7 +73,7 @@ class SearchActivitiesScreen extends NavBarTab {
   }
 
   Widget _buildSearchedActivities(context) {
-    return FetchingBuilder(
+    return FetchingBlocBuilder(
       fetchingCubit: BlocProvider.of<SearchActivitiesFetchingBloc>(context),
       buildSuccess: (activities) {
         return FilteredData<Activity>(
@@ -103,12 +109,8 @@ class SearchActivitiesScreen extends NavBarTab {
         IconButton(
             icon: Icon(Icons.search),
             onPressed: () async {
-              await showSearch<dynamic>(
-                context: context,
-                delegate: CustomSearch(
-                  searchFilterBloc: searchFilterBloc,
-                ),
-              );
+              await SearchScreen.show(context,
+                  BlocProvider.of<SearchActivitiesSearchFilterBloc>(context));
             }),
         CustomButton(
           buttonType: ButtonType.icon_button,

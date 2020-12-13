@@ -49,21 +49,21 @@ packages:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.3"
+    version: "0.14.4"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
       name: cloud_firestore_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.0"
+    version: "2.2.1"
   cloud_firestore_web:
     dependency: transitive
     description:
       name: cloud_firestore_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.1"
+    version: "0.2.1+2"
   collection:
     dependency: transitive
     description:
@@ -92,55 +92,48 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0-nullsafety.1"
-  firebase:
-    dependency: transitive
-    description:
-      name: firebase
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "7.3.2"
   firebase_auth:
     dependency: "direct main"
     description:
       name: firebase_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.18.1+2"
+    version: "0.18.4+1"
   firebase_auth_platform_interface:
     dependency: transitive
     description:
       name: firebase_auth_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.4"
   firebase_auth_web:
     dependency: transitive
     description:
       name: firebase_auth_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.1+1"
+    version: "0.3.2+3"
   firebase_core:
     dependency: "direct main"
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.2"
+    version: "0.5.3"
   firebase_core_platform_interface:
     dependency: transitive
     description:
       name: firebase_core_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.0"
   firebase_core_web:
     dependency: transitive
     description:
       name: firebase_core_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.1"
+    version: "0.2.1+1"
   flushbar:
     dependency: "direct main"
     description:
@@ -160,6 +153,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.6"
+  flutter_dotenv:
+    dependency: "direct main"
+    description:
+      name: flutter_dotenv
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -172,6 +172,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.70.2"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.11"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -182,6 +189,34 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  geohash:
+    dependency: "direct main"
+    description:
+      name: geohash
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.1"
+  google_maps_flutter:
+    dependency: "direct main"
+    description:
+      name: google_maps_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.6"
+  google_maps_flutter_platform_interface:
+    dependency: transitive
+    description:
+      name: google_maps_flutter_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.5"
+  google_maps_webservice:
+    dependency: "direct main"
+    description:
+      name: google_maps_webservice
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.18"
   http:
     dependency: transitive
     description:
@@ -299,6 +334,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0-nullsafety.1"
+  stream_transform:
+    dependency: transitive
+    description:
+      name: stream_transform
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   string_scanner:
     dependency: transitive
     description:
@@ -336,4 +378,4 @@ packages:
     version: "2.1.0-nullsafety.3"
 sdks:
   dart: ">=2.10.0-110 <2.11.0"
-  flutter: ">=1.20.4 <2.0.0"
+  flutter: ">=1.22.0 <2.0.0"

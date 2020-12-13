@@ -55,9 +55,8 @@ class CustomButton extends StatelessWidget {
   Widget _buildRaisedNextButton() {
     return PlatformButton(
       child: CustomText(text,
-          textType: onPressed == null
-              ? TextType.unavailable_text_button
-              : TextType.button),
+          textType:
+              !enabled ? TextType.unavailable_text_button : TextType.button),
       onPressed: enabled ? onPressed : null,
       material: (context, platform) => MaterialRaisedButtonData(),
       cupertino: (context, platform) => CupertinoButtonData(),
@@ -67,9 +66,8 @@ class CustomButton extends StatelessWidget {
   Widget _builFlatNextButton() {
     return PlatformButton(
       child: CustomText(text,
-          textType: onPressed == null
-              ? TextType.unavailable_text_button
-              : TextType.button),
+          textType:
+              !enabled ? TextType.unavailable_text_button : TextType.button),
       onPressed: enabled ? onPressed : null,
       materialFlat: (context, platform) => MaterialFlatButtonData(),
       cupertinoFilled: (context, platform) => CupertinoFilledButtonData(),

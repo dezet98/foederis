@@ -4,13 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import 'form_field/form_field_bloc.dart';
 
-class FormCheckFieldBloc extends FormFieldBloc<bool> {
-  final bool initialResult;
-  final List<Validator> Function(bool) validators;
-  final List<QueryField> Function(bool) queryFieldFromResult;
+class FormNumberRangeFieldBloc extends FormFieldBloc<List<int>> {
+  final List<int> initialResult;
+  final List<Validator> Function(List<int>) validators;
+  final List<QueryField> Function(List<int>) queryFieldFromResult;
   final String Function(BuildContext) getLabel;
 
-  FormCheckFieldBloc({
+  FormNumberRangeFieldBloc({
     @required this.initialResult,
     @required this.validators,
     @required this.getLabel,

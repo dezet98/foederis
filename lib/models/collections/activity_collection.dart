@@ -3,35 +3,34 @@ import 'package:engineering_thesis/models/collections/query_field.dart';
 class ActivityCollection {
   static String collectionName = 'activity';
 
-  static QueryField ref = QueryField(fieldName: 'ref', isRequired: false);
-  static QueryField title = QueryField(fieldName: 'title', isRequired: true);
-  static QueryField categoryRef =
-      QueryField(fieldName: 'categoryRef', isRequired: true);
-  static QueryField startDate =
-      QueryField(fieldName: 'startDate', isRequired: true);
-  static QueryField endDate =
-      QueryField(fieldName: 'endDate', isRequired: true);
-  static QueryField maxEntry =
-      QueryField(fieldName: 'maxEntry', isRequired: true);
-  static QueryField minEntry =
-      QueryField(fieldName: 'minEntry', isRequired: true);
-  static QueryField freeJoin =
-      QueryField(fieldName: 'freeJoin', isRequired: true);
-  static QueryField regular =
-      QueryField(fieldName: 'regular', isRequired: true);
-  static QueryField geolocationRef =
-      QueryField(fieldName: 'geolocationRef', isRequired: true);
+  static CollectionField title =
+      CollectionField(fieldName: 'title', isRequired: true);
+  static CollectionField categoryRef =
+      CollectionField(fieldName: 'categoryRef', isRequired: true);
+  static CollectionField startDate =
+      CollectionField(fieldName: 'startDate', isRequired: true);
+  static CollectionField maxEntry =
+      CollectionField(fieldName: 'maxEntry', isRequired: true);
+  static CollectionField minEntry =
+      CollectionField(fieldName: 'minEntry', isRequired: true);
+  static CollectionField freeJoin =
+      CollectionField(fieldName: 'freeJoin', isRequired: true);
+  static CollectionField regular =
+      CollectionField(fieldName: 'regular', isRequired: true);
+  static CollectionField geohash =
+      CollectionField(fieldName: 'geohash', isRequired: true);
+  static CollectionField address =
+      CollectionField(fieldName: 'address', isRequired: true);
 
-  static List<QueryField> get allFields => [
-        ref,
+  static List<CollectionField> get allFields => [
         title,
         categoryRef,
         startDate,
-        endDate,
         maxEntry,
         minEntry,
         freeJoin,
         regular,
-        geolocationRef,
+        geohash,
+        address,
       ];
 }

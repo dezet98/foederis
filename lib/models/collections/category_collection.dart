@@ -3,10 +3,12 @@ import 'package:engineering_thesis/models/collections/query_field.dart';
 class CategoryCollection {
   static String collectionName = 'category';
 
-  static QueryField ref = QueryField(fieldName: 'ref', isRequired: false);
-  static QueryField title = QueryField(fieldName: 'title', isRequired: true);
+  static CollectionField ref =
+      CollectionField(fieldName: 'ref', isRequired: false);
+  static CollectionField title =
+      CollectionField(fieldName: 'title', isRequired: true);
 
-  static List<QueryField> get allFields => [
+  static List<CollectionField> get allFields => [
         ref,
         title,
       ];

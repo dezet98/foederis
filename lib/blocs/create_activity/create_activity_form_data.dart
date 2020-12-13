@@ -1,13 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_address_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_check_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_data/form_data_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_date_field_bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_number_field_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_number_range_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_option_list_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_text_field_bloc.dart';
 import 'package:engineering_thesis/blocs/create_activity/category_fetching_bloc.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/category.dart';
+import 'package:engineering_thesis/models/collections/activity_collection.dart';
+import 'package:engineering_thesis/models/collections/query_field.dart';
+import 'package:engineering_thesis/models/geolocation.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/category_repository.dart';
 import 'package:engineering_thesis/shared/utils/validators.dart';
@@ -25,52 +29,105 @@ class CreateActvityFormDataBloc extends FormDataBloc {
   }) : super([
           FormTextFieldBloc(
             initialResult: 'daniel',
-            queryFieldName: ActivityAttributes.title,
-            validators: (_) => [LenghtValidator(min: 3, max: 130)],
+            queryFieldFromResult: (String result) => [
+              QueryField(
+                fieldName: ActivityCollection.title.fieldName,
+                fieldValue: result,
+              )
+            ],
+            validators: (String result) =>
+                [LenghtValidator(result, min: 3, max: 130)],
             getLabel: (BuildContext context) => "Activity title",
           ),
           FormCheckFieldBloc(
             initialResult: false,
-            queryFieldName: ActivityAttributes.regular,
+            queryFieldFromResult: (bool result) => [
+              QueryField(
+                fieldName: ActivityCollection.regular.fieldName,
+                fieldValue: result,
+              )
+            ],
             getLabel: (BuildContext context) => "Regular acitvity",
             validators: (_) => [],
           ),
           FormCheckFieldBloc(
             initialResult: true,
-            queryFieldName: ActivityAttributes.freeJoin,
+            queryFieldFromResult: (bool result) => [
+              QueryField(
+                fieldName: ActivityCollection.freeJoin.fieldName,
+                fieldValue: result,
+              )
+            ],
             getLabel: (BuildContext context) => "Free join",
             validators: (_) => [],
           ),
           FormDateFieldBloc(
             initialResult: DateTime.now(),
-            queryFieldName: ActivityAttributes.startDate,
-            validators: (_) => [
+            queryFieldFromResult: (DateTime result) => [
+              QueryField(
+                fieldName: ActivityCollection.startDate.fieldName,
+                fieldValue: result,
+              )
+            ],
+            validators: (DateTime result) => [
               DateTimeRangeValidator(
+                result,
                 minDate: DateTime.now(),
-                maxDate: DateTime.now().add(Duration(days: 28)),
+                maxDate: DateTime.now().add(Duration(
+                    days:
+                        28)), //todo take from firebase, should not be static and unchangeable
               )
             ],
             getLabel: (BuildContext context) => "Start date",
           ),
-          FormNumberFieldBloc(
-            initialResult: 5,
-            queryFieldName: ActivityAttributes.minEntry,
-            getLabel: (BuildContext context) => "Min entry",
-            validators: (_) => [NumberRangeValidator(min: 2)],
+          FormNumberRangeFieldBloc(
+            initialResult: [5, 5],
+            validators: (List<int> result) => [
+              NumberRangeValidator(result[0], min: 2),
+              NumbersValidator(
+                result[0],
+                result[1],
+                NumberCompareType.isLessThanOrEqualTo,
+              )
+            ],
+            getLabel: (BuildContext context) => "Min and max entry",
+            queryFieldFromResult: (List<int> result) => [
+              QueryField(
+                fieldName: ActivityCollection.minEntry.fieldName,
+                fieldValue: result[0],
+              ),
+              QueryField(
+                fieldName: ActivityCollection.maxEntry.fieldName,
+                fieldValue: result[1],
+              )
+            ],
           ),
-          FormNumberFieldBloc(
-            initialResult: 5,
-            queryFieldName: ActivityAttributes.maxEntry,
-            getLabel: (BuildContext context) => "Max entry",
-            validators: (_) => [NumberRangeValidator(min: 2)],
-          ),
-          FormOptionListFieldBloc<Category, DocumentReference>(
+          FormOptionListFieldBloc<Category>(
             getLabelFromOption: (dynamic category) => category.title,
-            getResultFromOption: (dynamic category) => category.ref,
+            queryFieldFromResult: (Category result) => [
+              QueryField(
+                fieldName: ActivityCollection.categoryRef.fieldName,
+                fieldValue: result.ref,
+              )
+            ],
             listOptionFetchingBloc: categoryFetchingBloc,
             getLabel: (BuildContext context) => "Category",
-            validators: (value) => [NotNullValidator(value: value)],
-            queryFieldName: ActivityAttributes.categoryRef,
+            validators: (value) => [NotNullValidator(value)],
+          ),
+          FormAddressFieldBloc(
+            initialResult: null,
+            validators: (value) => [NotNullValidator(value)],
+            getLabel: (BuildContext context) => "Address",
+            queryFieldFromResult: (Geolocation result) => [
+              QueryField(
+                fieldName: ActivityCollection.geohash.fieldName,
+                fieldValue: result.geohash,
+              ),
+              QueryField(
+                fieldName: ActivityCollection.address.fieldName,
+                fieldValue: result.address,
+              )
+            ],
           )
         ]);
 

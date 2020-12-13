@@ -24,10 +24,11 @@ class SearchFilterLoadDataFailureState extends SearchFilterState {
 
 class SearchFilterSelectOptionInProgressState extends SearchFilterState {}
 
-class SearchFilterSelectedOptionState extends SearchFilterState {
-  final FetchFilter fetchFilter;
+class SearchFilterSelectedOptionState<SelectedOption>
+    extends SearchFilterState {
+  final SelectedOption selectedOption;
 
-  SearchFilterSelectedOptionState({this.fetchFilter});
+  SearchFilterSelectedOptionState({this.selectedOption});
 }
 
 class SearchFilterSelectOptionFailureState extends SearchFilterState {

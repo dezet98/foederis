@@ -15,7 +15,6 @@ import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/auth_repository.dart';
 import 'package:engineering_thesis/repositories/category_repository.dart';
-import 'package:engineering_thesis/repositories/geolocation_repository.dart';
 import 'package:engineering_thesis/shared/datebase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,9 +24,6 @@ dynamic getRepositoryProviders() => [
       ),
       RepositoryProvider<AuthRepository>(
         create: (_) => AuthRepository(),
-      ),
-      RepositoryProvider<GeolocationRepository>(
-        create: (_) => GeolocationRepository(),
       ),
       RepositoryProvider<CategoryRepository>(
         create: (context) => CategoryRepository(
@@ -62,10 +58,7 @@ dynamic getHomeScreenBlocProviders() => [
         create: (context) => NavBarBloc(innitialIndex: 0),
       ),
       BlocProvider(
-        create: (context) => SearchActivitiesSearchFilterBloc(
-          geolocationRepository:
-              RepositoryProvider.of<GeolocationRepository>(context),
-        ),
+        create: (context) => SearchActivitiesSearchFilterBloc(),
       ),
       BlocProvider(
         create: (context) => SearchActivitiesFetchingBloc(

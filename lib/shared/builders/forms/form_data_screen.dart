@@ -1,13 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_address_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_check_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_data/form_data_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_date_field_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_field/form_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_number_field_bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_option/form_field_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_number_range_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_option_list_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_text_field_bloc.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/category.dart';
+import 'package:engineering_thesis/shared/builders/forms/form_address_field.dart';
+import 'package:engineering_thesis/shared/builders/forms/form_number_range_field.dart';
 import 'package:engineering_thesis/shared/builders/forms/form_option_list_field.dart';
 import 'package:engineering_thesis/shared/builders/forms/form_check_field.dart';
 import 'package:engineering_thesis/shared/builders/forms/form_date_field.dart';
@@ -95,9 +98,14 @@ class FormDataScreen extends StatelessWidget {
     } else if (optionBloc is FormNumberFieldBloc) {
       return FormNumberField(
           formFieldBloc: optionBloc, formDataBloc: formDataBloc);
-    } else if (optionBloc
-        is FormOptionListFieldBloc<Category, DocumentReference>) {
+    } else if (optionBloc is FormOptionListFieldBloc<Category>) {
       return FormOptionListField(
+          formFieldBloc: optionBloc, formDataBloc: formDataBloc);
+    } else if (optionBloc is FormAddressFieldBloc) {
+      return FormAddressField(
+          formFieldBloc: optionBloc, formDataBloc: formDataBloc);
+    } else if (optionBloc is FormNumberRangeFieldBloc) {
+      return FormNumberRangeField(
           formFieldBloc: optionBloc, formDataBloc: formDataBloc);
     }
     assert(false, "{ error: optionBloc not provided }");

@@ -1,9 +1,9 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/search_filter/search_filter_bloc.dart';
-import 'package:engineering_thesis/models/geolocation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'fetching_builder.dart';
 
-class CustomSearch extends SearchDelegate {
+class CustomSearch<SearchDataType> extends SearchDelegate {
   SearchFilterBloc searchFilterBloc;
 
   CustomSearch({@required this.searchFilterBloc});
@@ -30,9 +30,15 @@ class CustomSearch extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    if (searchFilterBloc.results(query).isEmpty)
-      return Center(child: Text("Result not found"));
-    return buildSuggestions(context);
+    return FetchingBuilder<List<dynamic>>(
+      future: searchFilterBloc.results(query),
+      buildSuccess: (List<dynamic> data) {
+        if (data.isEmpty) return Center(child: Text("Result not found"));
+        return buildSuggestions(context);
+      },
+      buildInProgress: CircularProgressIndicator(),
+      buildError: Text('Error'),
+    );
   }
 
   @override
@@ -45,12 +51,24 @@ class CustomSearch extends SearchDelegate {
 
           return query.isEmpty
               ? _buildList(searchFilterBloc.suggestion, Icons.search)
-              : _buildList(
+              : _buildFutureList(
                   searchFilterBloc.results(query), Icons.assistant_navigation);
         });
   }
 
-  Widget _buildList(List<Geolocation> elements, IconData iconData) {
+  Widget _buildFutureList(
+      Future<List<SearchDataType>> elements, IconData iconData) {
+    return FetchingBuilder<List<SearchDataType>>(
+      future: searchFilterBloc.results(query),
+      buildSuccess: (List<SearchDataType> data) {
+        return _buildList(data, iconData);
+      },
+      buildInProgress: CircularProgressIndicator(),
+      buildError: Text('Error'),
+    );
+  }
+
+  Widget _buildList(List<SearchDataType> elements, IconData iconData) {
     return ListView.builder(
       itemCount: elements.length,
       itemBuilder: (context, index) {
@@ -59,7 +77,7 @@ class CustomSearch extends SearchDelegate {
     );
   }
 
-  Widget _buildListTile(BuildContext context, Geolocation element,
+  Widget _buildListTile(BuildContext context, dynamic element,
       {IconData iconData}) {
     return ListTile(
         title: Text(
@@ -68,7 +86,7 @@ class CustomSearch extends SearchDelegate {
         leading: Icon(iconData),
         onTap: () {
           searchFilterBloc.add(
-            SearchFilterSelectOptionEvent<Geolocation>(
+            SearchFilterSelectOptionEvent<SearchDataType>(
               selectedElement: element,
             ),
           );

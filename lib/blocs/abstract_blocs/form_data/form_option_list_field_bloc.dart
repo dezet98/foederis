@@ -1,16 +1,14 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_bloc.dart';
+import 'package:engineering_thesis/models/collections/query_field.dart';
 import 'package:engineering_thesis/shared/utils/validators.dart';
 import 'package:flutter/cupertino.dart';
+import 'form_field/form_field_bloc.dart';
 
-import 'form_option/form_field_bloc.dart';
-
-class FormOptionListFieldBloc<OptionType, ResultType>
-    extends FormFieldBloc<OptionType> {
+class FormOptionListFieldBloc<OptionType> extends FormFieldBloc<OptionType> {
   final FetchBloc<List<OptionType>> listOptionFetchingBloc;
-  final ResultType Function(OptionType) getResultFromOption;
   final String Function(dynamic) getLabelFromOption;
   List<Validator> Function(OptionType) validators;
-  String queryFieldName;
+  final List<QueryField> Function(OptionType) queryFieldFromResult;
   String Function(BuildContext) getLabel;
 
   FormOptionListFieldBloc({
@@ -18,12 +16,11 @@ class FormOptionListFieldBloc<OptionType, ResultType>
     @required this.getLabelFromOption,
     @required this.getLabel,
     @required this.validators,
-    @required this.queryFieldName,
-    @required this.getResultFromOption,
+    @required this.queryFieldFromResult,
   }) : super(
           initialResult: null,
           getLabel: getLabel,
-          queryFieldName: queryFieldName,
+          queryFieldFromResult: queryFieldFromResult,
           validators: validators,
         );
 }

@@ -59,9 +59,8 @@ class CustomDateTimePicker extends StatelessWidget {
           await showTimePicker(context: context, initialTime: TimeOfDay.now());
 
       if (newTimeOfDay != null) {
-        newDate = newDate.add(
-          Duration(hours: newTimeOfDay.hour, minutes: newTimeOfDay.minute),
-        );
+        newDate = DateTime.utc(newDate.year, newDate.month, newDate.day,
+            newTimeOfDay.hour, newTimeOfDay.minute);
 
         dateChanged(newDate);
       }

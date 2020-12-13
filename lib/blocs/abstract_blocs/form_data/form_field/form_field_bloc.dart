@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:engineering_thesis/models/collections/query_field.dart';
 import 'package:engineering_thesis/shared/utils/validators.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,29 +10,31 @@ part 'form_field_state.dart';
 
 abstract class FormFieldBloc<ResultType>
     extends Bloc<FormFieldEvent, FormFieldState> {
-  ResultType result;
+  ResultType _result;
   List<Validator> Function(ResultType) validators;
-  String queryFieldName;
+  List<QueryField> Function(ResultType) queryFieldFromResult;
   String Function(BuildContext) getLabel;
 
   FormFieldBloc({
     @required initialResult,
     @required this.validators,
     @required this.getLabel,
-    @required this.queryFieldName,
+    @required this.queryFieldFromResult,
   }) : super(FormFieldInitialState()) {
-    result = initialResult;
+    _result = initialResult;
   }
 
   bool _checkValid(result) {
     List<Validator> v = validators(result);
-    for (Validator validator in v) if (!validator.isValid(result)) return false;
+    for (Validator validator in v) if (!validator.isValid()) return false;
     return true;
   }
 
-  bool get isValid => _checkValid(result);
+  bool get isValid => _checkValid(_result);
 
-  ResultType get getFinalResult => result;
+  List<QueryField> get queryFields => queryFieldFromResult(_result);
+
+  ResultType get result => _result;
 
   @override
   Stream<FormFieldState> mapEventToState(
@@ -39,8 +42,8 @@ abstract class FormFieldBloc<ResultType>
   ) async* {
     if (event is FormFieldChangeOptionEvent) {
       yield FormFieldChangeInProgressState();
-      result = event.result;
-      yield FormFieldChangedState(result: result);
+      _result = event.result;
+      yield FormFieldChangedState(result: _result);
     }
   }
 }

@@ -1,6 +1,8 @@
 # Internalization generated files
 ./lib/generated/
 
+.env*
+
 # Miscellaneous
 *.class
 *.log

@@ -1,12 +1,8 @@
-import 'package:engineering_thesis/constants/enums.dart';
-import 'package:engineering_thesis/models/collections/activity_collection.dart';
-import 'package:engineering_thesis/models/fetch_filter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_maps_webservice/places.dart';
-import '../abstract_blocs/search_filter/search_filter_bloc.dart';
+import 'abstract_blocs/search_filter/search_filter_bloc.dart';
 
-class SearchActivitiesSearchFilterBloc
-    extends SearchFilterBloc<PlacesSearchResult> {
+class SearchPlacesBloc extends SearchFilterBloc<PlacesSearchResult> {
   final places =
       new GoogleMapsPlaces(apiKey: DotEnv().env['GOOGLE_BROWSER_KEY']);
 
@@ -28,13 +24,5 @@ class SearchActivitiesSearchFilterBloc
   @override
   Future<List<PlacesSearchResult>> fetchSuggestion() {
     return Future.wait([]);
-  }
-
-  FetchFilter getFetchFilter() {
-    return FetchFilter(
-      fieldName: ActivityCollection.geohash.fieldName,
-      fieldValue: '', //this.selectedOption.,
-      filterType: FetchFilterType.isNotEqualTo,
-    );
   }
 }

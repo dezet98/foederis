@@ -1,6 +1,6 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_data/form_data_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_option_list_field_bloc.dart';
-import 'package:engineering_thesis/shared/builders/fetching_builder.dart';
+import 'package:engineering_thesis/shared/builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/shared/components/dropdown/custom_dropdown_button.dart';
 import 'package:engineering_thesis/shared/components/text/cutom_text.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,10 +25,12 @@ class FormOptionListField extends StatelessWidget {
               children: [
                 CustomText(
                   formFieldBloc.getLabel(context),
-                  textType: TextType.valid_form_title,
+                  textType: formFieldBloc.isValid
+                      ? TextType.valid_form_title
+                      : TextType.invalid_form_title,
                   alignment: Alignment.centerLeft,
                 ),
-                FetchingBuilder(
+                FetchingBlocBuilder(
                     fetchingCubit: formFieldBloc.listOptionFetchingBloc,
                     buildSuccess: (data) {
                       return CustomDropdownButton(

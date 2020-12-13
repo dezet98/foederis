@@ -4,10 +4,10 @@ import 'package:engineering_thesis/shared/exceptions.dart';
 
 abstract class Collection {
   static Map<String, dynamic> fillRemainsData(
-      Map<String, dynamic> data, List<QueryField> allFields) {
+      Map<String, dynamic> data, List<CollectionField> allFields) {
     Map<String, dynamic> emptyData = Map();
 
-    for (QueryField queryField in allFields) {
+    for (CollectionField queryField in allFields) {
       if (queryField.isRequired && !data.containsKey(queryField.fieldName)) {
         throw UploadDataException(
           sendingDataError: UploadDataError.required_field_not_provider,
