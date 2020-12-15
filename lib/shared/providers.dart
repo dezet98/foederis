@@ -10,11 +10,13 @@ import 'package:engineering_thesis/blocs/search_activities/search_activities_fil
 import 'package:engineering_thesis/blocs/search_activities/search_activities_search_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/login/login_bloc.dart';
 import 'package:engineering_thesis/blocs/register/register_bloc.dart';
+import 'package:engineering_thesis/blocs/shared_preferences/shared_preferences_bloc.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/auth_repository.dart';
 import 'package:engineering_thesis/repositories/category_repository.dart';
+import 'package:engineering_thesis/shared/database_helper.dart';
 import 'package:engineering_thesis/shared/remote_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -54,6 +56,9 @@ dynamic getMainBlocProviders() => [
     ];
 
 dynamic getHomeScreenBlocProviders() => [
+      BlocProvider(
+        create: (context) => SharedPreferencesBloc(DatabaseHelper.instance),
+      ),
       BlocProvider(
         create: (context) => NavBarBloc(innitialIndex: 0),
       ),

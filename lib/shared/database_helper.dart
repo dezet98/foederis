@@ -1,10 +1,6 @@
+import 'package:engineering_thesis/models/shared_preferences.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-
-enum UserSearchActivityViewPreference {
-  map,
-  list,
-}
 
 class DatabaseHelper {
   static final _databaseName = "database2.db";
@@ -33,13 +29,17 @@ class DatabaseHelper {
               )
               ''');
     await db.insert(
-        'USER_PREFERENCES', {'NAME': 'SEARCH_ACTIVITY_VIEW', 'CODE': 'MAP'},
+        'USER_PREFERENCES',
+        {
+          'NAME': SharedPreferencesName.searchActivityName,
+          'CODE': SharedPreferencesCode.list
+        },
         conflictAlgorithm: ConflictAlgorithm.replace);
     await db.insert('USER_PREFERENCES', {'NAME': 'THEME', 'CODE': 'LIGHT'},
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  Future<String> getSearchActivityView() async {
+  Future<SharedPreferences> getSearchActivityView() async {
     Database db = await database;
     List<Map> maps = await db.query('USER_PREFERENCES',
         columns: [
@@ -48,22 +48,24 @@ class DatabaseHelper {
         ],
         where: 'NAME = ?',
         whereArgs: ['SEARCH_ACTIVITY_VIEW']);
-    if (maps.length > 0) {
-      dynamic x = maps.first['CODE'];
-      return x;
+    if (maps.length > 0 && maps.first['CODE'] == 'MAP') {
+      return SharedPreferences(searchActivityView: SharedPreferencesCode.map);
     }
-    return null;
+    return SharedPreferences(searchActivityView: SharedPreferencesCode.list);
   }
 
-  Future<int> updateSearchActivityView(String value) async {
+  Future<int> updateSearchActivityView(
+    String prendicateName,
+    String code,
+  ) async {
     Database db = await database;
     int result = await db.update(
       'USER_PREFERENCES',
       {
-        'CODE': value,
+        'CODE': code,
       },
       where: 'NAME = ?',
-      whereArgs: ['SEARCH_ACTIVITY_VIEW'],
+      whereArgs: [prendicateName],
     );
 
     return result;

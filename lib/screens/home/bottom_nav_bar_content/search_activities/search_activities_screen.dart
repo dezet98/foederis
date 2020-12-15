@@ -3,12 +3,16 @@ import 'package:engineering_thesis/blocs/abstract_blocs/search_filter/search_fil
 import 'package:engineering_thesis/blocs/search_activities/search_activities_filters_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_search_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_fetching_bloc.dart';
+import 'package:engineering_thesis/blocs/shared_preferences/shared_preferences_bloc.dart';
 import 'package:engineering_thesis/models/activity.dart';
+import 'package:engineering_thesis/models/shared_preferences.dart';
 import 'package:engineering_thesis/shared/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/shared/builders/fetching_bloc_builder.dart';
+import 'package:engineering_thesis/shared/builders/fetching_builder.dart';
 import 'package:engineering_thesis/shared/builders/filters/filtered_data.dart';
 import 'package:engineering_thesis/shared/components/buttons/custom_button.dart';
 import 'package:engineering_thesis/shared/components/card/custom_card.dart';
+import 'package:engineering_thesis/shared/database_helper.dart';
 import 'package:engineering_thesis/shared/routing.dart';
 import 'package:engineering_thesis/shared/search_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -79,7 +83,7 @@ class SearchActivitiesScreen extends NavBarTab {
         return FilteredData<Activity>(
           data: activities,
           filtersBloc: BlocProvider.of<SearchActivitiesFiltersBloc>(context),
-          child: _buildActivitiesList,
+          child: _buildActivitiesView,
         );
       },
       buildError: SliverFillRemaining(
@@ -88,6 +92,33 @@ class SearchActivitiesScreen extends NavBarTab {
       buildInProgress: SliverFillRemaining(
         child: Center(child: CircularProgressIndicator()),
       ),
+    );
+  }
+
+  Widget _buildActivitiesView(BuildContext context, List<Activity> activities) {
+    return BlocBuilder(
+      cubit: BlocProvider.of<SharedPreferencesBloc>(context),
+      builder: (BuildContext context, state) {
+        if (state is SharedPreferencesLoadSuccessState) {
+          if (state.sharedPreferences.searchActivityView ==
+              SharedPreferencesCode.list)
+            return _buildActivitiesList(context, activities);
+          return SliverFillRemaining(
+            child: Text('map'),
+          );
+        } else if (state is SharedPreferencesUpdateSuccessState) {
+          if (state.sharedPreferences.searchActivityView ==
+              SharedPreferencesCode.list)
+            return _buildActivitiesList(context, activities);
+          return SliverFillRemaining(
+            child: Text('map'),
+          );
+        }
+
+        return SliverFillRemaining(
+          child: Center(child: CircularProgressIndicator()),
+        );
+      },
     );
   }
 
