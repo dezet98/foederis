@@ -48,6 +48,7 @@ dependencies:
   google_maps_flutter: ^1.0.6
   google_maps_webservice: ^0.0.18
   geohash: ^0.2.1
+  google_maps_cluster_manager: ^0.2.0
 
   # view
   flushbar: ^1.10.4

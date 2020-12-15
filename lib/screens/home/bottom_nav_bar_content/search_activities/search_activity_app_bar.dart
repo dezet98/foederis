@@ -10,51 +10,62 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SearchActivitiesAppBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SliverAppBar(
-      title: BlocBuilder(
-        cubit: BlocProvider.of<SearchActivitiesSearchFilterBloc>(context),
-        builder: (context, state) {
-          return Text(
-            BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
-                        .selectedOption !=
-                    null
-                ? BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
-                    .display(BlocProvider.of<SearchActivitiesSearchFilterBloc>(
-                            context)
-                        .selectedOption)
-                : 'Choose City',
-          );
-        },
-      ),
-      elevation: 4,
-      actions: [
-        IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () async {
-              await SearchScreen.show(context,
-                  BlocProvider.of<SearchActivitiesSearchFilterBloc>(context));
-            }),
-        _buildChangingViewButton(context),
-        CustomButton(
-          buttonType: ButtonType.icon_button,
-          cupertinoIconData: CupertinoIcons.color_filter,
-          materialIconData: Icons.filter_list,
-          onPressed: () {
-            Routing.pushNamed(
-              context,
-              CommonRoutes.filter,
-              options: BlocProvider.of<SearchActivitiesFiltersBloc>(context),
-            );
-          },
-        )
-      ],
+class SearchActivitiesAppBar {
+  static SliverAppBar getSliverAppBar(BuildContext context) => SliverAppBar(
+        title: _buildTitle(context),
+        elevation: 4,
+        actions: _buildAction(context),
+      );
+
+  static AppBar getAppBar(BuildContext context) => AppBar(
+        title: _buildTitle(context),
+        elevation: 4,
+        actions: _buildAction(context),
+      );
+
+  static Widget _buildTitle(BuildContext context) {
+    return BlocBuilder(
+      cubit: BlocProvider.of<SearchActivitiesSearchFilterBloc>(context),
+      builder: (context, state) {
+        return Text(
+          BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
+                      .selectedOption !=
+                  null
+              ? BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
+                  .display(
+                      BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
+                          .selectedOption)
+              : 'Choose City',
+        );
+      },
     );
   }
 
-  Widget _buildChangingViewButton(BuildContext context) {
+  static List<Widget> _buildAction(BuildContext context) {
+    return [
+      IconButton(
+          icon: Icon(Icons.search),
+          onPressed: () async {
+            await SearchScreen.show(context,
+                BlocProvider.of<SearchActivitiesSearchFilterBloc>(context));
+          }),
+      _buildChangingViewButton(context),
+      CustomButton(
+        buttonType: ButtonType.icon_button,
+        cupertinoIconData: CupertinoIcons.color_filter,
+        materialIconData: Icons.filter_list,
+        onPressed: () {
+          Routing.pushNamed(
+            context,
+            CommonRoutes.filter,
+            options: BlocProvider.of<SearchActivitiesFiltersBloc>(context),
+          );
+        },
+      )
+    ];
+  }
+
+  static Widget _buildChangingViewButton(BuildContext context) {
     return BlocBuilder(
       cubit: BlocProvider.of<SharedPreferencesBloc>(context),
       builder: (context, state) {
