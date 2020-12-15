@@ -5,10 +5,10 @@ import 'package:engineering_thesis/shared/extensions.dart';
 
 import 'exceptions.dart';
 
-class Database {
+class RemoteRepository {
   final FirebaseFirestore _firestore;
 
-  Database({FirebaseFirestore firestore})
+  RemoteRepository({FirebaseFirestore firestore})
       : _firestore = firestore ?? FirebaseFirestore.instance;
 
   Future<ResultType> fetchCollection<ResultType>(

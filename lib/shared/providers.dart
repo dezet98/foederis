@@ -15,23 +15,23 @@ import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/auth_repository.dart';
 import 'package:engineering_thesis/repositories/category_repository.dart';
-import 'package:engineering_thesis/shared/datebase.dart';
+import 'package:engineering_thesis/shared/remote_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 dynamic getRepositoryProviders() => [
-      RepositoryProvider<Database>(
-        create: (_) => Database(),
+      RepositoryProvider<RemoteRepository>(
+        create: (_) => RemoteRepository(),
       ),
       RepositoryProvider<AuthRepository>(
         create: (_) => AuthRepository(),
       ),
       RepositoryProvider<CategoryRepository>(
         create: (context) => CategoryRepository(
-            database: RepositoryProvider.of<Database>(context)),
+            database: RepositoryProvider.of<RemoteRepository>(context)),
       ),
       RepositoryProvider<ActivityRepository>(
-        create: (context) =>
-            ActivityRepository(RepositoryProvider.of<Database>(context)),
+        create: (context) => ActivityRepository(
+            RepositoryProvider.of<RemoteRepository>(context)),
       ),
     ];
 

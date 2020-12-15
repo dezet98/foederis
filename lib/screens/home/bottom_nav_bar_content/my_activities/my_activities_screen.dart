@@ -24,6 +24,7 @@ class MyActivitiesScreen extends NavBarTab {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Text('My activities screen'),
+            RaisedButton(onPressed: () async {}, child: Text('dfs'))
           ],
         ),
       ),

@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/collections/activity_collection.dart';
 import 'package:engineering_thesis/models/fetch_filter.dart';
-import 'package:engineering_thesis/shared/datebase.dart';
+import 'package:engineering_thesis/shared/remote_repository.dart';
 
 class ActivityRepository {
-  final Database _database;
+  final RemoteRepository _database;
 
   ActivityRepository(this._database);
 
