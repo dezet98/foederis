@@ -13,7 +13,7 @@ class SharedPreferencesBloc
     extends Bloc<SharedPreferencesEvent, SharedPreferencesState> {
   final DatabaseHelper _databaseHelper;
 
-  SharedPreferences _sharedPreferences;
+  SharedPreferences sharedPreferences;
 
   SharedPreferencesBloc(this._databaseHelper)
       : super(SharedPreferencesInitialState()) {
@@ -26,16 +26,16 @@ class SharedPreferencesBloc
   ) async* {
     if (event is SharedPreferencesLoadEvent) {
       yield SharedPreferencesLoadInProgressState();
-      _sharedPreferences = await _databaseHelper.getSearchActivityView();
+      sharedPreferences = await _databaseHelper.getSearchActivityView();
       yield SharedPreferencesLoadSuccessState(
-          sharedPreferences: _sharedPreferences);
+          sharedPreferences: sharedPreferences);
     } else if (event is SharedPreferencesUpdateEvent) {
       yield SharedPreferencesUpdateInProgressState();
       await _databaseHelper.updateSearchActivityView(
           event.fieldName, event.fieldValue);
-      _sharedPreferences = await _databaseHelper.getSearchActivityView();
+      sharedPreferences = await _databaseHelper.getSearchActivityView();
       yield SharedPreferencesUpdateSuccessState(
-          sharedPreferences: _sharedPreferences);
+          sharedPreferences: sharedPreferences);
     }
   }
 }

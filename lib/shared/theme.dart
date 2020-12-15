@@ -24,6 +24,7 @@ class Dimensions {
   static const double gutterMedium = 16.0;
   static const double gutterLarge = 24.0;
   static const double gutterHuge = 32.0;
+  static const double gutterVeryHuge = 40.0;
 
   static const double screenPadding = 16.0;
 }

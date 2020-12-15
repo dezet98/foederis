@@ -3,18 +3,12 @@ import 'package:engineering_thesis/blocs/abstract_blocs/search_filter/search_fil
 import 'package:engineering_thesis/blocs/search_activities/search_activities_filters_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_search_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_fetching_bloc.dart';
-import 'package:engineering_thesis/blocs/shared_preferences/shared_preferences_bloc.dart';
 import 'package:engineering_thesis/models/activity.dart';
-import 'package:engineering_thesis/models/shared_preferences.dart';
+import 'package:engineering_thesis/screens/home/bottom_nav_bar_content/search_activities/search_activities_view.dart';
+import 'package:engineering_thesis/screens/home/bottom_nav_bar_content/search_activities/search_activity_app_bar.dart';
 import 'package:engineering_thesis/shared/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/shared/builders/fetching_bloc_builder.dart';
-import 'package:engineering_thesis/shared/builders/fetching_builder.dart';
 import 'package:engineering_thesis/shared/builders/filters/filtered_data.dart';
-import 'package:engineering_thesis/shared/components/buttons/custom_button.dart';
-import 'package:engineering_thesis/shared/components/card/custom_card.dart';
-import 'package:engineering_thesis/shared/database_helper.dart';
-import 'package:engineering_thesis/shared/routing.dart';
-import 'package:engineering_thesis/shared/search_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -59,8 +53,7 @@ class SearchActivitiesScreen extends NavBarTab {
   Widget _buildCustomScrollView(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        _buildAppBar(context,
-            BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)),
+        SearchActivitiesAppBar(),
         CupertinoSliverRefreshControl(
           onRefresh: () async {
             await Future.delayed(Duration(seconds: 2));
@@ -71,113 +64,25 @@ class SearchActivitiesScreen extends NavBarTab {
             ]));
           },
         ),
-        _buildSearchedActivities(context),
-      ],
-    );
-  }
-
-  Widget _buildSearchedActivities(context) {
-    return FetchingBlocBuilder(
-      fetchingCubit: BlocProvider.of<SearchActivitiesFetchingBloc>(context),
-      buildSuccess: (activities) {
-        return FilteredData<Activity>(
-          data: activities,
-          filtersBloc: BlocProvider.of<SearchActivitiesFiltersBloc>(context),
-          child: _buildActivitiesView,
-        );
-      },
-      buildError: SliverFillRemaining(
-        child: Text('Error occur'),
-      ),
-      buildInProgress: SliverFillRemaining(
-        child: Center(child: CircularProgressIndicator()),
-      ),
-    );
-  }
-
-  Widget _buildActivitiesView(BuildContext context, List<Activity> activities) {
-    return BlocBuilder(
-      cubit: BlocProvider.of<SharedPreferencesBloc>(context),
-      builder: (BuildContext context, state) {
-        if (state is SharedPreferencesLoadSuccessState) {
-          if (state.sharedPreferences.searchActivityView ==
-              SharedPreferencesCode.list)
-            return _buildActivitiesList(context, activities);
-          return SliverFillRemaining(
-            child: Text('map'),
-          );
-        } else if (state is SharedPreferencesUpdateSuccessState) {
-          if (state.sharedPreferences.searchActivityView ==
-              SharedPreferencesCode.list)
-            return _buildActivitiesList(context, activities);
-          return SliverFillRemaining(
-            child: Text('map'),
-          );
-        }
-
-        return SliverFillRemaining(
-          child: Center(child: CircularProgressIndicator()),
-        );
-      },
-    );
-  }
-
-  Widget _buildAppBar(
-      BuildContext context, SearchActivitiesSearchFilterBloc searchFilterBloc) {
-    return SliverAppBar(
-      title: BlocBuilder(
-        cubit: searchFilterBloc,
-        builder: (context, state) {
-          return Text(
-            searchFilterBloc.selectedOption != null
-                ? searchFilterBloc.display(searchFilterBloc.selectedOption)
-                : 'Choose City',
-          );
-        },
-      ),
-      elevation: 4,
-      actions: [
-        IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () async {
-              await SearchScreen.show(context,
-                  BlocProvider.of<SearchActivitiesSearchFilterBloc>(context));
-            }),
-        CustomButton(
-          buttonType: ButtonType.icon_button,
-          cupertinoIconData: CupertinoIcons.color_filter,
-          materialIconData: Icons.filter_list,
-          onPressed: () {
-            Routing.pushNamed(
-              context,
-              CommonRoutes.filter,
-              options: BlocProvider.of<SearchActivitiesFiltersBloc>(context),
+        FetchingBlocBuilder(
+          fetchingCubit: BlocProvider.of<SearchActivitiesFetchingBloc>(context),
+          buildSuccess: (activities) {
+            return FilteredData<Activity>(
+              data: activities,
+              filtersBloc:
+                  BlocProvider.of<SearchActivitiesFiltersBloc>(context),
+              child: (context, activities) =>
+                  SearchActivitiesView(activities: activities),
             );
           },
-        )
+          buildError: SliverFillRemaining(
+            child: Text('Error occur'),
+          ),
+          buildInProgress: SliverFillRemaining(
+            child: Center(child: CircularProgressIndicator()),
+          ),
+        ),
       ],
-    );
-  }
-
-  Widget _buildActivitiesList(BuildContext context, List<Activity> activities) {
-    return SliverList(
-      delegate: SliverChildListDelegate(
-        [
-          for (Activity activity in activities)
-            _buildActivityTile(context, activity)
-        ],
-      ),
-    );
-  }
-
-  Widget _buildActivityTile(BuildContext context, Activity activity) {
-    return CustomCard(
-      title: activity.title,
-      subtitle: activity.categoryRef.toString(),
-      onTap: () {
-        Routing.pushNamed(context, UserRoutes.activityDetails,
-            options: activity);
-      },
     );
   }
 
