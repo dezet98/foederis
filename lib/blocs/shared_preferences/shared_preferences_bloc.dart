@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/models/shared_preferences.dart';
 import 'package:engineering_thesis/shared/database_helper.dart';
+import 'package:engineering_thesis/shared/shared_preferences.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -12,30 +11,23 @@ part 'shared_preferences_state.dart';
 class SharedPreferencesBloc
     extends Bloc<SharedPreferencesEvent, SharedPreferencesState> {
   final DatabaseHelper _databaseHelper;
+  final SharedPreferences _sharedPreferences;
 
-  SharedPreferences sharedPreferences;
-
-  SharedPreferencesBloc(this._databaseHelper)
-      : super(SharedPreferencesInitialState()) {
-    add(SharedPreferencesLoadEvent());
-  }
+  SharedPreferencesBloc(this._databaseHelper, this._sharedPreferences)
+      : super(SharedPreferencesInitialState());
 
   @override
   Stream<SharedPreferencesState> mapEventToState(
     SharedPreferencesEvent event,
   ) async* {
-    if (event is SharedPreferencesLoadEvent) {
-      yield SharedPreferencesLoadInProgressState();
-      sharedPreferences = await _databaseHelper.getSearchActivityView();
-      yield SharedPreferencesLoadSuccessState(
-          sharedPreferences: sharedPreferences);
-    } else if (event is SharedPreferencesUpdateEvent) {
+    if (event is SharedPreferencesUpdateEvent) {
       yield SharedPreferencesUpdateInProgressState();
-      await _databaseHelper.updateSearchActivityView(
+      await _databaseHelper.updateUserPreferences(
           event.fieldName, event.fieldValue);
-      sharedPreferences = await _databaseHelper.getSearchActivityView();
+      _sharedPreferences.searchActivityView = await _databaseHelper
+          .getUserPreferences(SharedPreferencesName.searchActivityName);
       yield SharedPreferencesUpdateSuccessState(
-          sharedPreferences: sharedPreferences);
+          sharedPreferences: _sharedPreferences);
     }
   }
 }

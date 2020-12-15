@@ -1,4 +1,5 @@
 import 'package:engineering_thesis/blocs/create_activity/create_activity_form_data.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/shared/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/shared/components/buttons/custom_button.dart';
 import 'package:engineering_thesis/shared/routing.dart';
@@ -50,5 +51,5 @@ class MyActivitiesScreen extends NavBarTab {
   Icon getIcon(BuildContext context) => Icon(PlatformIcons(context).book);
 
   @override
-  String get label => 'My activity';
+  String getLabel(context) => S.of(context).home_screen_my_activity_tab_name;
 }

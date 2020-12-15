@@ -7,8 +7,6 @@ abstract class SharedPreferencesEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SharedPreferencesLoadEvent extends SharedPreferencesEvent {}
-
 class SharedPreferencesUpdateEvent extends SharedPreferencesEvent {
   final String fieldName;
   final String fieldValue;

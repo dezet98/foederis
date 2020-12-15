@@ -1,8 +1,8 @@
 import 'package:engineering_thesis/blocs/shared_preferences/shared_preferences_bloc.dart';
 import 'package:engineering_thesis/models/activity.dart';
-import 'package:engineering_thesis/models/shared_preferences.dart';
 import 'package:engineering_thesis/shared/components/card/custom_card.dart';
 import 'package:engineering_thesis/shared/routing.dart';
+import 'package:engineering_thesis/shared/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,22 +16,11 @@ class SearchActivitiesView extends StatelessWidget {
     return BlocBuilder(
       cubit: BlocProvider.of<SharedPreferencesBloc>(context),
       builder: (context, state) {
-        if (state is SharedPreferencesLoadSuccessState) if (state
-                .sharedPreferences.searchActivityView ==
+        if (SharedPreferences().searchActivityView ==
             SharedPreferencesCode.list)
           return buildActivitiesList(context, activities);
         else
           return buildSearchedActivitiesMap(context, activities);
-        else if (state is SharedPreferencesUpdateSuccessState) if (state
-                .sharedPreferences.searchActivityView ==
-            SharedPreferencesCode.list)
-          return buildActivitiesList(context, activities);
-        else
-          return buildSearchedActivitiesMap(context, activities);
-
-        return SliverFillRemaining(
-          child: Center(child: CircularProgressIndicator()),
-        );
       },
     );
   }

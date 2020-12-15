@@ -85,6 +85,36 @@ class S {
     );
   }
 
+  /// `Search`
+  String get home_screen_search_activities_tab_name {
+    return Intl.message(
+      'Search',
+      name: 'home_screen_search_activities_tab_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My activity`
+  String get home_screen_my_activity_tab_name {
+    return Intl.message(
+      'My activity',
+      name: 'home_screen_my_activity_tab_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get home_screen_account_tab_name {
+    return Intl.message(
+      'Account',
+      name: 'home_screen_account_tab_name',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Filters`
   String get filter_screen_nav_title {
     return Intl.message(

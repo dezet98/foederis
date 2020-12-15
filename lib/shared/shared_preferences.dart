@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class SharedPreferencesCode {
   static String map = 'MAP';
   static String list = 'LIST';
@@ -12,5 +10,10 @@ class SharedPreferencesName {
 class SharedPreferences {
   String searchActivityView;
 
-  SharedPreferences({@required this.searchActivityView});
+  static final SharedPreferences _sharedPreferences =
+      SharedPreferences._internal();
+
+  factory SharedPreferences() => _sharedPreferences;
+
+  SharedPreferences._internal();
 }

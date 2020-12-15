@@ -18,6 +18,7 @@ import 'package:engineering_thesis/repositories/auth_repository.dart';
 import 'package:engineering_thesis/repositories/category_repository.dart';
 import 'package:engineering_thesis/shared/database_helper.dart';
 import 'package:engineering_thesis/shared/remote_repository.dart';
+import 'package:engineering_thesis/shared/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 dynamic getRepositoryProviders() => [
@@ -57,7 +58,8 @@ dynamic getMainBlocProviders() => [
 
 dynamic getHomeScreenBlocProviders() => [
       BlocProvider(
-        create: (context) => SharedPreferencesBloc(DatabaseHelper.instance),
+        create: (context) =>
+            SharedPreferencesBloc(DatabaseHelper.instance, SharedPreferences()),
       ),
       BlocProvider(
         create: (context) => NavBarBloc(innitialIndex: 0),

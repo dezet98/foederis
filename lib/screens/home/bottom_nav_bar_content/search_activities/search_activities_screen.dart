@@ -3,6 +3,7 @@ import 'package:engineering_thesis/blocs/abstract_blocs/search_filter/search_fil
 import 'package:engineering_thesis/blocs/search_activities/search_activities_filters_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_search_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_fetching_bloc.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_content/search_activities/search_activities_view.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_content/search_activities/search_activity_app_bar.dart';
@@ -90,5 +91,6 @@ class SearchActivitiesScreen extends NavBarTab {
   Icon getIcon(BuildContext context) => Icon(PlatformIcons(context).search);
 
   @override
-  String get label => 'Search';
+  String getLabel(context) =>
+      S.of(context).home_screen_search_activities_tab_name;
 }

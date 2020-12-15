@@ -9,16 +9,6 @@ abstract class SharedPreferencesState extends Equatable {
 
 class SharedPreferencesInitialState extends SharedPreferencesState {}
 
-class SharedPreferencesLoadInProgressState extends SharedPreferencesState {}
-
-class SharedPreferencesLoadSuccessState extends SharedPreferencesState {
-  final SharedPreferences sharedPreferences;
-
-  SharedPreferencesLoadSuccessState({@required this.sharedPreferences});
-}
-
-class SharedPreferencesLoadFailureState extends SharedPreferencesState {}
-
 class SharedPreferencesUpdateInProgressState extends SharedPreferencesState {}
 
 class SharedPreferencesUpdateSuccessState extends SharedPreferencesState {

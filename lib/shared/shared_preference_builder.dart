@@ -1,4 +1,4 @@
-import 'package:engineering_thesis/models/shared_preferences.dart';
+import 'package:engineering_thesis/shared/shared_preferences.dart';
 import 'package:flutter/widgets.dart';
 
 class SharedPreferenceBuilder extends StatelessWidget {

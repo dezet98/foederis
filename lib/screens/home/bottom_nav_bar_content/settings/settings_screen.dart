@@ -57,5 +57,5 @@ class SettingsScreen extends NavBarTab {
   Icon getIcon(BuildContext context) => Icon(PlatformIcons(context).settings);
 
   @override
-  String get label => 'Account';
+  String getLabel(context) => S.of(context).home_screen_account_tab_name;
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
 abstract class NavBarTab extends StatelessWidget {
-  String get label;
+  String getLabel(BuildContext context);
   Icon getIcon(BuildContext context);
 }

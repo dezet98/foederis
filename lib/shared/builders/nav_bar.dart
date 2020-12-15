@@ -39,7 +39,7 @@ class NavBar extends StatelessWidget {
         for (NavBarTab navBarTab in navBarContents)
           BottomNavigationBarItem(
             icon: navBarTab.getIcon(context),
-            label: navBarTab.label,
+            label: navBarTab.getLabel(context),
           ),
       ];
 }

@@ -1,10 +1,10 @@
 import 'package:engineering_thesis/blocs/search_activities/search_activities_filters_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_search_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/shared_preferences/shared_preferences_bloc.dart';
-import 'package:engineering_thesis/models/shared_preferences.dart';
 import 'package:engineering_thesis/shared/components/buttons/custom_button.dart';
 import 'package:engineering_thesis/shared/routing.dart';
 import 'package:engineering_thesis/shared/search_screen.dart';
+import 'package:engineering_thesis/shared/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -55,32 +55,26 @@ class SearchActivitiesAppBar extends StatelessWidget {
   }
 
   Widget _buildChangingViewButton(BuildContext context) {
-    String searchActivityView = BlocProvider.of<SharedPreferencesBloc>(context)
-        .sharedPreferences
-        .searchActivityView;
-
-    return BlocConsumer(
+    return BlocBuilder(
       cubit: BlocProvider.of<SharedPreferencesBloc>(context),
-      listener: (context, state) {
-        searchActivityView = BlocProvider.of<SharedPreferencesBloc>(context)
-            .sharedPreferences
-            .searchActivityView;
-      },
       builder: (context, state) {
         return CustomButton(
           buttonType: ButtonType.icon_button,
-          materialIconData: searchActivityView == SharedPreferencesCode.list
+          materialIconData: SharedPreferences().searchActivityView ==
+                  SharedPreferencesCode.list
               ? Icons.map
               : Icons.list,
           onPressed: () => {
-            if (searchActivityView == SharedPreferencesCode.list)
+            if (SharedPreferences().searchActivityView ==
+                SharedPreferencesCode.list)
               BlocProvider.of<SharedPreferencesBloc>(context).add(
                 SharedPreferencesUpdateEvent(
                   SharedPreferencesName.searchActivityName,
                   SharedPreferencesCode.map,
                 ),
               )
-            else if (searchActivityView == SharedPreferencesCode.map)
+            else if (SharedPreferences().searchActivityView ==
+                SharedPreferencesCode.map)
               BlocProvider.of<SharedPreferencesBloc>(context).add(
                 SharedPreferencesUpdateEvent(
                   SharedPreferencesName.searchActivityName,

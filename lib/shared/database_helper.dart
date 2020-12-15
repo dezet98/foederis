@@ -1,4 +1,4 @@
-import 'package:engineering_thesis/models/shared_preferences.dart';
+import 'package:engineering_thesis/shared/shared_preferences.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -24,7 +24,7 @@ class DatabaseHelper {
   Future _onCreate(Database db, int version) async {
     await db.execute('''
               CREATE TABLE USER_PREFERENCES(
-                NAME STRING NOT NULL,
+                NAME STRING NOT NULL, 
                 CODE STRING NOT NULL
               )
               ''');
@@ -39,7 +39,7 @@ class DatabaseHelper {
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  Future<SharedPreferences> getSearchActivityView() async {
+  Future<String> getUserPreferences(String sharedPreferencesName) async {
     Database db = await database;
     List<Map> maps = await db.query('USER_PREFERENCES',
         columns: [
@@ -47,25 +47,25 @@ class DatabaseHelper {
           'CODE',
         ],
         where: 'NAME = ?',
-        whereArgs: ['SEARCH_ACTIVITY_VIEW']);
+        whereArgs: [sharedPreferencesName]);
     if (maps.length > 0 && maps.first['CODE'] == 'MAP') {
-      return SharedPreferences(searchActivityView: SharedPreferencesCode.map);
+      return SharedPreferencesCode.map;
     }
-    return SharedPreferences(searchActivityView: SharedPreferencesCode.list);
+    return SharedPreferencesCode.list;
   }
 
-  Future<int> updateSearchActivityView(
-    String prendicateName,
-    String code,
+  Future<int> updateUserPreferences(
+    String sharedPreferencesName,
+    String sharedPreferencesCode,
   ) async {
     Database db = await database;
     int result = await db.update(
       'USER_PREFERENCES',
       {
-        'CODE': code,
+        'CODE': sharedPreferencesCode,
       },
       where: 'NAME = ?',
-      whereArgs: [prendicateName],
+      whereArgs: [sharedPreferencesName],
     );
 
     return result;
