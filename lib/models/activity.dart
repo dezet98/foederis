@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/models/collections/collection.dart';
 import 'package:engineering_thesis/shared/extensions.dart';
+import 'package:geohash/geohash.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'collections/activity_collection.dart';
 
@@ -56,4 +58,9 @@ class Activity {
       ActivityCollection.address.fieldName: address,
     };
   }
+
+  LatLng get latLng => LatLng(
+        Geohash.decode(this.geohash).x,
+        Geohash.decode(this.geohash).y,
+      );
 }

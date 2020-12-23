@@ -1,27 +1,57 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:engineering_thesis/blocs/search_activities/search_activities_fetching_bloc.dart';
+import 'package:engineering_thesis/blocs/search_activities/search_activities_filters_bloc.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_content/search_activities/search_activity_app_bar.dart';
+import 'package:engineering_thesis/shared/builders/fetching_bloc_builder.dart';
+import 'package:engineering_thesis/shared/builders/filters/filtered_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class SearchActivityMapView extends StatelessWidget {
-  final List<Activity> activities;
+  final Function(BuildContext) onRefresh;
 
-  SearchActivityMapView({this.activities});
+  SearchActivityMapView({@required this.onRefresh});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SearchActivitiesAppBar.getAppBar(context),
-      body: MapSample(),
+        appBar: SearchActivitiesAppBar.getAppBar(context),
+        body: _fetchActivities(context));
+  }
+
+  Widget _fetchActivities(BuildContext context) {
+    return FetchingBlocBuilder(
+      fetchingCubit: BlocProvider.of<SearchActivitiesFetchingBloc>(context),
+      buildSuccess: (activities) {
+        return FilteredData<Activity>(
+          data: activities,
+          filtersBloc: BlocProvider.of<SearchActivitiesFiltersBloc>(context),
+          child: (context, activities) => MapSample(getClusters(activities)),
+        );
+      },
+      buildError: Text('error'),
+      buildInProgress: CircularProgressIndicator(),
     );
+  }
+
+  List<ClusterItem<Place>> getClusters(List<Activity> activities) {
+    return [
+      for (Activity activity in activities)
+        ClusterItem(activity.latLng, item: Place(name: activity.title)),
+    ];
   }
 }
 
 class MapSample extends StatefulWidget {
+  final List<ClusterItem<Place>> items;
+
+  MapSample(this.items);
+
   @override
   State<MapSample> createState() => MapSampleState();
 }
@@ -36,25 +66,6 @@ class MapSampleState extends State<MapSample> {
   final CameraPosition _parisCameraPosition =
       CameraPosition(target: LatLng(48.856613, 2.352222), zoom: 12.0);
 
-  List<ClusterItem<Place>> items = [
-    for (int i = 0; i < 10; i++)
-      ClusterItem(LatLng(48.848200 + i * 0.001, 2.319124 + i * 0.001),
-          item: Place(name: 'Place $i')),
-    for (int i = 0; i < 10; i++)
-      ClusterItem(LatLng(48.858265 - i * 0.001, 2.350107 + i * 0.001),
-          item: Place(name: 'Restaurant $i', isClosed: i % 2 == 0)),
-    for (int i = 0; i < 10; i++)
-      ClusterItem(LatLng(48.858265 + i * 0.01, 2.350107 - i * 0.01),
-          item: Place(name: 'Bar $i')),
-    for (int i = 0; i < 10; i++)
-      ClusterItem(LatLng(48.858265 - i * 0.1, 2.350107 - i * 0.01),
-          item: Place(name: 'Hotel $i')),
-    for (int i = 0; i < 10; i++)
-      ClusterItem(LatLng(48.858265 + i * 0.1, 2.350107 + i * 0.1)),
-    for (int i = 0; i < 10; i++)
-      ClusterItem(LatLng(48.858265 + i * 1, 2.350107 + i * 1)),
-  ];
-
   @override
   void initState() {
     _manager = _initClusterManager();
@@ -62,7 +73,7 @@ class MapSampleState extends State<MapSample> {
   }
 
   ClusterManager _initClusterManager() {
-    return ClusterManager<Place>(items, _updateMarkers,
+    return ClusterManager<Place>(widget.items, _updateMarkers,
         markerBuilder: _markerBuilder,
         initialZoom: _parisCameraPosition.zoom,
         stopClusteringZoom: 17.0);

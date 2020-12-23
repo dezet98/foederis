@@ -73,8 +73,8 @@ class SearchActivitiesAppBar {
           buttonType: ButtonType.icon_button,
           materialIconData: SharedPreferences().searchActivityView ==
                   SharedPreferencesCode.list
-              ? Icons.map
-              : Icons.list,
+              ? Icons.list
+              : Icons.map,
           onPressed: () => {
             if (SharedPreferences().searchActivityView ==
                 SharedPreferencesCode.list)

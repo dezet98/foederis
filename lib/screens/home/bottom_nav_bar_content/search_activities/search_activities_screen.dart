@@ -43,7 +43,7 @@ class SearchActivitiesScreen extends NavBarTab {
             SharedPreferencesCode.list)
           return SearchActivitiesListView(onRefresh: onRefresh);
         else
-          return SearchActivityMapView();
+          return SearchActivityMapView(onRefresh: onRefresh);
       },
     );
   }
