@@ -19,7 +19,11 @@ class RemoteRepository {
     try {
       return await _firestore
           .collection(collectionName)
-          .whereWithFilters(filters)
+          // .whereWithFilters(filters)
+          .where('geohash',
+              isGreaterThanOrEqualTo: filters[0].fieldValue,
+              isLessThanOrEqualTo: filters[1].fieldValue)
+          // .where('geohash', isLessThanOrEqualTo: filters[1].fieldValue) //todo
           .get()
           .then(fromQuerySnapshot);
     } catch (e) {

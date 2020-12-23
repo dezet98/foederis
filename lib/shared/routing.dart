@@ -29,11 +29,11 @@ class GuestRoutes {
 class UserRoutes {
   static const String home = "/";
   static const String activityDetails = '/activityDetails';
-  static const String addActivity = "/addActivity";
+  static const String form = "/form";
   static const String chooseLocation = "/chooseLocation";
 
   static List<String> get props =>
-      [home, activityDetails, addActivity, chooseLocation];
+      [home, activityDetails, form, chooseLocation];
 }
 
 class Routing {
@@ -51,7 +51,7 @@ class Routing {
         return FiltersScreen(filtersBloc: options);
       case UserRoutes.activityDetails:
         return ActivityDetailsScreen(activity: options);
-      case UserRoutes.addActivity:
+      case UserRoutes.form:
         return FormDataScreen(formDataBloc: options);
       case UserRoutes.chooseLocation:
         return ChooseLocationScreen();

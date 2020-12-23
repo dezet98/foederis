@@ -32,8 +32,7 @@ class CustomDateTimePicker extends StatelessWidget {
         SizedBox(
           width: Dimensions.gutterMedium,
         ),
-        CustomButton(
-            buttonType: ButtonType.icon_button,
+        CustomButton.iconButton(
             materialIconData: Icons.date_range,
             cupertinoIconData: CupertinoIcons.time,
             enabled: enabled,

@@ -3,7 +3,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
-  static final _databaseName = "database2.db";
+  static final _databaseName = "database5.db";
   static final _databaseVersion = 1;
 
   static final DatabaseHelper instance = DatabaseHelper._internal();
@@ -37,6 +37,13 @@ class DatabaseHelper {
         conflictAlgorithm: ConflictAlgorithm.replace);
     await db.insert('USER_PREFERENCES', {'NAME': 'THEME', 'CODE': 'LIGHT'},
         conflictAlgorithm: ConflictAlgorithm.replace);
+    await db.insert(
+        'USER_PREFERENCES',
+        {
+          'NAME': SharedPreferencesName.distanceKm,
+          'CODE': SharedPreferencesCode.distanceKm
+        },
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<String> getUserPreferences(String sharedPreferencesName) async {
@@ -48,10 +55,11 @@ class DatabaseHelper {
         ],
         where: 'NAME = ?',
         whereArgs: [sharedPreferencesName]);
-    if (maps.length > 0 && maps.first['CODE'] == 'MAP') {
-      return SharedPreferencesCode.map;
-    }
-    return SharedPreferencesCode.list;
+    // if (maps.length > 0 && maps.first['CODE'] == 'MAP') {
+    //   return SharedPreferencesCode.map;
+    // }
+    // return SharedPreferencesCode.list;
+    return maps.first['CODE'].toString();
   }
 
   Future<int> updateUserPreferences(

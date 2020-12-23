@@ -24,8 +24,8 @@ class SharedPreferencesBloc
       yield SharedPreferencesUpdateInProgressState();
       await _databaseHelper.updateUserPreferences(
           event.fieldName, event.fieldValue);
-      _sharedPreferences.searchActivityView = await _databaseHelper
-          .getUserPreferences(SharedPreferencesName.searchActivityName);
+      _sharedPreferences.setPreferencesCode(event.fieldName,
+          await _databaseHelper.getUserPreferences(event.fieldName));
       yield SharedPreferencesUpdateSuccessState(
           sharedPreferences: _sharedPreferences);
     }

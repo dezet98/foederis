@@ -63,11 +63,10 @@ class FormDataScreen extends StatelessWidget {
       cubit: formDataBloc,
       builder: (context, state) {
         if (state is FormDataUploadInProgressState) {
-          return CustomButton(buttonType: ButtonType.loading_button);
+          return CustomButton.loadingButton();
         }
 
-        return CustomButton(
-          buttonType: ButtonType.flat_next_button,
+        return CustomButton.flatButton(
           text: 'create',
           enabled: formDataBloc.isValid,
           onPressed: () {

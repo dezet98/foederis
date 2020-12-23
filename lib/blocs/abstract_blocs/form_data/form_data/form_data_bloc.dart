@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_field/form_field_bloc.dart';
+import 'package:engineering_thesis/constants/enums.dart';
 import 'package:engineering_thesis/models/collections/query_field.dart';
 import 'package:engineering_thesis/shared/exceptions.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -50,7 +52,15 @@ abstract class FormDataBloc extends Bloc<FormDataEvent, FormDataState> {
         await query(queryFields());
         yield FormDataUploadSuccessState();
       } catch (e) {
-        yield FormDataUploadFailureState(uploadDataException: e);
+        if (e is UploadDataException)
+          yield FormDataUploadFailureState(uploadDataException: e);
+        else
+          yield FormDataUploadFailureState(
+            uploadDataException: UploadDataException(
+              sendingDataError: UploadDataError.undefined,
+              message: e.toString(),
+            ),
+          );
       }
     }
   }

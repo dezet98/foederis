@@ -23,10 +23,9 @@ class SearchActivitiesScreen extends NavBarTab {
         if (state is SearchFilterSelectedOptionState) {
           BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
             FetchInitialEvent(
-              initialFilters: [
-                BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
-                    .getFetchFilter()
-              ],
+              initialFilters:
+                  BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
+                      .getFetchFilters(),
             ),
           );
         }
@@ -52,10 +51,8 @@ class SearchActivitiesScreen extends NavBarTab {
     await Future.delayed(Duration(seconds: 2));
     BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
       FetchRefreshEvent(
-        filters: [
-          BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
-              .getFetchFilter()
-        ],
+        filters: BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
+            .getFetchFilters(),
       ),
     );
   }

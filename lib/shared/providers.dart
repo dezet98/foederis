@@ -5,6 +5,7 @@ import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
 import 'package:engineering_thesis/blocs/create_activity/category_fetching_bloc.dart';
 import 'package:engineering_thesis/blocs/create_activity/create_activity_form_data.dart';
 import 'package:engineering_thesis/blocs/nav_bar/nav_bar_bloc.dart';
+import 'package:engineering_thesis/blocs/search_activities/search_activities_distance_choice_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_fetching_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_filters_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_search_filter_bloc.dart';
@@ -131,5 +132,10 @@ dynamic getHomeScreenBlocProviders() => [
                 RepositoryProvider.of<CategoryRepository>(context),
             categoryFetchingBloc:
                 BlocProvider.of<CategoryFetchingBloc>(context)),
+      ),
+      BlocProvider(
+        create: (context) => SearchActivityDistanceChoiceBloc(
+            sharedPreferencesBloc:
+                BlocProvider.of<SharedPreferencesBloc>(context)),
       ),
     ];

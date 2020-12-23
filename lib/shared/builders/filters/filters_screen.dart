@@ -46,8 +46,7 @@ class FiltersScreen extends StatelessWidget {
       for (FilterBloc bloc in filtersBloc.filtersBlocs)
         _buildFilterWrapping(
             filter: _getFilterWidget(bloc), title: bloc.getTitle(context)),
-      CustomButton(
-        buttonType: ButtonType.raised_next_button,
+      CustomButton.raisedButton(
         onPressed: () {
           filtersBloc.add(FiltersChangedEvent());
           Routing.pop(context);

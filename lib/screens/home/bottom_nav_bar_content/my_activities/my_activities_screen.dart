@@ -33,14 +33,13 @@ class MyActivitiesScreen extends NavBarTab {
   }
 
   Widget _buildFloatingButton(BuildContext context) {
-    return CustomButton(
-      buttonType: ButtonType.floating_button,
+    return CustomButton.floatingButton(
       materialIconData: Icons.add,
       cupertinoIconData: CupertinoIcons.add,
       onPressed: () {
         Routing.pushNamed(
           context,
-          UserRoutes.addActivity,
+          UserRoutes.form,
           options: BlocProvider.of<CreateActvityFormDataBloc>(context),
         );
       },

@@ -33,16 +33,14 @@ class CustomAppBar extends StatelessWidget {
   Widget _buildAppBarLeading(BuildContext context) {
     switch (appBarType) {
       case AppBarType.back:
-        return CustomButton(
-          buttonType: ButtonType.icon_button,
+        return CustomButton.iconButton(
           materialIconData: Icons.arrow_back,
           cupertinoIconData: Icons.arrow_back_ios,
           onPressed: onPressed ?? () => Routing.pop(context),
         );
         break;
       case AppBarType.close:
-        return CustomButton(
-          buttonType: ButtonType.icon_button,
+        return CustomButton.iconButton(
           materialIconData: Icons.close,
           cupertinoIconData: CupertinoIcons.return_icon,
           onPressed: onPressed ?? () => Routing.pop(context),

@@ -13,7 +13,14 @@ class InitializeApp {
     SharedPreferences sharedPreferences = SharedPreferences();
     DatabaseHelper databaseHelper = DatabaseHelper.instance;
 
-    sharedPreferences.searchActivityView = await databaseHelper
-        .getUserPreferences(SharedPreferencesName.searchActivityName);
+    sharedPreferences.setPreferencesCode(
+        SharedPreferencesName.searchActivityName,
+        await databaseHelper
+            .getUserPreferences(SharedPreferencesName.searchActivityName));
+
+    sharedPreferences.setPreferencesCode(
+        SharedPreferencesName.distanceKm,
+        await databaseHelper
+            .getUserPreferences(SharedPreferencesName.distanceKm));
   }
 }

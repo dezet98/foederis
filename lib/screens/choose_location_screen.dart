@@ -20,8 +20,7 @@ class _ChooseLocationScreenState extends State<ChooseLocationScreen> {
     return TemplateScreen(
       body: Column(
         children: [
-          CustomButton(
-            buttonType: ButtonType.flat_next_button,
+          CustomButton.flatButton(
             text: 'Get',
             onPressed: () async {
               response = await widget.places.searchByText("Kra");
