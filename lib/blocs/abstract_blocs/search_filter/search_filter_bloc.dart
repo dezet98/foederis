@@ -8,7 +8,11 @@ part 'search_filter_state.dart';
 
 abstract class SearchFilterBloc<FilterDataType>
     extends Bloc<SearchFilterEvent, SearchFilterState> {
-  SearchFilterBloc() : super(SearchFilterInitialState()) {
+  final Future Function(FilterDataType selectedOption)
+      dealWithNewSelectedOption;
+
+  SearchFilterBloc({this.dealWithNewSelectedOption})
+      : super(SearchFilterInitialState()) {
     add(SearchFilterLoadDataEvent());
   }
 
@@ -55,6 +59,9 @@ abstract class SearchFilterBloc<FilterDataType>
     try {
       yield SearchFilterSelectOptionInProgressState();
       this.selectedOption = selectedOption;
+      if (dealWithNewSelectedOption != null) {
+        await dealWithNewSelectedOption(selectedOption);
+      }
       yield SearchFilterSelectedOptionState(selectedOption: selectedOption);
     } catch (e) {
       yield SearchFilterSelectOptionFailureState(message: e.toString());

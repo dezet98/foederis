@@ -66,7 +66,9 @@ dynamic getHomeScreenBlocProviders() => [
         create: (context) => NavBarBloc(innitialIndex: 0),
       ),
       BlocProvider(
-        create: (context) => SearchActivitiesSearchFilterBloc(),
+        create: (context) => SearchActivitiesSearchFilterBloc(
+            sharedPreferencesBloc:
+                BlocProvider.of<SharedPreferencesBloc>(context)),
       ),
       BlocProvider(
         create: (context) => SearchActivitiesFetchingBloc(

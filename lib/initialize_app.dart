@@ -9,18 +9,16 @@ class InitializeApp {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
     await DotEnv().load('.env');
+    await _initSharedPreferences();
+  }
 
+  static Future<void> _initSharedPreferences() async {
     SharedPreferences sharedPreferences = SharedPreferences();
     DatabaseHelper databaseHelper = DatabaseHelper.instance;
 
-    sharedPreferences.setPreferencesCode(
-        SharedPreferencesName.searchActivityName,
-        await databaseHelper
-            .getUserPreferences(SharedPreferencesName.searchActivityName));
-
-    sharedPreferences.setPreferencesCode(
-        SharedPreferencesName.distanceKm,
-        await databaseHelper
-            .getUserPreferences(SharedPreferencesName.distanceKm));
+    for (String sharedPreferenceName in SharedPreferencesName.props) {
+      sharedPreferences.setPreferencesCode(sharedPreferenceName,
+          await databaseHelper.getUserPreferences(sharedPreferenceName));
+    }
   }
 }

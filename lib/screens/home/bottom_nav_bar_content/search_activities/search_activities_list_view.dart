@@ -52,8 +52,8 @@ class SearchActivitiesListView extends StatelessWidget {
               buildActivitiesList(context, activities),
         );
       },
-      buildError: SliverFillRemaining(
-        child: Text('Error occur'),
+      buildError: (error) => SliverFillRemaining(
+        child: Text('Error occur: ${error.toString()}'),
       ),
       buildInProgress: SliverFillRemaining(
         child: Center(child: CircularProgressIndicator()),

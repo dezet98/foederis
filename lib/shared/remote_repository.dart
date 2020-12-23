@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/constants/enums.dart';
 import 'package:engineering_thesis/models/fetch_filter.dart';
-import 'package:engineering_thesis/shared/extensions.dart';
-
 import 'exceptions.dart';
+import 'extensions.dart';
 
 class RemoteRepository {
   final FirebaseFirestore _firestore;
@@ -19,11 +18,7 @@ class RemoteRepository {
     try {
       return await _firestore
           .collection(collectionName)
-          // .whereWithFilters(filters)
-          .where('geohash',
-              isGreaterThanOrEqualTo: filters[0].fieldValue,
-              isLessThanOrEqualTo: filters[1].fieldValue)
-          // .where('geohash', isLessThanOrEqualTo: filters[1].fieldValue) //todo
+          .whereWithFilters(filters)
           .get()
           .then(fromQuerySnapshot);
     } catch (e) {

@@ -34,7 +34,7 @@ class SearchActivityMapView extends StatelessWidget {
           child: (context, activities) => MapSample(getClusters(activities)),
         );
       },
-      buildError: Text('error'),
+      buildError: (error) => Text('error'),
       buildInProgress: CircularProgressIndicator(),
     );
   }

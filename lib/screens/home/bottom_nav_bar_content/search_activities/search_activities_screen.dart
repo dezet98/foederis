@@ -1,5 +1,7 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_data/form_data_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/search_filter/search_filter_bloc.dart';
+import 'package:engineering_thesis/blocs/search_activities/search_activities_distance_choice_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_search_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/search_activities/search_activities_fetching_bloc.dart';
 import 'package:engineering_thesis/blocs/shared_preferences/shared_preferences_bloc.dart';
@@ -13,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:google_maps_webservice/places.dart';
 
 class SearchActivitiesScreen extends NavBarTab {
   @override
@@ -22,15 +25,38 @@ class SearchActivitiesScreen extends NavBarTab {
       listener: (context, state) {
         if (state is SearchFilterSelectedOptionState) {
           BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
-            FetchInitialEvent(
-              initialFilters:
-                  BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
-                      .getFetchFilters(),
+            FetchRefreshEvent(
+              filters: SearchActivitiesFetchingBloc.getFetchFilters(
+                location: (state.selectedOption as PlacesSearchResult)
+                    .geometry
+                    .location,
+              ),
             ),
           );
         }
       },
-      child: _buildView(context),
+      child: BlocListener(
+        cubit: BlocProvider.of<SearchActivityDistanceChoiceBloc>(context),
+        listener: (context, state) {
+          if (state is FormDataUploadSuccessState) {
+            BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
+              FetchRefreshEvent(
+                filters: SearchActivitiesFetchingBloc.getFetchFilters(
+                  distanceKm:
+                      BlocProvider.of<SearchActivityDistanceChoiceBloc>(context)
+                          .distance,
+                ),
+              ),
+            );
+          }
+        },
+        child: BlocBuilder(
+          cubit: BlocProvider.of<SearchActivitiesFetchingBloc>(context),
+          builder: (context, state) {
+            return _buildView(context);
+          },
+        ),
+      ),
     );
   }
 
@@ -39,7 +65,7 @@ class SearchActivitiesScreen extends NavBarTab {
       cubit: BlocProvider.of<SharedPreferencesBloc>(context),
       builder: (context, state) {
         if (SharedPreferences().searchActivityView ==
-            SharedPreferencesCode.list)
+            SharedPreferencesSearchActivityCode.list)
           return SearchActivitiesListView(onRefresh: onRefresh);
         else
           return SearchActivityMapView(onRefresh: onRefresh);
@@ -50,10 +76,7 @@ class SearchActivitiesScreen extends NavBarTab {
   onRefresh(BuildContext context) async {
     await Future.delayed(Duration(seconds: 2));
     BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
-      FetchRefreshEvent(
-        filters: BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
-            .getFetchFilters(),
-      ),
+      FetchRefreshEvent(),
     );
   }
 
@@ -64,3 +87,5 @@ class SearchActivitiesScreen extends NavBarTab {
   String getLabel(context) =>
       S.of(context).home_screen_search_activities_tab_name;
 }
+
+class BlocCustomer {}

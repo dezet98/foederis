@@ -27,7 +27,7 @@ class SearchActivitiesAppBar {
 
   static Widget _buildAddressField(BuildContext context) {
     return BlocBuilder(
-      cubit: BlocProvider.of<SearchActivitiesSearchFilterBloc>(context),
+      cubit: BlocProvider.of<SharedPreferencesBloc>(context),
       builder: (context, state) {
         return CustomGestureDetector(
           onTap: () async {
@@ -35,14 +35,7 @@ class SearchActivitiesAppBar {
                 BlocProvider.of<SearchActivitiesSearchFilterBloc>(context));
           },
           child: Text(
-            BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
-                        .selectedOption !=
-                    null
-                ? BlocProvider.of<SearchActivitiesSearchFilterBloc>(context)
-                    .display(BlocProvider.of<SearchActivitiesSearchFilterBloc>(
-                            context)
-                        .selectedOption)
-                : 'Choose City',
+            SharedPreferences().address ?? 'Choose City',
           ),
         );
       },
@@ -99,24 +92,24 @@ class SearchActivitiesAppBar {
       builder: (context, state) {
         return CustomButton.iconButton(
           materialIconData: SharedPreferences().searchActivityView ==
-                  SharedPreferencesCode.list
+                  SharedPreferencesSearchActivityCode.list
               ? Icons.list
               : Icons.map,
           onPressed: () => {
             if (SharedPreferences().searchActivityView ==
-                SharedPreferencesCode.list)
+                SharedPreferencesSearchActivityCode.list)
               BlocProvider.of<SharedPreferencesBloc>(context).add(
                 SharedPreferencesUpdateEvent(
                   SharedPreferencesName.searchActivityName,
-                  SharedPreferencesCode.map,
+                  SharedPreferencesSearchActivityCode.map,
                 ),
               )
             else if (SharedPreferences().searchActivityView ==
-                SharedPreferencesCode.map)
+                SharedPreferencesSearchActivityCode.map)
               BlocProvider.of<SharedPreferencesBloc>(context).add(
                 SharedPreferencesUpdateEvent(
                   SharedPreferencesName.searchActivityName,
-                  SharedPreferencesCode.list,
+                  SharedPreferencesSearchActivityCode.list,
                 ),
               )
           },

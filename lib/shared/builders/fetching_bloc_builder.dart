@@ -8,7 +8,7 @@ class FetchingBlocBuilder extends StatelessWidget {
   final FetchBloc fetchingCubit;
   final FiltersBloc filtersCubit;
   final Widget Function(dynamic data) buildSuccess;
-  final Widget buildError;
+  final Widget Function(dynamic exception) buildError;
   final Widget buildInProgress;
 
   FetchingBlocBuilder({
@@ -25,7 +25,7 @@ class FetchingBlocBuilder extends StatelessWidget {
         builder: (BuildContext context, state) {
           if (state is FetchInitialFailureState ||
               state is FetchRefreshFailureState) {
-            return buildError;
+            return buildError(state.fetchingError);
           } else if (state is FetchInitialSuccessState ||
               state is FetchRefreshSuccessState) {
             return buildSuccess(state.data);

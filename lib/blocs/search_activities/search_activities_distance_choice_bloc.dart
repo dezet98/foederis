@@ -8,11 +8,12 @@ import 'package:flutter/cupertino.dart';
 
 class SearchActivityDistanceChoiceBloc extends FormDataBloc {
   final SharedPreferencesBloc sharedPreferencesBloc;
+  int _distance = int.parse(SharedPreferences().distanceKm);
 
   SearchActivityDistanceChoiceBloc({@required this.sharedPreferencesBloc})
       : super([
           FormNumberFieldBloc(
-            initialResult: 30,
+            initialResult: int.parse(SharedPreferences().distanceKm),
             queryFieldFromResult: (int result) => [
               QueryField(
                 fieldName: 'distance',
@@ -28,10 +29,13 @@ class SearchActivityDistanceChoiceBloc extends FormDataBloc {
 
   @override
   Future<void> query(Map<String, dynamic> queryFields) {
+    _distance = queryFields['distance'];
     sharedPreferencesBloc.add(SharedPreferencesUpdateEvent(
       SharedPreferencesName.distanceKm,
       queryFields['distance'].toString(),
     ));
     return Future.wait([]);
   }
+
+  int get distance => _distance;
 }

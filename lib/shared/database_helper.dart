@@ -3,7 +3,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
-  static final _databaseName = "database5.db";
+  static final _databaseName = "database7.db";
   static final _databaseVersion = 1;
 
   static final DatabaseHelper instance = DatabaseHelper._internal();
@@ -25,25 +25,41 @@ class DatabaseHelper {
     await db.execute('''
               CREATE TABLE USER_PREFERENCES(
                 NAME STRING NOT NULL, 
-                CODE STRING NOT NULL
+                VALUE STRING NOT NULL
               )
               ''');
     await db.insert(
-        'USER_PREFERENCES',
-        {
-          'NAME': SharedPreferencesName.searchActivityName,
-          'CODE': SharedPreferencesCode.list
-        },
-        conflictAlgorithm: ConflictAlgorithm.replace);
-    await db.insert('USER_PREFERENCES', {'NAME': 'THEME', 'CODE': 'LIGHT'},
-        conflictAlgorithm: ConflictAlgorithm.replace);
+      'USER_PREFERENCES',
+      {
+        'NAME': SharedPreferencesName.searchActivityName,
+        'VALUE': SharedPreferencesSearchActivityCode.list
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
     await db.insert(
-        'USER_PREFERENCES',
-        {
-          'NAME': SharedPreferencesName.distanceKm,
-          'CODE': SharedPreferencesCode.distanceKm
-        },
-        conflictAlgorithm: ConflictAlgorithm.replace);
+      'USER_PREFERENCES',
+      {
+        'NAME': SharedPreferencesName.distanceKm,
+        'VALUE': '30',
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    await db.insert(
+      'USER_PREFERENCES',
+      {
+        'NAME': SharedPreferencesName.geohash,
+        'VALUE': 'u3qcnhhk3yy', // todo now is Warsaw geohash
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    await db.insert(
+      'USER_PREFERENCES',
+      {
+        'NAME': SharedPreferencesName.address,
+        'VALUE': 'Warszawa, Poland', // todo now is Warsaw geohash
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 
   Future<String> getUserPreferences(String sharedPreferencesName) async {
@@ -51,26 +67,26 @@ class DatabaseHelper {
     List<Map> maps = await db.query('USER_PREFERENCES',
         columns: [
           'NAME',
-          'CODE',
+          'VALUE',
         ],
         where: 'NAME = ?',
         whereArgs: [sharedPreferencesName]);
-    // if (maps.length > 0 && maps.first['CODE'] == 'MAP') {
+    // if (maps.length > 0 && maps.first['VALUE'] == 'MAP') {
     //   return SharedPreferencesCode.map;
     // }
     // return SharedPreferencesCode.list;
-    return maps.first['CODE'].toString();
+    return maps.first['VALUE'].toString();
   }
 
   Future<int> updateUserPreferences(
     String sharedPreferencesName,
-    String sharedPreferencesCode,
+    String sharedPreferencesValue,
   ) async {
     Database db = await database;
     int result = await db.update(
       'USER_PREFERENCES',
       {
-        'CODE': sharedPreferencesCode,
+        'VALUE': sharedPreferencesValue,
       },
       where: 'NAME = ?',
       whereArgs: [sharedPreferencesName],
