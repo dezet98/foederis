@@ -85,6 +85,36 @@ class S {
     );
   }
 
+  /// `Search`
+  String get home_screen_search_activities_tab_name {
+    return Intl.message(
+      'Search',
+      name: 'home_screen_search_activities_tab_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My activity`
+  String get home_screen_my_activity_tab_name {
+    return Intl.message(
+      'My activity',
+      name: 'home_screen_my_activity_tab_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get home_screen_account_tab_name {
+    return Intl.message(
+      'Account',
+      name: 'home_screen_account_tab_name',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Filters`
   String get filter_screen_nav_title {
     return Intl.message(
@@ -160,6 +190,16 @@ class S {
     return Intl.message(
       'one-time',
       name: 'filters_screen_filter_value_one_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create activity`
+  String get create_activity_screen_nav_title {
+    return Intl.message(
+      'Create activity',
+      name: 'create_activity_screen_nav_title',
       desc: '',
       args: [],
     );

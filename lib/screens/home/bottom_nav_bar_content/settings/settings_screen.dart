@@ -1,9 +1,10 @@
-import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
-import 'package:engineering_thesis/generated/l10n.dart';
-import 'package:engineering_thesis/shared/abstract/nav_bar_tab.dart';
+import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
+import '../../../../blocs/specific_blocs/authorization/auth/auth_bloc.dart';
+import '../../../../generated/l10n.dart';
 
 class SettingsScreen extends NavBarTab {
   @override
@@ -57,5 +58,5 @@ class SettingsScreen extends NavBarTab {
   Icon getIcon(BuildContext context) => Icon(PlatformIcons(context).settings);
 
   @override
-  String get label => 'Account';
+  String getLabel(context) => S.of(context).home_screen_account_tab_name;
 }

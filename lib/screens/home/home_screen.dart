@@ -1,13 +1,14 @@
-import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
-import 'package:engineering_thesis/blocs/nav_bar/nav_bar_bloc.dart';
-import 'package:engineering_thesis/screens/home/bottom_nav_bar_content/my_activities/my_activities_screen.dart';
-import 'package:engineering_thesis/screens/home/bottom_nav_bar_content/settings/settings_screen.dart';
-import 'package:engineering_thesis/shared/builders/nav_bar.dart';
-import 'package:engineering_thesis/shared/providers.dart';
-import 'package:engineering_thesis/shared/routing.dart';
+import 'package:engineering_thesis/shared/bloc_builders/nav_bar.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../blocs/specific_blocs/authorization/auth/auth_bloc.dart';
+import '../../blocs/specific_blocs/nav_bar/nav_bar_bloc.dart';
+import '../../shared/providers.dart';
+import '../../shared/routing.dart';
+import 'bottom_nav_bar_content/my_activities/my_activities_screen.dart';
 import 'bottom_nav_bar_content/search_activities/search_activities_screen.dart';
+import 'bottom_nav_bar_content/settings/settings_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

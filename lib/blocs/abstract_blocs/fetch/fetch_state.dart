@@ -9,17 +9,32 @@ abstract class FetchState extends Equatable {
 
 class FetchInitialState extends FetchState {}
 
-class FetchInProgressState extends FetchState {}
+class FetchInitialInProgressState extends FetchState {}
 
-class FetchSuccessState<T> extends FetchState {
+class FetchInitialSuccessState<T> extends FetchState {
   final T data;
 
-  FetchSuccessState({@required this.data});
+  FetchInitialSuccessState({@required this.data});
 }
 
-class FetchFailureState extends FetchState {
+class FetchInitialFailureState extends FetchState {
   final FetchingError fetchingError;
   final String message;
 
-  FetchFailureState({@required this.fetchingError, this.message});
+  FetchInitialFailureState({@required this.fetchingError, this.message});
+}
+
+class FetchRefreshInProgressState extends FetchState {}
+
+class FetchRefreshSuccessState<T> extends FetchState {
+  final T data;
+
+  FetchRefreshSuccessState({@required this.data});
+}
+
+class FetchRefreshFailureState extends FetchState {
+  final FetchingError fetchingError;
+  final String message;
+
+  FetchRefreshFailureState({@required this.fetchingError, this.message});
 }

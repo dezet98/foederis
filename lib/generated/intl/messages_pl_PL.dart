@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static _notInlinedMessages(_) => <String, Function> {
     "app_bar_title_register" : MessageLookupByLibrary.simpleMessage("Rejestracja"),
     "bad_credentials" : MessageLookupByLibrary.simpleMessage("Złe dane"),
+    "create_activity_screen_nav_title" : MessageLookupByLibrary.simpleMessage("Dodaj aktywność"),
     "filter_screen_apply_button_text" : MessageLookupByLibrary.simpleMessage("Zastosuj filtry"),
     "filter_screen_nav_title" : MessageLookupByLibrary.simpleMessage("Filtry"),
     "filters_screen_filter_subtitile_frequency" : MessageLookupByLibrary.simpleMessage("Częsotliwość"),
@@ -31,6 +32,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "filters_screen_filter_value_desc" : MessageLookupByLibrary.simpleMessage("malejąco"),
     "filters_screen_filter_value_one_time" : MessageLookupByLibrary.simpleMessage("jednorazowe"),
     "filters_screen_filter_value_regular" : MessageLookupByLibrary.simpleMessage("regularne"),
+    "home_screen_account_tab_name" : MessageLookupByLibrary.simpleMessage("Konto"),
+    "home_screen_my_activity_tab_name" : MessageLookupByLibrary.simpleMessage("Twoje aktywnośći"),
+    "home_screen_search_activities_tab_name" : MessageLookupByLibrary.simpleMessage("Szukaj"),
     "login" : MessageLookupByLibrary.simpleMessage("zaloguj się"),
     "settings" : MessageLookupByLibrary.simpleMessage("ustawienia"),
     "text_button_go_to_login" : MessageLookupByLibrary.simpleMessage("login")

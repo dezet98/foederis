@@ -1,86 +1,66 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:engineering_thesis/shared/extensions.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:geohash/geohash.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-enum ActivityAttributes {
-  ref,
-  title,
-  categoryRef,
-  startDate,
-  maxEntry,
-  minEntry,
-  freeJoin,
-  regular,
-  geolocationRef
-}
+import '../shared/extensions.dart';
+import 'collections/activity_collection.dart';
+import 'collections/collection.dart';
 
 class Activity {
   DocumentReference ref;
   String title;
   DocumentReference categoryRef;
   DateTime startDate;
-  DateTime endDate;
   int maxEntry;
   int minEntry;
   bool freeJoin;
   bool regular;
-  DocumentReference geolocationRef;
-
-  Activity({
-    @required this.ref,
-    this.title,
-    this.categoryRef,
-    this.endDate,
-    this.freeJoin,
-    this.geolocationRef,
-    this.maxEntry,
-    this.minEntry,
-    this.regular,
-    this.startDate,
-  });
+  String geohash;
+  String address;
 
   Activity.fromDocument(QueryDocumentSnapshot doc) {
     this.ref = doc.reference;
-    this.title = doc.getField('title');
-    this.categoryRef = doc.getField('categoryRef');
-    this.startDate = doc.getField<DateTime>('startDate');
-    this.endDate = doc.getField<DateTime>('endDate');
-    this.maxEntry = doc.getField('maxEntry');
-    this.minEntry = doc.getField('minEntry');
-    this.freeJoin = doc.getField('freeJoin');
-    this.regular = doc.getField('regular');
-    this.geolocationRef = doc.getField('geolocationRef');
+    this.title = doc.getField(ActivityCollection.title.fieldName);
+    this.categoryRef = doc.getField(ActivityCollection.categoryRef.fieldName);
+    this.startDate =
+        doc.getField<DateTime>(ActivityCollection.startDate.fieldName);
+    this.maxEntry = doc.getField(ActivityCollection.maxEntry.fieldName);
+    this.minEntry = doc.getField(ActivityCollection.minEntry.fieldName);
+    this.freeJoin = doc.getField(ActivityCollection.freeJoin.fieldName);
+    this.regular = doc.getField(ActivityCollection.regular.fieldName);
+    this.geohash = doc.getField(ActivityCollection.geohash.fieldName);
+    this.address = doc.getField(ActivityCollection.address.fieldName);
   }
 
-  dynamic getValue(ActivityAttributes activityAttributes) {
-    switch (activityAttributes) {
-      case ActivityAttributes.ref:
-        return this.ref;
-        break;
-      case ActivityAttributes.title:
-        return this.title;
-        break;
-      case ActivityAttributes.categoryRef:
-        return this.categoryRef;
-        break;
-      case ActivityAttributes.startDate:
-        return this.startDate;
-        break;
-      case ActivityAttributes.maxEntry:
-        return this.maxEntry;
-        break;
-      case ActivityAttributes.minEntry:
-        return this.minEntry;
-        break;
-      case ActivityAttributes.freeJoin:
-        return this.freeJoin;
-        break;
-      case ActivityAttributes.regular:
-        return this.regular;
-        break;
-      case ActivityAttributes.geolocationRef:
-        return this.geolocationRef;
-        break;
-    }
+  Activity.fromMap(Map<String, dynamic> data) {
+    data = Collection.fillRemainsData(data, ActivityCollection.allFields);
+    this.title = data[ActivityCollection.title.fieldName];
+    this.categoryRef = data[ActivityCollection.categoryRef.fieldName];
+    this.startDate = data[ActivityCollection.startDate.fieldName];
+    this.maxEntry = data[ActivityCollection.maxEntry.fieldName];
+    this.minEntry = data[ActivityCollection.minEntry.fieldName];
+    this.freeJoin = data[ActivityCollection.freeJoin.fieldName];
+    this.regular = data[ActivityCollection.regular.fieldName];
+    this.geohash = data[ActivityCollection.geohash.fieldName];
+    this.address = data[ActivityCollection.address.fieldName];
   }
+
+  toMap() {
+    return {
+      ActivityCollection.title.fieldName: title,
+      ActivityCollection.regular.fieldName: regular,
+      ActivityCollection.startDate.fieldName: startDate,
+      ActivityCollection.freeJoin.fieldName: freeJoin,
+      ActivityCollection.geohash.fieldName: geohash,
+      ActivityCollection.categoryRef.fieldName: categoryRef,
+      ActivityCollection.maxEntry.fieldName: maxEntry,
+      ActivityCollection.minEntry.fieldName: minEntry,
+      ActivityCollection.address.fieldName: address,
+    };
+  }
+
+  LatLng get latLng => LatLng(
+        Geohash.decode(this.geohash).x,
+        Geohash.decode(this.geohash).y,
+      );
 }

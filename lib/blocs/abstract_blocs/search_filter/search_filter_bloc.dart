@@ -1,6 +1,6 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/models/fetch_filter.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -9,30 +9,28 @@ part 'search_filter_state.dart';
 
 abstract class SearchFilterBloc<FilterDataType>
     extends Bloc<SearchFilterEvent, SearchFilterState> {
-  SearchFilterBloc() : super(SearchFilterInitialState()) {
+  final Future Function(FilterDataType selectedOption)
+      dealWithNewSelectedOption;
+
+  SearchFilterBloc({this.dealWithNewSelectedOption})
+      : super(SearchFilterInitialState()) {
     add(SearchFilterLoadDataEvent());
   }
 
-  Future<List<FilterDataType>> fetchResults();
+  Future<List<FilterDataType>> fetchResults(String query);
   Future<List<FilterDataType>> fetchSuggestion();
   Future<List<FilterDataType>> fetchRecentSearches();
-  List<FilterDataType> filterResults(
-      String query, List<FilterDataType> results);
   String display(FilterDataType element);
 
-  List<FilterDataType> _results = <FilterDataType>[];
   List<FilterDataType> _suggestion = <FilterDataType>[];
   List<FilterDataType> _recentSearches = <FilterDataType>[];
-  List<FilterDataType> results(String query) => filterResults(query, _results);
+
+  Future<List<FilterDataType>> results(String query) => fetchResults(query);
+
   List<FilterDataType> get suggestion => _suggestion;
   List<FilterDataType> get recentSearches => _recentSearches;
 
   FilterDataType selectedOption;
-
-  FetchFilter getFetchFilter(FilterDataType selectedOption);
-
-  FetchFilter get fetchFilter =>
-      selectedOption == null ? null : getFetchFilter(selectedOption);
 
   @override
   Stream<SearchFilterState> mapEventToState(
@@ -42,7 +40,7 @@ abstract class SearchFilterBloc<FilterDataType>
       yield* mapSearchFilterLoadDataEvent();
     } else if (event is SearchFilterSelectOptionEvent) {
       yield* mapSearchFilterSelectOptionEvent(
-          selectedElement: event.selectedElement);
+          selectedOption: event.selectedElement);
     }
   }
 
@@ -50,7 +48,6 @@ abstract class SearchFilterBloc<FilterDataType>
     try {
       yield SearchFilterLoadDataInProgressState();
       _suggestion = await fetchSuggestion();
-      _results = await fetchResults();
       _recentSearches = await fetchRecentSearches();
       yield SearchFilterLoadDataSuccessState();
     } catch (e) {
@@ -59,11 +56,14 @@ abstract class SearchFilterBloc<FilterDataType>
   }
 
   Stream<SearchFilterState> mapSearchFilterSelectOptionEvent(
-      {@required selectedElement}) async* {
+      {@required selectedOption}) async* {
     try {
       yield SearchFilterSelectOptionInProgressState();
-      selectedOption = selectedElement;
-      yield SearchFilterSelectedOptionState(fetchFilter: fetchFilter);
+      this.selectedOption = selectedOption;
+      if (dealWithNewSelectedOption != null) {
+        await dealWithNewSelectedOption(selectedOption);
+      }
+      yield SearchFilterSelectedOptionState(selectedOption: selectedOption);
     } catch (e) {
       yield SearchFilterSelectOptionFailureState(message: e.toString());
     }

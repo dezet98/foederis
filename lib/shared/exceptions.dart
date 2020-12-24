@@ -1,5 +1,6 @@
-import 'package:engineering_thesis/constants/enums.dart';
 import 'package:meta/meta.dart';
+
+import 'constants/enums.dart';
 
 class LoginException implements Exception {
   final LoginError loginError;
@@ -26,4 +27,16 @@ class FetchingException implements Exception {
   final String message;
 
   FetchingException({@required this.fetchingError, this.message});
+}
+
+class UploadDataException implements Exception {
+  final UploadDataError sendingDataError;
+  final String message;
+
+  UploadDataException({@required this.sendingDataError, this.message});
+
+  @override
+  String toString() {
+    return 'UploadDataException {errorCode: ${sendingDataError.toString()}, message: $message}';
+  }
 }
