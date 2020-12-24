@@ -29,10 +29,12 @@ class SearchActivitiesFetchingBloc extends FetchBloc<List<Activity>> {
         );
     int disKm = distanceKm ?? int.parse(SharedPreferences().distanceKm);
 
-    var lowerLat = loc.lat - 0.0144927536231884 * disKm;
-    var lowerLon = loc.lng - 0.0181818181818182 * disKm;
-    var upperLat = loc.lat + 0.0144927536231884 * disKm;
-    var upperLon = loc.lng + 0.0181818181818182 * disKm;
+    // (1 / 111) is value of one degree of langtiude in conversion to km
+    // (1 / 111.3) is value of one degree of longitude in conversion to km
+    var lowerLat = loc.lat - (1 / 111) * disKm;
+    var lowerLon = loc.lng - (1 / 111.3) * disKm;
+    var upperLat = loc.lat + (1 / 111) * disKm;
+    var upperLon = loc.lng + (1 / 111.3) * disKm;
 
     return [
       FetchFilter(

@@ -19,7 +19,7 @@ class FetchingBlocBuilder extends StatelessWidget {
     this.filtersCubit,
     this.buildError,
     this.buildInProgress,
-    this.isSliver = true,
+    this.isSliver = false,
   });
 
   Widget build(BuildContext context) {

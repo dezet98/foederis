@@ -58,8 +58,8 @@ class SearchActivitiesAppBar {
           cubit: BlocProvider.of<SearchActivitiesSearchFilterBloc>(context),
           builder: (context, state) {
             return CustomButton.iconWithTextButton(
-              text: SharedPreferences().distanceKm,
-              materialIconData: Icons.navigation_sharp,
+              text: "${SharedPreferences().distanceKm}km",
+              materialIconData: Icons.circle,
               onPressed: () {
                 Routing.pushNamed(context, UserRoutes.form,
                     options: BlocProvider.of<SearchActivityDistanceChoiceBloc>(
