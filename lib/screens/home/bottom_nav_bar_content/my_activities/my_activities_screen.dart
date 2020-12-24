@@ -40,7 +40,11 @@ class MyActivitiesScreen extends NavBarTab {
         Routing.pushNamed(
           context,
           UserRoutes.form,
-          options: BlocProvider.of<CreateActvityFormDataBloc>(context),
+          options: {
+            'formDataBloc': BlocProvider.of<CreateActvityFormDataBloc>(context),
+            'formAppBarTitle': S.of(context).create_activity_screen_nav_title,
+            'formNextButtonText': 'fsd'
+          },
         );
       },
     );

@@ -37,7 +37,7 @@ class UserRoutes {
 }
 
 class Routing {
-  static onGenerate(String routeName, {dynamic options}) {
+  static onGenerate(String routeName, {Map<String, dynamic> options}) {
     switch (routeName) {
       case UserRoutes.home:
         return HomeScreen();
@@ -48,11 +48,15 @@ class Routing {
       case CommonRoutes.splash:
         return SplashScreen();
       case CommonRoutes.filter:
-        return FiltersScreen(filtersBloc: options);
+        return FiltersScreen(filtersBloc: options['filtersBloc']);
       case UserRoutes.activityDetails:
-        return ActivityDetailsScreen(activity: options);
+        return ActivityDetailsScreen(activity: options['activity']);
       case UserRoutes.form:
-        return FormDataScreen(formDataBloc: options);
+        return FormDataScreen(
+          formDataBloc: options['formDataBloc'],
+          formAppBarTitle: options['formAppBarTitle'],
+          formNextButtonText: options['formNextButtonText'],
+        );
       case UserRoutes.chooseLocation:
         return ChooseLocationScreen();
       default:

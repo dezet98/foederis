@@ -61,9 +61,17 @@ class SearchActivitiesAppBar {
               text: "${SharedPreferences().distanceKm}km",
               materialIconData: Icons.circle,
               onPressed: () {
-                Routing.pushNamed(context, UserRoutes.form,
-                    options: BlocProvider.of<SearchActivityDistanceChoiceBloc>(
-                        context));
+                Routing.pushNamed(
+                  context,
+                  UserRoutes.form,
+                  options: {
+                    'formDataBloc':
+                        BlocProvider.of<SearchActivityDistanceChoiceBloc>(
+                            context),
+                    'formAppBarTitle': 'dsa',
+                    'formNextButtonText': 'fsd'
+                  },
+                );
               },
             );
           },
@@ -80,7 +88,9 @@ class SearchActivitiesAppBar {
         Routing.pushNamed(
           context,
           CommonRoutes.filter,
-          options: BlocProvider.of<SearchActivitiesFiltersBloc>(context),
+          options: {
+            'filtersBloc': BlocProvider.of<SearchActivitiesFiltersBloc>(context)
+          },
         );
       },
     );

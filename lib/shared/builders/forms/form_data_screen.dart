@@ -7,7 +7,6 @@ import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_number_fi
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_number_range_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_option_list_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/form_data/form_text_field_bloc.dart';
-import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/category.dart';
 import 'package:engineering_thesis/shared/builders/forms/form_address_field.dart';
 import 'package:engineering_thesis/shared/builders/forms/form_number_range_field.dart';
@@ -26,8 +25,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FormDataScreen extends StatelessWidget {
   final FormDataBloc formDataBloc;
+  final String formAppBarTitle;
+  final String formNextButtonText;
 
-  FormDataScreen({@required this.formDataBloc});
+  FormDataScreen(
+      {@required this.formDataBloc,
+      @required this.formAppBarTitle,
+      @required this.formNextButtonText});
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +71,7 @@ class FormDataScreen extends StatelessWidget {
         }
 
         return CustomButton.flatButton(
-          text: 'create',
+          text: formNextButtonText,
           enabled: formDataBloc.isValid,
           onPressed: () {
             formDataBloc.add(FormDataSendingEvent());
@@ -80,7 +84,7 @@ class FormDataScreen extends StatelessWidget {
   Widget _buildAppBar(BuildContext context) {
     return CustomAppBar(
       appBarType: AppBarType.close,
-      title: S.of(context).create_activity_screen_nav_title,
+      title: formAppBarTitle,
     );
   }
 
