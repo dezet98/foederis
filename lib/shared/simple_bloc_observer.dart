@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/shared/app_logger.dart';
+
+import 'app_logger.dart';
 
 class SimpleBlocObserver extends BlocObserver {
   @override

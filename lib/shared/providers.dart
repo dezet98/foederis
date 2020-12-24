@@ -1,26 +1,27 @@
-import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/filter_option/filter_option_bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/multi_choice_filter_bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/sort_choice_filter_bloc.dart';
-import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
-import 'package:engineering_thesis/blocs/create_activity/category_fetching_bloc.dart';
-import 'package:engineering_thesis/blocs/create_activity/create_activity_form_data.dart';
-import 'package:engineering_thesis/blocs/nav_bar/nav_bar_bloc.dart';
-import 'package:engineering_thesis/blocs/search_activities/search_activities_distance_choice_bloc.dart';
-import 'package:engineering_thesis/blocs/search_activities/search_activities_fetching_bloc.dart';
-import 'package:engineering_thesis/blocs/search_activities/search_activities_filters_bloc.dart';
-import 'package:engineering_thesis/blocs/search_activities/search_activities_search_filter_bloc.dart';
-import 'package:engineering_thesis/blocs/login/login_bloc.dart';
-import 'package:engineering_thesis/blocs/register/register_bloc.dart';
-import 'package:engineering_thesis/blocs/shared_preferences/shared_preferences_bloc.dart';
-import 'package:engineering_thesis/generated/l10n.dart';
-import 'package:engineering_thesis/models/activity.dart';
-import 'package:engineering_thesis/repositories/activity_repository.dart';
-import 'package:engineering_thesis/repositories/auth_repository.dart';
-import 'package:engineering_thesis/repositories/category_repository.dart';
-import 'package:engineering_thesis/shared/database_helper.dart';
-import 'package:engineering_thesis/shared/remote_repository.dart';
-import 'package:engineering_thesis/shared/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../blocs/abstract_blocs/choice_filters/filter_option/filter_option_bloc.dart';
+import '../blocs/abstract_blocs/choice_filters/multi_choice_filter_bloc.dart';
+import '../blocs/abstract_blocs/choice_filters/sort_choice_filter_bloc.dart';
+import '../blocs/specific_blocs/authorization/auth/auth_bloc.dart';
+import '../blocs/specific_blocs/authorization/login/login_bloc.dart';
+import '../blocs/specific_blocs/authorization/register/register_bloc.dart';
+import '../blocs/specific_blocs/create_activity/category_fetching_bloc.dart';
+import '../blocs/specific_blocs/create_activity/create_activity_form_data.dart';
+import '../blocs/specific_blocs/nav_bar/nav_bar_bloc.dart';
+import '../blocs/specific_blocs/search_activities/search_activities_distance_choice_bloc.dart';
+import '../blocs/specific_blocs/search_activities/search_activities_fetching_bloc.dart';
+import '../blocs/specific_blocs/search_activities/search_activities_filters_bloc.dart';
+import '../blocs/specific_blocs/search_activities/search_activities_search_filter_bloc.dart';
+import '../blocs/specific_blocs/shared_preferences/shared_preferences_bloc.dart';
+import '../generated/l10n.dart';
+import '../models/activity.dart';
+import '../repositories/activity_repository.dart';
+import '../repositories/auth_repository.dart';
+import '../repositories/category_repository.dart';
+import 'database_helper.dart';
+import 'remote_repository.dart';
+import 'shared_preferences.dart';
 
 dynamic getRepositoryProviders() => [
       RepositoryProvider<RemoteRepository>(

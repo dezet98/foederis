@@ -9,11 +9,14 @@
         "**/.dart_tool": true,
         "**/.metadata": true,
         "**/.packages": true,
-        "**/android": false,
-        "**/ios": false,
+        "**/android": true,
+        "**/ios": true,
         "**/build": true,
-        "**/generated": false,
+        "**/generated": true,
         "**/.flutter*": true
     },
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    }
 }

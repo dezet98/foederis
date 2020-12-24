@@ -1,5 +1,6 @@
-import 'package:engineering_thesis/constants/enums.dart';
 import 'package:meta/meta.dart';
+
+import 'constants/enums.dart';
 
 class LoginException implements Exception {
   final LoginError loginError;

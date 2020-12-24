@@ -1,13 +1,14 @@
-import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
-import 'package:engineering_thesis/blocs/login/login_bloc.dart';
-import 'package:engineering_thesis/constants/enums.dart';
-import 'package:engineering_thesis/generated/l10n.dart';
-import 'package:engineering_thesis/shared/components/app_bars/custom_app_bar.dart';
-import 'package:engineering_thesis/shared/routing.dart';
-import 'package:engineering_thesis/shared/templates/template_screen.dart';
+import 'package:engineering_thesis/components/custom_widgets/app_bars/custom_app_bar.dart';
+import 'package:engineering_thesis/components/templates/template_screen.dart';
+import 'package:engineering_thesis/shared/constants/enums.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
+import '../../blocs/specific_blocs/authorization/auth/auth_bloc.dart';
+import '../../blocs/specific_blocs/authorization/login/login_bloc.dart';
+import '../../generated/l10n.dart';
+import '../../shared/routing.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

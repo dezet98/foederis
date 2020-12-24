@@ -1,6 +1,7 @@
-import 'package:engineering_thesis/constants/enums.dart';
-import 'package:engineering_thesis/models/collections/query_field.dart';
-import 'package:engineering_thesis/shared/exceptions.dart';
+import 'package:engineering_thesis/shared/constants/enums.dart';
+
+import '../../shared/exceptions.dart';
+import 'query_field.dart';
 
 abstract class Collection {
   static Map<String, dynamic> fillRemainsData(

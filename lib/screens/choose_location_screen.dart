@@ -1,5 +1,5 @@
-import 'package:engineering_thesis/shared/components/buttons/custom_button.dart';
-import 'package:engineering_thesis/shared/templates/template_screen.dart';
+import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
+import 'package:engineering_thesis/components/templates/template_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';

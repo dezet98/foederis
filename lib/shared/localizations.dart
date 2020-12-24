@@ -1,6 +1,7 @@
-import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
+import '../generated/l10n.dart';
 
 Iterable<LocalizationsDelegate<dynamic>> get getLocalizationsDelegates => [
       S.delegate,

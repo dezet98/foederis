@@ -1,10 +1,12 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/constants/enums.dart';
-import 'package:engineering_thesis/models/fetch_filter.dart';
-import 'package:engineering_thesis/shared/exceptions.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+
+import '../../../models/fetch_filter.dart';
+import '../../../shared/constants/enums.dart';
+import '../../../shared/exceptions.dart';
 
 part 'fetch_event.dart';
 part 'fetch_state.dart';

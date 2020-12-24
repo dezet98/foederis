@@ -1,8 +1,9 @@
-import 'package:engineering_thesis/constants/enums.dart';
-import 'package:engineering_thesis/models/app_user.dart';
-import 'package:engineering_thesis/shared/exceptions.dart';
+import 'package:engineering_thesis/shared/constants/enums.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
+
+import '../models/app_user.dart';
+import '../shared/exceptions.dart';
 
 class AuthRepository {
   final FirebaseAuth _firebaseAuth;

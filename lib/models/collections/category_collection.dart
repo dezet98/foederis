@@ -1,4 +1,4 @@
-import 'package:engineering_thesis/models/collections/query_field.dart';
+import 'query_field.dart';
 
 class CategoryCollection {
   static String collectionName = 'category';

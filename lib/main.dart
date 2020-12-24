@@ -1,15 +1,16 @@
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/initialize_app.dart';
-import 'package:engineering_thesis/shared/localizations.dart';
-import 'package:engineering_thesis/shared/providers.dart';
-import 'package:engineering_thesis/shared/routing.dart';
-import 'package:engineering_thesis/shared/simple_bloc_observer.dart';
-import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
 import 'generated/l10n.dart';
+import 'shared/initialize_app.dart';
+import 'shared/localizations.dart';
+import 'shared/providers.dart';
+import 'shared/routing.dart';
+import 'shared/simple_bloc_observer.dart';
+import 'shared/theme.dart';
 
 void main() async {
   await InitializeApp.initializeApp();

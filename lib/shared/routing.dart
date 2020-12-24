@@ -1,16 +1,17 @@
-import 'package:engineering_thesis/blocs/auth/auth_bloc.dart';
-import 'package:engineering_thesis/screens/activity_details/activity_details_screen.dart';
-import 'package:engineering_thesis/screens/choose_location_screen.dart';
-import 'package:engineering_thesis/screens/home/home_screen.dart';
-import 'package:engineering_thesis/screens/login/login_screen.dart';
-import 'package:engineering_thesis/screens/register/register_screen.dart';
-import 'package:engineering_thesis/screens/splash_screen.dart';
-import 'package:engineering_thesis/shared/builders/forms/form_data_screen.dart';
-import 'package:engineering_thesis/shared/builders/filters/filters_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
+import '../blocs/specific_blocs/authorization/auth/auth_bloc.dart';
+import '../components/bloc_builders/filters/filters_screen.dart';
+import '../components/bloc_builders/forms/form_data_screen.dart';
+import '../screens/activity_details/activity_details_screen.dart';
+import '../screens/choose_location_screen.dart';
+import '../screens/home/home_screen.dart';
+import '../screens/login/login_screen.dart';
+import '../screens/register/register_screen.dart';
+import '../screens/splash_screen.dart';
 
 class CommonRoutes {
   static const String splash = "/splash";

@@ -1,6 +1,7 @@
-import 'package:engineering_thesis/shared/shared_preferences.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+
+import 'shared_preferences.dart';
 
 class DatabaseHelper {
   static final _databaseName = "database7.db";

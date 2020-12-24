@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:engineering_thesis/constants/enums.dart';
-import 'package:engineering_thesis/models/fetch_filter.dart';
+
+import '../models/fetch_filter.dart';
+import 'constants/enums.dart';
 import 'exceptions.dart';
 import 'extensions.dart';
 

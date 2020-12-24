@@ -1,16 +1,17 @@
-import 'package:engineering_thesis/blocs/search_activities/search_activities_distance_choice_bloc.dart';
-import 'package:engineering_thesis/blocs/search_activities/search_activities_filters_bloc.dart';
-import 'package:engineering_thesis/blocs/search_activities/search_activities_search_filter_bloc.dart';
-import 'package:engineering_thesis/blocs/shared_preferences/shared_preferences_bloc.dart';
-import 'package:engineering_thesis/shared/components/buttons/custom_button.dart';
-import 'package:engineering_thesis/shared/components/gesture_detector.dart';
-import 'package:engineering_thesis/shared/routing.dart';
-import 'package:engineering_thesis/shared/search_screen.dart';
-import 'package:engineering_thesis/shared/shared_preferences.dart';
+import 'package:engineering_thesis/components/bloc_builders/search_screen.dart';
+import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
+import 'package:engineering_thesis/components/custom_widgets/gesture_detector/custom_gesture_detector.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../blocs/specific_blocs/search_activities/search_activities_distance_choice_bloc.dart';
+import '../../../../blocs/specific_blocs/search_activities/search_activities_filters_bloc.dart';
+import '../../../../blocs/specific_blocs/search_activities/search_activities_search_filter_bloc.dart';
+import '../../../../blocs/specific_blocs/shared_preferences/shared_preferences_bloc.dart';
+import '../../../../shared/routing.dart';
+import '../../../../shared/shared_preferences.dart';
 
 class SearchActivitiesAppBar {
   static SliverAppBar getSliverAppBar(BuildContext context) => SliverAppBar(

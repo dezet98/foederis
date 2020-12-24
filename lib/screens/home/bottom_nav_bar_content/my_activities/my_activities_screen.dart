@@ -1,14 +1,15 @@
-import 'package:engineering_thesis/blocs/create_activity/create_activity_form_data.dart';
-import 'package:engineering_thesis/generated/l10n.dart';
-import 'package:engineering_thesis/shared/abstract/nav_bar_tab.dart';
-import 'package:engineering_thesis/shared/components/buttons/custom_button.dart';
-import 'package:engineering_thesis/shared/routing.dart';
-import 'package:engineering_thesis/shared/theme.dart';
+import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
+import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
+import '../../../../blocs/specific_blocs/create_activity/create_activity_form_data.dart';
+import '../../../../generated/l10n.dart';
+import '../../../../shared/routing.dart';
+import '../../../../shared/theme.dart';
 
 class MyActivitiesScreen extends NavBarTab {
   @override
@@ -25,7 +26,6 @@ class MyActivitiesScreen extends NavBarTab {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Text('My activities screen'),
-            RaisedButton(onPressed: () async {}, child: Text('dfs'))
           ],
         ),
       ),

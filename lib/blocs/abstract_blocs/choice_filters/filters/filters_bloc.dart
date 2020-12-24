@@ -1,7 +1,9 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/filter/filter_bloc.dart';
 import 'package:equatable/equatable.dart';
+
+import '../filter/filter_bloc.dart';
 
 part 'filters_event.dart';
 part 'filters_state.dart';

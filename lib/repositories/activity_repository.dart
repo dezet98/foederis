@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:engineering_thesis/models/activity.dart';
-import 'package:engineering_thesis/models/collections/activity_collection.dart';
-import 'package:engineering_thesis/models/fetch_filter.dart';
-import 'package:engineering_thesis/shared/remote_repository.dart';
+
+import '../models/activity.dart';
+import '../models/collections/activity_collection.dart';
+import '../models/fetch_filter.dart';
+import '../shared/remote_repository.dart';
 
 class ActivityRepository {
   final RemoteRepository _database;
