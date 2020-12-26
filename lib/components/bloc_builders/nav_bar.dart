@@ -1,16 +1,14 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/nav_bar/nav_bar_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/templates/template_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-import '../../blocs/specific_blocs/nav_bar/nav_bar_bloc.dart';
-
 class NavBar extends StatelessWidget {
   final NavBarBloc navBarBloc;
-  final List<NavBarTab> content;
 
-  NavBar({@required this.navBarBloc, @required this.content});
+  NavBar({@required this.navBarBloc});
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +16,13 @@ class NavBar extends StatelessWidget {
       cubit: navBarBloc,
       builder: (context, state) {
         return TemplateScreen(
-          body: content
-              .elementAt(BlocProvider.of<NavBarBloc>(context).currentIndex),
+          body: navBarBloc.currentTab,
           usePadding: false,
           platformNavBar: PlatformNavBar(
-            currentIndex: BlocProvider.of<NavBarBloc>(context).currentIndex,
-            items: _homeNavBarItems(context, content),
+            currentIndex: navBarBloc.currentIndex,
+            items: _homeNavBarItems(context, navBarBloc.navBarTabs),
             itemChanged: (int index) {
-              BlocProvider.of<NavBarBloc>(context)
-                  .add(NavBarItemChangedEvent(index: index));
+              navBarBloc.add(NavBarItemChangedEvent(index: index));
             },
           ),
         );

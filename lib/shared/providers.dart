@@ -1,3 +1,4 @@
+import 'package:engineering_thesis/blocs/specific_blocs/home_screen/home_screen_bottom_nav_bar_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/abstract_blocs/choice_filters/filter_option/filter_option_bloc.dart';
@@ -8,7 +9,6 @@ import '../blocs/specific_blocs/authorization/login/login_bloc.dart';
 import '../blocs/specific_blocs/authorization/register/register_bloc.dart';
 import '../blocs/specific_blocs/create_activity/category_fetching_bloc.dart';
 import '../blocs/specific_blocs/create_activity/create_activity_form_data.dart';
-import '../blocs/specific_blocs/nav_bar/nav_bar_bloc.dart';
 import '../blocs/specific_blocs/search_activities/search_activities_distance_choice_bloc.dart';
 import '../blocs/specific_blocs/search_activities/search_activities_fetching_bloc.dart';
 import '../blocs/specific_blocs/search_activities/search_activities_filters_bloc.dart';
@@ -64,7 +64,7 @@ dynamic getHomeScreenBlocProviders() => [
             SharedPreferencesBloc(DatabaseHelper.instance, SharedPreferences()),
       ),
       BlocProvider(
-        create: (context) => NavBarBloc(innitialIndex: 0),
+        create: (context) => HomeScreenBottomNavBarBloc(),
       ),
       BlocProvider(
         create: (context) => SearchActivitiesSearchFilterBloc(

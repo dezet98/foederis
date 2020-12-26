@@ -13,6 +13,8 @@ class NavBarItemChangeInProgressState extends NavBarState {}
 
 class NavBarItemChangedState extends NavBarState {
   final int currentIndex;
+  final Widget currentTab;
 
-  NavBarItemChangedState({@required this.currentIndex});
+  NavBarItemChangedState(
+      {@required this.currentTab, @required this.currentIndex});
 }
