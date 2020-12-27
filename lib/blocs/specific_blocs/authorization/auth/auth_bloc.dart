@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/models/app_user.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
@@ -14,19 +14,18 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository;
+  final UserDataBloc _userDataBloc;
 
-  AppUser _user;
   StreamSubscription<User> _userStreamSubscription;
+  User _firebaseUser;
 
-  AuthBloc(this._authRepository)
+  AuthBloc(this._authRepository, this._userDataBloc)
       : super(AuthInitialState()) {
     _userStreamSubscription =
         _authRepository.authStream.listen((User firebaseUser) {
       add(AuthUserChangedEvent(firebaseUser: firebaseUser));
     });
   }
-
-  AppUser get user => _user;
 
   @override
   Stream<AuthState> mapEventToState(
@@ -51,12 +50,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (firebaseUser == null) {
       yield AuthUserUnauthenticatedState();
     } else {
+      _firebaseUser = firebaseUser;
       yield AuthUserAuthenticatedState();
+      _userDataBloc.add(UserDataLoadEvent(firebaseUser: _firebaseUser));
     }
   }
 
   Stream<AuthState> mapAuthSignOutEvent() async* {
     try {
+      _userDataBloc.add(UserDataClearEvent());
       await _authRepository.signOut();
       yield AuthSignOutSuccessState();
     } on SignOutException catch (e) {

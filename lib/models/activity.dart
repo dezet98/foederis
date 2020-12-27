@@ -24,16 +24,15 @@ class Activity {
 
   Activity.fromDocument(DocumentSnapshot doc) {
     this.ref = doc.reference;
-    this.title = doc.getField(ActivityCollection.title.fieldName);
-    this.categoryRef = doc.getField(ActivityCollection.categoryRef.fieldName);
-    this.startDate =
-        doc.getField<DateTime>(ActivityCollection.startDate.fieldName);
-    this.maxEntry = doc.getField(ActivityCollection.maxEntry.fieldName);
-    this.minEntry = doc.getField(ActivityCollection.minEntry.fieldName);
-    this.freeJoin = doc.getField(ActivityCollection.freeJoin.fieldName);
-    this.regular = doc.getField(ActivityCollection.regular.fieldName);
-    this.geohash = doc.getField(ActivityCollection.geohash.fieldName);
-    this.address = doc.getField(ActivityCollection.address.fieldName);
+    this.title = doc.getField(ActivityCollection.title);
+    this.categoryRef = doc.getField(ActivityCollection.categoryRef);
+    this.startDate = doc.getField<DateTime>(ActivityCollection.startDate);
+    this.maxEntry = doc.getField(ActivityCollection.maxEntry);
+    this.minEntry = doc.getField(ActivityCollection.minEntry);
+    this.freeJoin = doc.getField(ActivityCollection.freeJoin);
+    this.regular = doc.getField(ActivityCollection.regular);
+    this.geohash = doc.getField(ActivityCollection.geohash);
+    this.address = doc.getField(ActivityCollection.address);
   }
 
   Activity.fromMap(Map<String, dynamic> data) {

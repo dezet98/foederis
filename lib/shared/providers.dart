@@ -1,4 +1,6 @@
+import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/home_screen_bottom_nav_bar_bloc.dart';
+import 'package:engineering_thesis/repositories/user_repository.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/my_activities/my_activities_screen.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/search_activities/search_activities_screen.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/settings/settings_screen.dart';
@@ -41,12 +43,22 @@ dynamic getRepositoryProviders() => [
         create: (context) => ActivityRepository(
             RepositoryProvider.of<RemoteRepository>(context)),
       ),
+      RepositoryProvider<UserRepository>(
+        create: (context) =>
+            UserRepository(RepositoryProvider.of<RemoteRepository>(context)),
+      ),
     ];
 
 dynamic getMainBlocProviders() => [
       BlocProvider(
+        create: (context) => UserDataBloc(
+          RepositoryProvider.of<UserRepository>(context),
+        ),
+      ),
+      BlocProvider(
         create: (context) => AuthBloc(
           RepositoryProvider.of<AuthRepository>(context),
+          BlocProvider.of<UserDataBloc>(context),
         ),
       ),
       BlocProvider(

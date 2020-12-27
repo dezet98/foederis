@@ -21,3 +21,16 @@ class UserDataLoadFailureState extends UserDataState {
   @override
   String toString() => 'UserDataLoadFailureState {error: $message}';
 }
+
+class UserDataClearInProgressState extends UserDataState {}
+
+class UserDataClearSuccessfullState extends UserDataState {}
+
+class UserDataClearFailureState extends UserDataState {
+  final String message;
+
+  UserDataClearFailureState({this.message});
+
+  @override
+  String toString() => 'UserDataClearFailureState {error: $message}';
+}

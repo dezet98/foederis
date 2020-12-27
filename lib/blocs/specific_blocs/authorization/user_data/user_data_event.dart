@@ -12,3 +12,5 @@ class UserDataLoadEvent extends UserDataEvent {
 
   UserDataLoadEvent({@required this.firebaseUser});
 }
+
+class UserDataClearEvent extends UserDataEvent {}

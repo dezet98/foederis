@@ -19,8 +19,8 @@ class AppUser {
 
   AppUser.fromDocument(DocumentSnapshot doc) {
     this.ref = doc.reference;
-    this.email = doc.getField(UserCollection.email.fieldName);
-    this.firstName = doc.getField(UserCollection.firstName.fieldName);
+    this.email = doc.getField(UserCollection.email);
+    this.firstName = doc.getField(UserCollection.firstName);
   }
 
   AppUser.fromMap(Map<String, dynamic> data) {

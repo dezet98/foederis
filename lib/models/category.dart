@@ -12,6 +12,6 @@ class Category {
 
   Category.fromDocument(DocumentSnapshot doc) {
     this.ref = doc.reference;
-    this.title = doc.getField(CategoryCollection.title.fieldName);
+    this.title = doc.getField(CategoryCollection.title);
   }
 }
