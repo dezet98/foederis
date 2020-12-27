@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/models/app_user.dart';
 import 'package:engineering_thesis/models/collections/user_collection.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../shared/remote_repository.dart';
 
@@ -26,17 +27,19 @@ class UserRepository {
   // }
 
   Future<AppUser> fetchUser(String userId) async {
-    return await _remoteRepository.fetchCollectionItem<AppUser>(
+    return await _remoteRepository.getCollectionItem<AppUser>(
       '$collectionPath/$userId',
       _fromDocumentSnapshot,
     );
   }
 
-  Future<DocumentReference> createUser(
-      DocumentReference userRef, AppUser user) async {
-    return await _remoteRepository.addDocumentToCollection(
-      user.toMap(),
+  Future<void> createUser(User firebaseUser) async {
+    return await _remoteRepository.insertWithNameToCollection(
+      AppUser.fromMap({
+        UserCollection.email.fieldName: firebaseUser.email,
+      }).toMap(),
       collectionPath,
+      firebaseUser.uid,
     );
   }
 }

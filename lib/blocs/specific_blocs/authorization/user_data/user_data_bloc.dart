@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:engineering_thesis/models/app_user.dart';
 import 'package:engineering_thesis/repositories/user_repository.dart';
+import 'package:engineering_thesis/shared/constants/enums.dart';
+import 'package:engineering_thesis/shared/exceptions.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
@@ -26,6 +28,8 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       yield* mapUserDataLoadEvent(event.firebaseUser);
     } else if (event is UserDataClearEvent) {
       yield* mapUserDataClearEvent();
+    } else if (event is UserDataCreateEvent) {
+      yield* mapUserDataCreateEvent(event.firebaseUser);
     }
   }
 
@@ -35,7 +39,24 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       _user = await _userRepository.fetchUser(firebaseUser.uid);
       yield UserDataLoadSuccessfullState();
     } catch (e) {
-      yield UserDataLoadFailureState(message: e.toString());
+      if (e is FetchingException &&
+          e.fetchingError == FetchingError.field_not_exist) {
+        add(UserDataCreateEvent(firebaseUser: firebaseUser));
+        yield UserDataLoadFailureState(message: e.toString());
+      } else {
+        yield UserDataLoadFailureState(message: e.toString());
+      }
+    }
+  }
+
+  Stream<UserDataState> mapUserDataCreateEvent(User firebaseUser) async* {
+    try {
+      yield UserDataCreateInProgressState();
+      await _userRepository.createUser(firebaseUser);
+      add(UserDataLoadEvent(firebaseUser: firebaseUser));
+      yield UserDataCreateSuccessfullState();
+    } catch (e) {
+      yield UserDataCreateFailureState(message: e.toString());
     }
   }
 

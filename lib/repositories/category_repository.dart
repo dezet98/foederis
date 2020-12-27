@@ -22,12 +22,12 @@ class CategoryRepository {
   }
 
   Future<List<Category>> fetchAllCategories(List<FetchFilter> filters) async {
-    return await database.fetchCollection<List<Category>>(
+    return await database.getCollection<List<Category>>(
         filters, collectionName, _fromQuerySnapshot);
   }
 
   Future<Category> fetchCategory(DocumentReference categoryRef) async {
-    return await database.fetchCollectionItem<Category>(
+    return await database.getCollectionItem<Category>(
       categoryRef.path,
       _fromDocumentSnapshot,
     );

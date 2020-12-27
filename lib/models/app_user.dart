@@ -11,11 +11,7 @@ class AppUser {
   String firstName;
   String secondName;
 
-  // AppUser({this.ref, this.firstName, this.secondName, this.email});
-
-  // static AppUser toAppUser(User firebaseUser) {
-  //   return firebaseUser == null ? null : AppUser(ref: firebaseUser?.uid);
-  // }
+  //AppUser({this.email, this.firstName, this.secondName});
 
   AppUser.fromDocument(DocumentSnapshot doc) {
     this.ref = doc.reference;

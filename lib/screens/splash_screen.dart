@@ -36,6 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
+  // todo add loading data
   void _determine(context, state) {
     Future.delayed(Duration(seconds: 1)).then((value) {
       if (state is AuthUserAuthenticatedState && !_determined) {

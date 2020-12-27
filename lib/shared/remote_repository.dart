@@ -11,7 +11,7 @@ class RemoteRepository {
   RemoteRepository({FirebaseFirestore firestore})
       : _firestore = firestore ?? FirebaseFirestore.instance;
 
-  Future<ResultType> fetchCollection<ResultType>(
+  Future<ResultType> getCollection<ResultType>(
     List<FetchFilter> filters,
     String collectionPath,
     ResultType fromQuerySnapshot(QuerySnapshot querySnapshot),
@@ -31,7 +31,7 @@ class RemoteRepository {
     }
   }
 
-  Future<DocumentReference> addDocumentToCollection(
+  Future<DocumentReference> insertToCollection(
     Map<String, dynamic> data,
     String collectionPath,
   ) async {
@@ -46,7 +46,23 @@ class RemoteRepository {
     }
   }
 
-  Future<ResultType> fetchCollectionItem<ResultType>(
+  Future<void> insertWithNameToCollection(
+    Map<String, dynamic> data,
+    String collectionPath,
+    String docName,
+  ) async {
+    try {
+      return await _firestore.collection(collectionPath).doc(docName).set(data);
+    } catch (e) {
+      if (e is UploadDataException) {
+        throw e;
+      }
+      throw UploadDataException(
+          sendingDataError: UploadDataError.undefined, message: e.toString());
+    }
+  }
+
+  Future<ResultType> getCollectionItem<ResultType>(
     String collectionItemPath,
     ResultType fromQuerySnapshot(DocumentSnapshot querySnapshot),
   ) async {

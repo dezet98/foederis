@@ -17,7 +17,7 @@ class ActivityRepository {
   }
 
   Future<List<Activity>> fetchAllActivities(List<FetchFilter> filters) async {
-    return await _database.fetchCollection<List<Activity>>(
+    return await _database.getCollection<List<Activity>>(
         filters, ActivityCollection.collectionName, _fromQuerySnapshot);
   }
 
@@ -37,7 +37,7 @@ class ActivityRepository {
   // }
 
   Future<DocumentReference> createActivity(Activity activity) async {
-    return await _database.addDocumentToCollection(
+    return await _database.insertToCollection(
         activity.toMap(), ActivityCollection.collectionName);
   }
 }
