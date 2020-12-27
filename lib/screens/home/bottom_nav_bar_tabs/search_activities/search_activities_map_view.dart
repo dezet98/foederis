@@ -2,7 +2,7 @@ import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builde
 import 'package:engineering_thesis/components/bloc_builders/filters/filtered_data.dart';
 import 'package:engineering_thesis/components/custom_widgets/bottom_sheet/custom_bottom_sheet.dart';
 import 'package:engineering_thesis/components/custom_widgets/card/custom_card.dart';
-import 'package:engineering_thesis/components/custom_widgets/maps/custom_google_map.dart';
+import 'package:engineering_thesis/components/custom_widgets/maps/custom_cluster_google_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,7 +37,7 @@ class SearchActivityMapView extends StatelessWidget {
         return FilteredData<Activity>(
           data: activities,
           filtersBloc: BlocProvider.of<SearchActivitiesFiltersBloc>(context),
-          child: (context, activities) => CustomGoogleMap(
+          child: (context, activities) => CustomClusterGoogleMap(
             initialLocation: LatLng(latLng.x, latLng.y),
             clusterItems: getClusters(activities),
             onButtonTap: () => onRefresh(context),
