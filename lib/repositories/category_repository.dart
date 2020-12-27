@@ -13,12 +13,23 @@ class CategoryRepository {
 
   List<Category> _fromQuerySnapshot(QuerySnapshot querySnapshot) {
     return querySnapshot.docs
-        .map((QueryDocumentSnapshot e) => Category.fromDocument(e))
+        .map((DocumentSnapshot e) => Category.fromDocument(e))
         .toList();
+  }
+
+  Category _fromDocumentSnapshot(DocumentSnapshot documentSnapshot) {
+    return Category.fromDocument(documentSnapshot);
   }
 
   Future<List<Category>> fetchAllCategories(List<FetchFilter> filters) async {
     return await database.fetchCollection<List<Category>>(
         filters, collectionName, _fromQuerySnapshot);
+  }
+
+  Future<Category> fetchCategory(DocumentReference categoryRef) async {
+    return await database.fetchCollectionItem<Category>(
+      categoryRef.path,
+      _fromDocumentSnapshot,
+    );
   }
 }

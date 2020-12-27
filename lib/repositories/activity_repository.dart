@@ -12,7 +12,7 @@ class ActivityRepository {
 
   List<Activity> _fromQuerySnapshot(QuerySnapshot querySnapshot) {
     return querySnapshot.docs
-        .map((QueryDocumentSnapshot e) => Activity.fromDocument(e))
+        .map((DocumentSnapshot e) => Activity.fromDocument(e))
         .toList();
   }
 

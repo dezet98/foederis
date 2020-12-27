@@ -34,18 +34,19 @@ class ActivityDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildNavBarScreen(BuildContext context) {
-    return TemplateScreen.topNavbar(
-        context: context,
-        appBarTitle: activity.title,
-        navBarBloc: BlocProvider.of<ActivityDetailsTopNavbarBloc>(context));
-    // return TemplateScreen(
-    //   platformAppBar: CustomAppBar(
-    //     appBarType: AppBarType.back,
-    //     title: activity.title,
-    //   ),
-    //   body: NavBar(
-    //     navBarBloc: BlocProvider.of<ActivityDetailsTopNavbarBloc>(context),
-    //   ),
-    // );
+    return BlocProvider<ActivityDetailsTopNavbarBloc>(
+      create: (context) => ActivityDetailsTopNavbarBloc(
+        activity: activity,
+      ),
+      child: Builder(
+        builder: (context) {
+          return TemplateScreen.topNavbar(
+              context: context,
+              appBarTitle: activity.title,
+              navBarBloc:
+                  BlocProvider.of<ActivityDetailsTopNavbarBloc>(context));
+        },
+      ),
+    );
   }
 }

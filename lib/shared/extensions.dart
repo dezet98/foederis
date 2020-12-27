@@ -4,7 +4,7 @@ import '../models/fetch_filter.dart';
 import 'constants/enums.dart';
 import 'exceptions.dart';
 
-extension catchQueryExceptions on QueryDocumentSnapshot {
+extension catchQueryExceptions on DocumentSnapshot {
   /// use `get(String field)` method with handle exceptions
   T getField<T>(String field) {
     if (T == double) {

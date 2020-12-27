@@ -13,12 +13,12 @@ class RemoteRepository {
 
   Future<ResultType> fetchCollection<ResultType>(
     List<FetchFilter> filters,
-    String collectionName,
+    String collectionPath,
     ResultType fromQuerySnapshot(QuerySnapshot querySnapshot),
   ) async {
     try {
       return await _firestore
-          .collection(collectionName)
+          .collection(collectionPath)
           .whereWithFilters(filters)
           .get()
           .then(fromQuerySnapshot);
@@ -33,16 +33,34 @@ class RemoteRepository {
 
   Future<DocumentReference> addDocumentToCollection(
     Map<String, dynamic> data,
-    String collectionName,
+    String collectionPath,
   ) async {
     try {
-      return await _firestore.collection(collectionName).add(data);
+      return await _firestore.collection(collectionPath).add(data);
     } catch (e) {
       if (e is UploadDataException) {
         throw e;
       }
       throw UploadDataException(
           sendingDataError: UploadDataError.undefined, message: e.toString());
+    }
+  }
+
+  Future<ResultType> fetchCollectionItem<ResultType>(
+    String collectionItemPath,
+    ResultType fromQuerySnapshot(DocumentSnapshot querySnapshot),
+  ) async {
+    try {
+      return await _firestore
+          .doc(collectionItemPath)
+          .get()
+          .then(fromQuerySnapshot);
+    } catch (e) {
+      if (e is FetchingException) {
+        throw e;
+      }
+      throw FetchingException(
+          fetchingError: FetchingError.undefined, message: e.toString());
     }
   }
 }

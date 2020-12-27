@@ -3,6 +3,7 @@ import 'package:geohash/geohash.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../shared/extensions.dart';
+import 'category.dart';
 import 'collections/activity_collection.dart';
 import 'collections/collection.dart';
 
@@ -18,7 +19,10 @@ class Activity {
   String geohash;
   String address;
 
-  Activity.fromDocument(QueryDocumentSnapshot doc) {
+  // additional fields
+  Category category;
+
+  Activity.fromDocument(DocumentSnapshot doc) {
     this.ref = doc.reference;
     this.title = doc.getField(ActivityCollection.title.fieldName);
     this.categoryRef = doc.getField(ActivityCollection.categoryRef.fieldName);

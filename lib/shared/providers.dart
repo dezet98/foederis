@@ -1,7 +1,4 @@
-import 'package:engineering_thesis/blocs/specific_blocs/activity_details/activity_details_top_navbar_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/home_screen_bottom_nav_bar_bloc.dart';
-import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/attendees/attendees_screen.dart';
-import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/details/description_screen.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/my_activities/my_activities_screen.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/search_activities/search_activities_screen.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/settings/settings_screen.dart';
@@ -83,6 +80,8 @@ dynamic getHomeScreenBlocProviders() => [
       ),
       BlocProvider(
         create: (context) => SearchActivitiesFetchingBloc(
+          categoryRepository:
+              RepositoryProvider.of<CategoryRepository>(context),
           activityRepository:
               RepositoryProvider.of<ActivityRepository>(context),
         ),
@@ -155,11 +154,9 @@ dynamic getHomeScreenBlocProviders() => [
 
 dynamic getActivityDetailsScreenBlocProviders() => [
       BlocProvider(
-        create: (context) => ActivityDetailsTopNavbarBloc(
-          navBarTabs: [
-            DescriptionScreen(),
-            AttendeesScreen(),
-          ],
+        create: (context) => CategoryFetchingBloc(
+          categoryRepository:
+              RepositoryProvider.of<CategoryRepository>(context),
         ),
-      )
+      ),
     ];

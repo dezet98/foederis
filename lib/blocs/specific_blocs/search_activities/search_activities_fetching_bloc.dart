@@ -1,3 +1,4 @@
+import 'package:engineering_thesis/repositories/category_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:geohash/geohash.dart';
 import 'package:google_maps_webservice/geocoding.dart';
@@ -12,13 +13,20 @@ import '../../abstract_blocs/fetch/fetch_bloc.dart';
 
 class SearchActivitiesFetchingBloc extends FetchBloc<List<Activity>> {
   ActivityRepository activityRepository;
-
-  SearchActivitiesFetchingBloc({@required this.activityRepository});
+  CategoryRepository categoryRepository;
+  SearchActivitiesFetchingBloc(
+      {@required this.activityRepository, @required this.categoryRepository});
 
   @override
   Future<List<Activity>> fetch(List<FetchFilter> filters) async {
-    return await activityRepository
+    List<Activity> activities = await activityRepository
         .fetchAllActivities(filters ?? getFetchFilters());
+
+    for (Activity activity in activities)
+      activity.category =
+          await categoryRepository.fetchCategory(activity.categoryRef);
+
+    return activities;
   }
 
   static List<FetchFilter> getFetchFilters(
