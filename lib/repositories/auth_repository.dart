@@ -2,7 +2,6 @@ import 'package:engineering_thesis/shared/constants/enums.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
-import '../models/app_user.dart';
 import '../shared/exceptions.dart';
 
 class AuthRepository {
@@ -51,8 +50,8 @@ class AuthRepository {
     }
   }
 
-  Stream<AppUser> get authStream {
-    return _firebaseAuth.authStateChanges().asyncMap(AppUser.toAppUser);
+  Stream<User> get authStream {
+    return _firebaseAuth.authStateChanges();
   }
 
   Future<void> signOut() async {

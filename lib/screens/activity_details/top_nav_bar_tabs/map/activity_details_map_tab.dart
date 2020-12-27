@@ -31,5 +31,5 @@ class ActivityDetailsMapTab extends NavBarTab {
   Icon getIcon(BuildContext context) => null;
 
   @override
-  String getLabel(BuildContext context) => 'Map';
+  String getLabel(BuildContext context) => 'Localization';
 }

@@ -46,7 +46,7 @@ dynamic getRepositoryProviders() => [
 dynamic getMainBlocProviders() => [
       BlocProvider(
         create: (context) => AuthBloc(
-          authRepository: RepositoryProvider.of<AuthRepository>(context),
+          RepositoryProvider.of<AuthRepository>(context),
         ),
       ),
       BlocProvider(
