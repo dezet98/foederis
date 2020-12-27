@@ -2,6 +2,7 @@ import 'package:engineering_thesis/blocs/abstract_blocs/nav_bar/nav_bar_bloc.dar
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/custom_widgets/app_bars/custom_app_bar.dart';
 import 'package:engineering_thesis/shared/theme.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -54,14 +55,12 @@ class TemplateScreen extends StatelessWidget {
       builder: (context, state) {
         return PlatformScaffold(
           appBar: platformAppBar?.getPlatformAppBar(context),
-          body: SafeArea(
-            child: usePadding
-                ? Padding(
-                    padding: const EdgeInsets.all(Dimensions.screenPadding),
-                    child: navBarBloc.currentTab,
-                  )
-                : navBarBloc.currentTab,
-          ),
+          body: usePadding
+              ? Padding(
+                  padding: const EdgeInsets.all(Dimensions.screenPadding),
+                  child: navBarBloc.currentTab,
+                )
+              : navBarBloc.currentTab,
           bottomNavBar: PlatformNavBar(
             currentIndex: navBarBloc.currentIndex,
             items: _homeNavBarItems(context, navBarBloc.navBarTabs),
@@ -87,28 +86,28 @@ class TemplateScreen extends StatelessWidget {
   static Widget topNavbar({
     @required BuildContext context,
     @required NavBarBloc navBarBloc,
-    CustomAppBar platformAppBar,
-    bool usePadding = true,
+    @required String appBarTitle,
   }) {
     return BlocBuilder(
       cubit: navBarBloc,
       builder: (context, state) {
-        return PlatformScaffold(
-          appBar: platformAppBar?.getPlatformAppBar(context),
-          body: SafeArea(
-            child: usePadding
-                ? Padding(
-                    padding: const EdgeInsets.all(Dimensions.screenPadding),
-                    child: navBarBloc.currentTab,
-                  )
-                : navBarBloc.currentTab,
-          ),
-          bottomNavBar: PlatformNavBar(
-            currentIndex: navBarBloc.currentIndex,
-            items: _homeNavBarItems(context, navBarBloc.navBarTabs),
-            itemChanged: (int index) {
-              navBarBloc.add(NavBarItemChangedEvent(index: index));
-            },
+        return DefaultTabController(
+          length: navBarBloc.tabLenght,
+          initialIndex: navBarBloc.initialIndex,
+          child: PlatformScaffold(
+            appBar: CustomAppBar(
+              appBarType: AppBarType.back,
+              title: appBarTitle,
+              bottom: TabBar(
+                tabs: [
+                  for (NavBarTab tab in navBarBloc.navBarTabs)
+                    Tab(
+                      text: tab.getLabel(context),
+                    )
+                ],
+              ),
+            ).getPlatformAppBar(context),
+            body: TabBarView(children: navBarBloc.navBarTabs),
           ),
         );
       },

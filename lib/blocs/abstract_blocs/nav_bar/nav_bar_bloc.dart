@@ -21,6 +21,7 @@ abstract class NavBarBloc extends Bloc<NavBarEvent, NavBarState> {
 
   int currentIndex;
 
+  int get tabLenght => navBarTabs.length;
   Widget get currentTab => navBarTabs.elementAt(currentIndex);
 
   @override

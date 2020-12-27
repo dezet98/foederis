@@ -34,8 +34,9 @@ class ActivityDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildNavBarScreen(BuildContext context) {
-    return TemplateScreen.bottomNavbar(
+    return TemplateScreen.topNavbar(
         context: context,
+        appBarTitle: activity.title,
         navBarBloc: BlocProvider.of<ActivityDetailsTopNavbarBloc>(context));
     // return TemplateScreen(
     //   platformAppBar: CustomAppBar(
