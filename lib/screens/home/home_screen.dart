@@ -1,5 +1,5 @@
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/home_screen_bottom_nav_bar_bloc.dart';
-import 'package:engineering_thesis/components/bloc_builders/nav_bar.dart';
+import 'package:engineering_thesis/components/templates/template_screen.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,8 +27,10 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildNavBarScreen(BuildContext context) {
-    return NavBar(
+    return TemplateScreen.bottomNavbar(
+      context: context,
       navBarBloc: BlocProvider.of<HomeScreenBottomNavBarBloc>(context),
+      usePadding: false,
     );
   }
 }

@@ -14,7 +14,8 @@ abstract class NavBarBloc extends Bloc<NavBarEvent, NavBarState> {
   int get initialIndex;
 
   NavBarBloc() : super(NavBarInitialState()) {
-    assert(navBarTabs.length > initialIndex);
+    assert(navBarTabs.length > initialIndex,
+        'initialIndex for navbar is out of range');
     currentIndex = initialIndex;
   }
 

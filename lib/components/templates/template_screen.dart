@@ -1,7 +1,16 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/nav_bar/nav_bar_bloc.dart';
+import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/custom_widgets/app_bars/custom_app_bar.dart';
 import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
+enum TemplateScreenType {
+  blank,
+  bottom_navbar,
+  top_navbar,
+}
 
 class TemplateScreen extends StatelessWidget {
   final Widget body;
@@ -21,7 +30,7 @@ class TemplateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
-      appBar: platformAppBar?.getdPlatformAppBar(context),
+      appBar: platformAppBar?.getPlatformAppBar(context),
       body: SafeArea(
         child: usePadding
             ? Padding(
@@ -34,20 +43,75 @@ class TemplateScreen extends StatelessWidget {
     );
   }
 
-  // Widget protectBuildContent({@required Widget content}) {
-  //   return BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
-  //     bool authenticated = BlocProvider.of<AuthBloc>(context).state
-  //         is AuthUserAuthenticatedState;
+  static Widget bottomNavbar({
+    @required BuildContext context,
+    @required NavBarBloc navBarBloc,
+    CustomAppBar platformAppBar,
+    bool usePadding = true,
+  }) {
+    return BlocBuilder(
+      cubit: navBarBloc,
+      builder: (context, state) {
+        return PlatformScaffold(
+          appBar: platformAppBar?.getPlatformAppBar(context),
+          body: SafeArea(
+            child: usePadding
+                ? Padding(
+                    padding: const EdgeInsets.all(Dimensions.screenPadding),
+                    child: navBarBloc.currentTab,
+                  )
+                : navBarBloc.currentTab,
+          ),
+          bottomNavBar: PlatformNavBar(
+            currentIndex: navBarBloc.currentIndex,
+            items: _homeNavBarItems(context, navBarBloc.navBarTabs),
+            itemChanged: (int index) {
+              navBarBloc.add(NavBarItemChangedEvent(index: index));
+            },
+          ),
+        );
+      },
+    );
+  }
 
-  //     if (UserRoutes.props.contains(routeName)) {
-  //       if (authenticated) return content;
-  //       Navigator.pushNamedAndRemoveUntil(
-  //           context, GuestRoutes.login, ModalRoute.withName(GuestRoutes.login));
-  //       return SplashScreen(content: Text("You don\'t have permission"));
-  //     } else if (GuestRoutes.props.contains(routeName)) {
-  //       if (!authenticated) return content;
-  //       return HomeScreen();
-  //     }
-  //   });
-  // }
+  static List<BottomNavigationBarItem> _homeNavBarItems(
+          BuildContext context, List<NavBarTab> navBarContents) =>
+      [
+        for (NavBarTab navBarTab in navBarContents)
+          BottomNavigationBarItem(
+            icon: navBarTab.getIcon(context),
+            label: navBarTab.getLabel(context),
+          ),
+      ];
+
+  static Widget topNavbar({
+    @required BuildContext context,
+    @required NavBarBloc navBarBloc,
+    CustomAppBar platformAppBar,
+    bool usePadding = true,
+  }) {
+    return BlocBuilder(
+      cubit: navBarBloc,
+      builder: (context, state) {
+        return PlatformScaffold(
+          appBar: platformAppBar?.getPlatformAppBar(context),
+          body: SafeArea(
+            child: usePadding
+                ? Padding(
+                    padding: const EdgeInsets.all(Dimensions.screenPadding),
+                    child: navBarBloc.currentTab,
+                  )
+                : navBarBloc.currentTab,
+          ),
+          bottomNavBar: PlatformNavBar(
+            currentIndex: navBarBloc.currentIndex,
+            items: _homeNavBarItems(context, navBarBloc.navBarTabs),
+            itemChanged: (int index) {
+              navBarBloc.add(NavBarItemChangedEvent(index: index));
+            },
+          ),
+        );
+      },
+    );
+  }
 }

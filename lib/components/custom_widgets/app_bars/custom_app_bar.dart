@@ -15,18 +15,24 @@ class CustomAppBar extends StatelessWidget {
   final AppBarType appBarType;
   final String title;
   final Function() onPressed;
+  final TabBar bottom;
 
-  CustomAppBar({this.appBarType = AppBarType.back, this.title, this.onPressed});
+  CustomAppBar(
+      {this.appBarType = AppBarType.back,
+      this.title,
+      this.onPressed,
+      this.bottom});
 
   @override
   Widget build(BuildContext context) {
-    return getdPlatformAppBar(context);
+    return getPlatformAppBar(context);
   }
 
-  PlatformAppBar getdPlatformAppBar(BuildContext context) {
+  PlatformAppBar getPlatformAppBar(BuildContext context) {
     return PlatformAppBar(
       title: CustomText(title, textType: TextType.page_title),
       leading: _buildAppBarLeading(context),
+      material: (context, platform) => MaterialAppBarData(bottom: bottom),
     );
   }
 

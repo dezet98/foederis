@@ -2,11 +2,11 @@ import 'package:engineering_thesis/blocs/abstract_blocs/nav_bar/nav_bar_bloc.dar
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:meta/meta.dart';
 
-class HomeScreenBottomNavBarBloc extends NavBarBloc {
+class ActivityDetailsTopNavbarBloc extends NavBarBloc {
   final List<NavBarTab> navBarTabs;
   int initialIndex;
 
-  HomeScreenBottomNavBarBloc({
+  ActivityDetailsTopNavbarBloc({
     @required this.navBarTabs,
     this.initialIndex = 0,
   });

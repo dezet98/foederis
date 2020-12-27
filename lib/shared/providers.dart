@@ -1,4 +1,10 @@
+import 'package:engineering_thesis/blocs/specific_blocs/activity_details/activity_details_top_navbar_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/home_screen_bottom_nav_bar_bloc.dart';
+import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/attendees/attendees_screen.dart';
+import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/details/description_screen.dart';
+import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/my_activities/my_activities_screen.dart';
+import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/search_activities/search_activities_screen.dart';
+import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/settings/settings_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/abstract_blocs/choice_filters/filter_option/filter_option_bloc.dart';
@@ -64,7 +70,11 @@ dynamic getHomeScreenBlocProviders() => [
             SharedPreferencesBloc(DatabaseHelper.instance, SharedPreferences()),
       ),
       BlocProvider(
-        create: (context) => HomeScreenBottomNavBarBloc(),
+        create: (context) => HomeScreenBottomNavBarBloc(navBarTabs: [
+          SearchActivitiesScreen(),
+          MyActivitiesScreen(),
+          SettingsScreen(),
+        ]),
       ),
       BlocProvider(
         create: (context) => SearchActivitiesSearchFilterBloc(
@@ -141,4 +151,15 @@ dynamic getHomeScreenBlocProviders() => [
             sharedPreferencesBloc:
                 BlocProvider.of<SharedPreferencesBloc>(context)),
       ),
+    ];
+
+dynamic getActivityDetailsScreenBlocProviders() => [
+      BlocProvider(
+        create: (context) => ActivityDetailsTopNavbarBloc(
+          navBarTabs: [
+            DescriptionScreen(),
+            AttendeesScreen(),
+          ],
+        ),
+      )
     ];
