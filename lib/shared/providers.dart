@@ -15,7 +15,7 @@ import '../blocs/abstract_blocs/choice_filters/sort_choice_filter_bloc.dart';
 import '../blocs/specific_blocs/authorization/auth/auth_bloc.dart';
 import '../blocs/specific_blocs/authorization/login/login_bloc.dart';
 import '../blocs/specific_blocs/authorization/register/register_bloc.dart';
-import '../blocs/specific_blocs/create_activity/category_fetching_bloc.dart';
+import '../blocs/specific_blocs/common/categories_fetching_bloc.dart';
 import '../blocs/specific_blocs/create_activity/create_activity_form_data.dart';
 import '../blocs/specific_blocs/search_activities/search_activities_fetching_bloc.dart';
 import '../blocs/specific_blocs/search_activities/search_activities_filters_bloc.dart';
@@ -154,7 +154,7 @@ dynamic getHomeScreenBlocProviders() => [
             RepositoryProvider.of<UserDataBloc>(context)),
       ),
       BlocProvider(
-        create: (context) => CategoryFetchingBloc(
+        create: (context) => CategoriesFetchingBloc(
           categoryRepository:
               RepositoryProvider.of<CategoryRepository>(context),
         ),
@@ -166,7 +166,7 @@ dynamic getHomeScreenBlocProviders() => [
             categoryRepository:
                 RepositoryProvider.of<CategoryRepository>(context),
             categoryFetchingBloc:
-                BlocProvider.of<CategoryFetchingBloc>(context)),
+                BlocProvider.of<CategoriesFetchingBloc>(context)),
       ),
       BlocProvider(
         create: (context) => SearchActivitiesDistanceSendBloc(
@@ -178,7 +178,7 @@ dynamic getHomeScreenBlocProviders() => [
 
 dynamic getActivityDetailsScreenBlocProviders() => [
       BlocProvider(
-        create: (context) => CategoryFetchingBloc(
+        create: (context) => CategoriesFetchingBloc(
           categoryRepository:
               RepositoryProvider.of<CategoryRepository>(context),
         ),

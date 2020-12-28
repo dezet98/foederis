@@ -1,7 +1,12 @@
+import 'package:engineering_thesis/blocs/specific_blocs/common/category_fetching_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
+import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/models/activity.dart';
+import 'package:engineering_thesis/models/category.dart';
+import 'package:engineering_thesis/repositories/category_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DescriptionTab extends NavBarTab {
   final Activity activity;
@@ -18,7 +23,7 @@ class DescriptionTab extends NavBarTab {
         _buildSingleAttribute('minEntry', activity.minEntry.toString()),
         _buildSingleAttribute('regular', activity.regular.toString()),
         _buildSingleAttribute('startDate', activity.startDate.toString()),
-        _buildSingleAttribute('category', activity.category?.title),
+        _buildCategoryAttribute(context, 'category'),
       ],
     );
   }
@@ -33,6 +38,18 @@ class DescriptionTab extends NavBarTab {
           CustomText(text, textType: TextType.list_item),
         ],
       ),
+    );
+  }
+
+  Widget _buildCategoryAttribute(BuildContext context, String subtitle) {
+    return FetchingBlocBuilder(
+      fetchingCubit: CategoryFetchingBloc(
+        categoryRepository: RepositoryProvider.of<CategoryRepository>(context),
+        categoryRef: activity.categoryRef,
+      ),
+      buildSuccess: (data) {
+        return _buildSingleAttribute(subtitle, (data as Category).title);
+      },
     );
   }
 

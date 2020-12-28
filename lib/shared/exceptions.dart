@@ -29,6 +29,13 @@ class FetchingException implements Exception {
   FetchingException({@required this.fetchingError, this.message});
 }
 
+class StreamException implements Exception {
+  final StreamError streamError;
+  final String message;
+
+  StreamException({@required this.streamError, this.message});
+}
+
 class SendingDataException implements Exception {
   final UploadDataError sendingDataError;
   final String message;

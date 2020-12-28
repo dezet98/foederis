@@ -1,19 +1,18 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/stream/stream_bloc.dart';
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../blocs/abstract_blocs/fetch/fetch_bloc.dart';
-
-class FetchingBlocBuilder extends StatelessWidget {
-  final FetchBloc fetchingCubit;
+class StreamBlocBuilder extends StatelessWidget {
+  final StreamBloc streamBloc;
   final Widget Function(dynamic data) buildSuccess;
   final Widget Function(dynamic exception) buildError;
   final Widget buildInProgress;
   final bool isSliver;
 
-  FetchingBlocBuilder({
-    @required this.fetchingCubit,
+  StreamBlocBuilder({
+    @required this.streamBloc,
     @required this.buildSuccess,
     this.buildError,
     this.buildInProgress,
@@ -22,15 +21,14 @@ class FetchingBlocBuilder extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return BlocBuilder(
-        cubit: fetchingCubit,
+        cubit: streamBloc,
         builder: (BuildContext context, state) {
-          if (state is FetchInitialFailureState ||
-              state is FetchRefreshFailureState) {
+          if (state is StreamRefreshFailureState ||
+              state is StreamSubscribeFailed) {
             return buildError != null
                 ? buildError(state.fetchingError)
                 : _buildError;
-          } else if (state is FetchInitialSuccessState ||
-              state is FetchRefreshSuccessState) {
+          } else if (state is StreamRefreshSuccessState) {
             return buildSuccess(state.data);
           }
           return buildInProgress != null ? buildInProgress : _buildInProgress();

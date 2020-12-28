@@ -79,4 +79,22 @@ class RemoteRepository {
           fetchingError: FetchingError.undefined, message: e.toString());
     }
   }
+
+  Stream<ResultType> getCollectionItemStream<ResultType>(
+    String collectionItemPath,
+    ResultType fromQuerySnapshot(DocumentSnapshot querySnapshot),
+  ) {
+    try {
+      return _firestore
+          .doc(collectionItemPath)
+          .snapshots()
+          .asyncMap(fromQuerySnapshot);
+    } catch (e) {
+      if (e is StreamException) {
+        throw e;
+      }
+      throw StreamException(
+          streamError: StreamError.undefined, message: e.toString());
+    }
+  }
 }

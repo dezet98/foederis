@@ -9,11 +9,13 @@ part 'stream_event.dart';
 part 'stream_state.dart';
 
 abstract class StreamBloc<DataType> extends Bloc<StreamEvent, StreamState> {
-  StreamSubscription _streamSubscription;
+  Stream<DataType> stream();
 
-  StreamBloc(Stream<DataType> stream) : super(StreamInitialState()) {
-    add(StreamSubscribeEvent<DataType>(stream: stream));
+  StreamBloc() : super(StreamInitialState()) {
+    add(StreamSubscribeEvent<DataType>(stream: stream()));
   }
+
+  StreamSubscription _streamSubscription;
 
   @override
   Stream<StreamState> mapEventToState(

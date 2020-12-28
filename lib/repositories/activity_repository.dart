@@ -10,14 +10,18 @@ import '../models/fetch_filter.dart';
 import '../shared/remote_repository.dart';
 
 class ActivityRepository {
-  final RemoteRepository _database;
+  final RemoteRepository _remoteRepository;
 
-  ActivityRepository(this._database);
+  ActivityRepository(this._remoteRepository);
 
   List<Activity> _fromQuerySnapshot(QuerySnapshot querySnapshot) {
     return querySnapshot.docs
         .map((DocumentSnapshot e) => Activity.fromDocument(e))
         .toList();
+  }
+
+  Activity _fromDocumentSnapshot(DocumentSnapshot documentSnapshot) {
+    return Activity.fromDocument(documentSnapshot);
   }
 
   Future<List<Activity>> fetchAllActivities(
@@ -36,24 +40,14 @@ class ActivityRepository {
       ),
     ]);
 
-    return await _database.getCollection<List<Activity>>(
+    return await _remoteRepository.getCollection<List<Activity>>(
         filters, ActivityCollection.collectionName, _fromQuerySnapshot);
   }
 
-  // Stream<List<Activity>> fetchAllActivitiesStream() {
-  //   try {
-  //     return _firestore
-  //         .collection(Collections.activity)
-  //         .snapshots()
-  //         .asyncMap(fromQuerySnapshot);
-  //   } catch (e) {
-  //     if (e is FetchingException) {
-  //       throw e;
-  //     }
-  //     throw FetchingException(
-  //         fetchingError: FetchingError.undefined, message: e.toString());
-  //   }
-  // }
+  Stream<Activity> getCollectionItemStream(DocumentReference activityRef) {
+    return _remoteRepository.getCollectionItemStream(
+        activityRef.path, _fromDocumentSnapshot);
+  }
 
   Future<DocumentReference> createActivity(
       Activity activity, UserDataBloc userDataBloc) async {
@@ -61,7 +55,7 @@ class ActivityRepository {
     Map<String, dynamic> activityMap = Collection.fillRemainsData(
         activity.toMap(), ActivityCollection.allFields);
 
-    return await _database.insertToCollection(
+    return await _remoteRepository.insertToCollection(
         activityMap, ActivityCollection.collectionName);
   }
 }

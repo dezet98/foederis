@@ -1,7 +1,7 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/validators/validators_bloc.dart';
-import 'package:engineering_thesis/blocs/specific_blocs/activity_details/activity_details_register_send_bloc.dart';
-import 'package:engineering_thesis/blocs/specific_blocs/activity_details/activity_details_register_send_validators.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/activity_details_register_send_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/activity_details_register_send_validators.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/bloc_builders/send_with_validator/send_with_validator.dart';

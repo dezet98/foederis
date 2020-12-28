@@ -14,12 +14,12 @@ import '../../abstract_blocs/forms/form_date_field_bloc.dart';
 import '../../abstract_blocs/forms/form_number_range_field_bloc.dart';
 import '../../abstract_blocs/forms/form_option_list_field_bloc.dart';
 import '../../abstract_blocs/forms/form_text_field_bloc.dart';
-import 'category_fetching_bloc.dart';
+import '../common/categories_fetching_bloc.dart';
 
 class CreateActvityFormDataBloc extends FormDataBloc {
   final ActivityRepository activityRepository;
   final CategoryRepository categoryRepository;
-  final CategoryFetchingBloc categoryFetchingBloc;
+  final CategoriesFetchingBloc categoryFetchingBloc;
 
   CreateActvityFormDataBloc({
     @required this.activityRepository,
