@@ -6,13 +6,13 @@ abstract class FetchEvent extends Equatable {
 }
 
 class FetchInitialEvent extends FetchEvent {
-  final List<FetchFilter> initialFilters;
+  final FetchArgs initialFetchArgs;
 
-  FetchInitialEvent({this.initialFilters});
+  FetchInitialEvent({this.initialFetchArgs});
 }
 
 class FetchRefreshEvent extends FetchEvent {
-  final List<FetchFilter> filters;
+  final FetchArgs fetchArgs;
 
-  FetchRefreshEvent({this.filters});
+  FetchRefreshEvent({this.fetchArgs});
 }

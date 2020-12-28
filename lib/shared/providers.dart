@@ -2,6 +2,7 @@ import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/
 import 'package:engineering_thesis/blocs/specific_blocs/create_activity/create_activity_send_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/home_screen_bottom_nav_bar_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/search_activities/search_activities_distance_send_bloc.dart';
+import 'package:engineering_thesis/repositories/attendee_repository.dart';
 import 'package:engineering_thesis/repositories/user_repository.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/my_activities/my_activities_tab.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/search_activities/search_activities_tab.dart';
@@ -16,7 +17,6 @@ import '../blocs/specific_blocs/authorization/login/login_bloc.dart';
 import '../blocs/specific_blocs/authorization/register/register_bloc.dart';
 import '../blocs/specific_blocs/create_activity/category_fetching_bloc.dart';
 import '../blocs/specific_blocs/create_activity/create_activity_form_data.dart';
-import '../blocs/specific_blocs/search_activities/search_activities_distance_choice_bloc.dart';
 import '../blocs/specific_blocs/search_activities/search_activities_fetching_bloc.dart';
 import '../blocs/specific_blocs/search_activities/search_activities_filters_bloc.dart';
 import '../blocs/specific_blocs/search_activities/search_activities_search_filter_bloc.dart';
@@ -48,6 +48,10 @@ dynamic getRepositoryProviders() => [
       RepositoryProvider<UserRepository>(
         create: (context) =>
             UserRepository(RepositoryProvider.of<RemoteRepository>(context)),
+      ),
+      RepositoryProvider<AttendeeRepository>(
+        create: (context) => AttendeeRepository(
+            RepositoryProvider.of<RemoteRepository>(context)),
       ),
     ];
 
@@ -164,7 +168,6 @@ dynamic getHomeScreenBlocProviders() => [
             categoryFetchingBloc:
                 BlocProvider.of<CategoryFetchingBloc>(context)),
       ),
-      BlocProvider(create: (context) => SearchActivityDistanceChoiceBloc()),
       BlocProvider(
         create: (context) => SearchActivitiesDistanceSendBloc(
           sharedPreferencesBloc:

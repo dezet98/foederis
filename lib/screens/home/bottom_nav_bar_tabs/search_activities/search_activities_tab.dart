@@ -27,7 +27,7 @@ class SearchActivitiesTab extends NavBarTab {
         if (state is SearchFilterSelectedOptionState) {
           BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
             FetchRefreshEvent(
-              filters: SearchActivitiesFetchingBloc.getFetchFilters(
+              fetchArgs: SearchActivitiesFetchingArgsBloc(
                 location: (state.selectedOption as PlacesSearchResult)
                     .geometry
                     .location,
@@ -42,7 +42,7 @@ class SearchActivitiesTab extends NavBarTab {
           if (state is SendDataSuccessState) {
             BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
               FetchRefreshEvent(
-                filters: SearchActivitiesFetchingBloc.getFetchFilters(
+                fetchArgs: SearchActivitiesFetchingArgsBloc(
                   distanceKm:
                       BlocProvider.of<SearchActivitiesDistanceSendBloc>(context)
                           .distance,

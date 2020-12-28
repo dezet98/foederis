@@ -59,25 +59,32 @@ class SearchActivitiesAppBar {
         return BlocBuilder(
           cubit: BlocProvider.of<SearchActivitiesSearchFilterBloc>(context),
           builder: (context, state) {
-            return CustomButton.iconWithTextButton(
-              text: "${SharedPreferences().distanceKm}km",
-              materialIconData: Icons.circle,
-              onPressed: () {
-                Routing.pushNamed(
-                  context,
-                  UserRoutes.form,
-                  options: {
-                    RoutingOption.formDataBloc:
-                        BlocProvider.of<SearchActivityDistanceChoiceBloc>(
-                            context),
-                    RoutingOption.formAppBarTitle: 'dsa',
-                    RoutingOption.formNextButtonText: 'fsd',
-                    RoutingOption.sendBloc:
-                        BlocProvider.of<SearchActivitiesDistanceSendBloc>(
-                            context),
-                  },
-                );
-              },
+            return BlocProvider<SearchActivityDistanceChoiceBloc>(
+              create: (context) => SearchActivityDistanceChoiceBloc(),
+              child: Builder(
+                builder: (context) {
+                  return CustomButton.iconWithTextButton(
+                    text: "${SharedPreferences().distanceKm}km",
+                    materialIconData: Icons.circle,
+                    onPressed: () {
+                      Routing.pushNamed(
+                        context,
+                        UserRoutes.form,
+                        options: {
+                          RoutingOption.formDataBloc:
+                              BlocProvider.of<SearchActivityDistanceChoiceBloc>(
+                                  context),
+                          RoutingOption.formAppBarTitle: 'dsa',
+                          RoutingOption.formNextButtonText: 'fsd',
+                          RoutingOption.sendBloc:
+                              BlocProvider.of<SearchActivitiesDistanceSendBloc>(
+                                  context),
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
             );
           },
         );

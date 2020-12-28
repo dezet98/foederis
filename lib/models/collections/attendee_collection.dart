@@ -1,7 +1,7 @@
 import 'query_field.dart';
 
 class AttendeeCollection {
-  static String collectionName = 'attendy';
+  static String collectionName = 'attendee';
 
   static CollectionField activityRef =
       CollectionField(fieldName: 'activityRef', isRequired: true);

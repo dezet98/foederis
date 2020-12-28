@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:engineering_thesis/shared/constants/enums.dart';
 import 'package:meta/meta.dart';
 
 import '../models/category.dart';
@@ -21,7 +22,17 @@ class CategoryRepository {
     return Category.fromDocument(documentSnapshot);
   }
 
-  Future<List<Category>> fetchAllCategories(List<FetchFilter> filters) async {
+  Future<List<Category>> fetchAllCategories({String title}) async {
+    List<FetchFilter> filters = [];
+    if (title != null)
+      filters.add(
+        FetchFilter(
+          fieldName: CategoryCollection.title.fieldName,
+          fieldValue: title,
+          filterType: FetchFilterType.isEqualTo,
+        ),
+      );
+
     return await database.getCollection<List<Category>>(
         filters, collectionName, _fromQuerySnapshot);
   }

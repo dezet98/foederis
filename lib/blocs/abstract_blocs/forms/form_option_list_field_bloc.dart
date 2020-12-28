@@ -6,7 +6,7 @@ import '../fetch/fetch_bloc.dart';
 import 'form_field/form_field_bloc.dart';
 
 class FormOptionListFieldBloc<OptionType> extends FormFieldBloc<OptionType> {
-  final FetchBloc<List<OptionType>> listOptionFetchingBloc;
+  final FetchBloc listOptionFetchingBloc; //todo
   final String Function(dynamic) getLabelFromOption;
   List<Validator> Function(OptionType) validators;
   final List<QueryField> Function(OptionType) queryFieldFromResult;

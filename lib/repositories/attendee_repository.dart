@@ -1,17 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/models/attendee.dart';
 import 'package:engineering_thesis/models/collections/attendee_collection.dart';
-import 'package:engineering_thesis/models/collections/user_collection.dart';
 import 'package:engineering_thesis/models/fetch_filter.dart';
 import 'package:engineering_thesis/shared/constants/enums.dart';
 
 import '../shared/remote_repository.dart';
 
-class AttendyRepository {
+class AttendeeRepository {
   final RemoteRepository _remoteRepository;
-  final String collectionPath = UserCollection.collectionName;
+  final String collectionPath = AttendeeCollection.collectionName;
 
-  AttendyRepository(this._remoteRepository);
+  AttendeeRepository(this._remoteRepository);
 
   List<Attendee> _fromQuerySnapshot(QuerySnapshot querySnapshot) {
     return querySnapshot.docs
@@ -38,7 +37,7 @@ class AttendyRepository {
         filters, collectionPath, _fromQuerySnapshot);
   }
 
-  Future<void> createAttendee(Attendee attendee) async {
+  Future<DocumentReference> createAttendee(Attendee attendee) async {
     return await _remoteRepository.insertToCollection(
       attendee.toMap(),
       collectionPath,

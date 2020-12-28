@@ -4,37 +4,36 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../../../models/fetch_filter.dart';
 import '../../../shared/constants/enums.dart';
 import '../../../shared/exceptions.dart';
+import 'fetch_args.dart';
 
 part 'fetch_event.dart';
 part 'fetch_state.dart';
 
-abstract class FetchBloc<T> extends Bloc<FetchEvent, FetchState> {
-  List<dynamic> get initialFilters;
-
+abstract class FetchBloc<ResultType, FetchArgsType extends FetchArgs>
+    extends Bloc<FetchEvent, FetchState> {
   FetchBloc() : super(FetchInitialState()) {
-    add(FetchInitialEvent(initialFilters: initialFilters));
+    add(FetchInitialEvent());
   }
 
-  Future<T> fetch(List<FetchFilter> filters);
+  Future<ResultType> fetch(FetchArgsType fetchArgs);
 
   @override
   Stream<FetchState> mapEventToState(
     FetchEvent event,
   ) async* {
     if (event is FetchInitialEvent) {
-      yield* mapFetchInitialEvent(initialFilters: event.initialFilters);
+      yield* mapFetchInitialEvent(event.initialFetchArgs);
     } else if (event is FetchRefreshEvent) {
-      yield* mapFetchRefreshEvent(filters: event.filters);
+      yield* mapFetchRefreshEvent(event.fetchArgs);
     }
   }
 
-  Stream<FetchState> mapFetchInitialEvent({@required initialFilters}) async* {
+  Stream<FetchState> mapFetchInitialEvent(FetchArgs fetchArgs) async* {
     try {
       yield FetchInitialInProgressState();
-      T data = await fetch(initialFilters);
+      ResultType data = await fetch(fetchArgs);
       yield FetchInitialSuccessState(data: data);
     } catch (e) {
       if (e is FetchingException)
@@ -42,14 +41,14 @@ abstract class FetchBloc<T> extends Bloc<FetchEvent, FetchState> {
             fetchingError: e.fetchingError, message: e.message);
       else
         yield FetchInitialFailureState(
-            fetchingError: FetchingError.undefined, message: e.message);
+            fetchingError: FetchingError.undefined, message: e.toString());
     }
   }
 
-  Stream<FetchState> mapFetchRefreshEvent({@required filters}) async* {
+  Stream<FetchState> mapFetchRefreshEvent(FetchArgs fetchArgs) async* {
     try {
       yield FetchRefreshInProgressState();
-      T data = await fetch(filters);
+      ResultType data = await fetch(fetchArgs);
       yield FetchRefreshSuccessState(data: data);
     } catch (e) {
       if (e is FetchingException)
@@ -57,7 +56,7 @@ abstract class FetchBloc<T> extends Bloc<FetchEvent, FetchState> {
             fetchingError: e.fetchingError, message: e.message);
       else
         yield FetchRefreshFailureState(
-            fetchingError: FetchingError.undefined, message: e.message);
+            fetchingError: FetchingError.undefined, message: e.toString());
     }
   }
 }
