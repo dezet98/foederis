@@ -9,14 +9,12 @@ abstract class ValidatorsState extends Equatable {
 
 class ValidatorsInitialState extends ValidatorsState {}
 
-class ValidatorsValidationInProgressState extends ValidatorsState {}
+class ValidatorsInitInProgressState extends ValidatorsState {}
 
-class ValidatorsValidState extends ValidatorsState {}
+class ValidatorsInitSuccessState extends ValidatorsState {}
 
-class ValidatorsInvalidState extends ValidatorsState {
-  final String messsage;
+class ValidatorsInitFailureState extends ValidatorsState {
+  final String message;
 
-  ValidatorsInvalidState({@required this.messsage});
+  ValidatorsInitFailureState({this.message});
 }
-
-class ValidatorsValidationFailureState extends ValidatorsState {}

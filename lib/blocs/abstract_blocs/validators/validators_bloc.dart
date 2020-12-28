@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/validators/validator.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 part 'validators_event.dart';
 part 'validators_state.dart';
@@ -14,6 +13,8 @@ abstract class ValidatorsBloc extends Bloc<ValidatorsEvent, ValidatorsState> {
   ValidatorsBloc() : super(ValidatorsInitialState()) {
     add(ValidatorsInitEvent());
   }
+
+  List<Validator> get validators => _validators ?? [];
 
   Future<List<Validator>> initValidator();
 
@@ -34,11 +35,11 @@ abstract class ValidatorsBloc extends Bloc<ValidatorsEvent, ValidatorsState> {
 
   Stream<ValidatorsState> mapValidatorsInitEvent() async* {
     try {
-      yield ValidatorsValidationInProgressState();
+      yield ValidatorsInitInProgressState();
       _validators = await initValidator();
-      yield ValidatorsValidState();
+      yield ValidatorsInitSuccessState();
     } catch (e) {
-      yield ValidatorsInvalidState(messsage: e.toString());
+      yield ValidatorsInitFailureState(message: e.toString());
     }
   }
 }

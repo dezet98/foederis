@@ -1,16 +1,27 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/validators/validator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
 class CustomValidator<ArgType> extends Validator {
   ArgType argValue;
   bool Function(ArgType) isValidFunction;
 
-  CustomValidator({@required this.isValidFunction, @required this.argValue});
+  CustomValidator(
+      {@required this.isValidFunction,
+      @required this.argValue,
+      this.validatorFailureInfo,
+      this.validatorLabel});
 
   @override
   bool isValid() {
     return isValidFunction(argValue);
   }
+
+  @override
+  String Function(BuildContext) validatorFailureInfo;
+
+  @override
+  String Function(BuildContext) validatorLabel;
 }
 
 class DigitsValidator extends Validator {
@@ -27,6 +38,12 @@ class DigitsValidator extends Validator {
       return false;
     }
   }
+
+  @override
+  String Function(BuildContext) validatorFailureInfo;
+
+  @override
+  String Function(BuildContext) validatorLabel;
 }
 
 class LenghtValidator extends Validator<String> {
@@ -45,6 +62,12 @@ class LenghtValidator extends Validator<String> {
 
     return false;
   }
+
+  @override
+  String Function(BuildContext) validatorFailureInfo;
+
+  @override
+  String Function(BuildContext) validatorLabel;
 }
 
 class DateTimeRangeValidator extends Validator<DateTime> {
@@ -58,6 +81,12 @@ class DateTimeRangeValidator extends Validator<DateTime> {
   bool isValid() {
     return value.isBefore(maxDate) && value.isAfter(minDate);
   }
+
+  @override
+  String Function(BuildContext) validatorFailureInfo;
+
+  @override
+  String Function(BuildContext) validatorLabel;
 }
 
 class NumberRangeValidator extends Validator {
@@ -72,6 +101,12 @@ class NumberRangeValidator extends Validator {
     return (min == null ? value : min) <= value &&
         value >= (max == null ? value : max);
   }
+
+  @override
+  String Function(BuildContext) validatorFailureInfo;
+
+  @override
+  String Function(BuildContext) validatorLabel;
 }
 
 enum NumberCompareType {
@@ -114,6 +149,12 @@ class NumbersValidator extends Validator {
     }
     return false;
   }
+
+  @override
+  String Function(BuildContext) validatorFailureInfo;
+
+  @override
+  String Function(BuildContext) validatorLabel;
 }
 
 class NotNullValidator extends Validator {
@@ -125,4 +166,10 @@ class NotNullValidator extends Validator {
   bool isValid() {
     return value != null;
   }
+
+  @override
+  String Function(BuildContext) validatorFailureInfo;
+
+  @override
+  String Function(BuildContext) validatorLabel;
 }

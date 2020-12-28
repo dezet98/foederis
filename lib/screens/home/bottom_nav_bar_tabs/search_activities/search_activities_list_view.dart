@@ -1,6 +1,7 @@
 import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/components/bloc_builders/filters/filtered_data.dart';
 import 'package:engineering_thesis/components/custom_widgets/card/custom_card.dart';
+import 'package:engineering_thesis/components/custom_widgets/refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -21,7 +22,7 @@ class SearchActivitiesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformWidget(
-      material: (_, __) => RefreshIndicator(
+      material: (_, __) => CustomRefreshIndicator(
         displacement: 60.0,
         onRefresh: () => onRefresh(context),
         child: _buildCustomScrollView(context),
@@ -34,9 +35,8 @@ class SearchActivitiesListView extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         SearchActivitiesAppBar.getSliverAppBar(context),
-        CupertinoSliverRefreshControl(
-          onRefresh: () => onRefresh(context),
-        ),
+        CustomRefreshIndicator.cupertinoRefreshIndicator(
+            () => onRefresh(context)),
         _fetchActivities(context),
       ],
     );
