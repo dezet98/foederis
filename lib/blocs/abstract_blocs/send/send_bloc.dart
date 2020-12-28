@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/blocs/abstract_blocs/send/send_args.dart';
 import 'package:engineering_thesis/shared/constants/enums.dart';
 import 'package:engineering_thesis/shared/exceptions.dart';
 import 'package:equatable/equatable.dart';
@@ -10,25 +9,32 @@ import 'package:meta/meta.dart';
 part 'send_event.dart';
 part 'send_state.dart';
 
-abstract class SendBloc<SendArgsType extends SendArgs>
-    extends Bloc<SendEvent, SendState> {
+abstract class SendBloc extends Bloc<SendEvent, SendState> {
   SendBloc() : super(SendInitialState());
 
-  Future<void> query(SendArgsType sendArgsType);
+  Future<void> query(Map<String, dynamic> valuesMap);
 
   @override
   Stream<SendState> mapEventToState(
     SendEvent event,
   ) async* {
     if (event is SendDataEvent) {
-      yield* mapSendDataEvent(event.sendArgs);
+      yield* mapSendDataEvent(event.valuesMap);
     }
   }
 
-  Stream<SendState> mapSendDataEvent(SendArgs sendArgs) async* {
+  Stream<SendState> mapSendDataEvent(Map<String, dynamic> valuesMap) async* {
     try {
       yield SendDataInProgressState();
-      await query(sendArgs);
+      // if (sendValidators == null || sendValidators.isValid())
+      await query(valuesMap);
+      // else
+      //   yield SendDataFailureState(
+      //     sendingDataException: SendingDataException(
+      //       sendingDataError: UploadDataError.data_not_valid,
+      //       message: 'Send data was invalid, not pass validators',
+      //     ),
+      //   );
       yield SendDataSuccessState();
     } catch (e) {
       if (e is SendingDataException)

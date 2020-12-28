@@ -5,10 +5,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../shared/extensions.dart';
 import 'category.dart';
 import 'collections/activity_collection.dart';
-import 'collections/collection.dart';
 
 class Activity {
   DocumentReference ref;
+  DocumentReference userRef;
   String title;
   DocumentReference categoryRef;
   DateTime startDate;
@@ -24,6 +24,7 @@ class Activity {
 
   Activity.fromDocument(DocumentSnapshot doc) {
     this.ref = doc.reference;
+    this.userRef = doc.getField(ActivityCollection.userRef);
     this.title = doc.getField(ActivityCollection.title);
     this.categoryRef = doc.getField(ActivityCollection.categoryRef);
     this.startDate = doc.getField<DateTime>(ActivityCollection.startDate);
@@ -36,7 +37,7 @@ class Activity {
   }
 
   Activity.fromMap(Map<String, dynamic> data) {
-    data = Collection.fillRemainsData(data, ActivityCollection.allFields);
+    this.userRef = data[ActivityCollection.userRef.fieldName];
     this.title = data[ActivityCollection.title.fieldName];
     this.categoryRef = data[ActivityCollection.categoryRef.fieldName];
     this.startDate = data[ActivityCollection.startDate.fieldName];
@@ -50,6 +51,7 @@ class Activity {
 
   toMap() {
     return {
+      ActivityCollection.userRef.fieldName: userRef,
       ActivityCollection.title.fieldName: title,
       ActivityCollection.regular.fieldName: regular,
       ActivityCollection.startDate.fieldName: startDate,

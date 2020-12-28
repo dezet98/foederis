@@ -1,3 +1,4 @@
+import 'package:engineering_thesis/blocs/specific_blocs/validators/validators.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../models/category.dart';
@@ -6,7 +7,6 @@ import '../../../models/collections/query_field.dart';
 import '../../../models/geolocation.dart';
 import '../../../repositories/activity_repository.dart';
 import '../../../repositories/category_repository.dart';
-import '../../../shared/utils/validators.dart';
 import '../../abstract_blocs/forms/form_address_field_bloc.dart';
 import '../../abstract_blocs/forms/form_check_field_bloc.dart';
 import '../../abstract_blocs/forms/form_data/form_data_bloc.dart';

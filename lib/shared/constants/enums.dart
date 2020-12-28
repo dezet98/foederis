@@ -38,6 +38,7 @@ enum UploadDataError {
   wrongFieldName,
   undefined,
   required_field_not_provider,
+  data_not_valid,
 }
 
 // // enum TO string

@@ -12,6 +12,6 @@ class ActivityDetailsAttendeeFetchBloc extends FetchBloc {
 
   @override
   Future fetch(_) async {
-    await _attendeeRepository.fetchAllAttendies(activityRef);
+    await _attendeeRepository.fetchAllAttendees(activityRef);
   }
 }

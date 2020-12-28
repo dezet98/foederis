@@ -30,20 +30,12 @@ import 'database_helper.dart';
 import 'remote_repository.dart';
 import 'shared_preferences.dart';
 
-dynamic getRepositoryProviders() => [
-      RepositoryProvider<RemoteRepository>(
-        create: (_) => RemoteRepository(),
-      ),
+dynamic getMainRepositoryProviders() => [
       RepositoryProvider<AuthRepository>(
         create: (_) => AuthRepository(),
       ),
-      RepositoryProvider<CategoryRepository>(
-        create: (context) => CategoryRepository(
-            database: RepositoryProvider.of<RemoteRepository>(context)),
-      ),
-      RepositoryProvider<ActivityRepository>(
-        create: (context) => ActivityRepository(
-            RepositoryProvider.of<RemoteRepository>(context)),
+      RepositoryProvider<RemoteRepository>(
+        create: (_) => RemoteRepository(),
       ),
       RepositoryProvider<UserRepository>(
         create: (context) =>
@@ -51,6 +43,14 @@ dynamic getRepositoryProviders() => [
       ),
       RepositoryProvider<AttendeeRepository>(
         create: (context) => AttendeeRepository(
+            RepositoryProvider.of<RemoteRepository>(context)),
+      ),
+      RepositoryProvider<CategoryRepository>(
+        create: (context) => CategoryRepository(
+            database: RepositoryProvider.of<RemoteRepository>(context)),
+      ),
+      RepositoryProvider<ActivityRepository>(
+        create: (context) => ActivityRepository(
             RepositoryProvider.of<RemoteRepository>(context)),
       ),
     ];
@@ -150,8 +150,8 @@ dynamic getHomeScreenBlocProviders() => [
       ),
       BlocProvider(
         create: (context) => CreateActivitySendBloc(
-          RepositoryProvider.of<ActivityRepository>(context),
-        ),
+            RepositoryProvider.of<ActivityRepository>(context),
+            RepositoryProvider.of<UserDataBloc>(context)),
       ),
       BlocProvider(
         create: (context) => CategoryFetchingBloc(

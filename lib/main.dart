@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
-      providers: getRepositoryProviders(),
+      providers: getMainRepositoryProviders(),
       child: MultiBlocProvider(
         providers: getMainBlocProviders(),
         child: PlatformProvider(

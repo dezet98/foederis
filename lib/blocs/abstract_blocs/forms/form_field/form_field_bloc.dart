@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/validators/validator.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../../models/collections/query_field.dart';
-import '../../../../shared/utils/validators.dart';
 
 part 'form_field_event.dart';
 part 'form_field_state.dart';
@@ -29,11 +29,7 @@ abstract class FormFieldBloc<ResultType>
     _result = initialResult;
   }
 
-  bool _checkValid(result) {
-    List<Validator> v = validators(result);
-    for (Validator validator in v) if (!validator.isValid()) return false;
-    return true;
-  }
+  bool _checkValid(result) => Validator.checkValid(validators(result));
 
   bool get isValid => _checkValid(_result);
 

@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
+import 'package:engineering_thesis/models/collections/collection.dart';
 import 'package:engineering_thesis/shared/constants/enums.dart';
 import 'package:meta/meta.dart';
 
@@ -53,8 +55,13 @@ class ActivityRepository {
   //   }
   // }
 
-  Future<DocumentReference> createActivity(Activity activity) async {
+  Future<DocumentReference> createActivity(
+      Activity activity, UserDataBloc userDataBloc) async {
+    activity.userRef = userDataBloc.user.ref;
+    Map<String, dynamic> activityMap = Collection.fillRemainsData(
+        activity.toMap(), ActivityCollection.allFields);
+
     return await _database.insertToCollection(
-        activity.toMap(), ActivityCollection.collectionName);
+        activityMap, ActivityCollection.collectionName);
   }
 }

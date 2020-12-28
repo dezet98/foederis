@@ -22,7 +22,7 @@ class AttendeeRepository {
   //   return Attendee.fromDocument(documentSnapshot);
   // }
 
-  Future<List<Attendee>> fetchAllAttendies(
+  Future<List<Attendee>> fetchAllAttendees(
       DocumentReference activityRef) async {
     List<FetchFilter> filters = [];
     filters.add(

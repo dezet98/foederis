@@ -3,6 +3,8 @@ import 'query_field.dart';
 class ActivityCollection {
   static String collectionName = 'activity';
 
+  static CollectionField userRef =
+      CollectionField(fieldName: 'userRef', isRequired: true);
   static CollectionField title =
       CollectionField(fieldName: 'title', isRequired: true);
   static CollectionField categoryRef =
@@ -23,6 +25,7 @@ class ActivityCollection {
       CollectionField(fieldName: 'address', isRequired: true);
 
   static List<CollectionField> get allFields => [
+        userRef,
         title,
         categoryRef,
         startDate,

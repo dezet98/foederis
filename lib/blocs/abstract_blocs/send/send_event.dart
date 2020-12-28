@@ -8,7 +8,7 @@ abstract class SendEvent extends Equatable {
 }
 
 class SendDataEvent extends SendEvent {
-  final SendArgs sendArgs;
+  final Map<String, dynamic> valuesMap;
 
-  SendDataEvent({this.sendArgs});
+  SendDataEvent({this.valuesMap});
 }

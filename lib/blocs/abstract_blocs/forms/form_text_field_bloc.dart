@@ -1,7 +1,7 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/validators/validator.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../../models/collections/query_field.dart';
-import '../../../shared/utils/validators.dart';
 import 'form_field/form_field_bloc.dart';
 
 class FormTextFieldBloc extends FormFieldBloc<String> {

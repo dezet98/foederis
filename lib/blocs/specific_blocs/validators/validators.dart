@@ -1,5 +1,16 @@
-abstract class Validator<ValueType> {
-  bool isValid();
+import 'package:engineering_thesis/blocs/abstract_blocs/validators/validator.dart';
+import 'package:meta/meta.dart';
+
+class CustomValidator<ArgType> extends Validator {
+  ArgType argValue;
+  bool Function(ArgType) isValidFunction;
+
+  CustomValidator({@required this.isValidFunction, @required this.argValue});
+
+  @override
+  bool isValid() {
+    return isValidFunction(argValue);
+  }
 }
 
 class DigitsValidator extends Validator {
