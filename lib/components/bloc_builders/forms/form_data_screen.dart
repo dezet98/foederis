@@ -1,4 +1,6 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/create_activity/create_activity_send_bloc.dart';
+import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/shared/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -89,9 +91,13 @@ class FormDataScreen extends StatelessWidget {
               text: formNextButtonText,
               enabled: formDataBloc.isValid,
               onPressed: () {
-                sendBloc.add(SendDataEvent(
-                  queryData: formDataBloc.queryFields(),
-                ));
+                sendBloc.add(
+                  SendDataEvent(
+                    sendArgs: SearchActivitiesDistanceSendArgs(
+                      activity: Activity.fromMap(formDataBloc.queryFields()),
+                    ),
+                  ),
+                );
               },
             );
           },

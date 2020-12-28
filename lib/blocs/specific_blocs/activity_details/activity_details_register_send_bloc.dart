@@ -15,11 +15,15 @@ class ActivityDetailsRegisterSendBloc extends SendBloc {
       {@required this.activity, @required this.userRef});
 
   @override
-  Future<void> query({Map<String, dynamic> queryFields}) async {
-    await _attendeeRepository.createAttendee(Attendee.fromMap({
-      AttendeeCollection.activityRef.fieldName: activity.ref,
-      AttendeeCollection.userRef.fieldName: userRef,
-      AttendeeCollection.joinDate.fieldName: DateTime.now(),
-    }));
+  Future<void> query(_) async {
+    await _attendeeRepository.createAttendee(
+      Attendee.fromMap(
+        {
+          AttendeeCollection.activityRef.fieldName: activity.ref,
+          AttendeeCollection.userRef.fieldName: userRef,
+          AttendeeCollection.joinDate.fieldName: DateTime.now(),
+        },
+      ),
+    );
   }
 }
