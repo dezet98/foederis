@@ -10,7 +10,7 @@ class SearchActivitiesDistanceSendBloc extends SendBloc {
   SearchActivitiesDistanceSendBloc({@required this.sharedPreferencesBloc});
 
   @override
-  Future<void> query(Map<String, dynamic> queryFields) {
+  Future<void> query({Map<String, dynamic> queryFields}) {
     _distance = queryFields['distance'];
     sharedPreferencesBloc.add(SharedPreferencesUpdateEvent(
       SharedPreferencesName.distanceKm,

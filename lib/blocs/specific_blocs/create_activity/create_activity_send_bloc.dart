@@ -9,7 +9,7 @@ class CreateActivitySendBloc extends SendBloc {
   CreateActivitySendBloc(this._activityRepository);
 
   @override
-  Future<void> query(Map<String, dynamic> queryFields) async {
+  Future<void> query({Map<String, dynamic> queryFields}) async {
     await Future.delayed(Duration(seconds: 8));
     DocumentReference activityRef =
         await _activityRepository.createActivity(Activity.fromMap(queryFields));

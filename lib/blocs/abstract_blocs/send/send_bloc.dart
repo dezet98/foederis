@@ -12,7 +12,7 @@ part 'send_state.dart';
 abstract class SendBloc extends Bloc<SendEvent, SendState> {
   SendBloc() : super(SendInitialState());
 
-  Future<void> query(Map<String, dynamic> queryFields);
+  Future<void> query({Map<String, dynamic> queryFields});
 
   @override
   Stream<SendState> mapEventToState(
@@ -26,7 +26,7 @@ abstract class SendBloc extends Bloc<SendEvent, SendState> {
   Stream<SendState> mapSendDataEvent(Map<String, dynamic> queryFields) async* {
     try {
       yield SendDataInProgressState();
-      await query(queryFields);
+      await query(queryFields: queryFields);
       yield SendDataSuccessState();
     } catch (e) {
       if (e is SendingDataException)
