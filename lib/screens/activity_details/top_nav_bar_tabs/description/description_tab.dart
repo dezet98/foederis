@@ -3,10 +3,10 @@ import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dar
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:flutter/material.dart';
 
-class DescriptionScreen extends NavBarTab {
+class DescriptionTab extends NavBarTab {
   final Activity activity;
 
-  DescriptionScreen({@required this.activity});
+  DescriptionTab({@required this.activity});
 
   @override
   Widget build(BuildContext context) {

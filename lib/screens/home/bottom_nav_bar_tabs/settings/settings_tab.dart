@@ -6,7 +6,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import '../../../../blocs/specific_blocs/authorization/auth/auth_bloc.dart';
 import '../../../../generated/l10n.dart';
 
-class SettingsScreen extends NavBarTab {
+class SettingsTab extends NavBarTab {
   @override
   Widget build(BuildContext context) {
     return Padding(

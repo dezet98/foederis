@@ -2,10 +2,10 @@ import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:flutter/material.dart';
 
-class AttendeesScreen extends NavBarTab {
+class AttendeesTab extends NavBarTab {
   final Activity activity;
 
-  AttendeesScreen({@required this.activity});
+  AttendeesTab({@required this.activity});
 
   @override
   Widget build(BuildContext context) {

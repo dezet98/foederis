@@ -1,9 +1,9 @@
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/home_screen_bottom_nav_bar_bloc.dart';
 import 'package:engineering_thesis/repositories/user_repository.dart';
-import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/my_activities/my_activities_screen.dart';
-import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/search_activities/search_activities_screen.dart';
-import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/settings/settings_screen.dart';
+import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/my_activities/my_activities_tab.dart';
+import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/search_activities/search_activities_tab.dart';
+import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/settings/settings_tab.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/abstract_blocs/choice_filters/filter_option/filter_option_bloc.dart';
@@ -80,9 +80,9 @@ dynamic getHomeScreenBlocProviders() => [
       ),
       BlocProvider(
         create: (context) => HomeScreenBottomNavBarBloc(navBarTabs: [
-          SearchActivitiesScreen(),
-          MyActivitiesScreen(),
-          SettingsScreen(),
+          SearchActivitiesTab(),
+          MyActivitiesTab(),
+          SettingsTab(),
         ]),
       ),
       BlocProvider(

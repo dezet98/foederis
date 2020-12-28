@@ -18,7 +18,7 @@ import '../../../../shared/shared_preferences.dart';
 import 'search_activities_list_view.dart';
 import 'search_activities_map_view.dart';
 
-class SearchActivitiesScreen extends NavBarTab {
+class SearchActivitiesTab extends NavBarTab {
   @override
   Widget build(BuildContext context) {
     return BlocListener(

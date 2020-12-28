@@ -1,3 +1,4 @@
+import 'package:engineering_thesis/screens/splash/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,11 +8,9 @@ import '../blocs/specific_blocs/authorization/auth/auth_bloc.dart';
 import '../components/bloc_builders/filters/filters_screen.dart';
 import '../components/bloc_builders/forms/form_data_screen.dart';
 import '../screens/activity_details/activity_details_screen.dart';
-import '../screens/choose_location_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/login/login_screen.dart';
 import '../screens/register/register_screen.dart';
-import '../screens/splash_screen.dart';
 
 class CommonRoutes {
   static const String splash = "/splash";
@@ -31,10 +30,8 @@ class UserRoutes {
   static const String home = "/";
   static const String activityDetails = '/activityDetails';
   static const String form = "/form";
-  static const String chooseLocation = "/chooseLocation";
 
-  static List<String> get props =>
-      [home, activityDetails, form, chooseLocation];
+  static List<String> get props => [home, activityDetails, form];
 }
 
 class Routing {
@@ -58,8 +55,6 @@ class Routing {
           formAppBarTitle: options['formAppBarTitle'],
           formNextButtonText: options['formNextButtonText'],
         );
-      case UserRoutes.chooseLocation:
-        return ChooseLocationScreen();
       default:
         assert(false, '{ error: $routeName is not define as a routeName }');
         return PlatformScaffold(

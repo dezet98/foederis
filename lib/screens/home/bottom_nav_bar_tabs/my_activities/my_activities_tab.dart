@@ -11,7 +11,7 @@ import '../../../../generated/l10n.dart';
 import '../../../../shared/routing.dart';
 import '../../../../shared/theme.dart';
 
-class MyActivitiesScreen extends NavBarTab {
+class MyActivitiesTab extends NavBarTab {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
