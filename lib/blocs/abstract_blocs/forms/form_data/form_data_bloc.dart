@@ -14,10 +14,7 @@ part 'form_data_state.dart';
 
 abstract class FormDataBloc extends Bloc<FormDataEvent, FormDataState> {
   List<FormFieldBloc> formsData;
-  bool _editingEnabled = true;
-
-  FormDataBloc(this.formsData, this._editingEnabled)
-      : super(FormDataInitialState());
+  FormDataBloc(this.formsData) : super(FormDataInitialState());
 
   bool get isValid {
     for (FormFieldBloc optionBloc in formsData)
@@ -36,20 +33,30 @@ abstract class FormDataBloc extends Bloc<FormDataEvent, FormDataState> {
     return queryFields;
   }
 
-  bool get editingEnabled => _editingEnabled;
-
   @override
   Stream<FormDataState> mapEventToState(
     FormDataEvent event,
   ) async* {
     if (event is FormDataEditingEvent) {
-      yield FormDataEditingState();
-      event.formFieldBloc.add(FormFieldChangeOptionEvent(result: event.result));
-      yield FormDataEditedState();
+      yield* mapFormDataEditingEvent(event.formFieldBloc, event.result);
     } else if (event is FormDataEditingEnabledEvent) {
-      _editingEnabled = true;
+      for (FormFieldBloc formFieldBloc in formsData)
+        formFieldBloc.add(FormFieldEditingEnableEvent());
     } else if (event is FormDataEditingDisableEvent) {
-      _editingEnabled = false;
+      for (FormFieldBloc formFieldBloc in formsData)
+        formFieldBloc.add(FormFieldEditingDisableEvent());
+    } else if (event is FormDataClearEvent) {
+      for (FormFieldBloc formFieldBloc in formsData)
+        formFieldBloc.add(FormFieldClearEvent());
     }
+  }
+
+  Stream<FormDataState> mapFormDataEditingEvent(
+      FormFieldBloc formFieldBloc, dynamic formFieldResult) async* {
+    try {
+      yield FormDataEditingState();
+      formFieldBloc.add(FormFieldChangeOptionEvent(result: formFieldResult));
+      yield FormDataEditedState();
+    } catch (e) {}
   }
 }

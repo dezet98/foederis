@@ -16,12 +16,15 @@ class CustomAppBar extends StatelessWidget {
   final String title;
   final Function() onPressed;
   final TabBar bottom;
+  final List<Widget> trailingActions;
 
-  CustomAppBar(
-      {this.appBarType = AppBarType.back,
-      this.title,
-      this.onPressed,
-      this.bottom});
+  CustomAppBar({
+    this.appBarType = AppBarType.back,
+    this.title,
+    this.onPressed,
+    this.bottom,
+    this.trailingActions,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +35,7 @@ class CustomAppBar extends StatelessWidget {
     return PlatformAppBar(
       title: CustomText(title, textType: TextType.page_title),
       leading: _buildAppBarLeading(context),
+      trailingActions: trailingActions,
       material: (context, platform) => MaterialAppBarData(bottom: bottom),
     );
   }

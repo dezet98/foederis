@@ -33,7 +33,7 @@ class FormAddressField extends StatelessWidget {
                   if (state is SearchFilterSelectedOptionState) {
                     PlacesSearchResult result = state.selectedOption;
 
-                    if (formDataBloc.editingEnabled) {
+                    if (formFieldBloc.editingEnabled) {
                       String geohash = Geohash.encode(
                           result.geometry.location.lat,
                           result.geometry.location.lng);
@@ -61,7 +61,7 @@ class FormAddressField extends StatelessWidget {
                       ),
                       CustomButton.flatButton(
                         text: 'Choose location',
-                        enabled: formDataBloc.editingEnabled,
+                        enabled: formFieldBloc.editingEnabled,
                         onPressed: () async {
                           await SearchScreen.show(context,
                               BlocProvider.of<SearchPlacesBloc>(context));

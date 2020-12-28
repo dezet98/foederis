@@ -38,9 +38,9 @@ class FormOptionListField extends StatelessWidget {
                         value: formFieldBloc.result,
                         dropdownItems: data,
                         getItemLabel: formFieldBloc.getLabelFromOption,
-                        enabled: formDataBloc.editingEnabled,
+                        enabled: formFieldBloc.editingEnabled,
                         onChanged: (result) {
-                          if (formDataBloc.editingEnabled)
+                          if (formFieldBloc.editingEnabled)
                             formDataBloc.add(FormDataEditingEvent(
                               formFieldBloc: formFieldBloc,
                               result: result,

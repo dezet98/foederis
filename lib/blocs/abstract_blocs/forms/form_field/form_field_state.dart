@@ -16,3 +16,9 @@ class FormFieldChangedState<ResultType> extends FormFieldState {
 
   FormFieldChangedState({@required this.result});
 }
+
+class FormFieldClearedState extends FormFieldState {}
+
+class FormFieldEditingEnabledState extends FormFieldState {}
+
+class FormFieldEditingDisabledState extends FormFieldState {}

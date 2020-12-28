@@ -12,3 +12,9 @@ class FormFieldChangeOptionEvent<ResultType> extends FormFieldEvent {
 
   FormFieldChangeOptionEvent({@required this.result});
 }
+
+class FormFieldClearEvent extends FormFieldEvent {}
+
+class FormFieldEditingEnableEvent extends FormFieldEvent {}
+
+class FormFieldEditingDisableEvent extends FormFieldEvent {}

@@ -22,5 +22,5 @@ class SearchActivityDistanceChoiceBloc extends FormDataBloc {
             ],
             getLabel: (BuildContext context) => "Choose radius",
           )
-        ], true);
+        ]);
 }

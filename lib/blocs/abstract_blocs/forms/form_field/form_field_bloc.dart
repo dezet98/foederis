@@ -16,12 +16,15 @@ abstract class FormFieldBloc<ResultType>
   List<Validator> Function(ResultType) validators;
   List<QueryField> Function(ResultType) queryFieldFromResult;
   String Function(BuildContext) getLabel;
+  bool editingEnabled;
+  ResultType initialResult;
 
   FormFieldBloc({
-    @required initialResult,
+    @required this.initialResult,
     @required this.validators,
     @required this.getLabel,
     @required this.queryFieldFromResult,
+    this.editingEnabled = true,
   }) : super(FormFieldInitialState()) {
     _result = initialResult;
   }
@@ -46,6 +49,15 @@ abstract class FormFieldBloc<ResultType>
       yield FormFieldChangeInProgressState();
       _result = event.result;
       yield FormFieldChangedState(result: _result);
+    } else if (event is FormFieldEditingEnableEvent) {
+      editingEnabled = true;
+      yield FormFieldEditingEnabledState();
+    } else if (event is FormFieldEditingDisableEvent) {
+      editingEnabled = false;
+      yield FormFieldEditingDisabledState();
+    } else if (event is FormFieldClearEvent) {
+      _result = initialResult;
+      yield FormFieldClearedState();
     }
   }
 }

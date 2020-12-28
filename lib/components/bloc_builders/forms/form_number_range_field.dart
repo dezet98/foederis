@@ -1,3 +1,4 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_field/form_field_bloc.dart';
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/components/custom_widgets/text_form_field/custom_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,15 +17,17 @@ class FormNumberRangeField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<TextEditingController> textFieldControllers = [
-      for (int i = 0; i < formFieldBloc.result.length; i++)
-        TextEditingController(text: formFieldBloc.result[i].toString()),
-    ];
+    List<TextEditingController> textFieldControllers = _getInitResults;
 
     return Column(
       children: [
-        BlocBuilder(
+        BlocConsumer(
           cubit: formFieldBloc,
+          listener: (context, state) {
+            if (state is FormFieldClearedState) {
+              textFieldControllers = _getInitResults;
+            }
+          },
           builder: (context, state) {
             return CustomText(
               formFieldBloc.getLabel(context),
@@ -44,12 +47,12 @@ class FormNumberRangeField extends StatelessWidget {
                     CustomTextFormField(
                       textEditingController: textFieldControllers[i],
                       textFormType: TextFormType.digits,
-                      enabled: formDataBloc.editingEnabled,
+                      enabled: formFieldBloc.editingEnabled,
                       onChamged: (String fieldResult) {
                         List<int> newResult = formFieldBloc.result;
                         newResult[i] =
                             int.parse(fieldResult.isEmpty ? '0' : fieldResult);
-                        if (formDataBloc.editingEnabled)
+                        if (formFieldBloc.editingEnabled)
                           formDataBloc.add(FormDataEditingEvent(
                             formFieldBloc: formFieldBloc,
                             result: newResult,
@@ -61,5 +64,12 @@ class FormNumberRangeField extends StatelessWidget {
             }),
       ],
     );
+  }
+
+  List<TextEditingController> get _getInitResults {
+    return [
+      for (int i = 0; i < formFieldBloc.result.length; i++)
+        TextEditingController(text: formFieldBloc.result[i].toString()),
+    ];
   }
 }

@@ -128,5 +128,5 @@ class CreateActvityFormDataBloc extends FormDataBloc {
               )
             ],
           )
-        ], true);
+        ]);
 }

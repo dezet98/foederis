@@ -39,9 +39,9 @@ class FormNumberField extends StatelessWidget {
               return CustomTextFormField(
                 textEditingController: textFieldController,
                 textFormType: TextFormType.digits,
-                enabled: formDataBloc.editingEnabled,
+                enabled: formFieldBloc.editingEnabled,
                 onChamged: (String result) {
-                  if (formDataBloc.editingEnabled)
+                  if (formFieldBloc.editingEnabled)
                     formDataBloc.add(FormDataEditingEvent(
                       formFieldBloc: formFieldBloc,
                       result: int.parse(result.isEmpty ? '0' : result),

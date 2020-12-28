@@ -34,9 +34,9 @@ class FormDateField extends StatelessWidget {
                   builder: (context, state) {
                     return CustomDateTimePicker(
                       date: formFieldBloc.result,
-                      enabled: formDataBloc.editingEnabled,
+                      enabled: formFieldBloc.editingEnabled,
                       dateChanged: (DateTime result) {
-                        if (formDataBloc.editingEnabled)
+                        if (formFieldBloc.editingEnabled)
                           formDataBloc.add(
                             FormDataEditingEvent(
                                 formFieldBloc: formFieldBloc, result: result),

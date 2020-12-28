@@ -65,8 +65,9 @@ class FormDataScreen extends StatelessWidget {
       CustomSnackBar.show(
           context, SnackBarType.error, state.sendingDataException.toString());
     } else if (state is SendDataSuccessState) {
-      Routing.pop(context);
+      formDataBloc.add(FormDataClearEvent());
       formDataBloc.add(FormDataEditingEnabledEvent());
+      Routing.pop(context);
       CustomSnackBar.show(context, SnackBarType.info, 'Success');
     } else if (state is SendDataInProgressState) {
       formDataBloc.add(FormDataEditingDisableEvent());
@@ -103,6 +104,13 @@ class FormDataScreen extends StatelessWidget {
     return CustomAppBar(
       appBarType: AppBarType.close,
       title: formAppBarTitle,
+      trailingActions: [
+        CustomButton.flatButton(
+            text: 'Clear',
+            onPressed: () {
+              formDataBloc.add(FormDataClearEvent());
+            })
+      ],
     );
   }
 
