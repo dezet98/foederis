@@ -16,6 +16,10 @@ enum FetchingError {
   undefined,
 }
 
+enum StreamError {
+  undefined,
+}
+
 enum SendingError {
   undefined,
 }
