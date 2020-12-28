@@ -31,37 +31,6 @@ class RemoteRepository {
     }
   }
 
-  Future<DocumentReference> insertToCollection(
-    Map<String, dynamic> data,
-    String collectionPath,
-  ) async {
-    try {
-      return await _firestore.collection(collectionPath).add(data);
-    } catch (e) {
-      if (e is SendingDataException) {
-        throw e;
-      }
-      throw SendingDataException(
-          sendingDataError: UploadDataError.undefined, message: e.toString());
-    }
-  }
-
-  Future<void> insertWithNameToCollection(
-    Map<String, dynamic> data,
-    String collectionPath,
-    String docName,
-  ) async {
-    try {
-      return await _firestore.collection(collectionPath).doc(docName).set(data);
-    } catch (e) {
-      if (e is SendingDataException) {
-        throw e;
-      }
-      throw SendingDataException(
-          sendingDataError: UploadDataError.undefined, message: e.toString());
-    }
-  }
-
   Future<ResultType> getCollectionItem<ResultType>(
     String collectionItemPath,
     ResultType fromQuerySnapshot(DocumentSnapshot querySnapshot),
@@ -95,6 +64,57 @@ class RemoteRepository {
       }
       throw StreamException(
           streamError: StreamError.undefined, message: e.toString());
+    }
+  }
+
+  Stream<ResultType> getCollectionStream<ResultType>(
+    String collectionPath,
+    List<FetchFilter> filters,
+    ResultType fromQuerySnapshot(QuerySnapshot querySnapshot),
+  ) {
+    try {
+      return _firestore
+          .collection(collectionPath)
+          .whereWithFilters(filters)
+          .snapshots()
+          .asyncMap(fromQuerySnapshot);
+    } catch (e) {
+      if (e is StreamException) {
+        throw e;
+      }
+      throw StreamException(
+          streamError: StreamError.undefined, message: e.toString());
+    }
+  }
+
+  Future<DocumentReference> insertToCollection(
+    Map<String, dynamic> data,
+    String collectionPath,
+  ) async {
+    try {
+      return await _firestore.collection(collectionPath).add(data);
+    } catch (e) {
+      if (e is SendingDataException) {
+        throw e;
+      }
+      throw SendingDataException(
+          sendingDataError: UploadDataError.undefined, message: e.toString());
+    }
+  }
+
+  Future<void> insertWithNameToCollection(
+    Map<String, dynamic> data,
+    String collectionPath,
+    String docName,
+  ) async {
+    try {
+      return await _firestore.collection(collectionPath).doc(docName).set(data);
+    } catch (e) {
+      if (e is SendingDataException) {
+        throw e;
+      }
+      throw SendingDataException(
+          sendingDataError: UploadDataError.undefined, message: e.toString());
     }
   }
 }

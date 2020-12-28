@@ -37,6 +37,20 @@ class AttendeeRepository {
         filters, collectionPath, _fromQuerySnapshot);
   }
 
+  Stream<List<Attendee>> getAttendeesStream(DocumentReference activityRef) {
+    List<FetchFilter> filters = [];
+    filters.add(
+      FetchFilter(
+        fieldName: AttendeeCollection.activityRef.fieldName,
+        fieldValue: activityRef,
+        filterType: FetchFilterType.isEqualTo,
+      ),
+    );
+
+    return _remoteRepository.getCollectionStream<List<Attendee>>(
+        collectionPath, filters, _fromQuerySnapshot);
+  }
+
   Future<DocumentReference> createAttendee(Attendee attendee) async {
     return await _remoteRepository.insertToCollection(
       attendee.toMap(),

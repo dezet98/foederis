@@ -1,9 +1,12 @@
-import 'package:engineering_thesis/blocs/specific_blocs/activity_details/activity_details_activity_stream_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/activity_details/activity_details_top_navbar_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/activity_details/activity_stream_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/activity_details/attendee_stream_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/auth/auth_bloc.dart';
 import 'package:engineering_thesis/components/bloc_builders/stream_bloc_builder.dart';
 import 'package:engineering_thesis/components/templates/template_screen.dart';
+import 'package:engineering_thesis/models/attendee.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
+import 'package:engineering_thesis/repositories/attendee_repository.dart';
 import 'package:engineering_thesis/shared/providers.dart';
 import 'package:engineering_thesis/shared/routing.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,35 +32,52 @@ class ActivityDetailsScreen extends StatelessWidget {
                 CommonRoutes.splash); // TODO change security maybe
           }
         },
-        child: _buildStreamProvider(),
+        child: _buildStreamProviders(),
       ),
     );
   }
 
-  Widget _buildStreamProvider() {
-    return BlocProvider<ActivityDetailsActivityStreamBloc>(
-      create: (context) => ActivityDetailsActivityStreamBloc(
-        RepositoryProvider.of<ActivityRepository>(context),
-        activity: activity,
-      ),
+  Widget _buildStreamProviders() {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ActivityStreamBloc(
+            RepositoryProvider.of<ActivityRepository>(context),
+            activity: activity,
+          ),
+        ),
+        BlocProvider(
+          create: (context) => AttendeeStreamBloc(
+            RepositoryProvider.of<AttendeeRepository>(context),
+            activityRef: activity.ref,
+          ),
+        ),
+      ],
       child: Builder(
         builder: (context) => StreamBlocBuilder(
-          streamBloc:
-              BlocProvider.of<ActivityDetailsActivityStreamBloc>(context),
+          streamBloc: BlocProvider.of<ActivityStreamBloc>(context),
           buildSuccess: (activity) => Builder(
-            builder: (context) => _buildScreen(context, activity),
+            builder: (context) => StreamBlocBuilder(
+              streamBloc: BlocProvider.of<AttendeeStreamBloc>(context),
+              buildSuccess: (attendees) => Builder(
+                builder: (context) =>
+                    _buildScreen(context, activity, attendees),
+              ),
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildScreen(BuildContext context, Activity activity) {
+  Widget _buildScreen(
+      BuildContext context, Activity activity, List<Attendee> attendees) {
     return TemplateScreen.topNavbar(
       context: context,
       appBarTitle: activity.title,
       navBarBloc: ActivityDetailsTopNavbarBloc(
         activity: activity,
+        attendees: attendees,
       ),
     );
   }
