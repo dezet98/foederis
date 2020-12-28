@@ -1,3 +1,4 @@
+import 'package:engineering_thesis/blocs/specific_blocs/create_activity/create_activity_send_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -41,9 +42,13 @@ class MyActivitiesTab extends NavBarTab {
           context,
           UserRoutes.form,
           options: {
-            'formDataBloc': BlocProvider.of<CreateActvityFormDataBloc>(context),
-            'formAppBarTitle': S.of(context).create_activity_screen_nav_title,
-            'formNextButtonText': 'fsd'
+            RoutingOption.formDataBloc:
+                BlocProvider.of<CreateActvityFormDataBloc>(context),
+            RoutingOption.formAppBarTitle:
+                S.of(context).create_activity_screen_nav_title,
+            RoutingOption.formNextButtonText: 'fsd',
+            RoutingOption.sendBloc:
+                BlocProvider.of<CreateActivitySendBloc>(context),
           },
         );
       },

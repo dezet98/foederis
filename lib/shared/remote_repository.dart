@@ -38,10 +38,10 @@ class RemoteRepository {
     try {
       return await _firestore.collection(collectionPath).add(data);
     } catch (e) {
-      if (e is UploadDataException) {
+      if (e is SendingDataException) {
         throw e;
       }
-      throw UploadDataException(
+      throw SendingDataException(
           sendingDataError: UploadDataError.undefined, message: e.toString());
     }
   }
@@ -54,10 +54,10 @@ class RemoteRepository {
     try {
       return await _firestore.collection(collectionPath).doc(docName).set(data);
     } catch (e) {
-      if (e is UploadDataException) {
+      if (e is SendingDataException) {
         throw e;
       }
-      throw UploadDataException(
+      throw SendingDataException(
           sendingDataError: UploadDataError.undefined, message: e.toString());
     }
   }

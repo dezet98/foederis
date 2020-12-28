@@ -89,7 +89,7 @@ class SearchActivityMapView extends StatelessWidget {
       subtitle: activity.categoryRef.toString(),
       onTap: () {
         Routing.pushNamed(context, UserRoutes.activityDetails,
-            options: {'activity': activity});
+            options: {RoutingOption.activity: activity});
       },
     );
   }

@@ -16,6 +16,10 @@ enum FetchingError {
   undefined,
 }
 
+enum SendingError {
+  undefined,
+}
+
 enum FetchFilterType {
   isEqualTo,
   isNotEqualTo,

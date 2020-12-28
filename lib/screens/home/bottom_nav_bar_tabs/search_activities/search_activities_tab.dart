@@ -1,3 +1,5 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/search_activities/search_activities_distance_send_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +9,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:google_maps_webservice/places.dart';
 
 import '../../../../blocs/abstract_blocs/fetch/fetch_bloc.dart';
-import '../../../../blocs/abstract_blocs/forms/form_data/form_data_bloc.dart';
 import '../../../../blocs/abstract_blocs/search_filter/search_filter_bloc.dart';
-import '../../../../blocs/specific_blocs/search_activities/search_activities_distance_choice_bloc.dart';
 import '../../../../blocs/specific_blocs/search_activities/search_activities_fetching_bloc.dart';
 import '../../../../blocs/specific_blocs/search_activities/search_activities_search_filter_bloc.dart';
 import '../../../../blocs/specific_blocs/shared_preferences/shared_preferences_bloc.dart';
@@ -37,14 +37,14 @@ class SearchActivitiesTab extends NavBarTab {
         }
       },
       child: BlocListener(
-        cubit: BlocProvider.of<SearchActivityDistanceChoiceBloc>(context),
+        cubit: BlocProvider.of<SearchActivitiesDistanceSendBloc>(context),
         listener: (context, state) {
-          if (state is FormDataUploadSuccessState) {
+          if (state is SendDataSuccessState) {
             BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
               FetchRefreshEvent(
                 filters: SearchActivitiesFetchingBloc.getFetchFilters(
                   distanceKm:
-                      BlocProvider.of<SearchActivityDistanceChoiceBloc>(context)
+                      BlocProvider.of<SearchActivitiesDistanceSendBloc>(context)
                           .distance,
                 ),
               ),

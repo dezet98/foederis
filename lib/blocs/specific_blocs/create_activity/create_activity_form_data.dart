@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../models/activity.dart';
 import '../../../models/category.dart';
 import '../../../models/collections/activity_collection.dart';
 import '../../../models/collections/query_field.dart';
@@ -130,12 +128,5 @@ class CreateActvityFormDataBloc extends FormDataBloc {
               )
             ],
           )
-        ]);
-
-  @override
-  Future<void> query(Map<String, dynamic> queryFields) async {
-    DocumentReference activityRef =
-        await activityRepository.createActivity(Activity.fromMap(queryFields));
-    print(activityRef);
-  }
+        ], true);
 }

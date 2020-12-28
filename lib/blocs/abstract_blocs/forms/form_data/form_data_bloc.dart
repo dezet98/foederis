@@ -7,8 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../models/collections/query_field.dart';
-import '../../../../shared/constants/enums.dart';
-import '../../../../shared/exceptions.dart';
 import '../form_field/form_field_bloc.dart';
 
 part 'form_data_event.dart';
@@ -16,16 +14,16 @@ part 'form_data_state.dart';
 
 abstract class FormDataBloc extends Bloc<FormDataEvent, FormDataState> {
   List<FormFieldBloc> formsData;
+  bool _editingEnabled = true;
 
-  FormDataBloc(this.formsData) : super(FormDataInitialState());
+  FormDataBloc(this.formsData, this._editingEnabled)
+      : super(FormDataInitialState());
 
   bool get isValid {
     for (FormFieldBloc optionBloc in formsData)
       if (!optionBloc.isValid) return false;
     return true;
   }
-
-  Future<void> query(Map<String, dynamic> queryFields);
 
   Map<String, dynamic> queryFields() {
     Map<String, dynamic> queryFields = Map();
@@ -38,7 +36,7 @@ abstract class FormDataBloc extends Bloc<FormDataEvent, FormDataState> {
     return queryFields;
   }
 
-  bool get editingEnabled => !(state is FormDataUploadInProgressState);
+  bool get editingEnabled => _editingEnabled;
 
   @override
   Stream<FormDataState> mapEventToState(
@@ -48,22 +46,10 @@ abstract class FormDataBloc extends Bloc<FormDataEvent, FormDataState> {
       yield FormDataEditingState();
       event.formFieldBloc.add(FormFieldChangeOptionEvent(result: event.result));
       yield FormDataEditedState();
-    } else if (event is FormDataSendingEvent) {
-      try {
-        yield FormDataUploadInProgressState();
-        await query(queryFields());
-        yield FormDataUploadSuccessState();
-      } catch (e) {
-        if (e is UploadDataException)
-          yield FormDataUploadFailureState(uploadDataException: e);
-        else
-          yield FormDataUploadFailureState(
-            uploadDataException: UploadDataException(
-              sendingDataError: UploadDataError.undefined,
-              message: e.toString(),
-            ),
-          );
-      }
+    } else if (event is FormDataEditingEnabledEvent) {
+      _editingEnabled = true;
+    } else if (event is FormDataEditingDisableEvent) {
+      _editingEnabled = false;
     }
   }
 }

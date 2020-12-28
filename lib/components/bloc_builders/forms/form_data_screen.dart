@@ -1,3 +1,5 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
+import 'package:engineering_thesis/shared/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,17 +30,20 @@ class FormDataScreen extends StatelessWidget {
   final FormDataBloc formDataBloc;
   final String formAppBarTitle;
   final String formNextButtonText;
+  final SendBloc sendBloc;
 
-  FormDataScreen(
-      {@required this.formDataBloc,
-      @required this.formAppBarTitle,
-      @required this.formNextButtonText});
+  FormDataScreen({
+    @required this.formDataBloc,
+    @required this.formAppBarTitle,
+    @required this.formNextButtonText,
+    @required this.sendBloc,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocListener(
-      cubit: formDataBloc,
-      listener: formDataBlocListener,
+      cubit: sendBloc,
+      listener: sendBlocListener,
       child: TemplateScreen(
         platformAppBar: _buildAppBar(context),
         body: Form(
@@ -54,28 +59,40 @@ class FormDataScreen extends StatelessWidget {
     );
   }
 
-  void formDataBlocListener(BuildContext context, dynamic state) {
-    if (state is FormDataUploadFailureState) {
+  void sendBlocListener(BuildContext context, dynamic state) {
+    if (state is SendDataFailureState) {
+      formDataBloc.add(FormDataEditingEnabledEvent());
       CustomSnackBar.show(
-          context, SnackBarType.error, state.uploadDataException.toString());
-    } else if (state is FormDataUploadSuccessState) {
-      CustomSnackBar.show(context, SnackBarType.error, 'Success');
+          context, SnackBarType.error, state.sendingDataException.toString());
+    } else if (state is SendDataSuccessState) {
+      Routing.pop(context);
+      formDataBloc.add(FormDataEditingEnabledEvent());
+      CustomSnackBar.show(context, SnackBarType.info, 'Success');
+    } else if (state is SendDataInProgressState) {
+      formDataBloc.add(FormDataEditingDisableEvent());
     }
   }
 
   Widget _buildApplyButton(BuildContext context) {
     return BlocBuilder(
-      cubit: formDataBloc,
+      cubit: sendBloc,
       builder: (context, state) {
-        if (state is FormDataUploadInProgressState) {
+        if (state is SendDataInProgressState) {
           return CustomButton.loadingButton();
         }
 
-        return CustomButton.flatButton(
-          text: formNextButtonText,
-          enabled: formDataBloc.isValid,
-          onPressed: () {
-            formDataBloc.add(FormDataSendingEvent());
+        return BlocBuilder(
+          cubit: formDataBloc,
+          builder: (context, state) {
+            return CustomButton.flatButton(
+              text: formNextButtonText,
+              enabled: formDataBloc.isValid,
+              onPressed: () {
+                sendBloc.add(SendDataEvent(
+                  queryData: formDataBloc.queryFields(),
+                ));
+              },
+            );
           },
         );
       },

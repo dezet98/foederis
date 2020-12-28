@@ -34,8 +34,17 @@ class UserRoutes {
   static List<String> get props => [home, activityDetails, form];
 }
 
+enum RoutingOption {
+  formDataBloc,
+  sendBloc,
+  formNextButtonText,
+  formAppBarTitle,
+  activity,
+  filtersBloc,
+}
+
 class Routing {
-  static onGenerate(String routeName, {Map<String, dynamic> options}) {
+  static onGenerate(String routeName, {Map<RoutingOption, dynamic> options}) {
     switch (routeName) {
       case UserRoutes.home:
         return HomeScreen();
@@ -46,14 +55,15 @@ class Routing {
       case CommonRoutes.splash:
         return SplashScreen();
       case CommonRoutes.filter:
-        return FiltersScreen(filtersBloc: options['filtersBloc']);
+        return FiltersScreen(filtersBloc: options[RoutingOption.filtersBloc]);
       case UserRoutes.activityDetails:
-        return ActivityDetailsScreen(activity: options['activity']);
+        return ActivityDetailsScreen(activity: options[RoutingOption.activity]);
       case UserRoutes.form:
         return FormDataScreen(
-          formDataBloc: options['formDataBloc'],
-          formAppBarTitle: options['formAppBarTitle'],
-          formNextButtonText: options['formNextButtonText'],
+          formDataBloc: options[RoutingOption.formDataBloc],
+          formAppBarTitle: options[RoutingOption.formAppBarTitle],
+          formNextButtonText: options[RoutingOption.formNextButtonText],
+          sendBloc: options[RoutingOption.sendBloc],
         );
       default:
         assert(false, '{ error: $routeName is not define as a routeName }');
@@ -65,7 +75,8 @@ class Routing {
     }
   }
 
-  static void pushNamed(context, String routeName, {dynamic options}) {
+  static void pushNamed(context, String routeName,
+      {Map<RoutingOption, dynamic> options}) {
     if (_routeGuard(context, routeName)) {
       Navigator.push(
           context,
@@ -74,7 +85,8 @@ class Routing {
     }
   }
 
-  static void pushReplacement(context, String routeName, {dynamic options}) {
+  static void pushReplacement(context, String routeName,
+      {Map<RoutingOption, dynamic> options}) {
     if (_routeGuard(context, routeName)) {
       Navigator.pushReplacement(
           context,

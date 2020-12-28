@@ -1,3 +1,4 @@
+import 'package:engineering_thesis/blocs/specific_blocs/search_activities/search_activities_distance_send_bloc.dart';
 import 'package:engineering_thesis/components/bloc_builders/search_screen.dart';
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
 import 'package:engineering_thesis/components/custom_widgets/gesture_detector/custom_gesture_detector.dart';
@@ -66,11 +67,14 @@ class SearchActivitiesAppBar {
                   context,
                   UserRoutes.form,
                   options: {
-                    'formDataBloc':
+                    RoutingOption.formDataBloc:
                         BlocProvider.of<SearchActivityDistanceChoiceBloc>(
                             context),
-                    'formAppBarTitle': 'dsa',
-                    'formNextButtonText': 'fsd'
+                    RoutingOption.formAppBarTitle: 'dsa',
+                    RoutingOption.formNextButtonText: 'fsd',
+                    RoutingOption.sendBloc:
+                        BlocProvider.of<SearchActivitiesDistanceSendBloc>(
+                            context),
                   },
                 );
               },
@@ -90,7 +94,8 @@ class SearchActivitiesAppBar {
           context,
           CommonRoutes.filter,
           options: {
-            'filtersBloc': BlocProvider.of<SearchActivitiesFiltersBloc>(context)
+            RoutingOption.filtersBloc:
+                BlocProvider.of<SearchActivitiesFiltersBloc>(context)
           },
         );
       },
