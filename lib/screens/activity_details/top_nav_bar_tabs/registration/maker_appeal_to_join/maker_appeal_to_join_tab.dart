@@ -17,6 +17,7 @@ class MakerAppealToJoinTab extends NavBarTab {
 
   @override
   Widget build(BuildContext context) {
+    return Text('Maker');
     return BlocProvider(
       create: (context) => FreeJoinRegistrationSendBloc(
         RepositoryProvider.of<AttendeeRepository>(context),
@@ -54,5 +55,5 @@ class MakerAppealToJoinTab extends NavBarTab {
   Icon getIcon(BuildContext context) => null;
 
   @override
-  String getLabel(BuildContext context) => 'Registration';
+  String getLabel(BuildContext context) => 'Requests';
 }

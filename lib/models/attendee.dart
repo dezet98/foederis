@@ -3,7 +3,6 @@ import 'package:engineering_thesis/models/collections/attendee_collection.dart';
 import 'package:engineering_thesis/shared/utils/enums.dart';
 
 import '../shared/extensions.dart';
-import 'collections/collection.dart';
 
 class Attendee {
   DocumentReference ref;
@@ -22,7 +21,6 @@ class Attendee {
   }
 
   Attendee.fromMap(Map<String, dynamic> data) {
-    data = Collection.fillRemainsData(data, AttendeeCollection.allFields);
     this.activityRef = data[AttendeeCollection.activityRef.fieldName];
     this.userRef = data[AttendeeCollection.userRef.fieldName];
     this.joinDate = data[AttendeeCollection.joinDate.fieldName];

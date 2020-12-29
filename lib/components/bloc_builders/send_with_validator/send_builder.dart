@@ -26,6 +26,8 @@ class SendBuilder extends StatelessWidget {
       builder: (context, state) {
         if (state is SendDataInProgressState) {
           return CustomButton.loadingButton();
+        } else if (state is SendDataFailureState) {
+          return Text(state.sendingDataException.message);
         }
 
         return CustomButton.flatButton(
