@@ -3,11 +3,12 @@ import 'package:geohash/geohash.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../shared/extensions.dart';
+import 'category.dart';
 import 'collections/activity_collection.dart';
-import 'collections/collection.dart';
 
 class Activity {
   DocumentReference ref;
+  DocumentReference userRef;
   String title;
   DocumentReference categoryRef;
   DateTime startDate;
@@ -18,22 +19,25 @@ class Activity {
   String geohash;
   String address;
 
-  Activity.fromDocument(QueryDocumentSnapshot doc) {
+  // additional fields
+  Category category;
+
+  Activity.fromDocument(DocumentSnapshot doc) {
     this.ref = doc.reference;
-    this.title = doc.getField(ActivityCollection.title.fieldName);
-    this.categoryRef = doc.getField(ActivityCollection.categoryRef.fieldName);
-    this.startDate =
-        doc.getField<DateTime>(ActivityCollection.startDate.fieldName);
-    this.maxEntry = doc.getField(ActivityCollection.maxEntry.fieldName);
-    this.minEntry = doc.getField(ActivityCollection.minEntry.fieldName);
-    this.freeJoin = doc.getField(ActivityCollection.freeJoin.fieldName);
-    this.regular = doc.getField(ActivityCollection.regular.fieldName);
-    this.geohash = doc.getField(ActivityCollection.geohash.fieldName);
-    this.address = doc.getField(ActivityCollection.address.fieldName);
+    this.userRef = doc.getField(ActivityCollection.userRef);
+    this.title = doc.getField(ActivityCollection.title);
+    this.categoryRef = doc.getField(ActivityCollection.categoryRef);
+    this.startDate = doc.getField<DateTime>(ActivityCollection.startDate);
+    this.maxEntry = doc.getField(ActivityCollection.maxEntry);
+    this.minEntry = doc.getField(ActivityCollection.minEntry);
+    this.freeJoin = doc.getField(ActivityCollection.freeJoin);
+    this.regular = doc.getField(ActivityCollection.regular);
+    this.geohash = doc.getField(ActivityCollection.geohash);
+    this.address = doc.getField(ActivityCollection.address);
   }
 
   Activity.fromMap(Map<String, dynamic> data) {
-    data = Collection.fillRemainsData(data, ActivityCollection.allFields);
+    this.userRef = data[ActivityCollection.userRef.fieldName];
     this.title = data[ActivityCollection.title.fieldName];
     this.categoryRef = data[ActivityCollection.categoryRef.fieldName];
     this.startDate = data[ActivityCollection.startDate.fieldName];
@@ -47,6 +51,7 @@ class Activity {
 
   toMap() {
     return {
+      ActivityCollection.userRef.fieldName: userRef,
       ActivityCollection.title.fieldName: title,
       ActivityCollection.regular.fieldName: regular,
       ActivityCollection.startDate.fieldName: startDate,

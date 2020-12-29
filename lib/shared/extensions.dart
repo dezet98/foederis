@@ -1,26 +1,32 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:engineering_thesis/models/collections/query_field.dart';
 
 import '../models/fetch_filter.dart';
 import 'constants/enums.dart';
 import 'exceptions.dart';
 
-extension catchQueryExceptions on QueryDocumentSnapshot {
+extension catchQueryExceptions on DocumentSnapshot {
   /// use `get(String field)` method with handle exceptions
-  T getField<T>(String field) {
+  T getField<T>(CollectionField collectionField) {
     if (T == double) {
-      return _query(field)?.toDouble();
+      return _query(collectionField.fieldName, collectionField.isRequired)
+          ?.toDouble();
     } else if (T == DateTime) {
-      return _query(field)?.toDate();
+      return _query(collectionField.fieldName, collectionField.isRequired)
+          ?.toDate();
     }
 
-    return _query(field);
+    return _query(collectionField.fieldName, collectionField.isRequired);
   }
 
-  dynamic _query(String field) {
+  dynamic _query(String field, bool isRequired) {
     try {
       return this.get(field);
     } catch (e) {
       if (e is StateError) {
+        if (!isRequired) {
+          return null;
+        }
         throw (FetchingException(
           fetchingError: FetchingError.field_not_exist,
           message: "${e.message} / for $field field",

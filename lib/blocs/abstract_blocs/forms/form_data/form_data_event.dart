@@ -14,4 +14,8 @@ class FormDataEditingEvent<ResultType> extends FormDataEvent {
   FormDataEditingEvent({@required this.formFieldBloc, @required this.result});
 }
 
-class FormDataSendingEvent extends FormDataEvent {}
+class FormDataClearEvent extends FormDataEvent {}
+
+class FormDataEditingEnabledEvent extends FormDataEvent {}
+
+class FormDataEditingDisableEvent extends FormDataEvent {}

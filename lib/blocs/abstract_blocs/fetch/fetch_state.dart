@@ -26,8 +26,8 @@ class FetchInitialFailureState extends FetchState {
 
 class FetchRefreshInProgressState extends FetchState {}
 
-class FetchRefreshSuccessState<T> extends FetchState {
-  final T data;
+class FetchRefreshSuccessState<DataType> extends FetchState {
+  final DataType data;
 
   FetchRefreshSuccessState({@required this.data});
 }

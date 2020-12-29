@@ -7,12 +7,12 @@ abstract class AuthEvent extends Equatable {
 }
 
 class AuthUserChangedEvent extends AuthEvent {
-  final AppUser user;
+  final User firebaseUser;
 
-  AuthUserChangedEvent({@required this.user});
+  AuthUserChangedEvent({@required this.firebaseUser});
 
   @override
-  List<Object> get props => [user];
+  List<Object> get props => [firebaseUser];
 }
 
 class AuthSignOutEvent extends AuthEvent {}

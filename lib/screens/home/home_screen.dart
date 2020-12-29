@@ -1,14 +1,11 @@
-import 'package:engineering_thesis/shared/bloc_builders/nav_bar.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/home_screen/home_screen_bottom_nav_bar_bloc.dart';
+import 'package:engineering_thesis/components/templates/template_screen.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/specific_blocs/authorization/auth/auth_bloc.dart';
-import '../../blocs/specific_blocs/nav_bar/nav_bar_bloc.dart';
 import '../../shared/providers.dart';
 import '../../shared/routing.dart';
-import 'bottom_nav_bar_content/my_activities/my_activities_screen.dart';
-import 'bottom_nav_bar_content/search_activities/search_activities_screen.dart';
-import 'bottom_nav_bar_content/settings/settings_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -30,13 +27,10 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildNavBarScreen(BuildContext context) {
-    return NavBar(
-      content: [
-        SearchActivitiesScreen(),
-        MyActivitiesScreen(),
-        SettingsScreen()
-      ],
-      navBarBloc: BlocProvider.of<NavBarBloc>(context),
+    return TemplateScreen.bottomNavbar(
+      context: context,
+      navBarBloc: BlocProvider.of<HomeScreenBottomNavBarBloc>(context),
+      usePadding: false,
     );
   }
 }

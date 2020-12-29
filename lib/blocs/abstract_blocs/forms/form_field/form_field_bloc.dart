@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/validators/validator.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../../models/collections/query_field.dart';
-import '../../../../shared/utils/validators.dart';
 
 part 'form_field_event.dart';
 part 'form_field_state.dart';
@@ -16,21 +16,20 @@ abstract class FormFieldBloc<ResultType>
   List<Validator> Function(ResultType) validators;
   List<QueryField> Function(ResultType) queryFieldFromResult;
   String Function(BuildContext) getLabel;
+  bool editingEnabled;
+  ResultType initialResult;
 
   FormFieldBloc({
-    @required initialResult,
+    @required this.initialResult,
     @required this.validators,
     @required this.getLabel,
     @required this.queryFieldFromResult,
+    this.editingEnabled = true,
   }) : super(FormFieldInitialState()) {
     _result = initialResult;
   }
 
-  bool _checkValid(result) {
-    List<Validator> v = validators(result);
-    for (Validator validator in v) if (!validator.isValid()) return false;
-    return true;
-  }
+  bool _checkValid(result) => Validator.checkValid(validators(result));
 
   bool get isValid => _checkValid(_result);
 
@@ -46,6 +45,15 @@ abstract class FormFieldBloc<ResultType>
       yield FormFieldChangeInProgressState();
       _result = event.result;
       yield FormFieldChangedState(result: _result);
+    } else if (event is FormFieldEditingEnableEvent) {
+      editingEnabled = true;
+      yield FormFieldEditingEnabledState();
+    } else if (event is FormFieldEditingDisableEvent) {
+      editingEnabled = false;
+      yield FormFieldEditingDisabledState();
+    } else if (event is FormFieldClearEvent) {
+      _result = initialResult;
+      yield FormFieldClearedState();
     }
   }
 }

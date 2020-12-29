@@ -16,6 +16,14 @@ enum FetchingError {
   undefined,
 }
 
+enum StreamError {
+  undefined,
+}
+
+enum SendingError {
+  undefined,
+}
+
 enum FetchFilterType {
   isEqualTo,
   isNotEqualTo,
@@ -34,6 +42,7 @@ enum UploadDataError {
   wrongFieldName,
   undefined,
   required_field_not_provider,
+  data_not_valid,
 }
 
 // // enum TO string

@@ -1,9 +1,9 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/validators/validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
 import '../../../models/collections/query_field.dart';
 import '../../../models/geolocation.dart';
-import '../../../shared/utils/validators.dart';
 import 'form_field/form_field_bloc.dart';
 
 class FormAddressFieldBloc extends FormFieldBloc<Geolocation> {

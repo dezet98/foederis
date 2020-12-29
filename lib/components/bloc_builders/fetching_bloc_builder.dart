@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../blocs/abstract_blocs/choice_filters/filters/filters_bloc.dart';
 import '../../blocs/abstract_blocs/fetch/fetch_bloc.dart';
 
 class FetchingBlocBuilder extends StatelessWidget {
   final FetchBloc fetchingCubit;
-  final FiltersBloc filtersCubit;
   final Widget Function(dynamic data) buildSuccess;
   final Widget Function(dynamic exception) buildError;
   final Widget buildInProgress;
@@ -17,7 +15,6 @@ class FetchingBlocBuilder extends StatelessWidget {
   FetchingBlocBuilder({
     @required this.fetchingCubit,
     @required this.buildSuccess,
-    this.filtersCubit,
     this.buildError,
     this.buildInProgress,
     this.isSliver = false,

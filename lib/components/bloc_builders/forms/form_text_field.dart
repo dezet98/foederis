@@ -1,3 +1,4 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_field/form_field_bloc.dart';
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/components/custom_widgets/text_form_field/custom_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,36 +20,39 @@ class FormTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     textFieldController.text = formFieldBloc.result;
 
-    return Column(
-      children: [
-        BlocBuilder(
-          cubit: formFieldBloc,
-          builder: (context, state) {
-            return CustomText(
+    return BlocConsumer(
+      cubit: formFieldBloc,
+      listener: (context, state) {
+        if (state is FormFieldClearedState) {
+          textFieldController.text = formFieldBloc.result;
+        }
+      },
+      builder: (context, state) {
+        return Column(
+          children: [
+            CustomText(
               formFieldBloc.getLabel(context),
               textType: formFieldBloc.isValid
                   ? TextType.valid_form_title
                   : TextType.invalid_form_title,
               alignment: Alignment.centerLeft,
-            );
-          },
-        ),
-        BlocBuilder(
-            cubit: formDataBloc,
-            builder: (context, state) {
-              return CustomTextFormField(
-                textEditingController: textFieldController,
-                enabled: formDataBloc.editingEnabled,
-                onChamged: (String text) {
-                  if (formDataBloc.editingEnabled)
-                    formDataBloc.add(
-                      FormDataEditingEvent(
-                          formFieldBloc: formFieldBloc, result: text),
-                    );
-                },
-              );
-            }),
-      ],
+            ),
+            CustomTextFormField(
+              textEditingController: textFieldController,
+              enabled: formFieldBloc.editingEnabled,
+              onChamged: (String text) {
+                if (formFieldBloc.editingEnabled)
+                  formDataBloc.add(
+                    FormDataEditingEvent(
+                      formFieldBloc: formFieldBloc,
+                      result: text,
+                    ),
+                  );
+              },
+            )
+          ],
+        );
+      },
     );
   }
 }

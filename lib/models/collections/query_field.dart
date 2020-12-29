@@ -3,10 +3,12 @@ import 'package:meta/meta.dart';
 class CollectionField {
   String fieldName;
   bool isRequired;
+  dynamic defaultValue;
 
   CollectionField({
     @required this.fieldName,
     @required this.isRequired,
+    this.defaultValue,
   });
 }
 

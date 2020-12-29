@@ -1,14 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/validators/validators.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../models/activity.dart';
 import '../../../models/category.dart';
 import '../../../models/collections/activity_collection.dart';
 import '../../../models/collections/query_field.dart';
 import '../../../models/geolocation.dart';
 import '../../../repositories/activity_repository.dart';
 import '../../../repositories/category_repository.dart';
-import '../../../shared/utils/validators.dart';
 import '../../abstract_blocs/forms/form_address_field_bloc.dart';
 import '../../abstract_blocs/forms/form_check_field_bloc.dart';
 import '../../abstract_blocs/forms/form_data/form_data_bloc.dart';
@@ -16,12 +14,12 @@ import '../../abstract_blocs/forms/form_date_field_bloc.dart';
 import '../../abstract_blocs/forms/form_number_range_field_bloc.dart';
 import '../../abstract_blocs/forms/form_option_list_field_bloc.dart';
 import '../../abstract_blocs/forms/form_text_field_bloc.dart';
-import 'category_fetching_bloc.dart';
+import '../common/categories_fetching_bloc.dart';
 
 class CreateActvityFormDataBloc extends FormDataBloc {
   final ActivityRepository activityRepository;
   final CategoryRepository categoryRepository;
-  final CategoryFetchingBloc categoryFetchingBloc;
+  final CategoriesFetchingBloc categoryFetchingBloc;
 
   CreateActvityFormDataBloc({
     @required this.activityRepository,
@@ -131,11 +129,4 @@ class CreateActvityFormDataBloc extends FormDataBloc {
             ],
           )
         ]);
-
-  @override
-  Future<void> query(Map<String, dynamic> queryFields) async {
-    DocumentReference activityRef =
-        await activityRepository.createActivity(Activity.fromMap(queryFields));
-    print(activityRef);
-  }
 }

@@ -7,8 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../models/collections/query_field.dart';
-import '../../../../shared/constants/enums.dart';
-import '../../../../shared/exceptions.dart';
 import '../form_field/form_field_bloc.dart';
 
 part 'form_data_event.dart';
@@ -16,7 +14,6 @@ part 'form_data_state.dart';
 
 abstract class FormDataBloc extends Bloc<FormDataEvent, FormDataState> {
   List<FormFieldBloc> formsData;
-
   FormDataBloc(this.formsData) : super(FormDataInitialState());
 
   bool get isValid {
@@ -24,8 +21,6 @@ abstract class FormDataBloc extends Bloc<FormDataEvent, FormDataState> {
       if (!optionBloc.isValid) return false;
     return true;
   }
-
-  Future<void> query(Map<String, dynamic> queryFields);
 
   Map<String, dynamic> queryFields() {
     Map<String, dynamic> queryFields = Map();
@@ -38,32 +33,30 @@ abstract class FormDataBloc extends Bloc<FormDataEvent, FormDataState> {
     return queryFields;
   }
 
-  bool get editingEnabled => !(state is FormDataUploadInProgressState);
-
   @override
   Stream<FormDataState> mapEventToState(
     FormDataEvent event,
   ) async* {
     if (event is FormDataEditingEvent) {
-      yield FormDataEditingState();
-      event.formFieldBloc.add(FormFieldChangeOptionEvent(result: event.result));
-      yield FormDataEditedState();
-    } else if (event is FormDataSendingEvent) {
-      try {
-        yield FormDataUploadInProgressState();
-        await query(queryFields());
-        yield FormDataUploadSuccessState();
-      } catch (e) {
-        if (e is UploadDataException)
-          yield FormDataUploadFailureState(uploadDataException: e);
-        else
-          yield FormDataUploadFailureState(
-            uploadDataException: UploadDataException(
-              sendingDataError: UploadDataError.undefined,
-              message: e.toString(),
-            ),
-          );
-      }
+      yield* mapFormDataEditingEvent(event.formFieldBloc, event.result);
+    } else if (event is FormDataEditingEnabledEvent) {
+      for (FormFieldBloc formFieldBloc in formsData)
+        formFieldBloc.add(FormFieldEditingEnableEvent());
+    } else if (event is FormDataEditingDisableEvent) {
+      for (FormFieldBloc formFieldBloc in formsData)
+        formFieldBloc.add(FormFieldEditingDisableEvent());
+    } else if (event is FormDataClearEvent) {
+      for (FormFieldBloc formFieldBloc in formsData)
+        formFieldBloc.add(FormFieldClearEvent());
     }
+  }
+
+  Stream<FormDataState> mapFormDataEditingEvent(
+      FormFieldBloc formFieldBloc, dynamic formFieldResult) async* {
+    try {
+      yield FormDataEditingState();
+      formFieldBloc.add(FormFieldChangeOptionEvent(result: formFieldResult));
+      yield FormDataEditedState();
+    } catch (e) {}
   }
 }

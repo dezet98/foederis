@@ -1,3 +1,6 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
+import 'package:engineering_thesis/shared/routing.dart';
+import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,54 +31,84 @@ class FormDataScreen extends StatelessWidget {
   final FormDataBloc formDataBloc;
   final String formAppBarTitle;
   final String formNextButtonText;
+  final SendBloc sendBloc;
+  final Function afterSuccess;
 
-  FormDataScreen(
-      {@required this.formDataBloc,
-      @required this.formAppBarTitle,
-      @required this.formNextButtonText});
+  FormDataScreen({
+    @required this.formDataBloc,
+    @required this.formNextButtonText,
+    @required this.sendBloc,
+    this.formAppBarTitle,
+    this.afterSuccess,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocListener(
-      cubit: formDataBloc,
-      listener: formDataBlocListener,
-      child: TemplateScreen(
-        platformAppBar: _buildAppBar(context),
-        body: Form(
-          child: Column(
-            children: [
-              for (FormFieldBloc optionBloc in formDataBloc.formsData)
-                _buildSingleForm(optionBloc),
-              _buildApplyButton(context),
-            ],
-          ),
-        ),
+      cubit: sendBloc,
+      listener: sendBlocListener,
+      child: formAppBarTitle == null
+          ? Padding(
+              padding: const EdgeInsets.all(Dimensions.screenPadding),
+              child: _buildForm(context),
+            )
+          : TemplateScreen(
+              platformAppBar: _buildAppBar(context),
+              body: _buildForm(context),
+            ),
+    );
+  }
+
+  Widget _buildForm(context) {
+    return Form(
+      child: Column(
+        children: [
+          for (FormFieldBloc optionBloc in formDataBloc.formsData)
+            _buildSingleForm(optionBloc),
+          _buildApplyButton(context),
+        ],
       ),
     );
   }
 
-  void formDataBlocListener(BuildContext context, dynamic state) {
-    if (state is FormDataUploadFailureState) {
+  void sendBlocListener(BuildContext context, dynamic state) {
+    if (state is SendDataFailureState) {
+      formDataBloc.add(FormDataEditingEnabledEvent());
       CustomSnackBar.show(
-          context, SnackBarType.error, state.uploadDataException.toString());
-    } else if (state is FormDataUploadSuccessState) {
-      CustomSnackBar.show(context, SnackBarType.error, 'Success');
+          context, SnackBarType.error, state.sendingDataException.toString());
+    } else if (state is SendDataSuccessState) {
+      formDataBloc.add(FormDataClearEvent());
+      formDataBloc.add(FormDataEditingEnabledEvent());
+      if (afterSuccess == null)
+        Routing.pop(context);
+      else
+        afterSuccess();
+      CustomSnackBar.show(context, SnackBarType.info, 'Success');
+    } else if (state is SendDataInProgressState) {
+      formDataBloc.add(FormDataEditingDisableEvent());
     }
   }
 
   Widget _buildApplyButton(BuildContext context) {
     return BlocBuilder(
-      cubit: formDataBloc,
+      cubit: sendBloc,
       builder: (context, state) {
-        if (state is FormDataUploadInProgressState) {
+        if (state is SendDataInProgressState) {
           return CustomButton.loadingButton();
         }
 
-        return CustomButton.flatButton(
-          text: formNextButtonText,
-          enabled: formDataBloc.isValid,
-          onPressed: () {
-            formDataBloc.add(FormDataSendingEvent());
+        return BlocBuilder(
+          cubit: formDataBloc,
+          builder: (context, state) {
+            return CustomButton.flatButton(
+              text: formNextButtonText,
+              enabled: formDataBloc.isValid,
+              onPressed: () {
+                sendBloc.add(
+                  SendDataEvent(valuesMap: formDataBloc.queryFields()),
+                );
+              },
+            );
           },
         );
       },
@@ -86,6 +119,13 @@ class FormDataScreen extends StatelessWidget {
     return CustomAppBar(
       appBarType: AppBarType.close,
       title: formAppBarTitle,
+      trailingActions: [
+        CustomButton.flatButton(
+            text: 'Clear',
+            onPressed: () {
+              formDataBloc.add(FormDataClearEvent());
+            })
+      ],
     );
   }
 

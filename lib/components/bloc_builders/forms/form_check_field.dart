@@ -29,9 +29,9 @@ class FormCheckField extends StatelessWidget {
                 ),
                 CustomSwitch(
                   value: formFieldBloc.result,
-                  enabled: formDataBloc.editingEnabled,
+                  enabled: formFieldBloc.editingEnabled,
                   onChanged: (bool result) {
-                    if (formDataBloc.editingEnabled)
+                    if (formFieldBloc.editingEnabled)
                       formDataBloc.add(
                         FormDataEditingEvent(
                           formFieldBloc: formFieldBloc,

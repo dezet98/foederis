@@ -10,12 +10,20 @@ abstract class Collection {
 
     for (CollectionField queryField in allFields) {
       if (queryField.isRequired && !data.containsKey(queryField.fieldName)) {
-        throw UploadDataException(
+        throw SendingDataException(
           sendingDataError: UploadDataError.required_field_not_provider,
           message: '{ requiredField: ${queryField.fieldName} })',
         );
+      } else if (queryField.isRequired &&
+          data.containsKey(queryField.fieldName) &&
+          data[queryField.fieldName] == null) {
+        throw SendingDataException(
+          sendingDataError: UploadDataError.required_field_not_provider,
+          message: '{ requiredField is null: ${queryField.fieldName} })',
+        );
       } else if (!data.containsKey(queryField.fieldName)) {
-        emptyData[queryField.fieldName] = null;
+        emptyData[queryField.fieldName] =
+            queryField.defaultValue != null ? queryField.defaultValue : null;
       }
     }
 
