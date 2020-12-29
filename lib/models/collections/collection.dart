@@ -15,7 +15,8 @@ abstract class Collection {
           message: '{ requiredField: ${queryField.fieldName} })',
         );
       } else if (!data.containsKey(queryField.fieldName)) {
-        emptyData[queryField.fieldName] = null;
+        emptyData[queryField.fieldName] =
+            queryField.defaultValue != null ? queryField.defaultValue : null;
       }
     }
 

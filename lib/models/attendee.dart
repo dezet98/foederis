@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/models/collections/attendee_collection.dart';
+import 'package:engineering_thesis/shared/utils/enums.dart';
 
 import '../shared/extensions.dart';
 import 'collections/collection.dart';
@@ -9,12 +10,15 @@ class Attendee {
   DocumentReference activityRef;
   DocumentReference userRef;
   DateTime joinDate;
+  AttendeeRole role;
 
   Attendee.fromDocument(DocumentSnapshot doc) {
     this.ref = doc.reference;
     this.activityRef = doc.getField(AttendeeCollection.activityRef);
     this.userRef = doc.getField(AttendeeCollection.userRef);
     this.joinDate = doc.getField<DateTime>(AttendeeCollection.joinDate);
+    this.role = enumFromString<AttendeeRole>(
+        AttendeeRole.values, doc.getField(AttendeeCollection.role));
   }
 
   Attendee.fromMap(Map<String, dynamic> data) {
