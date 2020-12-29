@@ -7,6 +7,7 @@ import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activ
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_search_filter_bloc.dart';
 import 'package:engineering_thesis/repositories/appeal_to_join_repository.dart';
 import 'package:engineering_thesis/repositories/attendee_repository.dart';
+import 'package:engineering_thesis/repositories/transaction_and_batch_repository.dart';
 import 'package:engineering_thesis/repositories/user_repository.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/my_activities/my_activities_tab.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/search_activities/search_activities_tab.dart';
@@ -56,6 +57,10 @@ dynamic getMainRepositoryProviders() => [
       ),
       RepositoryProvider<AppealToJoinRepository>(
         create: (context) => AppealToJoinRepository(
+            RepositoryProvider.of<RemoteRepository>(context)),
+      ),
+      RepositoryProvider<TransactionAndBatchRepository>(
+        create: (context) => TransactionAndBatchRepository(
             RepositoryProvider.of<RemoteRepository>(context)),
       ),
     ];

@@ -11,6 +11,7 @@ class RemoteRepository {
   RemoteRepository({FirebaseFirestore firestore})
       : _firestore = firestore ?? FirebaseFirestore.instance;
 
+  // get data:
   Future<ResultType> getCollection<ResultType>(
     List<FetchFilter> filters,
     String collectionPath,
@@ -87,10 +88,9 @@ class RemoteRepository {
     }
   }
 
+  // insert data
   Future<DocumentReference> insertToCollection(
-    Map<String, dynamic> data,
-    String collectionPath,
-  ) async {
+      Map<String, dynamic> data, String collectionPath) async {
     try {
       return await _firestore.collection(collectionPath).add(data);
     } catch (e) {
@@ -118,12 +118,72 @@ class RemoteRepository {
     }
   }
 
-  Future<void> deleteWithNameFromCollection(
+  Future<dynamic> deleteWithNameFromCollection(
     String collectionPath,
     String docName,
   ) async {
     try {
       return await _firestore.collection(collectionPath).doc(docName).delete();
+    } catch (e) {
+      if (e is SendingDataException) {
+        throw e;
+      }
+      throw SendingDataException(
+          sendingDataError: UploadDataError.undefined, message: e.toString());
+    }
+  }
+
+  /// get reference to operation
+  Future<DocumentReference> insertToCollectionReference(
+      String collectionPath) async {
+    try {
+      return _firestore.collection(collectionPath).doc();
+    } catch (e) {
+      if (e is SendingDataException) {
+        throw e;
+      }
+      throw SendingDataException(
+          sendingDataError: UploadDataError.undefined, message: e.toString());
+    }
+  }
+
+  Future<DocumentReference> deleteWithNameFromCollectionReference(
+    String collectionPath,
+    String docName,
+  ) async {
+    try {
+      return _firestore.collection(collectionPath).doc(docName);
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  /// batches
+  Future<WriteBatch> getBatch() async {
+    try {
+      return _firestore.batch();
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  Future<void> commitBatch(WriteBatch batch) async {
+    try {
+      return batch.commit();
+    } catch (e) {
+      if (e is SendingDataException) {
+        throw e;
+      }
+      throw SendingDataException(
+          sendingDataError: UploadDataError.undefined, message: e.toString());
+    }
+  }
+
+  /// transactions
+  Future<T> runTranslaction<T>(
+      Future<T> Function(Transaction) transactionHandler) async {
+    try {
+      return _firestore.runTransaction(transactionHandler);
     } catch (e) {
       if (e is SendingDataException) {
         throw e;

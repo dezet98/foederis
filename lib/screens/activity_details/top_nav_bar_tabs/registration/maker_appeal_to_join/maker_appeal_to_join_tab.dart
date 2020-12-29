@@ -10,7 +10,7 @@ import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/appeal_to_join.dart';
 import 'package:engineering_thesis/models/attendee.dart';
 import 'package:engineering_thesis/repositories/appeal_to_join_repository.dart';
-import 'package:engineering_thesis/repositories/attendee_repository.dart';
+import 'package:engineering_thesis/repositories/transaction_and_batch_repository.dart';
 import 'package:engineering_thesis/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,8 +50,7 @@ class MakerAppealToJoinTab extends NavBarTab {
       buildTile: (AppealToJoin appealToJoin) {
         return BlocProvider(
           create: (context) => MakerRegistrationAttendeeSendBloc(
-            RepositoryProvider.of<AttendeeRepository>(context),
-            RepositoryProvider.of<AppealToJoinRepository>(context),
+            RepositoryProvider.of<TransactionAndBatchRepository>(context),
             activity: activity,
             userRef: appealToJoin.userRef,
             appealToJoinRef: appealToJoin.ref,
