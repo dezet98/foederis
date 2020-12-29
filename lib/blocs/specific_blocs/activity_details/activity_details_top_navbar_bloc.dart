@@ -5,7 +5,8 @@ import 'package:engineering_thesis/models/attendee.dart';
 import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/attendees/attendees_tab.dart';
 import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/description/description_tab.dart';
 import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/map/activity_details_map_tab.dart';
-import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/registration/registration_tab.dart';
+import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/registration/free_join/free_join_registration_tab.dart';
+import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/registration/records/records_registration_tab.dart';
 import 'package:meta/meta.dart';
 
 class ActivityDetailsTopNavbarBloc extends NavBarBloc {
@@ -21,8 +22,10 @@ class ActivityDetailsTopNavbarBloc extends NavBarBloc {
 
   List<NavBarTab> get navBarTabs => [
         DescriptionTab(activity: activity),
-        if (activity.startDate.isAfter(DateTime.now()))
-          RegistrationTab(activity: activity, attendees: attendees),
+        if (activity.freeJoin)
+          FreeJoinRegistrationTab(activity: activity, attendees: attendees),
+        if (!activity.freeJoin)
+          RecordsRegistrationTab(activity: activity, attendees: attendees),
         AttendeesTab(
           activity: activity,
           attendees: attendees,

@@ -6,12 +6,12 @@ import 'package:engineering_thesis/models/collections/attendee_collection.dart';
 import 'package:engineering_thesis/repositories/attendee_repository.dart';
 import 'package:meta/meta.dart';
 
-class ActivityDetailsRegisterSendBloc extends SendBloc {
+class FreeJoinRegistrationSendBloc extends SendBloc {
   final AttendeeRepository _attendeeRepository;
   final Activity activity;
   final DocumentReference userRef;
 
-  ActivityDetailsRegisterSendBloc(this._attendeeRepository,
+  FreeJoinRegistrationSendBloc(this._attendeeRepository,
       {@required this.activity, @required this.userRef});
 
   @override

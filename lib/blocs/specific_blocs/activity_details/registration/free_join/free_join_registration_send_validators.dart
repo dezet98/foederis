@@ -8,12 +8,12 @@ import 'package:engineering_thesis/models/attendee.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
-class ActivityDetailsRegisterSendValidators extends ValidatorsBloc {
+class FreeJoinRegistrationSendValidators extends ValidatorsBloc {
   final UserDataBloc _userDataBloc;
   final List<Attendee> attendees;
   final Activity activity;
 
-  ActivityDetailsRegisterSendValidators(this._userDataBloc,
+  FreeJoinRegistrationSendValidators(this._userDataBloc,
       {@required this.attendees, @required this.activity});
 
   @override

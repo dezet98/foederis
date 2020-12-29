@@ -1,11 +1,10 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/search_filter/search_filter_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/shared_preferences/shared_preferences_bloc.dart';
+import 'package:engineering_thesis/shared/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:geohash/geohash.dart';
 import 'package:google_maps_webservice/places.dart';
-
-import '../../../shared/shared_preferences.dart';
-import '../../abstract_blocs/search_filter/search_filter_bloc.dart';
-import '../shared_preferences/shared_preferences_bloc.dart';
 
 class SearchActivitiesSearchFilterBloc
     extends SearchFilterBloc<PlacesSearchResult> {

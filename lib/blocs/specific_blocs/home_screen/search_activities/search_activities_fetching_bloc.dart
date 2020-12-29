@@ -1,13 +1,12 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_args.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_bloc.dart';
+import 'package:engineering_thesis/models/activity.dart';
+import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/category_repository.dart';
+import 'package:engineering_thesis/shared/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:geohash/geohash.dart';
 import 'package:google_maps_webservice/geocoding.dart';
-
-import '../../../models/activity.dart';
-import '../../../repositories/activity_repository.dart';
-import '../../../shared/shared_preferences.dart';
-import '../../abstract_blocs/fetch/fetch_bloc.dart';
 
 class SearchActivitiesFetchingArgsBloc extends FetchArgs {
   final int distanceKm;

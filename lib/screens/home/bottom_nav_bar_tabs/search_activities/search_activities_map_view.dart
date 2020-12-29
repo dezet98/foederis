@@ -1,3 +1,5 @@
+import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_fetching_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_filters_bloc.dart';
 import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/components/bloc_builders/filters/filtered_data.dart';
 import 'package:engineering_thesis/components/custom_widgets/bottom_sheet/custom_bottom_sheet.dart';
@@ -10,8 +12,6 @@ import 'package:geohash/geohash.dart';
 import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../../../../blocs/specific_blocs/search_activities/search_activities_fetching_bloc.dart';
-import '../../../../blocs/specific_blocs/search_activities/search_activities_filters_bloc.dart';
 import '../../../../models/activity.dart';
 import '../../../../shared/routing.dart';
 import '../../../../shared/shared_preferences.dart';

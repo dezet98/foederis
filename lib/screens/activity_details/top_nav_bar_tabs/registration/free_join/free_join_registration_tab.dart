@@ -1,6 +1,6 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
-import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/activity_details_register_send_bloc.dart';
-import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/activity_details_register_send_validators.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/free_join/free_join_registration_send_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/free_join/free_join_registration_send_validators.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/bloc_builders/send_with_validator/send_with_validator.dart';
@@ -12,25 +12,25 @@ import 'package:engineering_thesis/repositories/attendee_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class RegistrationTab extends NavBarTab {
+class FreeJoinRegistrationTab extends NavBarTab {
   final Activity activity;
   final List<Attendee> attendees;
 
-  RegistrationTab({@required this.attendees, @required this.activity});
+  FreeJoinRegistrationTab({@required this.attendees, @required this.activity});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => ActivityDetailsRegisterSendBloc(
+          create: (context) => FreeJoinRegistrationSendBloc(
             RepositoryProvider.of<AttendeeRepository>(context),
             userRef: RepositoryProvider.of<UserDataBloc>(context).user.ref,
             activity: activity,
           ),
         ),
         BlocProvider(
-          create: (context) => ActivityDetailsRegisterSendValidators(
+          create: (context) => FreeJoinRegistrationSendValidators(
             BlocProvider.of<UserDataBloc>(context),
             attendees: attendees,
             activity: activity,
@@ -40,7 +40,7 @@ class RegistrationTab extends NavBarTab {
       child: Builder(
         builder: (context) {
           return BlocConsumer(
-            cubit: BlocProvider.of<ActivityDetailsRegisterSendBloc>(context),
+            cubit: BlocProvider.of<FreeJoinRegistrationSendBloc>(context),
             listener: (context, state) {},
             builder: (context, state) {
               return _buildTab(context);
@@ -57,8 +57,8 @@ class RegistrationTab extends NavBarTab {
         children: [
           SendWithValidator(
             validatorsBloc:
-                BlocProvider.of<ActivityDetailsRegisterSendValidators>(context),
-            sendBloc: BlocProvider.of<ActivityDetailsRegisterSendBloc>(context),
+                BlocProvider.of<FreeJoinRegistrationSendValidators>(context),
+            sendBloc: BlocProvider.of<FreeJoinRegistrationSendBloc>(context),
             invalidSendButton: _buildSendButton(context, false),
             validSendButton: _buildSendButton(context, true),
           )
@@ -69,7 +69,7 @@ class RegistrationTab extends NavBarTab {
 
   Widget _buildSendButton(context, enabled) {
     return BlocBuilder(
-      cubit: BlocProvider.of<ActivityDetailsRegisterSendBloc>(context),
+      cubit: BlocProvider.of<FreeJoinRegistrationSendBloc>(context),
       builder: (context, state) {
         if (state is SendDataInProgressState) {
           return CustomButton.loadingButton();
@@ -78,7 +78,7 @@ class RegistrationTab extends NavBarTab {
           text: 'Zapisz się na aktywność.',
           enabled: enabled,
           onPressed: () {
-            BlocProvider.of<ActivityDetailsRegisterSendBloc>(context)
+            BlocProvider.of<FreeJoinRegistrationSendBloc>(context)
                 .add(SendDataEvent());
           },
         );

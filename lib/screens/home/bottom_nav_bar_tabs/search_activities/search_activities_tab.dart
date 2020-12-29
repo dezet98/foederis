@@ -1,5 +1,7 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
-import 'package:engineering_thesis/blocs/specific_blocs/search_activities/search_activities_distance_send_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_distance_send_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_fetching_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_search_filter_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +12,6 @@ import 'package:google_maps_webservice/places.dart';
 
 import '../../../../blocs/abstract_blocs/fetch/fetch_bloc.dart';
 import '../../../../blocs/abstract_blocs/search_filter/search_filter_bloc.dart';
-import '../../../../blocs/specific_blocs/search_activities/search_activities_fetching_bloc.dart';
-import '../../../../blocs/specific_blocs/search_activities/search_activities_search_filter_bloc.dart';
 import '../../../../blocs/specific_blocs/shared_preferences/shared_preferences_bloc.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../shared/shared_preferences.dart';

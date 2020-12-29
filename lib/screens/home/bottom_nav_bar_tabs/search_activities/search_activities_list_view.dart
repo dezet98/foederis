@@ -1,3 +1,5 @@
+import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_fetching_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_filters_bloc.dart';
 import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/components/bloc_builders/filters/filtered_data.dart';
 import 'package:engineering_thesis/components/custom_widgets/card/custom_card.dart';
@@ -8,8 +10,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-import '../../../../blocs/specific_blocs/search_activities/search_activities_fetching_bloc.dart';
-import '../../../../blocs/specific_blocs/search_activities/search_activities_filters_bloc.dart';
 import '../../../../models/activity.dart';
 import '../../../../shared/routing.dart';
 import 'search_activity_app_bar.dart';
