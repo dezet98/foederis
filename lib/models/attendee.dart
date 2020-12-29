@@ -26,6 +26,7 @@ class Attendee {
     this.activityRef = data[AttendeeCollection.activityRef.fieldName];
     this.userRef = data[AttendeeCollection.userRef.fieldName];
     this.joinDate = data[AttendeeCollection.joinDate.fieldName];
+    this.role = data[AttendeeCollection.role.fieldName];
   }
 
   toMap() {
@@ -33,6 +34,7 @@ class Attendee {
       AttendeeCollection.activityRef.fieldName: activityRef,
       AttendeeCollection.userRef.fieldName: userRef,
       AttendeeCollection.joinDate.fieldName: joinDate,
+      AttendeeCollection.role.fieldName: enumToString(role),
     };
   }
 }

@@ -5,35 +5,23 @@ import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/
 import 'package:engineering_thesis/blocs/specific_blocs/validators/validators.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/attendee.dart';
-import 'package:engineering_thesis/models/collections/attendee_collection.dart';
-import 'package:engineering_thesis/repositories/attendee_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
 class ActivityDetailsRegisterSendValidators extends ValidatorsBloc {
-  final AttendeeRepository _attendeeRepository;
   final UserDataBloc _userDataBloc;
+  final List<Attendee> attendees;
   final Activity activity;
 
-  ActivityDetailsRegisterSendValidators(
-      this._attendeeRepository, this._userDataBloc,
-      {@required this.activity});
+  ActivityDetailsRegisterSendValidators(this._userDataBloc,
+      {@required this.attendees, @required this.activity});
 
   @override
-  Future<List<Validator>> initValidator() async {
-    List<Attendee> attendees =
-        await _attendeeRepository.fetchAllAttendees(activity.ref);
-
-    // add organizator to attendee list:
-    attendees.add(Attendee.fromMap({
-      AttendeeCollection.activityRef.fieldName: activity.ref,
-      AttendeeCollection.joinDate.fieldName: activity.startDate,
-      AttendeeCollection.userRef.fieldName: activity.userRef,
-    }));
-
+  List<Validator> validators() {
     return [
       attedneeValidator(attendees, _userDataBloc.user.ref),
       maxEntryValidator(attendees, activity),
+      dateValidator(activity),
     ];
   }
 
@@ -54,6 +42,14 @@ class ActivityDetailsRegisterSendValidators extends ValidatorsBloc {
         argValue: null,
         validatorFailureInfo: (BuildContext context) =>
             'Niestety nie ma już miejsc na daną aktywność',
+        validatorLabel: (BuildContext context) => '',
+      );
+
+  Validator dateValidator(Activity activity) => CustomValidator(
+        isValidFunction: (_) => activity.startDate.isAfter(DateTime.now()),
+        argValue: null,
+        validatorFailureInfo: (BuildContext context) =>
+            'Ta aktywność już się odbyła',
         validatorLabel: (BuildContext context) => '',
       );
 }

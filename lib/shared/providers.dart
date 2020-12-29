@@ -151,6 +151,7 @@ dynamic getHomeScreenBlocProviders() => [
       BlocProvider(
         create: (context) => CreateActivitySendBloc(
             RepositoryProvider.of<ActivityRepository>(context),
+            RepositoryProvider.of<AttendeeRepository>(context),
             RepositoryProvider.of<UserDataBloc>(context)),
       ),
       BlocProvider(

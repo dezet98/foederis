@@ -21,8 +21,12 @@ class ActivityDetailsTopNavbarBloc extends NavBarBloc {
 
   List<NavBarTab> get navBarTabs => [
         DescriptionTab(activity: activity),
-        RegistrationTab(activity: activity),
-        AttendeesTab(activity: activity, attendees: attendees),
+        if (activity.startDate.isAfter(DateTime.now()))
+          RegistrationTab(activity: activity, attendees: attendees),
+        AttendeesTab(
+          activity: activity,
+          attendees: attendees,
+        ),
         ActivityDetailsMapTab(activity: activity),
       ];
 }

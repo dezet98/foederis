@@ -8,18 +8,14 @@ part 'validators_event.dart';
 part 'validators_state.dart';
 
 abstract class ValidatorsBloc extends Bloc<ValidatorsEvent, ValidatorsState> {
-  List<Validator> _validators;
-
   ValidatorsBloc() : super(ValidatorsInitialState()) {
     add(ValidatorsInitEvent());
   }
 
-  List<Validator> get validators => _validators ?? [];
-
-  Future<List<Validator>> initValidator();
+  List<Validator> validators();
 
   bool checkValid() {
-    for (Validator validator in _validators)
+    for (Validator validator in validators())
       if (!validator.isValid()) return false;
     return true;
   }
@@ -34,12 +30,11 @@ abstract class ValidatorsBloc extends Bloc<ValidatorsEvent, ValidatorsState> {
   }
 
   Stream<ValidatorsState> mapValidatorsInitEvent() async* {
-    try {
-      yield ValidatorsInitInProgressState();
-      _validators = await initValidator();
-      yield ValidatorsInitSuccessState();
-    } catch (e) {
-      yield ValidatorsInitFailureState(message: e.toString());
-    }
+    // try {
+    //   yield ValidatorsInitInProgressState();
+    //   yield ValidatorsInitSuccessState();
+    // } catch (e) {
+    //   yield ValidatorsInitFailureState(message: e.toString());
+    // }
   }
 }
