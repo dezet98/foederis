@@ -1,11 +1,17 @@
-import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/free_join/free_join_registration_send_bloc.dart';
-import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/maker_appeal_to_join/appeals_to_join_fetch_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/maker_appeal_to_join/maker_registration_attendee_send_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
+import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/components/bloc_builders/send_with_validator/send_builder.dart';
-import 'package:engineering_thesis/components/templates/center_screen.dart';
+import 'package:engineering_thesis/components/custom_widgets/list/custom_list.dart';
+import 'package:engineering_thesis/components/custom_widgets/list/custom_list_tile.dart';
 import 'package:engineering_thesis/models/activity.dart';
+import 'package:engineering_thesis/models/appeal_to_join.dart';
 import 'package:engineering_thesis/models/attendee.dart';
+import 'package:engineering_thesis/repositories/appeal_to_join_repository.dart';
 import 'package:engineering_thesis/repositories/attendee_repository.dart';
+import 'package:engineering_thesis/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,20 +23,19 @@ class MakerAppealToJoinTab extends NavBarTab {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Maker');
     return BlocProvider(
-      create: (context) => FreeJoinRegistrationSendBloc(
-        RepositoryProvider.of<AttendeeRepository>(context),
-        userRef: RepositoryProvider.of<UserDataBloc>(context).user.ref,
-        activity: activity,
+      create: (context) => AppealsToJoinFetchBloc(
+        RepositoryProvider.of<AppealToJoinRepository>(context),
+        RepositoryProvider.of<UserRepository>(context),
+        activityRef: activity.ref,
       ),
       child: Builder(
         builder: (context) {
-          return BlocConsumer(
-            cubit: BlocProvider.of<FreeJoinRegistrationSendBloc>(context),
-            listener: (context, state) {},
-            builder: (context, state) {
-              return _buildTab(context);
+          return FetchingBlocBuilder(
+            fetchingCubit: BlocProvider.of<AppealsToJoinFetchBloc>(context),
+            buildSuccess: (appealsToJoin) {
+              return _buildAppealsToJoinList(
+                  context, appealsToJoin as List<AppealToJoin>);
             },
           );
         },
@@ -38,17 +43,44 @@ class MakerAppealToJoinTab extends NavBarTab {
     );
   }
 
-  Widget _buildTab(BuildContext context) {
-    return CenterScreen(
-      content: Column(
-        children: [
-          SendBuilder(
-            sendBloc: BlocProvider.of<FreeJoinRegistrationSendBloc>(context),
-            sendButtonText: 'Zapisz się na aktywność.',
-          )
-        ],
-      ),
+  Widget _buildAppealsToJoinList(
+      BuildContext context, List<AppealToJoin> appealsToJoin) {
+    return CustomList(
+      items: appealsToJoin,
+      buildTile: (AppealToJoin appealToJoin) {
+        return BlocProvider(
+          create: (context) => MakerRegistrationAttendeeSendBloc(
+            RepositoryProvider.of<AttendeeRepository>(context),
+            RepositoryProvider.of<AppealToJoinRepository>(context),
+            activity: activity,
+            userRef: appealToJoin.userRef,
+            appealToJoinRef: appealToJoin.ref,
+          ),
+          child: Builder(
+            builder: (context) {
+              return CustomListTile(
+                title: appealToJoin.submissionDate.toString(),
+                subtitle: appealToJoin.user?.firstName,
+                actionButtons: _buildActionButtons(context),
+              );
+            },
+          ),
+        );
+      },
     );
+  }
+
+  List<Widget> _buildActionButtons(context) {
+    return [
+      SendBuilder(
+        sendBloc: BlocProvider.of<MakerRegistrationAttendeeSendBloc>(context),
+        sendButtonText: 'accept',
+        afterSuccess: () {
+          BlocProvider.of<AppealsToJoinFetchBloc>(context)
+              .add(FetchRefreshEvent());
+        },
+      )
+    ];
   }
 
   @override

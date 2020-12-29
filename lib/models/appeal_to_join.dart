@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../shared/extensions.dart';
+import 'app_user.dart';
 import 'collections/appeal_to_join_collection.dart';
 
 class AppealToJoin {
@@ -9,6 +10,9 @@ class AppealToJoin {
   DocumentReference userRef;
   DateTime submissionDate;
   String comment;
+
+  // additional
+  AppUser user;
 
   AppealToJoin.fromDocument(DocumentSnapshot doc) {
     this.ref = doc.reference;

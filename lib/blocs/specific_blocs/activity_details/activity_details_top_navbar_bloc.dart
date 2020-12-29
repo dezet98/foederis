@@ -57,7 +57,8 @@ class ActivityDetailsTopNavbarBloc extends NavBarBloc {
           .where((el) => el.userRef.id == _userDataBloc.user.ref.id)
           .first;
 
-      if (userAttendee.role == AttendeeRole.maker ||
+      // display requests tab if user is organizator and activity is not freeJoin
+      if (!activity.freeJoin && userAttendee.role == AttendeeRole.maker ||
           userAttendee.role == AttendeeRole.coorganizer)
         return MakerAppealToJoinTab(activity: activity, attendees: attendees);
 

@@ -4,7 +4,6 @@ import 'package:engineering_thesis/models/collections/attendee_collection.dart';
 import 'package:engineering_thesis/models/collections/collection.dart';
 import 'package:engineering_thesis/models/fetch_filter.dart';
 import 'package:engineering_thesis/shared/constants/enums.dart';
-import 'package:engineering_thesis/shared/utils/enums.dart';
 
 import '../shared/remote_repository.dart';
 
@@ -56,8 +55,6 @@ class AttendeeRepository {
   Future<DocumentReference> createAttendee(Attendee attendee) async {
     Map<String, dynamic> data = Collection.fillRemainsData(
         attendee.toMap(), AttendeeCollection.allFields);
-
-    data[AttendeeCollection.role.fieldName] = enumToString(AttendeeRole.maker);
 
     return await _remoteRepository.insertToCollection(
       data,
