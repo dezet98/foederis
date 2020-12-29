@@ -117,4 +117,19 @@ class RemoteRepository {
           sendingDataError: UploadDataError.undefined, message: e.toString());
     }
   }
+
+  Future<void> deleteWithNameFromCollection(
+    String collectionPath,
+    String docName,
+  ) async {
+    try {
+      return await _firestore.collection(collectionPath).doc(docName).delete();
+    } catch (e) {
+      if (e is SendingDataException) {
+        throw e;
+      }
+      throw SendingDataException(
+          sendingDataError: UploadDataError.undefined, message: e.toString());
+    }
+  }
 }

@@ -3,15 +3,16 @@ import 'package:engineering_thesis/blocs/abstract_blocs/validators/validators_bl
 import 'package:engineering_thesis/components/bloc_builders/send_with_validator/validators_info.dart';
 import 'package:flutter/widgets.dart';
 
+// todo
 class SendWithValidator extends StatelessWidget {
   final SendBloc sendBloc;
-  final ValidatorsBloc validatorsBloc;
+  final Validators validatorsBloc;
   final Widget validSendButton;
   final Widget invalidSendButton;
 
   SendWithValidator({
     @required this.sendBloc,
-    @required this.validatorsBloc,
+    this.validatorsBloc,
     @required this.validSendButton,
     @required this.invalidSendButton,
   });

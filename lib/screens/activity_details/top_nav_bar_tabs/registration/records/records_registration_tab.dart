@@ -1,14 +1,17 @@
-import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
-import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/free_join/free_join_registration_send_bloc.dart';
-import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/free_join/free_join_registration_send_validators.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/records/appeal_to_join_cancel_send_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/records/appeal_to_join_create_send_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/records/appeal_to_join_fetch_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/records/appeal_to_join_form_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
-import 'package:engineering_thesis/components/bloc_builders/send_with_validator/send_with_validator.dart';
-import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
-import 'package:engineering_thesis/components/templates/center_screen.dart';
+import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
+import 'package:engineering_thesis/components/bloc_builders/forms/form_data_screen.dart';
+import 'package:engineering_thesis/components/bloc_builders/send_with_validator/send_builder.dart';
 import 'package:engineering_thesis/models/activity.dart';
+import 'package:engineering_thesis/models/appeal_to_join.dart';
 import 'package:engineering_thesis/models/attendee.dart';
-import 'package:engineering_thesis/repositories/attendee_repository.dart';
+import 'package:engineering_thesis/repositories/appeal_to_join_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,27 +26,20 @@ class RecordsRegistrationTab extends NavBarTab {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => FreeJoinRegistrationSendBloc(
-            RepositoryProvider.of<AttendeeRepository>(context),
+          create: (context) => AppealToJoinBloc(
+            RepositoryProvider.of<AppealToJoinRepository>(context),
             userRef: RepositoryProvider.of<UserDataBloc>(context).user.ref,
-            activity: activity,
+            activityRef: activity.ref,
           ),
         ),
-        BlocProvider(
-          create: (context) => FreeJoinRegistrationSendValidators(
-            BlocProvider.of<UserDataBloc>(context),
-            attendees: attendees,
-            activity: activity,
-          ),
-        )
       ],
       child: Builder(
         builder: (context) {
-          return BlocConsumer(
-            cubit: BlocProvider.of<FreeJoinRegistrationSendBloc>(context),
-            listener: (context, state) {},
-            builder: (context, state) {
-              return _buildTab(context);
+          return FetchingBlocBuilder(
+            fetchingCubit: BlocProvider.of<AppealToJoinBloc>(context),
+            buildSuccess: (appealToJoin) {
+              if (appealToJoin == null) return _buildAppealToJoinForm(context);
+              return _buildCancelAppealToJoinForm(context, appealToJoin);
             },
           );
         },
@@ -51,39 +47,33 @@ class RecordsRegistrationTab extends NavBarTab {
     );
   }
 
-  Widget _buildForm() {}
-
-  Widget _buildTab(BuildContext context) {
-    return CenterScreen(
-      content: Column(
-        children: [
-          SendWithValidator(
-            validatorsBloc:
-                BlocProvider.of<FreeJoinRegistrationSendValidators>(context),
-            sendBloc: BlocProvider.of<FreeJoinRegistrationSendBloc>(context),
-            invalidSendButton: _buildSendButton(context, false),
-            validSendButton: _buildSendButton(context, true),
-          )
-        ],
+  // situation when we can send request with comment to join
+  Widget _buildAppealToJoinForm(context) {
+    return FormDataScreen(
+      formDataBloc: AppealToJoinFormBloc(),
+      formAppBarTitle: null,
+      formNextButtonText: 'Appeal to join',
+      sendBloc: AppealToJoinCreateSendBloc(
+        RepositoryProvider.of<AppealToJoinRepository>(context),
+        activityRef: activity.ref,
+        userRef: RepositoryProvider.of<UserDataBloc>(context).user.ref,
       ),
+      afterSuccess: () {
+        BlocProvider.of<AppealToJoinBloc>(context).add(FetchRefreshEvent());
+      },
     );
   }
 
-  Widget _buildSendButton(context, enabled) {
-    return BlocBuilder(
-      cubit: BlocProvider.of<FreeJoinRegistrationSendBloc>(context),
-      builder: (context, state) {
-        if (state is SendDataInProgressState) {
-          return CustomButton.loadingButton();
-        }
-        return CustomButton.raisedButton(
-          text: 'Zapisz się na aktywność.',
-          enabled: enabled,
-          onPressed: () {
-            BlocProvider.of<FreeJoinRegistrationSendBloc>(context)
-                .add(SendDataEvent());
-          },
-        );
+// situation when we send request with comment to join and we waiting on decision
+  Widget _buildCancelAppealToJoinForm(context, AppealToJoin appealToJoin) {
+    return SendBuilder(
+      sendBloc: AppealToJoinCancelSendBloc(
+        RepositoryProvider.of<AppealToJoinRepository>(context),
+        appealToJoinRef: appealToJoin.ref,
+      ),
+      sendButtonText: 'Anuluj prośbę o dołączenie',
+      afterSuccess: () {
+        BlocProvider.of<AppealToJoinBloc>(context).add(FetchRefreshEvent());
       },
     );
   }

@@ -72,4 +72,9 @@ class AppealToJoinRepository {
       collectionPath,
     );
   }
+
+  Future<void> deleteAppealToJoin(DocumentReference appealToJoinRef) async {
+    return await _remoteRepository.deleteWithNameFromCollection(
+        collectionPath, appealToJoinRef.id);
+  }
 }

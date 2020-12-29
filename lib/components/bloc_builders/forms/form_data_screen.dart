@@ -1,5 +1,6 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
 import 'package:engineering_thesis/shared/routing.dart';
+import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,12 +32,14 @@ class FormDataScreen extends StatelessWidget {
   final String formAppBarTitle;
   final String formNextButtonText;
   final SendBloc sendBloc;
+  final Function afterSuccess;
 
   FormDataScreen({
     @required this.formDataBloc,
-    @required this.formAppBarTitle,
     @required this.formNextButtonText,
     @required this.sendBloc,
+    this.formAppBarTitle,
+    this.afterSuccess,
   });
 
   @override
@@ -44,17 +47,26 @@ class FormDataScreen extends StatelessWidget {
     return BlocListener(
       cubit: sendBloc,
       listener: sendBlocListener,
-      child: TemplateScreen(
-        platformAppBar: _buildAppBar(context),
-        body: Form(
-          child: Column(
-            children: [
-              for (FormFieldBloc optionBloc in formDataBloc.formsData)
-                _buildSingleForm(optionBloc),
-              _buildApplyButton(context),
-            ],
-          ),
-        ),
+      child: formAppBarTitle == null
+          ? Padding(
+              padding: const EdgeInsets.all(Dimensions.screenPadding),
+              child: _buildForm(context),
+            )
+          : TemplateScreen(
+              platformAppBar: _buildAppBar(context),
+              body: _buildForm(context),
+            ),
+    );
+  }
+
+  Widget _buildForm(context) {
+    return Form(
+      child: Column(
+        children: [
+          for (FormFieldBloc optionBloc in formDataBloc.formsData)
+            _buildSingleForm(optionBloc),
+          _buildApplyButton(context),
+        ],
       ),
     );
   }
@@ -67,7 +79,10 @@ class FormDataScreen extends StatelessWidget {
     } else if (state is SendDataSuccessState) {
       formDataBloc.add(FormDataClearEvent());
       formDataBloc.add(FormDataEditingEnabledEvent());
-      Routing.pop(context);
+      if (afterSuccess == null)
+        Routing.pop(context);
+      else
+        afterSuccess();
       CustomSnackBar.show(context, SnackBarType.info, 'Success');
     } else if (state is SendDataInProgressState) {
       formDataBloc.add(FormDataEditingDisableEvent());

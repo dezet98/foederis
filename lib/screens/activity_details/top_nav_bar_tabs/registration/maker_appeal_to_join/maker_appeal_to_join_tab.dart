@@ -9,11 +9,11 @@ import 'package:engineering_thesis/repositories/attendee_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FreeJoinRegistrationTab extends NavBarTab {
+class MakerAppealToJoinTab extends NavBarTab {
   final Activity activity;
   final List<Attendee> attendees;
 
-  FreeJoinRegistrationTab({@required this.attendees, @required this.activity});
+  MakerAppealToJoinTab({@required this.attendees, @required this.activity});
 
   @override
   Widget build(BuildContext context) {
