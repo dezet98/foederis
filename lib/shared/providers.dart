@@ -12,6 +12,7 @@ import 'package:engineering_thesis/repositories/user_repository.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/my_activities/my_activities_tab.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/search_activities/search_activities_tab.dart';
 import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/settings/settings_tab.dart';
+import 'package:engineering_thesis/shared/remote_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/abstract_blocs/choice_filters/filter_option/filter_option_bloc.dart';
@@ -63,6 +64,7 @@ dynamic getMainRepositoryProviders() => [
         create: (context) => TransactionAndBatchRepository(
             RepositoryProvider.of<RemoteRepository>(context)),
       ),
+      RepositoryProvider<RemoteStorage>(create: (context) => RemoteStorage()),
     ];
 
 dynamic getMainBlocProviders() => [

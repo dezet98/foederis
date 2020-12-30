@@ -4,6 +4,7 @@ import 'package:engineering_thesis/blocs/specific_blocs/settings/update_user_dat
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
 import 'package:engineering_thesis/repositories/user_repository.dart';
+import 'package:engineering_thesis/shared/remote_storage.dart';
 import 'package:engineering_thesis/shared/routing.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +33,7 @@ class SettingsTab extends NavBarTab {
                 RoutingOption.sendBloc: UpdateUserDataSendBloc(
                   RepositoryProvider.of<UserRepository>(context),
                   BlocProvider.of<UserDataBloc>(context),
+                  RepositoryProvider.of<RemoteStorage>(context),
                 ),
               });
             },

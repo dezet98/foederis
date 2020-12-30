@@ -29,6 +29,7 @@ class RemoteStorage {
     try {
       await _firebaseStorage.ref().child(path).putFile(file);
     } catch (e) {
+      print('fsd');
       throw StorageException(
         storageError: StorageError.undefined,
         message: e.toString(),
@@ -45,5 +46,13 @@ class RemoteStorage {
         message: e.toString(),
       );
     }
+  }
+}
+
+class StoragePatches {
+  static final String _user = "user";
+
+  static String userProfilePhoto(String userId) {
+    return '$_user/$userId/profilePhoto';
   }
 }
