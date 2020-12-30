@@ -68,7 +68,7 @@ class FormPhotoField extends StatelessWidget {
       return _buildPhotoWithCropPosibility(context, formFieldBloc.result);
     } else if (formFieldBloc.result == null &&
         formFieldBloc.initialPhotoUrl != null)
-      return CustomUserAvatar.fromUrl(formFieldBloc.initialPhotoUrl);
+      return CustomUserAvatar.fromUrl(context, formFieldBloc.initialPhotoUrl);
 
     return CustomUserAvatar.fromIcon(CustomIcon.userAvatar(context));
   }
@@ -76,7 +76,7 @@ class FormPhotoField extends StatelessWidget {
   Widget _buildPhotoWithCropPosibility(context, File file) {
     return Stack(
       children: [
-        CustomUserAvatar.fromFile(file),
+        CustomUserAvatar.fromFile(context, file),
         Positioned(
           right: 0,
           child: CustomButton.floatingButton(

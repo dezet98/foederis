@@ -88,7 +88,7 @@ class RemoteRepository {
     }
   }
 
-  // insert data
+  /// insert new data
   Future<DocumentReference> insertToCollection(
       Map<String, dynamic> data, String collectionPath) async {
     try {
@@ -102,6 +102,7 @@ class RemoteRepository {
     }
   }
 
+  /// insert new data or update existing
   Future<void> insertWithNameToCollection(
     Map<String, dynamic> data,
     String collectionPath,
@@ -133,9 +134,8 @@ class RemoteRepository {
     }
   }
 
-  /// get reference to operation
-  Future<DocumentReference> insertToCollectionReference(
-      String collectionPath) async {
+  /// get reference to not existing item in in the given collection
+  Future<DocumentReference> referenceToItem(String collectionPath) async {
     try {
       return _firestore.collection(collectionPath).doc();
     } catch (e) {
@@ -147,7 +147,8 @@ class RemoteRepository {
     }
   }
 
-  Future<DocumentReference> deleteWithNameFromCollectionReference(
+  /// get reference to not existing item in the given collection
+  Future<DocumentReference> referenceToExistingItem(
     String collectionPath,
     String docName,
   ) async {

@@ -34,7 +34,7 @@ class CustomListTile extends StatelessWidget {
               ),
               leading: leading,
             ),
-            if (actionButtons != null)
+            if (actionButtons != null && actionButtons.length > 0)
               Row(
                 children: actionButtons,
               )

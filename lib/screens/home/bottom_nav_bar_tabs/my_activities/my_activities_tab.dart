@@ -94,12 +94,13 @@ class MyActivitiesTab extends NavBarTab {
     );
   }
 
+// attendee here without sense
   Widget _buildTile(BuildContext context, Activity activity, Attendee attendee,
       AppUser appUser) {
     return CustomListTile(
       title: activity.title,
       subtitle: enumToString(attendee.role),
-      leading: CustomUserAvatar.fromUrl(appUser.photoUrl),
+      leading: CustomUserAvatar.fromUrl(context, appUser.photoUrl),
       onTap: () {
         Routing.pushNamed(context, UserRoutes.activityDetails,
             options: {RoutingOption.activity: activity});

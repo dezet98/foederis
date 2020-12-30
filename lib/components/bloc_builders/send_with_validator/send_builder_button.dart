@@ -8,11 +8,13 @@ class SendBuilderButton extends StatelessWidget {
   final SendBloc sendBloc;
   final String sendButtonText;
   final Function afterSuccess;
+  final Function afterError;
 
   SendBuilderButton({
     @required this.sendBloc,
     @required this.sendButtonText,
     this.afterSuccess,
+    this.afterError,
   });
 
   @override
@@ -21,9 +23,17 @@ class SendBuilderButton extends StatelessWidget {
       cubit: sendBloc,
       listener: (context, state) {
         if (state is SendDataSuccessState) {
-          if (afterSuccess != null) afterSuccess();
+          if (afterSuccess != null) {
+            afterSuccess();
+          } else {
+            CustomSnackBar.show(context, SnackBarType.info, 'Success');
+          }
         } else if (state is SendDataFailureState) {
-          CustomSnackBar.show(context, SnackBarType.error, state.message);
+          if (afterError != null) {
+            afterError();
+          } else {
+            CustomSnackBar.show(context, SnackBarType.error, state.message);
+          }
         }
       },
       builder: (context, state) {

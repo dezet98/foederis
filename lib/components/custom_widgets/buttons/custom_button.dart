@@ -41,7 +41,7 @@ class CustomButton {
 
   static Widget iconButton({
     bool enabled = true,
-    Widget customIcon,
+    @required Widget customIcon,
     final void Function() onPressed,
   }) {
     return PlatformIconButton(

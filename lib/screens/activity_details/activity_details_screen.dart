@@ -76,6 +76,7 @@ class ActivityDetailsScreen extends StatelessWidget {
     return TemplateScreen.topNavbar(
       context: context,
       appBarTitle: activity.title,
+      // trailingActions: [optionsMenu(context, attende)],
       navBarBloc: ActivityDetailsTopNavbarBloc(
         BlocProvider.of<UserDataBloc>(context),
         activity: activity,
@@ -83,4 +84,19 @@ class ActivityDetailsScreen extends StatelessWidget {
       ),
     );
   }
+
+  // Widget optionsMenu(context, Attendee attendee) {
+  //   return CustomPopupMenu(popupMenuItems: [
+  //     if (attendee.role == AttendeeRole.coorganizer)
+  //       CustomPopupMenuItem.it(
+  //         SendBuilderButton(
+  //           sendBloc: GiveUpCoorganizerRightsSendBloc(
+  //             RepositoryProvider.of<AttendeeRepository>(context),
+  //             attendee: attendee,
+  //           ),
+  //           sendButtonText: 'Zrezygnuj z praw koorganizowania',
+  //         ),
+  //       ),
+  //   ]);
+  // }
 }

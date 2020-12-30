@@ -87,6 +87,7 @@ class TemplateScreen extends StatelessWidget {
     @required BuildContext context,
     @required NavBarBloc navBarBloc,
     @required String appBarTitle,
+    List<Widget> trailingActions,
   }) {
     return BlocBuilder(
       cubit: navBarBloc,
@@ -98,6 +99,8 @@ class TemplateScreen extends StatelessWidget {
             appBar: CustomAppBar(
               appBarType: AppBarType.back,
               title: appBarTitle,
+              trailingActions:
+                  trailingActions?.length == 0 ? null : trailingActions,
               bottom: TabBar(
                 tabs: [
                   for (NavBarTab tab in navBarBloc.navBarTabs)

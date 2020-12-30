@@ -35,6 +35,10 @@ class CustomIcon {
   static Widget distancePicker(context) =>
       _buildPlatformIcon(Icons.circle, CupertinoIcons.circle);
 
+  /// use for popupMenu buttons
+  static Widget more(context) =>
+      _buildPlatformIcon(Icons.more_vert, CupertinoIcons.table_badge_more);
+
   static Widget searchActivityBottomTab(context) =>
       Icon(PlatformIcons(context).search);
 

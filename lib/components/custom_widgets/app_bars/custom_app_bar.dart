@@ -45,7 +45,7 @@ class CustomAppBar extends StatelessWidget {
     switch (appBarType) {
       case AppBarType.back:
         return CustomButton.iconButton(
-          customIcon: CustomIcon.distancePicker(context),
+          customIcon: CustomIcon.closeScreen(context),
           onPressed: onPressed ?? () => Routing.pop(context),
         );
         break;
