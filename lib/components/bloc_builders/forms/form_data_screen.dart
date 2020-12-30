@@ -1,3 +1,4 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_photo_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
 import 'package:engineering_thesis/shared/routing.dart';
 import 'package:engineering_thesis/shared/theme.dart';
@@ -24,6 +25,7 @@ import 'form_date_field.dart';
 import 'form_number_field.dart';
 import 'form_number_range_field.dart';
 import 'form_option_list_field.dart';
+import 'form_photo_field.dart';
 import 'form_text_field.dart';
 
 class FormDataScreen extends StatelessWidget {
@@ -149,6 +151,9 @@ class FormDataScreen extends StatelessWidget {
           formFieldBloc: optionBloc, formDataBloc: formDataBloc);
     } else if (optionBloc is FormNumberRangeFieldBloc) {
       return FormNumberRangeField(
+          formFieldBloc: optionBloc, formDataBloc: formDataBloc);
+    } else if (optionBloc is FormPhotoFieldBloc) {
+      return FormPhotoField(
           formFieldBloc: optionBloc, formDataBloc: formDataBloc);
     }
     assert(false, "{ error: optionBloc not provided }");

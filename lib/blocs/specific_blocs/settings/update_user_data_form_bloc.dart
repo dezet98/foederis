@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_data/form_data_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_date_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_option_list_field_bloc.dart';
+import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_photo_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_text_field_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/validators/validators.dart';
 import 'package:engineering_thesis/models/app_user.dart';
@@ -14,6 +17,17 @@ class UpdateUserDataFormBloc extends FormDataBloc {
 
   UpdateUserDataFormBloc({@required this.appUser})
       : super([
+          FormPhotoFieldBloc(
+            initialResult: null,
+            queryFieldFromResult: (File result) => [
+              QueryField(
+                fieldName: UserCollection.photoUrl.fieldName,
+                fieldValue: result,
+              )
+            ],
+            validators: (File result) => [],
+            getLabel: (BuildContext context) => "Photo",
+          ),
           FormTextFieldBloc(
             initialResult: appUser.firstName ?? '',
             queryFieldFromResult: (String result) => [
