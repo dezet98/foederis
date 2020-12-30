@@ -31,28 +31,34 @@ class FormOptionListField extends StatelessWidget {
                       : TextType.invalid_form_title,
                   alignment: Alignment.centerLeft,
                 ),
-                FetchingBlocBuilder(
-                    fetchingCubit: formFieldBloc.listOptionFetchingBloc,
-                    buildSuccess: (data) {
-                      return CustomDropdownButton(
-                        value: formFieldBloc.result,
-                        dropdownItems: data,
-                        getItemLabel: formFieldBloc.getLabelFromOption,
-                        enabled: formFieldBloc.editingEnabled,
-                        onChanged: (result) {
-                          if (formFieldBloc.editingEnabled)
-                            formDataBloc.add(FormDataEditingEvent(
-                              formFieldBloc: formFieldBloc,
-                              result: result,
-                            ));
-                        },
-                      );
-                    }),
+                formFieldBloc.listOption == null
+                    ? FetchingBlocBuilder(
+                        fetchingCubit: formFieldBloc.listOptionFetchingBloc,
+                        buildSuccess: (data) {
+                          return _getDropdown(data);
+                        })
+                    : _getDropdown(formFieldBloc.listOption),
               ],
             );
           },
         ),
       ],
+    );
+  }
+
+  Widget _getDropdown(data) {
+    return CustomDropdownButton(
+      value: formFieldBloc.result,
+      dropdownItems: data,
+      getItemLabel: formFieldBloc.getLabelFromOption,
+      enabled: formFieldBloc.editingEnabled,
+      onChanged: (result) {
+        if (formFieldBloc.editingEnabled)
+          formDataBloc.add(FormDataEditingEvent(
+            formFieldBloc: formFieldBloc,
+            result: result,
+          ));
+      },
     );
   }
 }

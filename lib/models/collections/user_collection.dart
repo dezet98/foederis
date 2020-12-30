@@ -11,11 +11,20 @@ class UserCollection {
       CollectionField(fieldName: 'secondName', isRequired: false);
   static CollectionField birthday =
       CollectionField(fieldName: 'birthday', isRequired: false);
+  static CollectionField gender =
+      CollectionField(fieldName: 'gender', isRequired: false);
+  static CollectionField about =
+      CollectionField(fieldName: 'about', isRequired: false);
+  static CollectionField phone =
+      CollectionField(fieldName: 'phone', isRequired: false);
 
   static List<CollectionField> get allFields => [
         email,
         firstName,
         secondName,
         birthday,
+        gender,
+        about,
+        phone,
       ];
 }

@@ -15,11 +15,11 @@ import 'package:engineering_thesis/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MakerAppealToJoinTab extends NavBarTab {
+class OrganizerAppealToJoinTab extends NavBarTab {
   final Activity activity;
   final List<Attendee> attendees;
 
-  MakerAppealToJoinTab({@required this.attendees, @required this.activity});
+  OrganizerAppealToJoinTab({@required this.attendees, @required this.activity});
 
   @override
   Widget build(BuildContext context) {

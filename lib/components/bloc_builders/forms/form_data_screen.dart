@@ -14,7 +14,6 @@ import '../../../blocs/abstract_blocs/forms/form_number_field_bloc.dart';
 import '../../../blocs/abstract_blocs/forms/form_number_range_field_bloc.dart';
 import '../../../blocs/abstract_blocs/forms/form_option_list_field_bloc.dart';
 import '../../../blocs/abstract_blocs/forms/form_text_field_bloc.dart';
-import '../../../models/category.dart';
 import '../../custom_widgets/app_bars/custom_app_bar.dart';
 import '../../custom_widgets/buttons/custom_button.dart';
 import '../../custom_widgets/snack_bar.dart/custom_snack_bar.dart';
@@ -142,7 +141,7 @@ class FormDataScreen extends StatelessWidget {
     } else if (optionBloc is FormNumberFieldBloc) {
       return FormNumberField(
           formFieldBloc: optionBloc, formDataBloc: formDataBloc);
-    } else if (optionBloc is FormOptionListFieldBloc<Category>) {
+    } else if (optionBloc is FormOptionListFieldBloc) {
       return FormOptionListField(
           formFieldBloc: optionBloc, formDataBloc: formDataBloc);
     } else if (optionBloc is FormAddressFieldBloc) {

@@ -1,6 +1,9 @@
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/settings/update_user_data_form_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/settings/update_user_data_send_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
+import 'package:engineering_thesis/repositories/user_repository.dart';
 import 'package:engineering_thesis/shared/routing.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,11 +21,18 @@ class SettingsTab extends NavBarTab {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           CustomButton.raisedButton(
-            text: 'Show profile',
+            text: 'Edit profile',
             onPressed: () {
-              Routing.pushNamed(context, UserRoutes.profile, options: {
-                RoutingOption.userRef:
-                    BlocProvider.of<UserDataBloc>(context).user.ref
+              Routing.pushNamed(context, UserRoutes.form, options: {
+                RoutingOption.formDataBloc: UpdateUserDataFormBloc(
+                  appUser: BlocProvider.of<UserDataBloc>(context).user,
+                ),
+                RoutingOption.formAppBarTitle: 'title',
+                RoutingOption.formNextButtonText: 'next',
+                RoutingOption.sendBloc: UpdateUserDataSendBloc(
+                  RepositoryProvider.of<UserRepository>(context),
+                  BlocProvider.of<UserDataBloc>(context),
+                ),
               });
             },
           ),

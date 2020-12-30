@@ -9,7 +9,7 @@ import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/cha
 import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/description/description_tab.dart';
 import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/map/activity_details_map_tab.dart';
 import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/registration/free_join/free_join_registration_tab.dart';
-import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/registration/maker_appeal_to_join/maker_appeal_to_join_tab.dart';
+import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/registration/organizer_appeal_to_join/organizer_appeal_to_join_tab.dart';
 import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/registration/records/records_registration_tab.dart';
 import 'package:meta/meta.dart';
 
@@ -27,37 +27,21 @@ class ActivityDetailsTopNavbarBloc extends NavBarBloc {
   });
 
   List<NavBarTab> get navBarTabs {
-    List<NavBarTab> tabsDependentOnParticipation =
-        getTabsDependentOnParticipation();
+    bool userIsNotAttendee = attendees
+            .where((el) => el.userRef.id == _userDataBloc.user.ref.id)
+            .length ==
+        0;
+
     return [
       DescriptionTab(activity: activity),
-      if (tabsDependentOnParticipation.length > 0)
-        ...tabsDependentOnParticipation,
-      AttendeesTab(
-        activity: activity,
-        attendees: attendees,
-      ),
+      if (userIsNotAttendee) ..._forNotAttendee(),
+      if (!userIsNotAttendee) ..._forAttendee(),
       ActivityDetailsMapTab(activity: activity),
     ];
   }
 
-  List<NavBarTab> getTabsDependentOnParticipation() {
-    // user not participate in activity
-    if (attendees
-            .where((el) => el.userRef.id == _userDataBloc.user.ref.id)
-            .length ==
-        0) {
-      return _forNotAttendee();
-    } else {
-      Attendee userAttendee = attendees
-          .where((el) => el.userRef.id == _userDataBloc.user.ref.id)
-          .first;
-      return _forAttendee(userAttendee);
-    }
-  }
-
   List<NavBarTab> _forNotAttendee() {
-    List<NavBarTab> resultList = [ChatTab(activity: activity)];
+    List<NavBarTab> resultList = [];
 
     if (activity.freeJoin)
       resultList.add(
@@ -66,17 +50,33 @@ class ActivityDetailsTopNavbarBloc extends NavBarBloc {
       resultList.add(
           RecordsRegistrationTab(activity: activity, attendees: attendees));
 
+    resultList.add(AttendeesTab(
+      activity: activity,
+      attendees: attendees,
+      attendeeRole: null,
+    ));
+
     return resultList;
   }
 
-  List<NavBarTab> _forAttendee(Attendee user) {
+  List<NavBarTab> _forAttendee() {
+    Attendee user = attendees
+        .where((el) => el.userRef.id == _userDataBloc.user.ref.id)
+        .first;
+
     List<NavBarTab> resultList = [ChatTab(activity: activity)];
 
     // display requests tab if user is organizator and activity is not freeJoin
     if (!activity.freeJoin && user.role == AttendeeRole.maker ||
         user.role == AttendeeRole.coorganizer)
-      resultList
-          .add(MakerAppealToJoinTab(activity: activity, attendees: attendees));
+      resultList.add(
+          OrganizerAppealToJoinTab(activity: activity, attendees: attendees));
+
+    resultList.add(AttendeesTab(
+      activity: activity,
+      attendees: attendees,
+      attendeeRole: user.role,
+    ));
 
     return resultList;
   }

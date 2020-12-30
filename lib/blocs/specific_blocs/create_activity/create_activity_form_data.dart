@@ -110,6 +110,7 @@ class CreateActvityFormDataBloc extends FormDataBloc {
               )
             ],
             listOptionFetchingBloc: categoryFetchingBloc,
+            listOption: null,
             getLabel: (BuildContext context) => "Category",
             validators: (value) => [NotNullValidator(value)],
           ),

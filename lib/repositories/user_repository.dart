@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/models/app_user.dart';
+import 'package:engineering_thesis/models/collections/collection.dart';
 import 'package:engineering_thesis/models/collections/user_collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -34,12 +35,28 @@ class UserRepository {
   }
 
   Future<void> createUser(User firebaseUser) async {
+    Map<String, dynamic> userMap = Collection.fillRemainsData({
+      UserCollection.email.fieldName: firebaseUser.email,
+    }, UserCollection.allFields);
+
     return await _remoteRepository.insertWithNameToCollection(
-      AppUser.fromMap({
-        UserCollection.email.fieldName: firebaseUser.email,
-      }).toMap(),
+      userMap,
       collectionPath,
       firebaseUser.uid,
+    );
+  }
+
+  Future<void> updateUserBasicData(
+      Map<String, dynamic> appUserData, AppUser appUser) async {
+    appUserData[UserCollection.email.fieldName] = appUser.email;
+
+    Map<String, dynamic> userMap =
+        Collection.fillRemainsData(appUserData, UserCollection.allFields);
+
+    return await _remoteRepository.insertWithNameToCollection(
+      userMap,
+      collectionPath,
+      appUser.ref.id,
     );
   }
 }
