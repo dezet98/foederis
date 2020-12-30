@@ -55,6 +55,16 @@ class S {
     );
   }
 
+  /// `Wejdź jako gość`
+  String get login_screen_visit_as_a_guest {
+    return Intl.message(
+      'Wejdź jako gość',
+      name: 'login_screen_visit_as_a_guest',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Adres email`
   String get login_screen_email_placeholder {
     return Intl.message(

@@ -13,8 +13,8 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        title: CustomText(title, textType: TextType.menu_title),
-        subtitle: CustomText('1 / 3', textType: TextType.modal_text),
+        title: CustomText.menuTitle(title),
+        subtitle: CustomText.menuTitle(subtitle),
         onTap: onTap,
       ),
     );

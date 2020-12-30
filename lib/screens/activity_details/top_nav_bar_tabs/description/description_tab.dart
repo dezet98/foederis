@@ -17,25 +17,28 @@ class DescriptionTab extends NavBarTab {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _buildSingleAttribute('FreeJoin', activity.freeJoin.toString()),
-        _buildSingleAttribute('Address', activity.address.toString()),
-        _buildSingleAttribute('maxEntry', activity.maxEntry.toString()),
-        _buildSingleAttribute('minEntry', activity.minEntry.toString()),
-        _buildSingleAttribute('regular', activity.regular.toString()),
-        _buildSingleAttribute('startDate', activity.startDate.toString()),
+        _buildSingleAttribute(
+            context, 'FreeJoin', activity.freeJoin.toString()),
+        _buildSingleAttribute(context, 'Address', activity.address.toString()),
+        _buildSingleAttribute(
+            context, 'maxEntry', activity.maxEntry.toString()),
+        _buildSingleAttribute(
+            context, 'minEntry', activity.minEntry.toString()),
+        _buildSingleAttribute(context, 'regular', activity.regular.toString()),
+        _buildSingleAttribute(
+            context, 'startDate', activity.startDate.toString()),
         _buildCategoryAttribute(context, 'category'),
       ],
     );
   }
 
-  Widget _buildSingleAttribute(String subtitle, String text) {
+  Widget _buildSingleAttribute(context, String subtitle, String text) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          CustomText(subtitle,
-              textType: TextType.menu_title, alignment: Alignment.centerLeft),
-          CustomText(text, textType: TextType.list_item),
+          CustomText.menuTitle(subtitle, textAlign: TextAlign.left),
+          CustomText.listItem(text),
         ],
       ),
     );
@@ -48,7 +51,8 @@ class DescriptionTab extends NavBarTab {
         categoryRef: activity.categoryRef,
       ),
       buildSuccess: (data) {
-        return _buildSingleAttribute(subtitle, (data as Category).title);
+        return _buildSingleAttribute(
+            context, subtitle, (data as Category).title);
       },
     );
   }

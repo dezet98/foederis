@@ -27,7 +27,7 @@ class StreamBlocBuilder extends StatelessWidget {
               state is StreamSubscribeFailed) {
             return buildError != null
                 ? buildError(state.fetchingError)
-                : _buildError;
+                : _buildError(context);
           } else if (state is StreamRefreshSuccessState) {
             return buildSuccess(state.data);
           }
@@ -45,13 +45,13 @@ class StreamBlocBuilder extends StatelessWidget {
     return CircularProgressIndicator();
   }
 
-  Widget _buildError() {
+  Widget _buildError(context) {
     if (isSliver) {
       return SliverFillRemaining(
         child: Container(),
       );
     }
 
-    return CustomText('Error', textType: TextType.error_text);
+    return CustomText.errorText('Error');
   }
 }

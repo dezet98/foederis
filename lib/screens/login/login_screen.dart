@@ -47,7 +47,12 @@ class LoginScreen extends StatelessWidget {
             placeholder: S.of(context).login_screen_password_placeholder),
         CustomButton.goToOtherScreen(
           text: S.of(context).login_screen_go_to_register,
-          onPressed: () => _toRegisterOnPressed(context),
+          onPressed: () => _navigateToRegister(context),
+          enabled: !loading,
+        ),
+        CustomButton.goToOtherScreen(
+          text: S.of(context).login_screen_visit_as_a_guest,
+          onPressed: () => _navigateToHomeAsAGuest(context),
           enabled: !loading,
         ),
         if (!loading)
@@ -89,7 +94,11 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void _toRegisterOnPressed(context) {
+  void _navigateToRegister(context) {
     Routing.pushNamed(context, GuestRoutes.register);
+  }
+
+  void _navigateToHomeAsAGuest(context) {
+    Routing.pushNamed(context, UserRoutes.home);
   }
 }

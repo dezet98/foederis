@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "login_screen_go_to_register" : MessageLookupByLibrary.simpleMessage("Załóż konto"),
     "login_screen_login" : MessageLookupByLibrary.simpleMessage("Zaloguj się"),
     "login_screen_password_placeholder" : MessageLookupByLibrary.simpleMessage("Hasło"),
+    "login_screen_visit_as_a_guest" : MessageLookupByLibrary.simpleMessage("Wejdź jako gość"),
     "register_error_email_already_in_use" : MessageLookupByLibrary.simpleMessage("Podany email jest już zajęty"),
     "register_error_email_weak_password" : MessageLookupByLibrary.simpleMessage("Zbyt słabe hasło"),
     "register_error_invalid_email" : MessageLookupByLibrary.simpleMessage("Niepoprawny email"),

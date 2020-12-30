@@ -27,9 +27,8 @@ class CustomDateTimePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CustomText(
+        CustomText.textButton(
           date.toUtc().toString(),
-          textType: TextType.text_button,
         ),
         SizedBox(
           width: Dimensions.gutterMedium,

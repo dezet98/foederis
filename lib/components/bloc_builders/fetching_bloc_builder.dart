@@ -29,7 +29,7 @@ class FetchingBlocBuilder extends StatelessWidget {
             return buildError != null
                 ? buildError(
                     state.fetchingException) //todo hard bug to find to change
-                : _buildError;
+                : _buildError(context);
           } else if (state is FetchInitialSuccessState ||
               state is FetchRefreshSuccessState) {
             return buildSuccess(state.data);
@@ -48,13 +48,13 @@ class FetchingBlocBuilder extends StatelessWidget {
     return CircularProgressIndicator();
   }
 
-  Widget _buildError() {
+  Widget _buildError(context) {
     if (isSliver) {
       return SliverFillRemaining(
         child: Container(),
       );
     }
 
-    return CustomText('Error', textType: TextType.error_text);
+    return CustomText.errorText('Error');
   }
 }

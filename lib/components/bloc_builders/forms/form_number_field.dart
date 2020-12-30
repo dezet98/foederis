@@ -24,13 +24,13 @@ class FormNumberField extends StatelessWidget {
         BlocBuilder(
           cubit: formFieldBloc,
           builder: (context, state) {
-            return CustomText(
-              formFieldBloc.getLabel(context),
-              textType: formFieldBloc.isValid
-                  ? TextType.valid_form_title
-                  : TextType.invalid_form_title,
-              alignment: Alignment.centerLeft,
-            );
+            return formFieldBloc.isValid
+                ? CustomText.validFormTitle(
+                    formFieldBloc.getLabel(context),
+                  )
+                : CustomText.invalidFormTitle(
+                    formFieldBloc.getLabel(context),
+                  );
           },
         ),
         BlocBuilder(

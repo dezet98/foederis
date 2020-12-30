@@ -24,13 +24,13 @@ class FormOptionListField extends StatelessWidget {
           builder: (context, state) {
             return Column(
               children: [
-                CustomText(
-                  formFieldBloc.getLabel(context),
-                  textType: formFieldBloc.isValid
-                      ? TextType.valid_form_title
-                      : TextType.invalid_form_title,
-                  alignment: Alignment.centerLeft,
-                ),
+                formFieldBloc.isValid
+                    ? CustomText.validFormTitle(
+                        formFieldBloc.getLabel(context),
+                      )
+                    : CustomText.invalidFormTitle(
+                        formFieldBloc.getLabel(context),
+                      ),
                 formFieldBloc.listOption == null
                     ? FetchingBlocBuilder(
                         fetchingCubit: formFieldBloc.listOptionFetchingBloc,

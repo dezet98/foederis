@@ -18,9 +18,11 @@ class CustomButton {
   static Widget _raisedButton(
       {String text, bool enabled = true, final void Function() onPressed}) {
     return PlatformButton(
-      child: CustomText(text,
-          textType:
-              !enabled ? TextType.unavailable_text_button : TextType.button),
+      child: Builder(
+        builder: (context) => !enabled
+            ? CustomText.unavailableTextButton(text)
+            : CustomText.button(context, text),
+      ),
       onPressed: enabled ? onPressed : null,
       material: (context, platform) => MaterialRaisedButtonData(),
       cupertino: (context, platform) => CupertinoButtonData(),
@@ -30,9 +32,11 @@ class CustomButton {
   static Widget _flatButton(
       {String text, bool enabled = true, final void Function() onPressed}) {
     return PlatformButton(
-      child: CustomText(text,
-          textType:
-              !enabled ? TextType.unavailable_text_button : TextType.button),
+      child: Builder(
+        builder: (context) => !enabled
+            ? CustomText.unavailableTextButton(text)
+            : CustomText.button(context, text),
+      ),
       onPressed: enabled ? onPressed : null,
       materialFlat: (context, platform) => MaterialFlatButtonData(),
       cupertinoFilled: (context, platform) => CupertinoFilledButtonData(),
@@ -83,7 +87,9 @@ class CustomButton {
       child: Row(
         children: [
           customIcon,
-          CustomText(text, textType: TextType.button),
+          Builder(
+            builder: (context) => CustomText.button(context, text),
+          ),
         ],
       ),
     );

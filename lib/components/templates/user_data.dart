@@ -11,24 +11,25 @@ class UserData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _buildSingleAttribute('email', appUser.email.toString()),
-        _buildSingleAttribute('firstName', appUser.firstName.toString()),
-        _buildSingleAttribute('secondName', appUser.secondName.toString()),
+        _buildSingleAttribute(context, 'email', appUser.email.toString()),
+        _buildSingleAttribute(
+            context, 'firstName', appUser.firstName.toString()),
+        _buildSingleAttribute(
+            context, 'secondName', appUser.secondName.toString()),
       ],
     );
   }
 
-  Widget _buildSingleAttribute(String subtitle, String text) {
+  Widget _buildSingleAttribute(context, String subtitle, String text) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          CustomText(
+          CustomText.menuTitle(
             subtitle,
-            textType: TextType.menu_title,
-            alignment: Alignment.centerLeft,
+            textAlign: TextAlign.left,
           ),
-          CustomText(text, textType: TextType.list_item),
+          CustomText.listItem(text),
         ],
       ),
     );

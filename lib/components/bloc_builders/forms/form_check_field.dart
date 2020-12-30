@@ -22,10 +22,8 @@ class FormCheckField extends StatelessWidget {
           builder: (context, state) {
             return Row(
               children: [
-                CustomText(
+                CustomText.validFormTitle(
                   formFieldBloc.getLabel(context),
-                  textType: TextType.valid_form_title,
-                  alignment: Alignment.centerLeft,
                 ),
                 CustomSwitch(
                   value: formFieldBloc.result,

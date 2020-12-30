@@ -3,6 +3,7 @@
 
     "login_screen_login": "Zaloguj się",
     "login_screen_go_to_register": "Załóż konto",
+    "login_screen_visit_as_a_guest": "Wejdź jako gość",
     "login_screen_email_placeholder": "Adres email",
     "login_screen_password_placeholder": "Hasło",
     "register_screen_register": "Utwórz",

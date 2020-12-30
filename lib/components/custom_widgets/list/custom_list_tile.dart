@@ -24,13 +24,11 @@ class CustomListTile extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
-              title: CustomText(
+              title: CustomText.menuTitle(
                 title ?? '',
-                textType: TextType.menu_title,
               ),
-              subtitle: CustomText(
+              subtitle: CustomText.listItem(
                 subtitle ?? '',
-                textType: TextType.list_item,
               ),
               leading: leading,
             ),

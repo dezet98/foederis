@@ -28,7 +28,7 @@ class CustomAppBar extends StatelessWidget {
 
   PlatformAppBar getPlatformAppBar(BuildContext context) {
     return PlatformAppBar(
-      title: CustomText(title, textType: TextType.page_title),
+      title: CustomText.pageTitle(title),
       leading: CustomButton.iconButton(
         customIcon: customIcon,
         onPressed: onPressed ?? () => Routing.pop(context),
