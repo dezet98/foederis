@@ -1,4 +1,5 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_distance_send_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_fetching_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_search_filter_bloc.dart';
@@ -28,6 +29,7 @@ class SearchActivitiesTab extends NavBarTab {
           BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
             FetchRefreshEvent(
               fetchArgs: SearchActivitiesFetchingArgsBloc(
+                userRef: BlocProvider.of<UserDataBloc>(context).user.ref,
                 location: (state.selectedOption as PlacesSearchResult)
                     .geometry
                     .location,
@@ -43,6 +45,7 @@ class SearchActivitiesTab extends NavBarTab {
             BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
               FetchRefreshEvent(
                 fetchArgs: SearchActivitiesFetchingArgsBloc(
+                  userRef: BlocProvider.of<UserDataBloc>(context).user.ref,
                   distanceKm:
                       BlocProvider.of<SearchActivitiesDistanceSendBloc>(context)
                           .distance,

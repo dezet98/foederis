@@ -24,10 +24,17 @@ class ActivityRepository {
     return Activity.fromDocument(documentSnapshot);
   }
 
-  Future<List<Activity>> fetchAllActivities(
-      {@required String lowerGeohash, @required String upperGeohash}) async {
+  Future<List<Activity>> fetchAllNotUserActivities(
+      {@required String lowerGeohash,
+      @required String upperGeohash,
+      @required DocumentReference userRef}) async {
     List<FetchFilter> filters = [];
     filters.addAll([
+      // FetchFilter( TODO
+      //   fieldName: ActivityCollection.userRef.fieldName,
+      //   fieldValue: userRef,
+      //   filterType: FetchFilterType.isNotEqualTo,
+      // ),
       FetchFilter(
         fieldName: ActivityCollection.geohash.fieldName,
         fieldValue: lowerGeohash,

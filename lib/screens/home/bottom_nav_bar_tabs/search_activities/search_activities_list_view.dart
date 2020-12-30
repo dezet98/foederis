@@ -4,6 +4,7 @@ import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builde
 import 'package:engineering_thesis/components/bloc_builders/filters/filtered_data.dart';
 import 'package:engineering_thesis/components/custom_widgets/card/custom_card.dart';
 import 'package:engineering_thesis/components/custom_widgets/refresh_indicator/custom_refresh_indicator.dart';
+import 'package:engineering_thesis/shared/exceptions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -54,7 +55,9 @@ class SearchActivitiesListView extends StatelessWidget {
         );
       },
       buildError: (error) => SliverFillRemaining(
-        child: Text('Error occur: ${error.toString()}'),
+        child: Text(error is FetchingException
+            ? '${error.message}'
+            : 'Error occur: ${error.toString()}'),
       ),
       buildInProgress: SliverFillRemaining(
         child: Center(child: CircularProgressIndicator()),

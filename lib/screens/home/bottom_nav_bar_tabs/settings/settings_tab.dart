@@ -1,4 +1,7 @@
+import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
+import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
+import 'package:engineering_thesis/shared/routing.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -14,6 +17,15 @@ class SettingsTab extends NavBarTab {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
+          CustomButton.raisedButton(
+            text: 'Show profile',
+            onPressed: () {
+              Routing.pushNamed(context, UserRoutes.profile, options: {
+                RoutingOption.userRef:
+                    BlocProvider.of<UserDataBloc>(context).user.ref
+              });
+            },
+          ),
           PlatformButton(
             child: Text('en'),
             onPressed: () {

@@ -112,6 +112,7 @@ dynamic getHomeScreenBlocProviders() => [
               RepositoryProvider.of<CategoryRepository>(context),
           activityRepository:
               RepositoryProvider.of<ActivityRepository>(context),
+          userDataBloc: BlocProvider.of<UserDataBloc>(context),
         ),
       ),
       BlocProvider(

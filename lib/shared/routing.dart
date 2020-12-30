@@ -1,3 +1,4 @@
+import 'package:engineering_thesis/screens/profile/profile_screen.dart';
 import 'package:engineering_thesis/screens/splash/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,9 @@ class UserRoutes {
   static const String home = "/";
   static const String activityDetails = '/activityDetails';
   static const String form = "/form";
+  static const String profile = "/profile";
 
-  static List<String> get props => [home, activityDetails, form];
+  static List<String> get props => [home, activityDetails, form, profile];
 }
 
 enum RoutingOption {
@@ -41,6 +43,7 @@ enum RoutingOption {
   formAppBarTitle,
   activity,
   filtersBloc,
+  userRef,
 }
 
 class Routing {
@@ -58,6 +61,8 @@ class Routing {
         return FiltersScreen(filtersBloc: options[RoutingOption.filtersBloc]);
       case UserRoutes.activityDetails:
         return ActivityDetailsScreen(activity: options[RoutingOption.activity]);
+      case UserRoutes.profile:
+        return ProfileScreen(userRef: options[RoutingOption.userRef]);
       case UserRoutes.form:
         return FormDataScreen(
           formDataBloc: options[RoutingOption.formDataBloc],

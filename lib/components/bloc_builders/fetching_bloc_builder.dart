@@ -27,7 +27,8 @@ class FetchingBlocBuilder extends StatelessWidget {
           if (state is FetchInitialFailureState ||
               state is FetchRefreshFailureState) {
             return buildError != null
-                ? buildError(state.fetchingError)
+                ? buildError(
+                    state.fetchingException) //todo hard bug to find to change
                 : _buildError;
           } else if (state is FetchInitialSuccessState ||
               state is FetchRefreshSuccessState) {

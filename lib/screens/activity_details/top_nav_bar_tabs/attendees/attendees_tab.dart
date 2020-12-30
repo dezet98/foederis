@@ -7,6 +7,7 @@ import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/app_user.dart';
 import 'package:engineering_thesis/models/attendee.dart';
 import 'package:engineering_thesis/repositories/user_repository.dart';
+import 'package:engineering_thesis/shared/routing.dart';
 import 'package:engineering_thesis/shared/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,6 +41,10 @@ class AttendeesTab extends NavBarTab {
           title:
               '${(appUser as AppUser).firstName} ${(appUser as AppUser).secondName}',
           subtitle: enumToString(attendee.role),
+          onTap: () {
+            Routing.pushNamed(context, UserRoutes.profile,
+                options: {RoutingOption.userRef: (appUser as AppUser).ref});
+          },
         );
       },
     );

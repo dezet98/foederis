@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_args.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/category_repository.dart';
@@ -11,8 +13,10 @@ import 'package:google_maps_webservice/geocoding.dart';
 class SearchActivitiesFetchingArgsBloc extends FetchArgs {
   final int distanceKm;
   final Location location;
+  final DocumentReference userRef;
 
-  SearchActivitiesFetchingArgsBloc({this.distanceKm, this.location});
+  SearchActivitiesFetchingArgsBloc(
+      {@required this.userRef, this.distanceKm, this.location});
 
   @override
   List<Object> get props => [distanceKm, location];
@@ -20,10 +24,18 @@ class SearchActivitiesFetchingArgsBloc extends FetchArgs {
 
 class SearchActivitiesFetchingBloc
     extends FetchBloc<List<Activity>, SearchActivitiesFetchingArgsBloc> {
-  ActivityRepository activityRepository;
-  CategoryRepository categoryRepository;
+  final ActivityRepository activityRepository;
+  final CategoryRepository categoryRepository;
+  final UserDataBloc userDataBloc;
+
   SearchActivitiesFetchingBloc(
-      {@required this.activityRepository, @required this.categoryRepository});
+      {@required this.activityRepository,
+      @required this.categoryRepository,
+      @required this.userDataBloc})
+      : super(
+          initialFetchArgs:
+              SearchActivitiesFetchingArgsBloc(userRef: userDataBloc.user.ref),
+        );
 
   @override
   Future<List<Activity>> fetch(
@@ -31,9 +43,11 @@ class SearchActivitiesFetchingBloc
     Map<String, String> geohashResults =
         _getGeohash(searchActivitiesFetchingArgsBloc);
 
-    List<Activity> activities = await activityRepository.fetchAllActivities(
+    List<Activity> activities =
+        await activityRepository.fetchAllNotUserActivities(
       lowerGeohash: geohashResults['lowerGeohash'],
       upperGeohash: geohashResults['upperGeohash'],
+      userRef: searchActivitiesFetchingArgsBloc.userRef,
     );
 
     for (Activity activity in activities)
