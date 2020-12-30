@@ -1,4 +1,5 @@
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
+import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,8 +35,7 @@ class CustomDateTimePicker extends StatelessWidget {
           width: Dimensions.gutterMedium,
         ),
         CustomButton.iconButton(
-            materialIconData: Icons.date_range,
-            cupertinoIconData: CupertinoIcons.time,
+            customIcon: CustomIcon.datePicker(context),
             enabled: enabled,
             onPressed: () {
               if (isMaterial(context))

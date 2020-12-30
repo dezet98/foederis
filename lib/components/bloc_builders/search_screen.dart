@@ -1,4 +1,6 @@
+import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
 import 'package:engineering_thesis/components/custom_widgets/future_builder/custom_future_builder.dart';
+import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,8 +23,8 @@ class CustomSearch<SearchDataType> extends SearchDelegate {
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
-      IconButton(
-        icon: Icon(Icons.clear),
+      CustomButton.iconButton(
+        customIcon: CustomIcon.clear(context),
         onPressed: () {
           query = '';
         },
@@ -32,8 +34,8 @@ class CustomSearch<SearchDataType> extends SearchDelegate {
 
   @override
   Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.arrow_back),
+    return CustomButton.iconButton(
+      customIcon: CustomIcon.closeScreen(context),
       onPressed: () => close(context, null),
     );
   }
@@ -82,18 +84,19 @@ class CustomSearch<SearchDataType> extends SearchDelegate {
     return ListView.builder(
       itemCount: elements.length,
       itemBuilder: (context, index) {
-        return _buildListTile(context, elements[index], iconData: iconData);
+        return _buildListTile(context, elements[index]);
       },
     );
   }
 
-  Widget _buildListTile(BuildContext context, dynamic element,
-      {IconData iconData}) {
+  Widget _buildListTile(
+    BuildContext context,
+    dynamic element,
+  ) {
     return ListTile(
         title: Text(
           searchFilterBloc.display(element),
         ),
-        leading: Icon(iconData),
         onTap: () {
           searchFilterBloc.add(
             SearchFilterSelectOptionEvent<SearchDataType>(

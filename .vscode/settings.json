@@ -9,7 +9,7 @@
         "**/.dart_tool": true,
         "**/.metadata": true,
         "**/.packages": true,
-        "**/android": true,
+        "**/android": false,
         "**/ios": true,
         "**/build": true,
         "**/generated": true,

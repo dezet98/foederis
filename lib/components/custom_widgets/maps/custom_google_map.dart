@@ -1,4 +1,5 @@
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
+import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -34,7 +35,7 @@ class CustomGoogleMap extends StatelessWidget {
             right: 0,
             top: 0,
             child: CustomButton.floatingButton(
-              materialIconData: Icons.refresh_outlined,
+              customIcon: CustomIcon.refresh(context),
               onPressed: onButtonTap,
             ),
           ),

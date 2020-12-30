@@ -15,7 +15,6 @@ class CustomCard extends StatelessWidget {
       child: ListTile(
         title: CustomText(title, textType: TextType.menu_title),
         subtitle: CustomText('1 / 3', textType: TextType.modal_text),
-        leading: Icon(Icons.ac_unit_outlined),
         onTap: onTap,
       ),
     );

@@ -83,7 +83,7 @@ class OrganizerAppealToJoinTab extends NavBarTab {
   }
 
   @override
-  Icon getIcon(BuildContext context) => null;
+  Widget getIcon(BuildContext context) => null;
 
   @override
   String getLabel(BuildContext context) => 'Requests';

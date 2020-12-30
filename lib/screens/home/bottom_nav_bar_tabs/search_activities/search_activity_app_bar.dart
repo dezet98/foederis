@@ -5,6 +5,7 @@ import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activ
 import 'package:engineering_thesis/components/bloc_builders/search_screen.dart';
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
 import 'package:engineering_thesis/components/custom_widgets/gesture_detector/custom_gesture_detector.dart';
+import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -65,7 +66,7 @@ class SearchActivitiesAppBar {
                 builder: (context) {
                   return CustomButton.iconWithTextButton(
                     text: "${SharedPreferences().distanceKm}km",
-                    materialIconData: Icons.circle,
+                    customIcon: CustomIcon.distancePicker(context),
                     onPressed: () {
                       Routing.pushNamed(
                         context,
@@ -94,8 +95,7 @@ class SearchActivitiesAppBar {
 
   static Widget _buildFilterButton(BuildContext context) {
     return CustomButton.iconButton(
-      cupertinoIconData: CupertinoIcons.color_filter,
-      materialIconData: Icons.filter_list,
+      customIcon: CustomIcon.filter(context),
       onPressed: () {
         Routing.pushNamed(
           context,
@@ -114,10 +114,10 @@ class SearchActivitiesAppBar {
       cubit: BlocProvider.of<SharedPreferencesBloc>(context),
       builder: (context, state) {
         return CustomButton.iconButton(
-          materialIconData: SharedPreferences().searchActivityView ==
+          customIcon: SharedPreferences().searchActivityView ==
                   SharedPreferencesSearchActivityCode.list
-              ? Icons.list
-              : Icons.map,
+              ? CustomIcon.list(context)
+              : CustomIcon.map(context),
           onPressed: () => {
             if (SharedPreferences().searchActivityView ==
                 SharedPreferencesSearchActivityCode.list)

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
+import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -61,7 +62,7 @@ class _CustomClusterGoogleMapState extends State<CustomClusterGoogleMap> {
             right: 0,
             top: 0,
             child: CustomButton.floatingButton(
-              materialIconData: Icons.refresh_outlined,
+              customIcon: CustomIcon.refresh(context),
               onPressed: widget.onButtonTap,
             ),
           ),

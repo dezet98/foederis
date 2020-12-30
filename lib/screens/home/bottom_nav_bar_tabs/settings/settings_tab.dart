@@ -3,6 +3,7 @@ import 'package:engineering_thesis/blocs/specific_blocs/settings/update_user_dat
 import 'package:engineering_thesis/blocs/specific_blocs/settings/update_user_data_send_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
+import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:engineering_thesis/repositories/user_repository.dart';
 import 'package:engineering_thesis/shared/remote_storage.dart';
 import 'package:engineering_thesis/shared/routing.dart';
@@ -79,7 +80,7 @@ class SettingsTab extends NavBarTab {
   }
 
   @override
-  Icon getIcon(BuildContext context) => Icon(PlatformIcons(context).settings);
+  Widget getIcon(BuildContext context) => CustomIcon.settingsBottomTab(context);
 
   @override
   String getLabel(context) => S.of(context).home_screen_account_tab_name;

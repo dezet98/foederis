@@ -8,12 +8,14 @@ import 'form_field/form_field_bloc.dart';
 
 class FormPhotoFieldBloc extends FormFieldBloc<File> {
   final File initialResult;
+  final String initialPhotoUrl;
   final List<Validator> Function(File) validators;
   final List<QueryField> Function(File) queryFieldFromResult;
   final String Function(BuildContext) getLabel;
 
   FormPhotoFieldBloc({
     @required this.initialResult,
+    @required this.initialPhotoUrl,
     @required this.validators,
     @required this.queryFieldFromResult,
     @required this.getLabel,

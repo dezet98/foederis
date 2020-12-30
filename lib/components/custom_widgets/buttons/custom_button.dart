@@ -39,73 +39,42 @@ class CustomButton {
     );
   }
 
-  static Widget iconButton(
-      {bool enabled = true,
-      IconData materialIconData,
-      IconData cupertinoIconData,
-      final void Function() onPressed}) {
-    // return PlatformWidget(
-    //   material: (_, __) => IconButton(
-    //     icon: Icon(materialIconData),
-    //     onPressed: onPressed != null ? onPressed : () {},
-    //   ),
-    //   cupertino: (_, __) => CupertinoButton(
-    //     child: Icon(Icons.ac_unit),
-    //     onPressed: onPressed != null ? onPressed : () {},
-    //   ),
-    // );
+  static Widget iconButton({
+    bool enabled = true,
+    Widget customIcon,
+    final void Function() onPressed,
+  }) {
     return PlatformIconButton(
       onPressed: enabled ? onPressed : null,
-      materialIcon: Icon(materialIconData),
-      cupertinoIcon: Icon(cupertinoIconData),
-      material: (_, __) => MaterialIconButtonData(),
-      cupertino: (_, __) => CupertinoIconButtonData(),
+      icon: customIcon,
     );
   }
 
   static Widget floatingButton(
       {bool enabled = true,
-      IconData materialIconData,
-      IconData cupertinoIconData,
+      Widget customIcon,
       final void Function() onPressed}) {
-    return PlatformWidget(
-      material: (_, __) => FloatingActionButton(
-        heroTag: null,
-        child: Icon(materialIconData),
-        onPressed: enabled ? onPressed : null,
-        mini: true,
-      ),
-      cupertino: (_, __) => FloatingActionButton(
-        heroTag: null,
-        child: Icon(cupertinoIconData),
-        onPressed: enabled ? onPressed : null,
-        mini: true,
-      ),
+    return FloatingActionButton(
+      heroTag: null,
+      child: customIcon,
+      onPressed: enabled ? onPressed : null,
+      mini: true,
     );
   }
 
   static Widget iconWithTextButton({
     @required String text,
     bool enabled = true,
-    IconData materialIconData,
-    IconData cupertinoIconData,
+    Widget customIcon,
     final void Function() onPressed,
   }) {
     return CustomGestureDetector(
       onTap: enabled ? onPressed : null,
-      child: PlatformWidget(
-        material: (_, __) => Row(
-          children: [
-            Icon(Icons.ac_unit_outlined),
-            CustomText(text, textType: TextType.button),
-          ],
-        ),
-        cupertino: (_, __) => Row(
-          children: [
-            Icon(Icons.ac_unit_outlined),
-            CustomText(text, textType: TextType.button),
-          ],
-        ),
+      child: Row(
+        children: [
+          customIcon,
+          CustomText(text, textType: TextType.button),
+        ],
       ),
     );
   }

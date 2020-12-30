@@ -5,10 +5,16 @@ import 'package:flutter/material.dart';
 class CustomListTile extends StatelessWidget {
   final String title;
   final String subtitle;
+  final Widget leading;
   final List<Widget> actionButtons;
   final Function onTap;
 
-  CustomListTile({this.title, this.subtitle, this.actionButtons, this.onTap});
+  CustomListTile(
+      {this.title,
+      this.subtitle,
+      this.actionButtons,
+      this.onTap,
+      this.leading});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +32,7 @@ class CustomListTile extends StatelessWidget {
                 subtitle ?? '',
                 textType: TextType.list_item,
               ),
+              leading: leading,
             ),
             if (actionButtons != null)
               Row(

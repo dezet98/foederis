@@ -19,6 +19,7 @@ class UpdateUserDataFormBloc extends FormDataBloc {
       : super([
           FormPhotoFieldBloc(
             initialResult: null,
+            initialPhotoUrl: appUser.photoUrl,
             queryFieldFromResult: (File result) => [
               QueryField(
                 fieldName: UserCollection.photoUrl.fieldName,
