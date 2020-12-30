@@ -50,6 +50,18 @@ class UpdateUserDataFormBloc extends FormDataBloc {
                 [LenghtValidator(result, min: 3, max: 130)],
             getLabel: (BuildContext context) => "About",
           ),
+          FormTextFieldBloc(
+            initialResult: appUser.phone ?? '',
+            queryFieldFromResult: (String result) => [
+              QueryField(
+                fieldName: UserCollection.phone.fieldName,
+                fieldValue: result,
+              )
+            ],
+            validators: (String result) =>
+                [LenghtValidator(result, min: 3, max: 130)],
+            getLabel: (BuildContext context) => "Phone",
+          ),
           FormDateFieldBloc(
             initialResult: appUser.birthday ?? DateTime(2000),
             queryFieldFromResult: (DateTime result) => [
@@ -77,7 +89,6 @@ class UpdateUserDataFormBloc extends FormDataBloc {
                 fieldValue: enumToString(result),
               )
             ],
-            //listOptionFetchingBloc: categoryFetchingBloc,
             getLabel: (BuildContext context) => "Gender",
             validators: (value) => [NotNullValidator(value)],
           ),

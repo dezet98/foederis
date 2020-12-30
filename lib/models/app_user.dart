@@ -20,6 +20,7 @@ class AppUser {
   Gender gender;
   String about;
   String phone;
+  String photoUrl;
 
   AppUser.fromDocument(DocumentSnapshot doc) {
     this.ref = doc.reference;
@@ -31,6 +32,7 @@ class AppUser {
         Gender.values, doc.getField(UserCollection.gender));
     this.about = doc.getField(UserCollection.about);
     this.phone = doc.getField(UserCollection.phone);
+    this.photoUrl = doc.getField(UserCollection.photoUrl);
   }
 
   AppUser.fromMap(Map<String, dynamic> data) {
@@ -42,6 +44,7 @@ class AppUser {
     this.gender = data[UserCollection.gender.fieldName];
     this.about = data[UserCollection.about.fieldName];
     this.phone = data[UserCollection.phone.fieldName];
+    this.photoUrl = data[UserCollection.photoUrl.fieldName];
   }
 
   toMap() {
@@ -53,6 +56,7 @@ class AppUser {
       UserCollection.gender.fieldName: gender,
       UserCollection.about.fieldName: about,
       UserCollection.phone.fieldName: phone,
+      UserCollection.photoUrl.fieldName: photoUrl,
     };
   }
 }

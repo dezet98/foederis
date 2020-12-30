@@ -17,6 +17,8 @@ class UserCollection {
       CollectionField(fieldName: 'about', isRequired: false);
   static CollectionField phone =
       CollectionField(fieldName: 'phone', isRequired: false);
+  static CollectionField photoUrl =
+      CollectionField(fieldName: 'photoUrl', isRequired: false);
 
   static List<CollectionField> get allFields => [
         email,
