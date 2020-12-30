@@ -3,7 +3,7 @@ import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registr
 import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/maker_appeal_to_join/maker_registration_attendee_send_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
-import 'package:engineering_thesis/components/bloc_builders/send_with_validator/send_builder.dart';
+import 'package:engineering_thesis/components/bloc_builders/send_with_validator/send_builder_button.dart';
 import 'package:engineering_thesis/components/custom_widgets/list/custom_list.dart';
 import 'package:engineering_thesis/components/custom_widgets/list/custom_list_tile.dart';
 import 'package:engineering_thesis/models/activity.dart';
@@ -71,7 +71,7 @@ class OrganizerAppealToJoinTab extends NavBarTab {
 
   List<Widget> _buildActionButtons(context) {
     return [
-      SendBuilder(
+      SendBuilderButton(
         sendBloc: BlocProvider.of<MakerRegistrationAttendeeSendBloc>(context),
         sendButtonText: 'accept',
         afterSuccess: () {

@@ -1,14 +1,15 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
+import 'package:engineering_thesis/components/custom_widgets/snack_bar.dart/custom_snack_bar.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SendBuilder extends StatelessWidget {
+class SendBuilderButton extends StatelessWidget {
   final SendBloc sendBloc;
   final String sendButtonText;
   final Function afterSuccess;
 
-  SendBuilder({
+  SendBuilderButton({
     @required this.sendBloc,
     @required this.sendButtonText,
     this.afterSuccess,
@@ -21,13 +22,13 @@ class SendBuilder extends StatelessWidget {
       listener: (context, state) {
         if (state is SendDataSuccessState) {
           if (afterSuccess != null) afterSuccess();
+        } else if (state is SendDataFailureState) {
+          CustomSnackBar.show(context, SnackBarType.error, state.message);
         }
       },
       builder: (context, state) {
         if (state is SendDataInProgressState) {
           return CustomButton.loadingButton();
-        } else if (state is SendDataFailureState) {
-          return Text(state.sendingDataException.message);
         }
 
         return CustomButton.flatButton(

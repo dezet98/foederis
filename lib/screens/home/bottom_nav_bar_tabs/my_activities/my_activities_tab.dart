@@ -32,12 +32,12 @@ class MyActivitiesTab extends NavBarTab {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
+      _buildTabProviders(),
       Positioned(
         child: _buildFloatingButton(context),
         right: Dimensions.gutterMedium,
         bottom: Dimensions.gutterMedium,
       ),
-      _buildTabProviders(),
     ]);
   }
 

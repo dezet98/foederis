@@ -7,7 +7,7 @@ import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/components/bloc_builders/forms/form_data_screen.dart';
-import 'package:engineering_thesis/components/bloc_builders/send_with_validator/send_builder.dart';
+import 'package:engineering_thesis/components/bloc_builders/send_with_validator/send_builder_button.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/appeal_to_join.dart';
 import 'package:engineering_thesis/models/attendee.dart';
@@ -66,7 +66,7 @@ class RecordsRegistrationTab extends NavBarTab {
 
 // situation when we send request with comment to join and we waiting on decision
   Widget _buildCancelAppealToJoinForm(context, AppealToJoin appealToJoin) {
-    return SendBuilder(
+    return SendBuilderButton(
       sendBloc: AppealToJoinCancelSendBloc(
         RepositoryProvider.of<AppealToJoinRepository>(context),
         appealToJoinRef: appealToJoin.ref,

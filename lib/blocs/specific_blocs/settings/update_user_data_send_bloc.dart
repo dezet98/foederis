@@ -18,13 +18,21 @@ class UpdateUserDataSendBloc extends SendBloc {
   Future<void> query(Map<String, dynamic> valuesMap) async {
     File file = valuesMap[UserCollection.photoUrl.fieldName];
 
-    await _remoteStorage.uploadFile(
-      file: file,
-      path: StoragePatches.userProfilePhoto(_userDataBloc.user.ref.id),
-    );
+    // when user choose new photo
+    if (file != null) {
+      await _remoteStorage.uploadFile(
+        file: file,
+        path: StoragePatches.userProfilePhoto(_userDataBloc.user.ref.id),
+      );
 
-    valuesMap[UserCollection.photoUrl.fieldName] = await _remoteStorage
-        .loadFile(StoragePatches.userProfilePhoto(_userDataBloc.user.ref.id));
+      valuesMap[UserCollection.photoUrl.fieldName] = await _remoteStorage
+          .loadFile(StoragePatches.userProfilePhoto(_userDataBloc.user.ref.id));
+    }
+    // when photo didn't change
+    else {
+      valuesMap[UserCollection.photoUrl.fieldName] =
+          _userDataBloc.user.photoUrl;
+    }
 
     await _userRepository.updateUserBasicData(valuesMap, _userDataBloc.user);
   }

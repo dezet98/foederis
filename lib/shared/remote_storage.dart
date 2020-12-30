@@ -29,7 +29,6 @@ class RemoteStorage {
     try {
       await _firebaseStorage.ref().child(path).putFile(file);
     } catch (e) {
-      print('fsd');
       throw StorageException(
         storageError: StorageError.undefined,
         message: e.toString(),
