@@ -1,8 +1,15 @@
 {
     "@@locale": "en_US",
-    "login": "log in",
+
+    "login_screen_login": "Zaloguj się",
+    "login_screen_go_to_register": "Załóż konto",
+    "login_screen_email_placeholder": "Adres email",
+    "login_screen_password_placeholder": "Hasło",
+    "register_screen_register": "Utwórz",
+    "register_screen_nav_bar_title": "Zakładanie konta",
+    "register_screen_email_placeholder": "Podaj swój email",
+    "register_screen_password_placeholder": "Wymyśl hasło",
     "app_bar_title_register": "Create account",
-    "text_button_go_to_register": "create account",
     "text_button_go_to_login": "go to login",
     "settings": "settings",
     "home_screen_search_activities_tab_name": "Search",
@@ -17,5 +24,12 @@
     "filters_screen_filter_value_regular": "regular",
     "filters_screen_filter_value_one_time": "one-time",
     "create_activity_screen_nav_title": "Create activity",
-    "bad_credentials": "Bad credentials"
+
+    "login_error_bad_credentials": "Nie poprawny login bądź hasło",
+    "login_error_undefined": "Wystąpił niezidentyfikowany problem przy logowaniu",
+    "register_error_undefined": "Wystąpił niezidentyfikowany problem przy rejestracji",
+    "register_error_email_already_in_use": "Podany email jest już zajęty",
+    "register_error_invalid_email": "Niepoprawny email",
+    "register_error_email_weak_password": "Zbyt słabe hasło",
+    "register_error_operation_not_allowed": "Operacja niedozwolona"
 }

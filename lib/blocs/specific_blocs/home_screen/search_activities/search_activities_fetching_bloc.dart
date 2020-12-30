@@ -33,8 +33,9 @@ class SearchActivitiesFetchingBloc
       @required this.categoryRepository,
       @required this.userDataBloc})
       : super(
+          //todo
           initialFetchArgs:
-              SearchActivitiesFetchingArgsBloc(userRef: userDataBloc.user.ref),
+              SearchActivitiesFetchingArgsBloc(userRef: userDataBloc.user?.ref),
         );
 
   @override

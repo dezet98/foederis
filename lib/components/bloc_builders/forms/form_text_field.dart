@@ -37,7 +37,7 @@ class FormTextField extends StatelessWidget {
                   : TextType.invalid_form_title,
               alignment: Alignment.centerLeft,
             ),
-            CustomTextFormField(
+            CustomTextFormField.normal(
               textEditingController: textFieldController,
               enabled: formFieldBloc.editingEnabled,
               onChamged: (String text) {

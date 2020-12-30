@@ -42,9 +42,15 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       if (e is FetchingException &&
           e.fetchingError == FetchingError.field_not_exist) {
         add(UserDataCreateEvent(firebaseUser: firebaseUser));
-        yield UserDataLoadFailureState(message: e.toString());
+        yield UserDataClearFailureState(
+          userLoadDataError: UserLoadDataError.undefined,
+          message: e.toString(),
+        );
       } else {
-        yield UserDataLoadFailureState(message: e.toString());
+        yield UserDataClearFailureState(
+          userLoadDataError: UserLoadDataError.undefined,
+          message: e.toString(),
+        );
       }
     }
   }
@@ -56,7 +62,10 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       add(UserDataLoadEvent(firebaseUser: firebaseUser));
       yield UserDataCreateSuccessfullState();
     } catch (e) {
-      yield UserDataCreateFailureState(message: e.toString());
+      yield UserDataClearFailureState(
+        userLoadDataError: UserLoadDataError.undefined,
+        message: e.toString(),
+      );
     }
   }
 
@@ -66,7 +75,10 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       _user = null;
       yield UserDataClearSuccessfullState();
     } catch (e) {
-      yield UserDataClearFailureState(message: e.toString());
+      yield UserDataClearFailureState(
+        userLoadDataError: UserLoadDataError.undefined,
+        message: e.toString(),
+      );
     }
   }
 }

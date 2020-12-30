@@ -22,7 +22,7 @@ class SettingsTab extends NavBarTab {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          CustomButton.raisedButton(
+          CustomButton.applyForm(
             text: 'Edit profile',
             onPressed: () {
               Routing.pushNamed(context, UserRoutes.form, options: {

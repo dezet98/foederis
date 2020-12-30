@@ -12,6 +12,8 @@ class CustomIcon {
 
   static Widget add(context) => Icon(PlatformIcons(context).add);
 
+  static Widget back(context) => Icon(PlatformIcons(context).back);
+
   static Widget userAvatar(context) =>
       Icon(PlatformIcons(context).personOutline);
 

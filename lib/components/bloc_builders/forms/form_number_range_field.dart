@@ -44,9 +44,8 @@ class FormNumberRangeField extends StatelessWidget {
               return Column(
                 children: [
                   for (int i = 0; i < formFieldBloc.result.length; i++)
-                    CustomTextFormField(
+                    CustomTextFormField.digits(
                       textEditingController: textFieldControllers[i],
-                      textFormType: TextFormType.digits,
                       enabled: formFieldBloc.editingEnabled,
                       onChamged: (String fieldResult) {
                         List<int> newResult = formFieldBloc.result;

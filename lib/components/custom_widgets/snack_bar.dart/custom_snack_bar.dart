@@ -9,40 +9,42 @@ enum SnackBarType {
 }
 
 class CustomSnackBar {
-  static show(BuildContext context, SnackBarType type, String text) {
-    switch (type) {
-      case SnackBarType.error:
-        _errorSnackBar(text)..show(context);
-        break;
-      case SnackBarType.info:
-        _infoSnackBar(text)..show(context);
-        break;
-      case SnackBarType.loading:
-        _loadingSnackBar(text)..show(context);
-        break;
-    }
+  static void showErrorSnackBar(BuildContext context,
+      {String title, String message}) {
+    _errorSnackBar(title: title, message: message)..show(context);
   }
 
-  static Flushbar _errorSnackBar(String text) {
+  static void showLoadingSnackBar(BuildContext context,
+      {String title, String message}) {
+    _loadingSnackBar(title: title, message: message)..show(context);
+  }
+
+  static void showInfoSnackBar(BuildContext context,
+      {String title, String message}) {
+    _infoSnackBar(title: title, message: message)..show(context);
+  }
+
+  static Flushbar _errorSnackBar({String title, String message}) {
     return FlushbarHelper.createError(
-      message: text,
-      title: 'Error',
+      title: title,
+      message: message,
       duration: Duration(seconds: 3),
     );
   }
 
-  static Flushbar _loadingSnackBar(String text) {
+  static Flushbar _loadingSnackBar({String title, String message}) {
     return FlushbarHelper.createLoading(
-      message: text,
+      message: message,
       linearProgressIndicator: LinearProgressIndicator(),
-      title: 'title',
+      title: title,
       duration: Duration(seconds: 2),
     );
   }
 
-  static Flushbar _infoSnackBar(String text) {
+  static Flushbar _infoSnackBar({String title, String message}) {
     return FlushbarHelper.createSuccess(
-      message: text,
+      message: message,
+      title: title,
       duration: Duration(seconds: 2),
     );
   }

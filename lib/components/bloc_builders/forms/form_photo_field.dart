@@ -38,7 +38,7 @@ class FormPhotoField extends StatelessWidget {
               alignment: Alignment.centerLeft,
             ),
             _buildPhoto(context),
-            CustomButton.flatButton(
+            CustomButton.goToOtherScreen(
                 text: formFieldBloc.result == null
                     ? 'Choose file'
                     : formFieldBloc.result.path,

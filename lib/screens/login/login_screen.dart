@@ -1,96 +1,95 @@
-import 'package:engineering_thesis/components/custom_widgets/app_bars/custom_app_bar.dart';
+import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
+import 'package:engineering_thesis/components/custom_widgets/snack_bar.dart/custom_snack_bar.dart';
+import 'package:engineering_thesis/components/custom_widgets/text_form_field/custom_text_form_field.dart';
 import 'package:engineering_thesis/components/templates/template_screen.dart';
 import 'package:engineering_thesis/shared/constants/enums.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../blocs/specific_blocs/authorization/auth/auth_bloc.dart';
 import '../../blocs/specific_blocs/authorization/login/login_bloc.dart';
 import '../../generated/l10n.dart';
 import '../../shared/routing.dart';
 
-class LoginScreen extends StatefulWidget {
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
+class LoginScreen extends StatelessWidget {
   final TextEditingController _emailController =
       TextEditingController(text: "d@g.com");
   final TextEditingController _passwordController =
       TextEditingController(text: "123456aa");
-  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginBloc, LoginState>(
-      listener: _loginBlocListener,
-      child: _buildLoginScreen(),
+    return TemplateScreen(
+      body: BlocConsumer<LoginBloc, LoginState>(
+        listener: _loginBlocListener,
+        builder: _loginBlocBuilder,
+      ),
     );
   }
 
-  Widget _buildLoginScreen() {
-    return TemplateScreen(
-      platformAppBar: CustomAppBar(
-        title: 'Login',
-      ),
-      body: Column(
-        children: [
-          PlatformTextField(controller: _emailController),
-          PlatformTextField(
-            controller: _passwordController,
+  Widget _loginBlocBuilder(context, state) {
+    if (state is LoginInProgressState) return _buildLoginContent(context, true);
+    return _buildLoginContent(context, false);
+  }
+
+  Widget _buildLoginContent(context, bool loading) {
+    return Column(
+      children: [
+        CustomTextFormField.normal(
+          textEditingController: _emailController,
+          enabled: !loading,
+          placeholder: S.of(context).login_screen_email_placeholder,
+        ),
+        CustomTextFormField.normal(
+            textEditingController: _passwordController,
+            enabled: !loading,
+            obscureText: true,
+            placeholder: S.of(context).login_screen_password_placeholder),
+        CustomButton.goToOtherScreen(
+          text: S.of(context).login_screen_go_to_register,
+          onPressed: () => _toRegisterOnPressed(context),
+          enabled: !loading,
+        ),
+        if (!loading)
+          CustomButton.applyForm(
+            text: S.of(context).login_screen_login,
+            onPressed: () => _loginOnPressed(context),
           ),
-          PlatformButton(
-            onPressed: () =>
-                Routing.pushReplacement(context, GuestRoutes.register),
-            child: Text(S.of(context).text_button_go_to_register),
-          ),
-          PlatformButton(
-            onPressed: loading
-                ? null
-                : () {
-                    BlocProvider.of<LoginBloc>(context).add(
-                      LoginWithEmailAndPasswordEvent(
-                          email: _emailController.text,
-                          password: _passwordController.text),
-                    );
-                  },
-            child: loading
-                ? PlatformCircularProgressIndicator()
-                : Text('log in with credentials'),
-          )
-        ],
-      ),
+        if (loading) CustomButton.loadingButton(),
+      ],
     );
   }
 
   void _loginBlocListener(BuildContext context, LoginState state) {
-    if (state is LoginInProgressState) {
-      setState(() {
-        loading = true;
-      });
-    } else if (state is LoginFailureState) {
-      String text;
-      switch (state.loginException.loginError) {
-        case LoginError.bad_credentials:
-          text = S.of(context).bad_credentials;
-          break;
-        case LoginError.undefined:
-          text = state.loginException.message;
-          break;
-      }
-      setState(() {
-        loading = false;
-        showPlatformModalSheet(context: context, builder: (_) => Text(text));
-      });
-    } else if (state is LoginSuccessState) {
+    if (state is LoginSuccessState) {
       if (BlocProvider.of<AuthBloc>(context).state
           is AuthUserAuthenticatedState) {
         Routing.pushReplacement(context, UserRoutes.home);
       } else {
         Routing.pushReplacement(context, CommonRoutes.splash);
       }
+    } else if (state is LoginFailureState) {
+      switch (state.loginException.loginError) {
+        case LoginError.bad_credentials:
+          CustomSnackBar.showErrorSnackBar(context,
+              message: S.of(context).login_error_bad_credentials);
+          break;
+        case LoginError.undefined:
+          CustomSnackBar.showErrorSnackBar(context,
+              message: S.of(context).login_error_undefined);
+          break;
+      }
     }
+  }
+
+  void _loginOnPressed(context) {
+    BlocProvider.of<LoginBloc>(context).add(
+      LoginWithEmailAndPasswordEvent(
+          email: _emailController.text, password: _passwordController.text),
+    );
+  }
+
+  void _toRegisterOnPressed(context) {
+    Routing.pushNamed(context, GuestRoutes.register);
   }
 }

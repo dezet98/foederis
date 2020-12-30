@@ -50,4 +50,10 @@ abstract class StreamBloc<DataType> extends Bloc<StreamEvent, StreamState> {
           streamError: StreamError.undefined, message: e.toString());
     }
   }
+
+  @override
+  Future<void> close() {
+    _streamSubscription?.cancel();
+    return super.close();
+  }
 }

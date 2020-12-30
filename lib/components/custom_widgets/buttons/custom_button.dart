@@ -5,7 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class CustomButton {
-  static Widget raisedButton(
+  static Widget applyForm(
+      {String text, bool enabled = true, final void Function() onPressed}) {
+    return _raisedButton(enabled: enabled, onPressed: onPressed, text: text);
+  }
+
+  static Widget goToOtherScreen(
+      {String text, bool enabled = true, final void Function() onPressed}) {
+    return _flatButton(enabled: enabled, onPressed: onPressed, text: text);
+  }
+
+  static Widget _raisedButton(
       {String text, bool enabled = true, final void Function() onPressed}) {
     return PlatformButton(
       child: CustomText(text,
@@ -17,7 +27,7 @@ class CustomButton {
     );
   }
 
-  static Widget flatButton(
+  static Widget _flatButton(
       {String text, bool enabled = true, final void Function() onPressed}) {
     return PlatformButton(
       child: CustomText(text,

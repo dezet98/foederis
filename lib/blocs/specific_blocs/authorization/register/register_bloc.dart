@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:engineering_thesis/shared/constants/enums.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../repositories/auth_repository.dart';
-import '../../../../shared/app_logger.dart';
 import '../../../../shared/exceptions.dart';
 
 part 'register_event.dart';
@@ -35,11 +35,16 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       await _authRepository.createUserWithEmailAndPassword(
           email: email, password: password);
       yield RegisterSuccessState();
-    } on RegisterException catch (registerException) {
-      AppLogger().log(
-          message: registerException.registerError.toString(),
-          logLevel: LogLevel.warning);
-      yield RegisterFailureState(registerException: registerException);
+    } catch (e) {
+      if (e is RegisterException) {
+        yield RegisterFailureState(registerException: e);
+      } else {
+        RegisterFailureState(
+          registerException: RegisterException(
+            registerError: RegisterError.undefined,
+          ),
+        );
+      }
     }
   }
 }

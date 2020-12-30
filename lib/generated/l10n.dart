@@ -35,11 +35,81 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `log in`
-  String get login {
+  /// `Zaloguj się`
+  String get login_screen_login {
     return Intl.message(
-      'log in',
-      name: 'login',
+      'Zaloguj się',
+      name: 'login_screen_login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Załóż konto`
+  String get login_screen_go_to_register {
+    return Intl.message(
+      'Załóż konto',
+      name: 'login_screen_go_to_register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Adres email`
+  String get login_screen_email_placeholder {
+    return Intl.message(
+      'Adres email',
+      name: 'login_screen_email_placeholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hasło`
+  String get login_screen_password_placeholder {
+    return Intl.message(
+      'Hasło',
+      name: 'login_screen_password_placeholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Utwórz`
+  String get register_screen_register {
+    return Intl.message(
+      'Utwórz',
+      name: 'register_screen_register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zakładanie konta`
+  String get register_screen_nav_bar_title {
+    return Intl.message(
+      'Zakładanie konta',
+      name: 'register_screen_nav_bar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Podaj swój email`
+  String get register_screen_email_placeholder {
+    return Intl.message(
+      'Podaj swój email',
+      name: 'register_screen_email_placeholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wymyśl hasło`
+  String get register_screen_password_placeholder {
+    return Intl.message(
+      'Wymyśl hasło',
+      name: 'register_screen_password_placeholder',
       desc: '',
       args: [],
     );
@@ -50,16 +120,6 @@ class S {
     return Intl.message(
       'Create account',
       name: 'app_bar_title_register',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `create account`
-  String get text_button_go_to_register {
-    return Intl.message(
-      'create account',
-      name: 'text_button_go_to_register',
       desc: '',
       args: [],
     );
@@ -205,11 +265,71 @@ class S {
     );
   }
 
-  /// `Bad credentials`
-  String get bad_credentials {
+  /// `Nie poprawny login bądź hasło`
+  String get login_error_bad_credentials {
     return Intl.message(
-      'Bad credentials',
-      name: 'bad_credentials',
+      'Nie poprawny login bądź hasło',
+      name: 'login_error_bad_credentials',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wystąpił niezidentyfikowany problem przy logowaniu`
+  String get login_error_undefined {
+    return Intl.message(
+      'Wystąpił niezidentyfikowany problem przy logowaniu',
+      name: 'login_error_undefined',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wystąpił niezidentyfikowany problem przy rejestracji`
+  String get register_error_undefined {
+    return Intl.message(
+      'Wystąpił niezidentyfikowany problem przy rejestracji',
+      name: 'register_error_undefined',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Podany email jest już zajęty`
+  String get register_error_email_already_in_use {
+    return Intl.message(
+      'Podany email jest już zajęty',
+      name: 'register_error_email_already_in_use',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Niepoprawny email`
+  String get register_error_invalid_email {
+    return Intl.message(
+      'Niepoprawny email',
+      name: 'register_error_invalid_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zbyt słabe hasło`
+  String get register_error_email_weak_password {
+    return Intl.message(
+      'Zbyt słabe hasło',
+      name: 'register_error_email_weak_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Operacja niedozwolona`
+  String get register_error_operation_not_allowed {
+    return Intl.message(
+      'Operacja niedozwolona',
+      name: 'register_error_operation_not_allowed',
       desc: '',
       args: [],
     );

@@ -1,6 +1,8 @@
 {
     "@@locale": "pl_PL",
-    "login": "zaloguj się",
+    
+    "login_screen_login": "Zaloguj się",
+    "login_screen_go_to_register": "Zaloguj się",
     "app_bar_title_register": "Rejestracja",
     "text_button_create_account": "zarejestruj się",
     "text_button_go_to_login": "login",

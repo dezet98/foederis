@@ -36,9 +36,8 @@ class FormNumberField extends StatelessWidget {
         BlocBuilder(
             cubit: formDataBloc,
             builder: (context, state) {
-              return CustomTextFormField(
+              return CustomTextFormField.digits(
                 textEditingController: textFieldController,
-                textFormType: TextFormType.digits,
                 enabled: formFieldBloc.editingEnabled,
                 onChamged: (String result) {
                   if (formFieldBloc.editingEnabled)

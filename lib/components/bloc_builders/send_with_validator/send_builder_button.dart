@@ -26,13 +26,13 @@ class SendBuilderButton extends StatelessWidget {
           if (afterSuccess != null) {
             afterSuccess();
           } else {
-            CustomSnackBar.show(context, SnackBarType.info, 'Success');
+            CustomSnackBar.showInfoSnackBar(context, message: 'Success');
           }
         } else if (state is SendDataFailureState) {
           if (afterError != null) {
             afterError();
           } else {
-            CustomSnackBar.show(context, SnackBarType.error, state.message);
+            CustomSnackBar.showErrorSnackBar(context, message: state.message);
           }
         }
       },
@@ -41,7 +41,7 @@ class SendBuilderButton extends StatelessWidget {
           return CustomButton.loadingButton();
         }
 
-        return CustomButton.flatButton(
+        return CustomButton.goToOtherScreen(
           text: sendButtonText,
           onPressed: () => sendBloc.add(SendDataEvent()),
         );

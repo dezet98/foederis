@@ -1,5 +1,6 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_photo_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
+import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:engineering_thesis/shared/routing.dart';
 import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/material.dart';
@@ -79,8 +80,8 @@ class FormDataScreen extends StatelessWidget {
   void sendBlocListener(BuildContext context, dynamic state) {
     if (state is SendDataFailureState) {
       formDataBloc.add(FormDataEditingEnabledEvent());
-      CustomSnackBar.show(
-          context, SnackBarType.error, state.sendingDataException.toString());
+      CustomSnackBar.showErrorSnackBar(context,
+          message: state.sendingDataException.toString());
     } else if (state is SendDataSuccessState) {
       formDataBloc.add(FormDataClearEvent());
       formDataBloc.add(FormDataEditingEnabledEvent());
@@ -88,7 +89,7 @@ class FormDataScreen extends StatelessWidget {
         Routing.pop(context);
       else
         afterSuccess();
-      CustomSnackBar.show(context, SnackBarType.info, 'Success');
+      CustomSnackBar.showInfoSnackBar(context, message: 'Success');
     } else if (state is SendDataInProgressState) {
       formDataBloc.add(FormDataEditingDisableEvent());
     }
@@ -105,7 +106,7 @@ class FormDataScreen extends StatelessWidget {
         return BlocBuilder(
           cubit: formDataBloc,
           builder: (context, state) {
-            return CustomButton.flatButton(
+            return CustomButton.goToOtherScreen(
               text: formNextButtonText,
               enabled: formDataBloc.isValid,
               onPressed: () {
@@ -122,10 +123,10 @@ class FormDataScreen extends StatelessWidget {
 
   Widget _buildAppBar(BuildContext context) {
     return CustomAppBar(
-      appBarType: AppBarType.close,
+      customIcon: CustomIcon.closeScreen(context),
       title: formAppBarTitle,
       trailingActions: [
-        CustomButton.flatButton(
+        CustomButton.goToOtherScreen(
             text: 'Clear',
             onPressed: () {
               formDataBloc.add(FormDataClearEvent());

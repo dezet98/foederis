@@ -59,7 +59,7 @@ class FormAddressField extends StatelessWidget {
                             : TextType.invalid_form_title,
                         alignment: Alignment.centerLeft,
                       ),
-                      CustomButton.flatButton(
+                      CustomButton.goToOtherScreen(
                         text: 'Choose location',
                         enabled: formFieldBloc.editingEnabled,
                         onPressed: () async {

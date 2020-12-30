@@ -22,7 +22,6 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "app_bar_title_register" : MessageLookupByLibrary.simpleMessage("Create account"),
-    "bad_credentials" : MessageLookupByLibrary.simpleMessage("Bad credentials"),
     "create_activity_screen_nav_title" : MessageLookupByLibrary.simpleMessage("Create activity"),
     "filter_screen_apply_button_text" : MessageLookupByLibrary.simpleMessage("Apply filters"),
     "filter_screen_nav_title" : MessageLookupByLibrary.simpleMessage("Filters"),
@@ -35,9 +34,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "home_screen_account_tab_name" : MessageLookupByLibrary.simpleMessage("Account"),
     "home_screen_my_activity_tab_name" : MessageLookupByLibrary.simpleMessage("My activity"),
     "home_screen_search_activities_tab_name" : MessageLookupByLibrary.simpleMessage("Search"),
-    "login" : MessageLookupByLibrary.simpleMessage("log in"),
+    "login_error_bad_credentials" : MessageLookupByLibrary.simpleMessage("Nie poprawny login bądź hasło"),
+    "login_error_undefined" : MessageLookupByLibrary.simpleMessage("Wystąpił niezidentyfikowany problem przy logowaniu"),
+    "login_screen_email_placeholder" : MessageLookupByLibrary.simpleMessage("Adres email"),
+    "login_screen_go_to_register" : MessageLookupByLibrary.simpleMessage("Załóż konto"),
+    "login_screen_login" : MessageLookupByLibrary.simpleMessage("Zaloguj się"),
+    "login_screen_password_placeholder" : MessageLookupByLibrary.simpleMessage("Hasło"),
+    "register_error_email_already_in_use" : MessageLookupByLibrary.simpleMessage("Podany email jest już zajęty"),
+    "register_error_email_weak_password" : MessageLookupByLibrary.simpleMessage("Zbyt słabe hasło"),
+    "register_error_invalid_email" : MessageLookupByLibrary.simpleMessage("Niepoprawny email"),
+    "register_error_operation_not_allowed" : MessageLookupByLibrary.simpleMessage("Operacja niedozwolona"),
+    "register_error_undefined" : MessageLookupByLibrary.simpleMessage("Wystąpił niezidentyfikowany problem przy rejestracji"),
+    "register_screen_email_placeholder" : MessageLookupByLibrary.simpleMessage("Podaj swój email"),
+    "register_screen_nav_bar_title" : MessageLookupByLibrary.simpleMessage("Zakładanie konta"),
+    "register_screen_password_placeholder" : MessageLookupByLibrary.simpleMessage("Wymyśl hasło"),
+    "register_screen_register" : MessageLookupByLibrary.simpleMessage("Utwórz"),
     "settings" : MessageLookupByLibrary.simpleMessage("settings"),
-    "text_button_go_to_login" : MessageLookupByLibrary.simpleMessage("go to login"),
-    "text_button_go_to_register" : MessageLookupByLibrary.simpleMessage("create account")
+    "text_button_go_to_login" : MessageLookupByLibrary.simpleMessage("go to login")
   };
 }
