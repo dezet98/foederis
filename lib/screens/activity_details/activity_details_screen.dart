@@ -44,7 +44,7 @@ class ActivityDetailsScreen extends StatelessWidget {
         BlocProvider(
           create: (context) => ActivityStreamBloc(
             RepositoryProvider.of<ActivityRepository>(context),
-            activity: activity,
+            activityRef: activity.ref,
           ),
         ),
         BlocProvider(

@@ -38,12 +38,27 @@ class AttendeeRepository {
         filters, collectionPath, _fromQuerySnapshot);
   }
 
-  Stream<List<Attendee>> getAttendeesStream(DocumentReference activityRef) {
+  Stream<List<Attendee>> getAttendeesStreamByActivity(
+      DocumentReference activityRef) {
     List<FetchFilter> filters = [];
     filters.add(
       FetchFilter(
         fieldName: AttendeeCollection.activityRef.fieldName,
         fieldValue: activityRef,
+        filterType: FetchFilterType.isEqualTo,
+      ),
+    );
+
+    return _remoteRepository.getCollectionStream<List<Attendee>>(
+        collectionPath, filters, _fromQuerySnapshot);
+  }
+
+  Stream<List<Attendee>> getAttendeesStreamByUser(DocumentReference userRef) {
+    List<FetchFilter> filters = [];
+    filters.add(
+      FetchFilter(
+        fieldName: AttendeeCollection.userRef.fieldName,
+        fieldValue: userRef,
         filterType: FetchFilterType.isEqualTo,
       ),
     );

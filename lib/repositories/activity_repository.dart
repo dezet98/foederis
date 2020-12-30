@@ -44,6 +44,20 @@ class ActivityRepository {
         filters, ActivityCollection.collectionName, _fromQuerySnapshot);
   }
 
+  // Stream<List<Activity>> getMyActivitiesStream(DocumentReference userRef) {
+  //   List<FetchFilter> filters = [];
+  //   filters.addAll([
+  //     FetchFilter(
+  //       fieldName: ActivityCollection.us.fieldName,
+  //       fieldValue: lowerGeohash,
+  //       filterType: FetchFilterType.isGreaterThanOrEqualTo,
+  //     ),
+  //   ]);
+
+  //   return _remoteRepository.getCollectionStream(
+  //       ActivityCollection.collectionName, _fromQuerySnapshot);
+  // }
+
   Stream<Activity> getCollectionItemStream(DocumentReference activityRef) {
     return _remoteRepository.getCollectionItemStream(
         activityRef.path, _fromDocumentSnapshot);
