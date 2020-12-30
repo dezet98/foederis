@@ -97,6 +97,7 @@ class UpdateUserDataFormBloc extends FormDataBloc {
           FormOptionListFieldBloc<Gender>(
             listOptionFetchingBloc: null,
             listOption: Gender.values,
+            initialResult: appUser.gender,
             getLabelFromOption: (dynamic gender) => enumToString(gender),
             queryFieldFromResult: (Gender result) => [
               QueryField(

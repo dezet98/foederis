@@ -10,6 +10,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 import '../../../blocs/abstract_blocs/forms/form_data/form_data_bloc.dart';
 
@@ -42,16 +43,11 @@ class FormPhotoField extends StatelessWidget {
                     ? 'Choose file'
                     : formFieldBloc.result.path,
                 onPressed: () async {
-                  FilePickerResult pickedFile = await FilePicker.platform
-                      .pickFiles(type: FileType.image, allowCompression: true);
+                  FilePickerResult pickedFile =
+                      await FilePicker.platform.pickFiles(type: FileType.image);
 
                   if (pickedFile != null) {
-                    File file = File(pickedFile.files.first.path);
-
-                    formDataBloc.add(FormDataEditingEvent(
-                      formFieldBloc: formFieldBloc,
-                      result: file,
-                    ));
+                    _updateResult(File(pickedFile.files.single.path));
                   }
                 })
           ],
@@ -60,9 +56,16 @@ class FormPhotoField extends StatelessWidget {
     );
   }
 
+  void _updateResult(File file) {
+    formDataBloc.add(FormDataEditingEvent(
+      formFieldBloc: formFieldBloc,
+      result: file,
+    ));
+  }
+
   Widget _buildPhoto(context) {
     if (formFieldBloc.result != null) {
-      return _buildPhotoWithCropPosibility(formFieldBloc.result);
+      return _buildPhotoWithCropPosibility(context, formFieldBloc.result);
     } else if (formFieldBloc.result == null &&
         formFieldBloc.initialPhotoUrl != null)
       return CustomUserAvatar.fromUrl(formFieldBloc.initialPhotoUrl);
@@ -70,11 +73,37 @@ class FormPhotoField extends StatelessWidget {
     return CustomUserAvatar.fromIcon(CustomIcon.userAvatar(context));
   }
 
-  Widget _buildPhotoWithCropPosibility(File file) {
+  Widget _buildPhotoWithCropPosibility(context, File file) {
     return Stack(
       children: [
         CustomUserAvatar.fromFile(file),
-        CustomButton.iconButton(),
+        Positioned(
+          right: 0,
+          child: CustomButton.floatingButton(
+              customIcon: CustomIcon.cropFile(context),
+              onPressed: () async {
+                File croppedFile = await ImageCropper.cropImage(
+                    sourcePath: file.path,
+                    aspectRatioPresets: [
+                      CropAspectRatioPreset.square,
+                      CropAspectRatioPreset.ratio3x2,
+                      CropAspectRatioPreset.original,
+                      CropAspectRatioPreset.ratio4x3,
+                      CropAspectRatioPreset.ratio16x9
+                    ],
+                    androidUiSettings: AndroidUiSettings(
+                        toolbarTitle: 'Cropper',
+                        toolbarColor: Colors.deepOrange,
+                        toolbarWidgetColor: Colors.white,
+                        initAspectRatio: CropAspectRatioPreset.original,
+                        lockAspectRatio: false),
+                    iosUiSettings: IOSUiSettings(
+                      minimumAspectRatio: 1.0,
+                    ));
+
+                if (croppedFile != null) _updateResult(croppedFile);
+              }),
+        ),
       ],
     );
   }

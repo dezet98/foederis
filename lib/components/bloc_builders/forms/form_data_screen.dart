@@ -62,12 +62,16 @@ class FormDataScreen extends StatelessWidget {
 
   Widget _buildForm(context) {
     return Form(
-      child: Column(
-        children: [
-          for (FormFieldBloc optionBloc in formDataBloc.formsData)
-            _buildSingleForm(optionBloc),
-          _buildApplyButton(context),
-        ],
+      child: SingleChildScrollView(
+        child: Expanded(
+          child: Column(
+            children: [
+              for (FormFieldBloc optionBloc in formDataBloc.formsData)
+                _buildSingleForm(optionBloc),
+              _buildApplyButton(context),
+            ],
+          ),
+        ),
       ),
     );
   }
