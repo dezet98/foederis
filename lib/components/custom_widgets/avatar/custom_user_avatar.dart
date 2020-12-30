@@ -12,7 +12,7 @@ class CustomUserAvatar {
         image: photoUrl,
         imageErrorBuilder: (context, error, stackTrace) {
           if (errorWidget != null) return errorWidget;
-          return fromIcon(CustomIcon.closeScreen(context));
+          return fromIcon(CustomIcon.closeScreen);
         },
       );
 
@@ -33,5 +33,5 @@ class CustomUserAvatar {
     return customIcon;
   }
 
-  static Widget _nullImage(context) => CustomIcon.closeScreen(context);
+  static Widget _nullImage(context) => CustomIcon.closeScreen;
 }

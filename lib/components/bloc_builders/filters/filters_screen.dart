@@ -25,7 +25,7 @@ class FiltersScreen extends StatelessWidget {
     return TemplateScreen(
       usePadding: false,
       platformAppBar: CustomAppBar(
-        customIcon: CustomIcon.closeScreen(context),
+        customIcon: CustomIcon.closeScreen,
         title: S.of(context).filter_screen_nav_title,
       ),
       body: Scaffold(

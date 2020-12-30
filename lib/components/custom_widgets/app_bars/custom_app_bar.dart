@@ -1,4 +1,5 @@
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
+import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/shared/routing.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,7 +31,7 @@ class CustomAppBar extends StatelessWidget {
     return PlatformAppBar(
       title: CustomText.pageTitle(title),
       leading: CustomButton.iconButton(
-        customIcon: customIcon,
+        customIcon: customIcon == null ? CustomIcon.back : customIcon,
         onPressed: onPressed ?? () => Routing.pop(context),
       ),
       trailingActions: trailingActions,

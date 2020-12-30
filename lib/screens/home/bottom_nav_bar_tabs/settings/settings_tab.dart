@@ -80,7 +80,7 @@ class SettingsTab extends NavBarTab {
   }
 
   @override
-  Widget getIcon(BuildContext context) => CustomIcon.settingsBottomTab(context);
+  Widget getIcon(BuildContext context) => CustomIcon.settingsBottomTab;
 
   @override
   String getLabel(context) => S.of(context).home_screen_account_tab_name;

@@ -85,8 +85,7 @@ class SearchActivitiesTab extends NavBarTab {
   }
 
   @override
-  Widget getIcon(BuildContext context) =>
-      CustomIcon.searchActivityBottomTab(context);
+  Widget getIcon(BuildContext context) => CustomIcon.searchActivityBottomTab;
 
   @override
   String getLabel(context) =>

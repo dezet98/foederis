@@ -66,7 +66,7 @@ class SearchActivitiesAppBar {
                 builder: (context) {
                   return CustomButton.iconWithTextButton(
                     text: "${SharedPreferences().distanceKm}km",
-                    customIcon: CustomIcon.distancePicker(context),
+                    customIcon: CustomIcon.distancePicker,
                     onPressed: () {
                       Routing.pushNamed(
                         context,
@@ -95,7 +95,7 @@ class SearchActivitiesAppBar {
 
   static Widget _buildFilterButton(BuildContext context) {
     return CustomButton.iconButton(
-      customIcon: CustomIcon.filter(context),
+      customIcon: CustomIcon.filter,
       onPressed: () {
         Routing.pushNamed(
           context,
@@ -116,8 +116,8 @@ class SearchActivitiesAppBar {
         return CustomButton.iconButton(
           customIcon: SharedPreferences().searchActivityView ==
                   SharedPreferencesSearchActivityCode.list
-              ? CustomIcon.list(context)
-              : CustomIcon.map(context),
+              ? CustomIcon.list
+              : CustomIcon.map,
           onPressed: () => {
             if (SharedPreferences().searchActivityView ==
                 SharedPreferencesSearchActivityCode.list)

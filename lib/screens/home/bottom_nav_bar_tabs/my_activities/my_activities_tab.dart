@@ -110,7 +110,7 @@ class MyActivitiesTab extends NavBarTab {
 
   Widget _buildFloatingButton(BuildContext context) {
     return CustomButton.floatingButton(
-      customIcon: CustomIcon.add(context),
+      customIcon: CustomIcon.add,
       onPressed: () {
         Routing.pushNamed(
           context,
@@ -130,8 +130,7 @@ class MyActivitiesTab extends NavBarTab {
   }
 
   @override
-  Widget getIcon(BuildContext context) =>
-      CustomIcon.myActivitiesBottomTab(context);
+  Widget getIcon(BuildContext context) => CustomIcon.myActivitiesBottomTab;
 
   @override
   String getLabel(context) => S.of(context).home_screen_my_activity_tab_name;

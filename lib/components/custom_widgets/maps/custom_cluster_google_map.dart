@@ -62,7 +62,7 @@ class _CustomClusterGoogleMapState extends State<CustomClusterGoogleMap> {
             right: 0,
             top: 0,
             child: CustomButton.floatingButton(
-              customIcon: CustomIcon.refresh(context),
+              customIcon: CustomIcon.refresh,
               onPressed: widget.onButtonTap,
             ),
           ),

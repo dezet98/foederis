@@ -24,7 +24,7 @@ class CustomSearch<SearchDataType> extends SearchDelegate {
   List<Widget> buildActions(BuildContext context) {
     return [
       CustomButton.iconButton(
-        customIcon: CustomIcon.clear(context),
+        customIcon: CustomIcon.clear,
         onPressed: () {
           query = '';
         },
@@ -35,7 +35,7 @@ class CustomSearch<SearchDataType> extends SearchDelegate {
   @override
   Widget buildLeading(BuildContext context) {
     return CustomButton.iconButton(
-      customIcon: CustomIcon.closeScreen(context),
+      customIcon: CustomIcon.closeScreen,
       onPressed: () => close(context, null),
     );
   }

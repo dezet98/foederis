@@ -13,8 +13,8 @@ class CustomPopupMenu extends StatelessWidget {
       itemBuilder: (_) {
         return popupMenuItems;
       },
-      child: customButton ??
-          CustomButton.iconButton(customIcon: CustomIcon.more(context)),
+      child:
+          customButton ?? CustomButton.iconButton(customIcon: CustomIcon.more),
     );
   }
 }

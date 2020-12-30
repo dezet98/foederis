@@ -68,8 +68,7 @@ class AttendeesTab extends NavBarTab {
     return [
       if (isMaker)
         CustomPopupMenu(
-          customButton:
-              CustomButton.iconButton(customIcon: CustomIcon.more(context)),
+          customButton: CustomButton.iconButton(customIcon: CustomIcon.more),
           popupMenuItems: [
             if (attendee.role == AttendeeRole.attendee)
               CustomPopupMenuItem.it(

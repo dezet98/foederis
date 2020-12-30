@@ -34,7 +34,7 @@ class CustomDateTimePicker extends StatelessWidget {
           width: Dimensions.gutterMedium,
         ),
         CustomButton.iconButton(
-            customIcon: CustomIcon.datePicker(context),
+            customIcon: CustomIcon.datePicker,
             enabled: enabled,
             onPressed: () {
               if (isMaterial(context))

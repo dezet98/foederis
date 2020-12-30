@@ -98,7 +98,7 @@ class TemplateScreen extends StatelessWidget {
           initialIndex: navBarBloc.initialIndex,
           child: PlatformScaffold(
             appBar: CustomAppBar(
-              customIcon: CustomIcon.back(context),
+              customIcon: CustomIcon.back,
               title: appBarTitle,
               trailingActions:
                   trailingActions?.length == 0 ? null : trailingActions,

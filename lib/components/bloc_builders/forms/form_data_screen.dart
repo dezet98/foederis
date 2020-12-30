@@ -123,7 +123,7 @@ class FormDataScreen extends StatelessWidget {
 
   Widget _buildAppBar(BuildContext context) {
     return CustomAppBar(
-      customIcon: CustomIcon.closeScreen(context),
+      customIcon: CustomIcon.closeScreen,
       title: formAppBarTitle,
       trailingActions: [
         CustomButton.goToOtherScreen(

@@ -35,7 +35,7 @@ class CustomGoogleMap extends StatelessWidget {
             right: 0,
             top: 0,
             child: CustomButton.floatingButton(
-              customIcon: CustomIcon.refresh(context),
+              customIcon: CustomIcon.refresh,
               onPressed: onButtonTap,
             ),
           ),

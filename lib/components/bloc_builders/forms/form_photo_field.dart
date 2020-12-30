@@ -70,7 +70,7 @@ class FormPhotoField extends StatelessWidget {
         formFieldBloc.initialPhotoUrl != null)
       return CustomUserAvatar.fromUrl(context, formFieldBloc.initialPhotoUrl);
 
-    return CustomUserAvatar.fromIcon(CustomIcon.userAvatar(context));
+    return CustomUserAvatar.fromIcon(CustomIcon.userAvatar);
   }
 
   Widget _buildPhotoWithCropPosibility(context, File file) {
@@ -80,7 +80,7 @@ class FormPhotoField extends StatelessWidget {
         Positioned(
           right: 0,
           child: CustomButton.floatingButton(
-              customIcon: CustomIcon.cropFile(context),
+              customIcon: CustomIcon.cropFile,
               onPressed: () async {
                 File croppedFile = await ImageCropper.cropImage(
                     sourcePath: file.path,
