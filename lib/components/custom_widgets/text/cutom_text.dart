@@ -2,6 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class CustomText {
+  static Widget screenInfoHeader(String text, {TextAlign textAlign}) =>
+      Builder(builder: (context) {
+        return Text(
+          text,
+          style: Theme.of(context)
+              .textTheme
+              .headline2
+              .copyWith(color: Colors.black87, fontWeight: FontWeight.bold),
+        );
+      });
+
   static Widget menuTitle(String text, {TextAlign textAlign}) =>
       Builder(builder: (context) {
         return Text(
@@ -74,7 +85,7 @@ class CustomText {
         );
       });
 
-  static Widget button(BuildContext das, String text, {TextAlign textAlign}) =>
+  static Widget button(String text, {TextAlign textAlign}) =>
       Builder(builder: (context) {
         return Text(
           text,

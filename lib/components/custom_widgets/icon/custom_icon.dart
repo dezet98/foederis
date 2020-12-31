@@ -72,6 +72,10 @@ class CustomIcon {
         return Icon(PlatformIcons(context).home);
       });
 
+  static Widget get guestInfoBottomTab => Builder(builder: (context) {
+        return Icon(PlatformIcons(context).info);
+      });
+
   static Widget _buildPlatformIcon(
       IconData materialData, IconData cupertinoData) {
     return PlatformWidget(

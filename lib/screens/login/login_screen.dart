@@ -99,6 +99,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   void _navigateToHomeAsAGuest(context) {
-    Routing.pushNamed(context, UserRoutes.home);
+    Routing.pushNamedAndRemoveUntil(
+        context, GuestRoutes.guestHome, GuestRoutes.guestHome);
   }
 }

@@ -6,22 +6,35 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class CustomButton {
   static Widget applyForm(
-      {String text, bool enabled = true, final void Function() onPressed}) {
+      {@required String text,
+      bool enabled = true,
+      final void Function() onPressed}) {
+    return _raisedButton(enabled: enabled, onPressed: onPressed, text: text);
+  }
+
+  static Widget dialog(
+      {@required String text,
+      bool enabled = true,
+      final void Function() onPressed}) {
     return _raisedButton(enabled: enabled, onPressed: onPressed, text: text);
   }
 
   static Widget goToOtherScreen(
-      {String text, bool enabled = true, final void Function() onPressed}) {
+      {@required String text,
+      bool enabled = true,
+      final void Function() onPressed}) {
     return _flatButton(enabled: enabled, onPressed: onPressed, text: text);
   }
 
   static Widget _raisedButton(
-      {String text, bool enabled = true, final void Function() onPressed}) {
+      {@required String text,
+      bool enabled = true,
+      final void Function() onPressed}) {
     return PlatformButton(
       child: Builder(
         builder: (context) => !enabled
             ? CustomText.unavailableTextButton(text)
-            : CustomText.button(context, text),
+            : CustomText.button(text),
       ),
       onPressed: enabled ? onPressed : null,
       material: (context, platform) => MaterialRaisedButtonData(),
@@ -30,12 +43,14 @@ class CustomButton {
   }
 
   static Widget _flatButton(
-      {String text, bool enabled = true, final void Function() onPressed}) {
+      {@required String text,
+      bool enabled = true,
+      final void Function() onPressed}) {
     return PlatformButton(
       child: Builder(
         builder: (context) => !enabled
             ? CustomText.unavailableTextButton(text)
-            : CustomText.button(context, text),
+            : CustomText.button(text),
       ),
       onPressed: enabled ? onPressed : null,
       materialFlat: (context, platform) => MaterialFlatButtonData(),
@@ -88,7 +103,7 @@ class CustomButton {
         children: [
           customIcon,
           Builder(
-            builder: (context) => CustomText.button(context, text),
+            builder: (context) => CustomText.button(text),
           ),
         ],
       ),

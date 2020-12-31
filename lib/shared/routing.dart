@@ -1,3 +1,5 @@
+import 'package:engineering_thesis/screens/guest/guest_home_screen.dart';
+import 'package:engineering_thesis/screens/guest/guest_prohibited_dialog.dart';
 import 'package:engineering_thesis/screens/profile/profile_screen.dart';
 import 'package:engineering_thesis/screens/splash/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,8 +25,9 @@ class CommonRoutes {
 class GuestRoutes {
   static const String login = "/login";
   static const String register = "/register";
+  static const String guestHome = "/guestHome";
 
-  static List<String> get props => [login, register];
+  static List<String> get props => [login, register, guestHome];
 }
 
 class UserRoutes {
@@ -32,7 +35,6 @@ class UserRoutes {
   static const String activityDetails = '/activityDetails';
   static const String form = "/form";
   static const String profile = "/profile";
-
   static List<String> get props => [home, activityDetails, form, profile];
 }
 
@@ -55,6 +57,10 @@ class Routing {
         return LoginScreen();
       case GuestRoutes.register:
         return RegisterScreen();
+      case GuestRoutes.register:
+        return RegisterScreen();
+      case GuestRoutes.guestHome:
+        return GuestHomeScreen();
       case CommonRoutes.splash:
         return SplashScreen();
       case CommonRoutes.filter:
@@ -123,8 +129,7 @@ bool _routeGuard(BuildContext context, String routeName) {
 
   if (UserRoutes.props.contains(routeName)) {
     if (authenticated) return true;
-    Routing.pushNamedAndRemoveUntil(
-        context, GuestRoutes.login, GuestRoutes.login);
+    GuestProhibitedDialog.showDialog(context);
   } else if (GuestRoutes.props.contains(routeName)) {
     if (!authenticated) return true;
     showPlatformModalSheet(

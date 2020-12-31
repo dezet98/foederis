@@ -17,15 +17,11 @@ enum TemplateScreenType {
 class TemplateScreen extends StatelessWidget {
   final Widget body;
   final CustomAppBar platformAppBar;
-  final PlatformNavBar platformNavBar;
-  final String routeName;
   final bool usePadding;
 
   TemplateScreen({
     @required this.body,
-    this.routeName,
     this.platformAppBar,
-    this.platformNavBar,
     this.usePadding = true,
   });
 
@@ -41,7 +37,6 @@ class TemplateScreen extends StatelessWidget {
               )
             : body,
       ),
-      bottomNavBar: platformNavBar,
     );
   }
 
@@ -79,8 +74,8 @@ class TemplateScreen extends StatelessWidget {
       [
         for (NavBarTab navBarTab in navBarContents)
           BottomNavigationBarItem(
-            icon: navBarTab.getIcon(context),
-            label: navBarTab.getLabel(context),
+            icon: navBarTab.getIcon(context) ?? CustomIcon.closeScreen,
+            label: navBarTab.getLabel(context) ?? '',
           ),
       ];
 

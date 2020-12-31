@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_args.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
@@ -13,10 +12,8 @@ import 'package:google_maps_webservice/geocoding.dart';
 class SearchActivitiesFetchingArgsBloc extends FetchArgs {
   final int distanceKm;
   final Location location;
-  final DocumentReference userRef;
 
-  SearchActivitiesFetchingArgsBloc(
-      {@required this.userRef, this.distanceKm, this.location});
+  SearchActivitiesFetchingArgsBloc({this.distanceKm, this.location});
 
   @override
   List<Object> get props => [distanceKm, location];
@@ -31,12 +28,7 @@ class SearchActivitiesFetchingBloc
   SearchActivitiesFetchingBloc(
       {@required this.activityRepository,
       @required this.categoryRepository,
-      @required this.userDataBloc})
-      : super(
-          //todo
-          initialFetchArgs:
-              SearchActivitiesFetchingArgsBloc(userRef: userDataBloc.user?.ref),
-        );
+      @required this.userDataBloc});
 
   @override
   Future<List<Activity>> fetch(
@@ -48,7 +40,6 @@ class SearchActivitiesFetchingBloc
         await activityRepository.fetchAllNotUserActivities(
       lowerGeohash: geohashResults['lowerGeohash'],
       upperGeohash: geohashResults['upperGeohash'],
-      userRef: searchActivitiesFetchingArgsBloc.userRef,
     );
 
     for (Activity activity in activities)

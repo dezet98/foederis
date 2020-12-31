@@ -19,7 +19,7 @@ class CustomChip extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: Dimensions.gutterVerySmall),
       child: ChoiceChip(
-        label: CustomText.button(context, text),
+        label: CustomText.button(text),
         selected: selected,
         onSelected: onSelected,
       ),

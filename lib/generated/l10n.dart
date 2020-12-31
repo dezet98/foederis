@@ -344,6 +344,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Aby w pełni korzystać z aplikacji zaloguj się bądź załóż konto`
+  String get guest_prohibited_access_info {
+    return Intl.message(
+      'Aby w pełni korzystać z aplikacji zaloguj się bądź załóż konto',
+      name: 'guest_prohibited_access_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aby móc tworzyć własne aktywności, przeglądać i uczestniczyć w innych dołącz do nas już teraz!`
+  String get guest_prohibited_access_info_tab_content {
+    return Intl.message(
+      'Aby móc tworzyć własne aktywności, przeglądać i uczestniczyć w innych dołącz do nas już teraz!',
+      name: 'guest_prohibited_access_info_tab_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Odmowa dostępu`
+  String get guest_prohibited_access_title {
+    return Intl.message(
+      'Odmowa dostępu',
+      name: 'guest_prohibited_access_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zaloguj się`
+  String get guest_prohibited_go_to_login {
+    return Intl.message(
+      'Zaloguj się',
+      name: 'guest_prohibited_go_to_login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zarejestruj`
+  String get guest_prohibited_go_to_register {
+    return Intl.message(
+      'Zarejestruj',
+      name: 'guest_prohibited_go_to_register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Info`
+  String get guest_prohibited_info_bottom_tab_label {
+    return Intl.message(
+      'Info',
+      name: 'guest_prohibited_info_bottom_tab_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OK`
+  String get dialog_ok {
+    return Intl.message(
+      'OK',
+      name: 'dialog_ok',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

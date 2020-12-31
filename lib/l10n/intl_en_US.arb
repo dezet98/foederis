@@ -1,6 +1,5 @@
 {
     "@@locale": "en_US",
-
     "login_screen_login": "Zaloguj się",
     "login_screen_go_to_register": "Załóż konto",
     "login_screen_visit_as_a_guest": "Wejdź jako gość",
@@ -25,12 +24,18 @@
     "filters_screen_filter_value_regular": "regular",
     "filters_screen_filter_value_one_time": "one-time",
     "create_activity_screen_nav_title": "Create activity",
-
     "login_error_bad_credentials": "Nie poprawny login bądź hasło",
     "login_error_undefined": "Wystąpił niezidentyfikowany problem przy logowaniu",
     "register_error_undefined": "Wystąpił niezidentyfikowany problem przy rejestracji",
     "register_error_email_already_in_use": "Podany email jest już zajęty",
     "register_error_invalid_email": "Niepoprawny email",
     "register_error_email_weak_password": "Zbyt słabe hasło",
-    "register_error_operation_not_allowed": "Operacja niedozwolona"
+    "register_error_operation_not_allowed": "Operacja niedozwolona",
+    "guest_prohibited_access_info": "Aby w pełni korzystać z aplikacji zaloguj się bądź załóż konto",
+    "guest_prohibited_access_info_tab_content": "Aby móc tworzyć własne aktywności, przeglądać i uczestniczyć w innych dołącz do nas już teraz!",
+    "guest_prohibited_access_title": "Odmowa dostępu",
+    "guest_prohibited_go_to_login": "Zaloguj się",
+    "guest_prohibited_go_to_register": "Zarejestruj",
+    "guest_prohibited_info_bottom_tab_label": "Info",
+    "dialog_ok": "OK"
 }

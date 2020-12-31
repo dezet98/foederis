@@ -1,6 +1,5 @@
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/create_activity/create_activity_send_bloc.dart';
-import 'package:engineering_thesis/blocs/specific_blocs/home_screen/home_screen_bottom_nav_bar_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_distance_send_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_fetching_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_filters_bloc.dart';
@@ -9,9 +8,6 @@ import 'package:engineering_thesis/repositories/appeal_to_join_repository.dart';
 import 'package:engineering_thesis/repositories/attendee_repository.dart';
 import 'package:engineering_thesis/repositories/transaction_and_batch_repository.dart';
 import 'package:engineering_thesis/repositories/user_repository.dart';
-import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/my_activities/my_activities_tab.dart';
-import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/search_activities/search_activities_tab.dart';
-import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/settings/settings_tab.dart';
 import 'package:engineering_thesis/shared/remote_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -95,13 +91,6 @@ dynamic getHomeScreenBlocProviders() => [
       BlocProvider(
         create: (context) =>
             SharedPreferencesBloc(DatabaseHelper.instance, SharedPreferences()),
-      ),
-      BlocProvider(
-        create: (context) => HomeScreenBottomNavBarBloc(navBarTabs: [
-          SearchActivitiesTab(),
-          MyActivitiesTab(),
-          SettingsTab(),
-        ]),
       ),
       BlocProvider(
         create: (context) => SearchActivitiesSearchFilterBloc(
