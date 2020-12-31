@@ -92,6 +92,6 @@ class SearchActivityMapView extends StatelessWidget {
   }
 
   Widget buildActivityTile(BuildContext context, Activity activity) {
-    return ActivityCard(activity: activity);
+    return ActivityCard.searchCard(context, activity: activity);
   }
 }

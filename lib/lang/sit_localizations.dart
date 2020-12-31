@@ -26,31 +26,13 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  String plural_days(int howManyDays) => Intl.plural(
-        howManyDays,
-        one: '$howManyDays dzień',
-        other: '$howManyDays dni',
-        name: 'plural_days',
-        args: [howManyDays],
-      );
-
-  String plural_hours(int howManyHours) => Intl.plural(
-        howManyHours,
-        one: '$howManyHours godzina',
-        two: '$howManyHours godziny',
-        other: '$howManyHours godzin',
-        name: 'plural_hours',
-        args: [howManyHours],
-      );
-
-  String plural_minutes(int howManyMinutes) => Intl.plural(
-        howManyMinutes,
-        one: '$howManyMinutes minuta',
-        two: '$howManyMinutes minuty',
-        other: '$howManyMinutes minut',
-        name: 'plural_minutes',
-        args: [howManyMinutes],
-      );
+  // String plural_days(int howManyDays) => Intl.plural(
+  //       howManyDays,
+  //       one: '$howManyDays dzień',
+  //       other: '$howManyDays dni',
+  //       name: 'plural_days',
+  //       args: [howManyDays],
+  //     );
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

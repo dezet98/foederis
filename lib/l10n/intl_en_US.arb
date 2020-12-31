@@ -39,8 +39,12 @@
     "guest_prohibited_info_bottom_tab_label": "Info",
     "activity_card_free_join": "wolny udział",
     "activity_card_registration": "zapisy",
+    "activity_card_complete": "complete",
+    "activity_card_future": "future",
     "dialog_ok": "OK",
     "plural_minutes": "{howManyMinutes,plural, =1{{howManyMinutes} minuta}=2{{howManyMinutes} minuty}other{{howManyMinutes} minut}}",
     "plural_hours": "{howManyHours,plural, =1{{howManyHours} godzina}=2{{howManyHours} godziny}other{{howManyHours} godzin}}",
     "plural_days": "{howManyDays,plural, =1{{howManyDays} dzień}other{{howManyDays} dni}}"
+
+
 }

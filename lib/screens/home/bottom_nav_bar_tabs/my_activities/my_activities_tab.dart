@@ -4,21 +4,18 @@ import 'package:engineering_thesis/blocs/specific_blocs/common/user_fetch_bloc.d
 import 'package:engineering_thesis/blocs/specific_blocs/create_activity/create_activity_send_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/my_activities/my_activities_stream_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
+import 'package:engineering_thesis/components/bloc_builders/cards/activity_card.dart';
 import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/components/bloc_builders/stream_bloc_builder.dart';
-import 'package:engineering_thesis/components/custom_widgets/avatar/custom_user_avatar.dart';
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
 import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:engineering_thesis/components/custom_widgets/list/custom_list.dart';
-import 'package:engineering_thesis/components/custom_widgets/list/custom_list_tile.dart';
-import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/app_user.dart';
 import 'package:engineering_thesis/models/attendee.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/attendee_repository.dart';
 import 'package:engineering_thesis/repositories/user_repository.dart';
-import 'package:engineering_thesis/shared/utils/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -98,16 +95,7 @@ class MyActivitiesTab extends NavBarTab {
 // attendee here without sense
   Widget _buildTile(BuildContext context, Activity activity, Attendee attendee,
       AppUser appUser) {
-    return CustomListTile(
-      title: activity.title,
-      content: CustomText.bodyText(enumToString(attendee.role)),
-      leading: CustomUserAvatar.fromUrl(context, appUser.photoUrl,
-          diameter: MediaQuery.of(context).size.width / 4),
-      onTap: () {
-        Routing.pushNamed(context, UserRoutes.activityDetails,
-            options: {RoutingOption.activity: activity});
-      },
-    );
+    return ActivityCard.myActivityCard(context, activity: activity);
   }
 
   Widget _buildFloatingButton(BuildContext context) {

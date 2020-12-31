@@ -425,6 +425,26 @@ class S {
     );
   }
 
+  /// `complete`
+  String get activity_card_complete {
+    return Intl.message(
+      'complete',
+      name: 'activity_card_complete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `future`
+  String get activity_card_future {
+    return Intl.message(
+      'future',
+      name: 'activity_card_future',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `OK`
   String get dialog_ok {
     return Intl.message(

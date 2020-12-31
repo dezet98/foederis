@@ -27,7 +27,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "activity_card_complete" : MessageLookupByLibrary.simpleMessage("complete"),
     "activity_card_free_join" : MessageLookupByLibrary.simpleMessage("wolny udział"),
+    "activity_card_future" : MessageLookupByLibrary.simpleMessage("future"),
     "activity_card_registration" : MessageLookupByLibrary.simpleMessage("zapisy"),
     "app_bar_title_register" : MessageLookupByLibrary.simpleMessage("Create account"),
     "create_activity_screen_nav_title" : MessageLookupByLibrary.simpleMessage("Create activity"),
