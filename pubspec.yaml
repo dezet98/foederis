@@ -12,6 +12,7 @@ dependencies:
 
   # internalization helpers
   intl: 0.16.1
+  intl_translation: ^0.17.10+1
   flutter_localizations:
     sdk: flutter
 

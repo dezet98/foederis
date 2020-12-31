@@ -23,62 +23,66 @@ class SearchActivitiesTab extends NavBarTab {
   Widget build(BuildContext context) {
     return BlocListener(
       cubit: BlocProvider.of<SearchActivitiesSearchFilterBloc>(context),
-      listener: (context, state) {
-        if (state is SearchFilterSelectedOptionState) {
-          BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
-            FetchRefreshEvent(
-              fetchArgs: SearchActivitiesFetchingArgsBloc(
-                location: (state.selectedOption as PlacesSearchResult)
-                    .geometry
-                    .location,
-              ),
-            ),
-          );
-        }
-      },
+      listener: _searchActivitiesSearchFilterBlocListener,
       child: BlocListener(
         cubit: BlocProvider.of<SearchActivitiesDistanceSendBloc>(context),
-        listener: (context, state) {
-          if (state is SendDataSuccessState) {
-            BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
-              FetchRefreshEvent(
-                fetchArgs: SearchActivitiesFetchingArgsBloc(
-                  distanceKm:
-                      BlocProvider.of<SearchActivitiesDistanceSendBloc>(context)
-                          .distance,
-                ),
-              ),
-            );
-          }
-        },
+        listener: _searchActivitiesDistanceSendBlocListener,
         child: BlocBuilder(
           cubit: BlocProvider.of<SearchActivitiesFetchingBloc>(context),
-          builder: (context, state) {
-            return _buildView(context);
-          },
+          builder: (context, state) => _buildView(context),
         ),
       ),
     );
   }
 
+  /// depends on user preferences choose list or map activities view
   Widget _buildView(BuildContext context) {
     return BlocBuilder(
       cubit: BlocProvider.of<SharedPreferencesBloc>(context),
       builder: (context, state) {
         if (SharedPreferences().searchActivityView ==
             SharedPreferencesSearchActivityCode.list)
-          return SearchActivitiesListView(onRefresh: onRefresh);
+          return SearchActivitiesListView(onRefresh: _onRefreshActivities);
         else
-          return SearchActivityMapView(onRefresh: onRefresh);
+          return SearchActivityMapView(onRefresh: _onRefreshActivities);
       },
     );
   }
 
-  onRefresh(BuildContext context) async {
+  void _onRefreshActivities(BuildContext context) async {
     await Future.delayed(Duration(seconds: 2));
     BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
       FetchRefreshEvent(),
     );
+  }
+
+  /// if address changed call to refresh activities
+  void _searchActivitiesSearchFilterBlocListener(context, state) {
+    if (state is SearchFilterSelectedOptionState) {
+      BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
+        FetchRefreshEvent(
+          fetchArgs: SearchActivitiesFetchingArgsBloc(
+            location:
+                (state.selectedOption as PlacesSearchResult).geometry.location,
+          ),
+        ),
+      );
+    }
+  }
+
+  /// if search area changed call to refresh activities
+  void _searchActivitiesDistanceSendBlocListener(context, state) {
+    if (state is SendDataSuccessState) {
+      BlocProvider.of<SearchActivitiesFetchingBloc>(context).add(
+        FetchRefreshEvent(
+          fetchArgs: SearchActivitiesFetchingArgsBloc(
+            distanceKm:
+                BlocProvider.of<SearchActivitiesDistanceSendBloc>(context)
+                    .distance,
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -88,5 +92,3 @@ class SearchActivitiesTab extends NavBarTab {
   String getLabel(context) =>
       S.of(context).home_screen_search_activities_tab_name;
 }
-
-class BlocCustomer {}

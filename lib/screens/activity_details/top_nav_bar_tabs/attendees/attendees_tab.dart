@@ -10,6 +10,7 @@ import 'package:engineering_thesis/components/custom_widgets/list/custom_list.da
 import 'package:engineering_thesis/components/custom_widgets/list/custom_list_tile.dart';
 import 'package:engineering_thesis/components/custom_widgets/popup_menu/custom_popup_menu.dart';
 import 'package:engineering_thesis/components/custom_widgets/popup_menu/custom_popup_menu_item.dart';
+import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/app_user.dart';
 import 'package:engineering_thesis/models/attendee.dart';
@@ -53,7 +54,7 @@ class AttendeesTab extends NavBarTab {
         return CustomListTile(
           title:
               '${(appUser as AppUser).firstName} ${(appUser as AppUser).secondName}',
-          subtitle: enumToString(attendee.role),
+          content: CustomText.bodyText(enumToString(attendee.role)),
           actionButtons: _buildActionMenuButton(context, attendee),
           onTap: () {
             Routing.pushNamed(context, UserRoutes.profile,

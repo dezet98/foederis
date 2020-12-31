@@ -405,6 +405,26 @@ class S {
     );
   }
 
+  /// `wolny udział`
+  String get activity_card_free_join {
+    return Intl.message(
+      'wolny udział',
+      name: 'activity_card_free_join',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `zapisy`
+  String get activity_card_registration {
+    return Intl.message(
+      'zapisy',
+      name: 'activity_card_registration',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `OK`
   String get dialog_ok {
     return Intl.message(
@@ -412,6 +432,44 @@ class S {
       name: 'dialog_ok',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `{howManyMinutes,plural, =1{{howManyMinutes} minuta}=2{{howManyMinutes} minuty}other{{howManyMinutes} minut}}`
+  String plural_minutes(num howManyMinutes) {
+    return Intl.plural(
+      howManyMinutes,
+      one: '$howManyMinutes minuta',
+      two: '$howManyMinutes minuty',
+      other: '$howManyMinutes minut',
+      name: 'plural_minutes',
+      desc: '',
+      args: [howManyMinutes],
+    );
+  }
+
+  /// `{howManyHours,plural, =1{{howManyHours} godzina}=2{{howManyHours} godziny}other{{howManyHours} godzin}}`
+  String plural_hours(num howManyHours) {
+    return Intl.plural(
+      howManyHours,
+      one: '$howManyHours godzina',
+      two: '$howManyHours godziny',
+      other: '$howManyHours godzin',
+      name: 'plural_hours',
+      desc: '',
+      args: [howManyHours],
+    );
+  }
+
+  /// `{howManyDays,plural, =1{{howManyDays} dzień}other{{howManyDays} dni}}`
+  String plural_days(num howManyDays) {
+    return Intl.plural(
+      howManyDays,
+      one: '$howManyDays dzień',
+      other: '$howManyDays dni',
+      name: 'plural_days',
+      desc: '',
+      args: [howManyDays],
     );
   }
 }
@@ -422,6 +480,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en', countryCode: 'US'),
+      Locale.fromSubtags(languageCode: 'messages'),
       Locale.fromSubtags(languageCode: 'pl', countryCode: 'PL'),
     ];
   }

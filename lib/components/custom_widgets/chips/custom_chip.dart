@@ -25,4 +25,20 @@ class CustomChip extends StatelessWidget {
       ),
     );
   }
+
+  static Widget label({
+    String label,
+  }) {
+    return Chip(
+      label: CustomText.chipLabel(label),
+    );
+  }
+
+  static Widget common({
+    Widget child,
+  }) {
+    return Chip(
+      label: child,
+    );
+  }
 }

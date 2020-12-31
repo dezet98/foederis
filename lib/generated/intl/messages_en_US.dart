@@ -19,8 +19,16 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en_US';
 
+  static m0(howManyDays) => "${Intl.plural(howManyDays, one: '${howManyDays} dzień', other: '${howManyDays} dni')}";
+
+  static m1(howManyHours) => "${Intl.plural(howManyHours, one: '${howManyHours} godzina', two: '${howManyHours} godziny', other: '${howManyHours} godzin')}";
+
+  static m2(howManyMinutes) => "${Intl.plural(howManyMinutes, one: '${howManyMinutes} minuta', two: '${howManyMinutes} minuty', other: '${howManyMinutes} minut')}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "activity_card_free_join" : MessageLookupByLibrary.simpleMessage("wolny udział"),
+    "activity_card_registration" : MessageLookupByLibrary.simpleMessage("zapisy"),
     "app_bar_title_register" : MessageLookupByLibrary.simpleMessage("Create account"),
     "create_activity_screen_nav_title" : MessageLookupByLibrary.simpleMessage("Create activity"),
     "dialog_ok" : MessageLookupByLibrary.simpleMessage("OK"),
@@ -48,6 +56,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "login_screen_login" : MessageLookupByLibrary.simpleMessage("Zaloguj się"),
     "login_screen_password_placeholder" : MessageLookupByLibrary.simpleMessage("Hasło"),
     "login_screen_visit_as_a_guest" : MessageLookupByLibrary.simpleMessage("Wejdź jako gość"),
+    "plural_days" : m0,
+    "plural_hours" : m1,
+    "plural_minutes" : m2,
     "register_error_email_already_in_use" : MessageLookupByLibrary.simpleMessage("Podany email jest już zajęty"),
     "register_error_email_weak_password" : MessageLookupByLibrary.simpleMessage("Zbyt słabe hasło"),
     "register_error_invalid_email" : MessageLookupByLibrary.simpleMessage("Niepoprawny email"),

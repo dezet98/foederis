@@ -1,8 +1,8 @@
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_fetching_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_filters_bloc.dart';
+import 'package:engineering_thesis/components/bloc_builders/cards/activity_card.dart';
 import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/components/bloc_builders/filters/filtered_data.dart';
-import 'package:engineering_thesis/components/custom_widgets/card/custom_card.dart';
 import 'package:engineering_thesis/components/custom_widgets/refresh_indicator/custom_refresh_indicator.dart';
 import 'package:engineering_thesis/shared/exceptions.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,7 +12,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../../../models/activity.dart';
-import '../../../../shared/routing.dart';
 import 'search_activity_app_bar.dart';
 
 class SearchActivitiesListView extends StatelessWidget {
@@ -51,7 +50,7 @@ class SearchActivitiesListView extends StatelessWidget {
           data: activities,
           filtersBloc: BlocProvider.of<SearchActivitiesFiltersBloc>(context),
           child: (context, activities) =>
-              buildActivitiesList(context, activities),
+              _buildActivitiesList(context, activities),
         );
       },
       buildError: (error) => SliverFillRemaining(
@@ -65,7 +64,7 @@ class SearchActivitiesListView extends StatelessWidget {
     );
   }
 
-  Widget buildActivitiesList(BuildContext context, List<Activity> activities) {
+  Widget _buildActivitiesList(BuildContext context, List<Activity> activities) {
     return SliverList(
       delegate: SliverChildListDelegate(
         [
@@ -77,13 +76,8 @@ class SearchActivitiesListView extends StatelessWidget {
   }
 
   Widget buildActivityTile(BuildContext context, Activity activity) {
-    return CustomCard(
-      title: activity.title,
-      subtitle: activity.categoryRef.toString(),
-      onTap: () {
-        Routing.pushNamed(context, UserRoutes.activityDetails,
-            options: {RoutingOption.activity: activity});
-      },
+    return ActivityCard(
+      activity: activity,
     );
   }
 }

@@ -23,6 +23,10 @@ class CustomIcon {
         return Icon(PlatformIcons(context).back);
       });
 
+  static Widget get person => Builder(builder: (context) {
+        return Icon(PlatformIcons(context).person);
+      });
+
   static Widget get userAvatar => Builder(builder: (context) {
         return Icon(PlatformIcons(context).personOutline);
       });
@@ -51,7 +55,8 @@ class CustomIcon {
       });
 
   static Widget get distancePicker => Builder(builder: (context) {
-        return _buildPlatformIcon(Icons.circle, CupertinoIcons.circle);
+        return _buildPlatformIcon(
+            Icons.navigation_rounded, CupertinoIcons.news);
       });
 
   /// use for popupMenu buttons

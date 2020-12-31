@@ -4,13 +4,7 @@ import 'package:flutter/widgets.dart';
 class CustomText {
   static Widget screenInfoHeader(String text, {TextAlign textAlign}) =>
       Builder(builder: (context) {
-        return Text(
-          text,
-          style: Theme.of(context)
-              .textTheme
-              .headline2
-              .copyWith(color: Colors.black87, fontWeight: FontWeight.bold),
-        );
+        return Text(text, style: Theme.of(context).textTheme.headline2);
       });
 
   static Widget menuTitle(String text, {TextAlign textAlign}) =>
@@ -18,6 +12,14 @@ class CustomText {
         return Text(
           text,
           style: Theme.of(context).textTheme.headline3,
+        );
+      });
+
+  static Widget chipLabel(String text, {TextAlign textAlign}) =>
+      Builder(builder: (context) {
+        return Text(
+          text,
+          style: Theme.of(context).textTheme.bodyText1,
         );
       });
 

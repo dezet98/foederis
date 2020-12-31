@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../shared/providers.dart';
 
-class GuestHomeScreen extends StatelessWidget {
+class HomeGuestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

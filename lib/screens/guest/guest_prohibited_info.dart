@@ -8,34 +8,38 @@ import 'package:flutter/widgets.dart';
 
 class GuestProhibitedInfo {
   static Widget getProhibitedInfo(BuildContext context, String infoText) {
-    return CenterScreen(
-      content: Column(
-        children: [
-          CustomText.screenInfoHeader(infoText),
-          SizedBox(
-            height: Dimensions.gutterMedium,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              goToLoginScreenButton(context),
-              goToRegisterScreenButton(context),
-            ],
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.all(Dimensions.screenPadding),
+      child: CenterScreen(
+        content: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CustomText.screenInfoHeader(infoText),
+            SizedBox(
+              height: Dimensions.gutterMedium,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                goToLoginScreenButton(context),
+                goToRegisterScreenButton(context),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
   static Widget goToLoginScreenButton(BuildContext context) {
     return CustomButton.goToOtherScreen(
-        text: S.of(context).login_screen_go_to_register,
+        text: S.of(context).guest_prohibited_go_to_login,
         onPressed: () => Routing.pushNamed(context, GuestRoutes.login));
   }
 
   static Widget goToRegisterScreenButton(context) {
     return CustomButton.goToOtherScreen(
-        text: S.of(context).login_screen_go_to_register,
+        text: S.of(context).guest_prohibited_go_to_register,
         onPressed: () => Routing.pushNamed(context, GuestRoutes.register));
   }
 }

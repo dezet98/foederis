@@ -15,8 +15,8 @@ class HomeScreen extends StatelessWidget {
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthUserUnauthenticatedState) {
-            Routing.pushNamedAndRemoveUntil(context, CommonRoutes.splash,
-                CommonRoutes.splash); // TODO change security maybe
+            Routing.pushNamedAndRemoveUntil(
+                context, CommonRoutes.splash, CommonRoutes.splash);
           }
         },
         child: Builder(

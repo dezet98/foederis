@@ -60,7 +60,7 @@ class Routing {
       case GuestRoutes.register:
         return RegisterScreen();
       case GuestRoutes.guestHome:
-        return GuestHomeScreen();
+        return HomeGuestScreen();
       case CommonRoutes.splash:
         return SplashScreen();
       case CommonRoutes.filter:

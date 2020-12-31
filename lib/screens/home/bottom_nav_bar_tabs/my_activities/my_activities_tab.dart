@@ -11,6 +11,7 @@ import 'package:engineering_thesis/components/custom_widgets/buttons/custom_butt
 import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:engineering_thesis/components/custom_widgets/list/custom_list.dart';
 import 'package:engineering_thesis/components/custom_widgets/list/custom_list_tile.dart';
+import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/app_user.dart';
 import 'package:engineering_thesis/models/attendee.dart';
@@ -99,8 +100,9 @@ class MyActivitiesTab extends NavBarTab {
       AppUser appUser) {
     return CustomListTile(
       title: activity.title,
-      subtitle: enumToString(attendee.role),
-      leading: CustomUserAvatar.fromUrl(context, appUser.photoUrl),
+      content: CustomText.bodyText(enumToString(attendee.role)),
+      leading: CustomUserAvatar.fromUrl(context, appUser.photoUrl,
+          diameter: MediaQuery.of(context).size.width / 4),
       onTap: () {
         Routing.pushNamed(context, UserRoutes.activityDetails,
             options: {RoutingOption.activity: activity});

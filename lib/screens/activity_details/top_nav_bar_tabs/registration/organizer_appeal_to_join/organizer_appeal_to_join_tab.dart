@@ -6,6 +6,7 @@ import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builde
 import 'package:engineering_thesis/components/bloc_builders/send_with_validator/send_builder_button.dart';
 import 'package:engineering_thesis/components/custom_widgets/list/custom_list.dart';
 import 'package:engineering_thesis/components/custom_widgets/list/custom_list_tile.dart';
+import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/appeal_to_join.dart';
 import 'package:engineering_thesis/models/attendee.dart';
@@ -59,7 +60,7 @@ class OrganizerAppealToJoinTab extends NavBarTab {
             builder: (context) {
               return CustomListTile(
                 title: appealToJoin.submissionDate.toString(),
-                subtitle: appealToJoin.user?.firstName,
+                content: CustomText.bodyText(appealToJoin.user?.firstName),
                 actionButtons: _buildActionButtons(context),
               );
             },

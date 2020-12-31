@@ -68,7 +68,8 @@ class FormPhotoField extends StatelessWidget {
       return _buildPhotoWithCropPosibility(context, formFieldBloc.result);
     } else if (formFieldBloc.result == null &&
         formFieldBloc.initialPhotoUrl != null)
-      return CustomUserAvatar.fromUrl(context, formFieldBloc.initialPhotoUrl);
+      return CustomUserAvatar.fromUrl(context, formFieldBloc.initialPhotoUrl,
+          diameter: MediaQuery.of(context).size.width / 3);
 
     return CustomUserAvatar.fromIcon(CustomIcon.userAvatar);
   }
