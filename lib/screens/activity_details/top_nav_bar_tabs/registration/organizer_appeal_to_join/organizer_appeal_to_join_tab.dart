@@ -7,6 +7,8 @@ import 'package:engineering_thesis/components/bloc_builders/send/send_builder_bu
 import 'package:engineering_thesis/components/custom_widgets/list/custom_list.dart';
 import 'package:engineering_thesis/components/custom_widgets/list/custom_list_tile.dart';
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
+import 'package:engineering_thesis/components/templates/center_screen.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/appeal_to_join.dart';
 import 'package:engineering_thesis/models/attendee.dart';
@@ -35,12 +37,21 @@ class OrganizerAppealToJoinTab extends NavBarTab {
           return FetchingBlocBuilder(
             fetchingCubit: BlocProvider.of<AppealsToJoinFetchBloc>(context),
             buildSuccess: (appealsToJoin) {
+              if ((appealsToJoin as List<AppealToJoin>).length == 0)
+                return _buildNoResults(context);
               return _buildAppealsToJoinList(
                   context, appealsToJoin as List<AppealToJoin>);
             },
           );
         },
       ),
+    );
+  }
+
+  Widget _buildNoResults(BuildContext context) {
+    return CenterScreen(
+      content: CustomText.screenInfoHeader(
+          S.of(context).activity_details_screen_request_tab_no_results),
     );
   }
 
@@ -60,8 +71,14 @@ class OrganizerAppealToJoinTab extends NavBarTab {
             builder: (context) {
               return CustomListTile(
                 title: appealToJoin.submissionDate.toString(),
-                content: CustomText.bodyText(appealToJoin.user?.firstName),
-                actionButtons: _buildActionButtons(context),
+                content: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText.bodyText(
+                        '${appealToJoin.user?.firstName} ${appealToJoin.user?.secondName}'),
+                    _buildActionButtons(context),
+                  ],
+                ),
               );
             },
           ),
@@ -70,22 +87,22 @@ class OrganizerAppealToJoinTab extends NavBarTab {
     );
   }
 
-  List<Widget> _buildActionButtons(context) {
-    return [
-      SendBuilderButton(
-        sendBloc: BlocProvider.of<MakerRegistrationAttendeeSendBloc>(context),
-        sendButtonText: 'accept',
-        afterSuccess: () {
-          BlocProvider.of<AppealsToJoinFetchBloc>(context)
-              .add(FetchRefreshEvent());
-        },
-      )
-    ];
+  Widget _buildActionButtons(context) {
+    return SendBuilderButton(
+      sendBloc: BlocProvider.of<MakerRegistrationAttendeeSendBloc>(context),
+      sendButtonText:
+          S.of(context).activity_details_screen_requests_tab_accept_request,
+      afterSuccess: () {
+        BlocProvider.of<AppealsToJoinFetchBloc>(context)
+            .add(FetchRefreshEvent());
+      },
+    );
   }
 
   @override
   Widget getIcon(BuildContext context) => null;
 
   @override
-  String getLabel(BuildContext context) => 'Requests';
+  String getLabel(BuildContext context) =>
+      S.of(context).activity_details_screen_requests_tab_join_title;
 }

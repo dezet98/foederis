@@ -52,7 +52,7 @@ class CreateActvityFormDataBloc extends FormDataBloc {
             ],
             getLabel: (BuildContext context) =>
                 S.of(context).create_activity_screen_description_label,
-            validators: (_) => [],
+            validators: (result) => [LenghtValidator(result, min: 5, max: 200)],
           ),
           FormCheckFieldBloc(
             initialResult: true,

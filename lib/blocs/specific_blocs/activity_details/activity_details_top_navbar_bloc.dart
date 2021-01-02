@@ -33,7 +33,7 @@ class ActivityDetailsTopNavbarBloc extends NavBarBloc {
         0;
 
     return [
-      DescriptionTab(activity: activity),
+      DescriptionTab(activity: activity, attendees: attendees),
       if (userIsNotAttendee) ..._forNotAttendee(),
       if (!userIsNotAttendee) ..._forAttendee(),
       ActivityDetailsMapTab(activity: activity),

@@ -8,6 +8,9 @@ import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/components/bloc_builders/forms/form_screen/form_with_send_screen.dart';
 import 'package:engineering_thesis/components/bloc_builders/send/send_builder_button.dart';
+import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
+import 'package:engineering_thesis/components/templates/center_screen.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/appeal_to_join.dart';
 import 'package:engineering_thesis/models/attendee.dart';
@@ -47,12 +50,13 @@ class RecordsRegistrationTab extends NavBarTab {
     );
   }
 
-  // situation when we can send request with comment to join
+  // when we can send request with comment to join
   Widget _buildAppealToJoinForm(context) {
     return FormDataWithSendScreen(
       formDataBloc: AppealToJoinFormBloc(),
       formAppBarTitle: null,
-      formNextButtonText: 'Appeal to join',
+      formNextButtonText:
+          S.of(context).activity_details_screen_records_send_appeal,
       sendBloc: AppealToJoinCreateSendBloc(
         RepositoryProvider.of<AppealToJoinRepository>(context),
         activityRef: activity.ref,
@@ -64,17 +68,27 @@ class RecordsRegistrationTab extends NavBarTab {
     );
   }
 
-// situation when we send request with comment to join and we waiting on decision
+  // when we send request with comment to join and we waiting on decision
   Widget _buildCancelAppealToJoinForm(context, AppealToJoin appealToJoin) {
-    return SendBuilderButton(
-      sendBloc: AppealToJoinCancelSendBloc(
-        RepositoryProvider.of<AppealToJoinRepository>(context),
-        appealToJoinRef: appealToJoin.ref,
+    return CenterScreen(
+      content: Column(
+        children: [
+          CustomText.screenInfoHeader(
+              S.of(context).activity_details_screen_records_cancel_info),
+          SendBuilderButton(
+            sendBloc: AppealToJoinCancelSendBloc(
+              RepositoryProvider.of<AppealToJoinRepository>(context),
+              appealToJoinRef: appealToJoin.ref,
+            ),
+            sendButtonText:
+                S.of(context).activity_details_screen_records_cancel_request,
+            afterSuccess: () {
+              BlocProvider.of<AppealToJoinBloc>(context)
+                  .add(FetchRefreshEvent());
+            },
+          ),
+        ],
       ),
-      sendButtonText: 'Anuluj prośbę o dołączenie',
-      afterSuccess: () {
-        BlocProvider.of<AppealToJoinBloc>(context).add(FetchRefreshEvent());
-      },
     );
   }
 
@@ -82,5 +96,6 @@ class RecordsRegistrationTab extends NavBarTab {
   Widget getIcon(BuildContext context) => null;
 
   @override
-  String getLabel(BuildContext context) => 'Registration';
+  String getLabel(BuildContext context) =>
+      S.of(context).activity_details_screen_records_nav_bar_tab;
 }

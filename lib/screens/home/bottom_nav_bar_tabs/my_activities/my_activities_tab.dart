@@ -1,6 +1,8 @@
+import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/activity_details/activity_stream_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/create_activity/create_activity_send_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_fetching_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/my_activities/my_activities_stream_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/bloc_builders/cards/activity_card.dart';
@@ -8,6 +10,7 @@ import 'package:engineering_thesis/components/bloc_builders/stream_bloc_builder.
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
 import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:engineering_thesis/components/custom_widgets/list/custom_list.dart';
+import 'package:engineering_thesis/components/custom_widgets/snack_bar.dart/custom_snack_bar.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/attendee.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
@@ -96,10 +99,25 @@ class MyActivitiesTab extends NavBarTab {
             RoutingOption.sendBloc:
                 BlocProvider.of<CreateActivitySendBloc>(context),
             RoutingOption.useStepper: true,
+            RoutingOption.afterSuccess: () => _onCreateActivitySuccess(context),
+            RoutingOption.afterError: () => _onCreateActivityFailure(context),
           },
         );
       },
     );
+  }
+
+  void _onCreateActivitySuccess(BuildContext context) {
+    Routing.pop(context);
+    CustomSnackBar.showInfoSnackBar(context,
+        message: S.of(context).snackbar_create_activity_form_send_success);
+    BlocProvider.of<SearchActivitiesFetchingBloc>(context)
+        .add(FetchRefreshEvent());
+  }
+
+  void _onCreateActivityFailure(BuildContext context) {
+    CustomSnackBar.showInfoSnackBar(context,
+        message: S.of(context).snackbar_create_activity_form_send_error);
   }
 
   @override

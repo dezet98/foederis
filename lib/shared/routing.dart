@@ -48,6 +48,7 @@ enum RoutingOption {
   userRef,
   useStepper,
   afterSuccess,
+  afterError,
 }
 
 class Routing {
@@ -79,6 +80,7 @@ class Routing {
           sendBloc: options[RoutingOption.sendBloc],
           useStepper: options[RoutingOption.useStepper] ?? false,
           afterSuccess: options[RoutingOption.afterSuccess],
+          afterError: options[RoutingOption.afterError],
         );
       default:
         assert(false, '{ error: $routeName is not define as a routeName }');

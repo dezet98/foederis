@@ -18,8 +18,6 @@ class CreateActivitySendBloc extends SendBloc {
 
   @override
   Future<void> query(Map<String, dynamic> valuesMap) async {
-    // TODO maybe use translaction
-    await Future.delayed(Duration(seconds: 8));
     DocumentReference activityRef = await _activityRepository.createActivity(
         Activity.fromMap(valuesMap), _userDataBloc);
 

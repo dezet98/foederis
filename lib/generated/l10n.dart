@@ -125,191 +125,161 @@ class S {
     );
   }
 
-  /// `Create account`
+  /// `Tworzenie konta`
   String get app_bar_title_register {
     return Intl.message(
-      'Create account',
+      'Tworzenie konta',
       name: 'app_bar_title_register',
       desc: '',
       args: [],
     );
   }
 
-  /// `go to login`
+  /// `idź do logowania`
   String get text_button_go_to_login {
     return Intl.message(
-      'go to login',
+      'idź do logowania',
       name: 'text_button_go_to_login',
       desc: '',
       args: [],
     );
   }
 
-  /// `settings`
+  /// `ustawienia`
   String get settings {
     return Intl.message(
-      'settings',
+      'ustawienia',
       name: 'settings',
       desc: '',
       args: [],
     );
   }
 
-  /// `Search`
+  /// `Szukaj`
   String get home_screen_search_activities_tab_name {
     return Intl.message(
-      'Search',
+      'Szukaj',
       name: 'home_screen_search_activities_tab_name',
       desc: '',
       args: [],
     );
   }
 
-  /// `Choose address`
+  /// `Wybierz adres`
   String get home_screen_search_activities_address_field_placeholder {
     return Intl.message(
-      'Choose address',
+      'Wybierz adres',
       name: 'home_screen_search_activities_address_field_placeholder',
       desc: '',
       args: [],
     );
   }
 
-  /// `Choose search area`
-  String get form_distance_nav_bar_title {
-    return Intl.message(
-      'Choose search area',
-      name: 'form_distance_nav_bar_title',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `choose`
-  String get form_distance_apply_text {
-    return Intl.message(
-      'choose',
-      name: 'form_distance_apply_text',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `clear`
+  /// `wyczyść`
   String get form_clear_button_text {
     return Intl.message(
-      'clear',
+      'wyczyść',
       name: 'form_clear_button_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `Sukces wysyłania formularza!`
-  String get form_with_send_success_snackbar_info {
-    return Intl.message(
-      'Sukces wysyłania formularza!',
-      name: 'form_with_send_success_snackbar_info',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `My activity`
+  /// `Moje aktywności`
   String get home_screen_my_activity_tab_name {
     return Intl.message(
-      'My activity',
+      'Moje aktywności',
       name: 'home_screen_my_activity_tab_name',
       desc: '',
       args: [],
     );
   }
 
-  /// `Account`
+  /// `Konto`
   String get home_screen_account_tab_name {
     return Intl.message(
-      'Account',
+      'Konto',
       name: 'home_screen_account_tab_name',
       desc: '',
       args: [],
     );
   }
 
-  /// `Filters`
+  /// `Filtry`
   String get filter_screen_nav_title {
     return Intl.message(
-      'Filters',
+      'Filtry',
       name: 'filter_screen_nav_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `Apply filters`
+  /// `Zastosuj filtry`
   String get filter_screen_apply_button_text {
     return Intl.message(
-      'Apply filters',
+      'Zastosuj filtry',
       name: 'filter_screen_apply_button_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `Frequency`
-  String get filters_screen_filter_subtitile_frequency {
-    return Intl.message(
-      'Frequency',
-      name: 'filters_screen_filter_subtitile_frequency',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sort by`
+  /// `Sortuj poprzez nazwę`
   String get filters_screen_filter_subtitile_sort_by {
     return Intl.message(
-      'Sort by',
+      'Sortuj poprzez nazwę',
       name: 'filters_screen_filter_subtitile_sort_by',
       desc: '',
       args: [],
     );
   }
 
-  /// `desc`
+  /// `malejąco`
   String get filters_screen_filter_value_desc {
     return Intl.message(
-      'desc',
+      'malejąco',
       name: 'filters_screen_filter_value_desc',
       desc: '',
       args: [],
     );
   }
 
-  /// `asc`
+  /// `rosnąco`
   String get filters_screen_filter_value_asc {
     return Intl.message(
-      'asc',
+      'rosnąco',
       name: 'filters_screen_filter_value_asc',
       desc: '',
       args: [],
     );
   }
 
-  /// `regular`
-  String get filters_screen_filter_value_regular {
+  /// `Typ zapisów`
+  String get filters_screen_filter_value_records_type {
     return Intl.message(
-      'regular',
-      name: 'filters_screen_filter_value_regular',
+      'Typ zapisów',
+      name: 'filters_screen_filter_value_records_type',
       desc: '',
       args: [],
     );
   }
 
-  /// `one-time`
-  String get filters_screen_filter_value_one_time {
+  /// `wolne zapisy`
+  String get filters_screen_filter_value_free_join {
     return Intl.message(
-      'one-time',
-      name: 'filters_screen_filter_value_one_time',
+      'wolne zapisy',
+      name: 'filters_screen_filter_value_free_join',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `do zatwierdzenia`
+  String get filters_screen_filter_value_with_appeal {
+    return Intl.message(
+      'do zatwierdzenia',
+      name: 'filters_screen_filter_value_with_appeal',
       desc: '',
       args: [],
     );
@@ -465,20 +435,20 @@ class S {
     );
   }
 
-  /// `complete`
+  /// `ukończone`
   String get activity_card_complete {
     return Intl.message(
-      'complete',
+      'ukończone',
       name: 'activity_card_complete',
       desc: '',
       args: [],
     );
   }
 
-  /// `future`
+  /// `przyszłe`
   String get activity_card_future {
     return Intl.message(
-      'future',
+      'przyszłe',
       name: 'activity_card_future',
       desc: '',
       args: [],
@@ -543,20 +513,20 @@ class S {
     );
   }
 
-  /// `Create activity`
+  /// `Tworzenie aktywności`
   String get create_activity_screen_nav_bar_title {
     return Intl.message(
-      'Create activity',
+      'Tworzenie aktywności',
       name: 'create_activity_screen_nav_bar_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `create`
+  /// `utwórz`
   String get create_activity_screen_apply_button_text {
     return Intl.message(
-      'create',
+      'utwórz',
       name: 'create_activity_screen_apply_button_text',
       desc: '',
       args: [],
@@ -903,20 +873,20 @@ class S {
     );
   }
 
-  /// `football`
+  /// `piłka nożna`
   String get category_football {
     return Intl.message(
-      'football',
+      'piłka nożna',
       name: 'category_football',
       desc: '',
       args: [],
     );
   }
 
-  /// `beer`
+  /// `piwo`
   String get category_beer {
     return Intl.message(
-      'beer',
+      'piwo',
       name: 'category_beer',
       desc: '',
       args: [],
@@ -998,6 +968,396 @@ class S {
     return Intl.message(
       'edytuj profil',
       name: 'home_screen_settings_tab_edit_profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zakres poszukiwań`
+  String get search_area_form_nav_bar_title {
+    return Intl.message(
+      'Zakres poszukiwań',
+      name: 'search_area_form_nav_bar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `szukaj`
+  String get search_area_form_apply_text {
+    return Intl.message(
+      'szukaj',
+      name: 'search_area_form_apply_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dystans`
+  String get search_area_form_distance_label {
+    return Intl.message(
+      'Dystans',
+      name: 'search_area_form_distance_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zakres poszukiwań określa promień od jakiego będą szukane aktywności od punktu wybranego wcześniej adresu`
+  String get search_area_form_distance_description {
+    return Intl.message(
+      'Zakres poszukiwań określa promień od jakiego będą szukane aktywności od punktu wybranego wcześniej adresu',
+      name: 'search_area_form_distance_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `założyciel`
+  String get activity_role_maker {
+    return Intl.message(
+      'założyciel',
+      name: 'activity_role_maker',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `wspołorganizator`
+  String get activity_role_coorganizator {
+    return Intl.message(
+      'wspołorganizator',
+      name: 'activity_role_coorganizator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `uczestnik`
+  String get activity_role_attendee {
+    return Intl.message(
+      'uczestnik',
+      name: 'activity_role_attendee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Błąd przy wysyłaniu formularza`
+  String get snackbar_form_send_error {
+    return Intl.message(
+      'Błąd przy wysyłaniu formularza',
+      name: 'snackbar_form_send_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Błąd przy tworzeniu aktywności`
+  String get snackbar_create_activity_form_send_error {
+    return Intl.message(
+      'Błąd przy tworzeniu aktywności',
+      name: 'snackbar_create_activity_form_send_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aktywność została utworzona pomyślnie`
+  String get snackbar_create_activity_form_send_success {
+    return Intl.message(
+      'Aktywność została utworzona pomyślnie',
+      name: 'snackbar_create_activity_form_send_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sukces wysyłania formularza`
+  String get snackbar_form_send_error_success {
+    return Intl.message(
+      'Sukces wysyłania formularza',
+      name: 'snackbar_form_send_error_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Uczestnicy`
+  String get activity_details_screen_attendee_tab_nav_bar_title {
+    return Intl.message(
+      'Uczestnicy',
+      name: 'activity_details_screen_attendee_tab_nav_bar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nadaj prawa organizatora`
+  String get activity_details_screen_attendee_tab_grant_organizator_grants {
+    return Intl.message(
+      'Nadaj prawa organizatora',
+      name: 'activity_details_screen_attendee_tab_grant_organizator_grants',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Odbierz prawa organizatora`
+  String get activity_details_screen_attendee_tab_give_organizator_rights_up {
+    return Intl.message(
+      'Odbierz prawa organizatora',
+      name: 'activity_details_screen_attendee_tab_give_organizator_rights_up',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `data dołączenia:`
+  String get activity_details_screen_attendee_tab_join_date {
+    return Intl.message(
+      'data dołączenia:',
+      name: 'activity_details_screen_attendee_tab_join_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `rola:`
+  String get activity_details_screen_attendee_tab_role {
+    return Intl.message(
+      'rola:',
+      name: 'activity_details_screen_attendee_tab_role',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Map`
+  String get activity_details_screen_map_tab_nav_bar_title {
+    return Intl.message(
+      'Map',
+      name: 'activity_details_screen_map_tab_nav_bar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Szczegóły`
+  String get activity_details_screen_details_tab_nav_bar_title {
+    return Intl.message(
+      'Szczegóły',
+      name: 'activity_details_screen_details_tab_nav_bar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Charakter zapisów`
+  String get activity_details_screen_details_tab_records_label {
+    return Intl.message(
+      'Charakter zapisów',
+      name: 'activity_details_screen_details_tab_records_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `wolne`
+  String get activity_details_screen_details_tab_records_free_join {
+    return Intl.message(
+      'wolne',
+      name: 'activity_details_screen_details_tab_records_free_join',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `wymagające akceptacji organizatora`
+  String get activity_details_screen_details_tab_records_with_appeal {
+    return Intl.message(
+      'wymagające akceptacji organizatora',
+      name: 'activity_details_screen_details_tab_records_with_appeal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Adres`
+  String get activity_details_screen_details_tab_address {
+    return Intl.message(
+      'Adres',
+      name: 'activity_details_screen_details_tab_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ilość uczestników`
+  String get activity_details_screen_details_tab_attendees_label {
+    return Intl.message(
+      'Ilość uczestników',
+      name: 'activity_details_screen_details_tab_attendees_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Możliwa ilość uczestników`
+  String get activity_details_screen_details_tab_attendees_range_label {
+    return Intl.message(
+      'Możliwa ilość uczestników',
+      name: 'activity_details_screen_details_tab_attendees_range_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Od {min} do {max}`
+  String activity_details_screen_details_tab_attendees_range(Object min, Object max) {
+    return Intl.message(
+      'Od $min do $max',
+      name: 'activity_details_screen_details_tab_attendees_range',
+      desc: '',
+      args: [min, max],
+    );
+  }
+
+  /// `Opis aktywności`
+  String get activity_details_screen_details_tab_description {
+    return Intl.message(
+      'Opis aktywności',
+      name: 'activity_details_screen_details_tab_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data rozpoczęcia`
+  String get activity_details_screen_details_tab_start_date {
+    return Intl.message(
+      'Data rozpoczęcia',
+      name: 'activity_details_screen_details_tab_start_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Kategoria`
+  String get activity_details_screen_details_tab_category {
+    return Intl.message(
+      'Kategoria',
+      name: 'activity_details_screen_details_tab_category',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zapisy`
+  String get activity_details_screen_free_join_tab_nav_bar_title {
+    return Intl.message(
+      'Zapisy',
+      name: 'activity_details_screen_free_join_tab_nav_bar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dołącz do aktywności`
+  String get activity_details_screen_free_join_tab_join_button {
+    return Intl.message(
+      'Dołącz do aktywności',
+      name: 'activity_details_screen_free_join_tab_join_button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Prośby o dołączenie`
+  String get activity_details_screen_requests_tab_join_title {
+    return Intl.message(
+      'Prośby o dołączenie',
+      name: 'activity_details_screen_requests_tab_join_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `akceptuj prośbę o dołączenie`
+  String get activity_details_screen_requests_tab_accept_request {
+    return Intl.message(
+      'akceptuj prośbę o dołączenie',
+      name: 'activity_details_screen_requests_tab_accept_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `anuluj prośbę o dołączenie`
+  String get activity_details_screen_records_cancel_request {
+    return Intl.message(
+      'anuluj prośbę o dołączenie',
+      name: 'activity_details_screen_records_cancel_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zapisy`
+  String get activity_details_screen_records_nav_bar_tab {
+    return Intl.message(
+      'Zapisy',
+      name: 'activity_details_screen_records_nav_bar_tab',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `poproś o dołączenie do aktywności`
+  String get activity_details_screen_records_send_appeal {
+    return Intl.message(
+      'poproś o dołączenie do aktywności',
+      name: 'activity_details_screen_records_send_appeal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Twoja prośba oczekuje na decyzję organizatora`
+  String get activity_details_screen_records_cancel_info {
+    return Intl.message(
+      'Twoja prośba oczekuje na decyzję organizatora',
+      name: 'activity_details_screen_records_cancel_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Brak próśb o dołączenie do aktywności`
+  String get activity_details_screen_request_tab_no_results {
+    return Intl.message(
+      'Brak próśb o dołączenie do aktywności',
+      name: 'activity_details_screen_request_tab_no_results',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wiadomość`
+  String get appeal_join_form_comment_label {
+    return Intl.message(
+      'Wiadomość',
+      name: 'appeal_join_form_comment_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Komentarz do prośby`
+  String get appeal_join_form_comment_placeholder {
+    return Intl.message(
+      'Komentarz do prośby',
+      name: 'appeal_join_form_comment_placeholder',
       desc: '',
       args: [],
     );

@@ -83,12 +83,15 @@ class SearchActivitiesAppBar {
                               BlocProvider.of<SearchActivityDistanceChoiceBloc>(
                                   context),
                           RoutingOption.formAppBarTitle:
-                              S.of(context).form_distance_nav_bar_title,
+                              S.of(context).search_area_form_nav_bar_title,
                           RoutingOption.formNextButtonText:
-                              S.of(context).form_distance_apply_text,
+                              S.of(context).search_area_form_apply_text,
                           RoutingOption.sendBloc:
                               BlocProvider.of<SearchActivitiesDistanceSendBloc>(
                                   context),
+                          RoutingOption.afterSuccess: () {
+                            Routing.pop(context);
+                          }
                         },
                       );
                     },

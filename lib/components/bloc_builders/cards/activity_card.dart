@@ -1,4 +1,6 @@
 import 'package:engineering_thesis/blocs/specific_blocs/activity_details/attendee_fetch_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/activity_details/user_attendee_fetch_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/common/category_fetching_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/common/user_fetch_bloc.dart';
 import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
@@ -10,8 +12,8 @@ import 'package:engineering_thesis/components/custom_widgets/list/custom_list_ti
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/activity.dart';
-import 'package:engineering_thesis/models/app_user.dart';
 import 'package:engineering_thesis/models/category.dart';
+import 'package:engineering_thesis/models/collections/attendee_collection.dart';
 import 'package:engineering_thesis/repositories/attendee_repository.dart';
 import 'package:engineering_thesis/repositories/category_repository.dart';
 import 'package:engineering_thesis/repositories/user_repository.dart';
@@ -33,7 +35,8 @@ class ActivityCard {
           SizedBox(width: Dimensions.gutterSmall),
           _attendeeJoinWayChip(context, activity),
           SizedBox(width: Dimensions.gutterSmall),
-          _startDateClockChip(context, activity),
+          if (activity.startDate.isAfter(DateTime.now()))
+            _startDateClockChip(context, activity),
         ],
       ),
       onTap: () {
@@ -51,6 +54,8 @@ class ActivityCard {
       content: Wrap(
         children: [
           CustomChip.label(label: activity.address),
+          SizedBox(width: Dimensions.gutterSmall),
+          _roleChip(context, activity),
           SizedBox(width: Dimensions.gutterSmall),
           _categoryChip(context, activity),
           SizedBox(width: Dimensions.gutterSmall),
@@ -115,16 +120,16 @@ class ActivityCard {
     );
   }
 
-  // ignore: unused_element
-  static Widget _makerChip(BuildContext context, activity) {
+  static Widget _roleChip(BuildContext context, Activity activity) {
     return FetchingBlocBuilder(
-      fetchingCubit: UserFetchBloc(
-        RepositoryProvider.of<UserRepository>(context),
-        userRef: activity.userRef,
+      fetchingCubit: UserAttendeeFetchBloc(
+        RepositoryProvider.of<AttendeeRepository>(context),
+        activityRef: activity.ref,
+        userRef: BlocProvider.of<UserDataBloc>(context).user.ref,
       ),
-      buildSuccess: (maker) => CustomChip.label(
+      buildSuccess: (attendee) => CustomChip.label(
           label:
-              '${(maker as AppUser).firstName} ${(maker as AppUser).firstName}'),
+              '${AttendeeCollection.attendeeToString(context, attendee.role)}'),
     );
   }
 

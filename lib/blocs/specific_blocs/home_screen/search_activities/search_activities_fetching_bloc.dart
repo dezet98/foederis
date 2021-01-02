@@ -37,7 +37,7 @@ class SearchActivitiesFetchingBloc
         _getGeohash(searchActivitiesFetchingArgsBloc);
 
     List<Activity> activities =
-        await activityRepository.fetchAllNotUserActivities(
+        await activityRepository.fetchAllFutureActivities(
       lowerGeohash: geohashResults['lowerGeohash'],
       upperGeohash: geohashResults['upperGeohash'],
     );

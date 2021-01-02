@@ -20,33 +20,32 @@ class FormTextField extends StatelessWidget {
     textFieldController.text = formFieldBloc.result ?? '';
 
     return BlocConsumer(
-      cubit: formFieldBloc,
-      listener: (context, state) {
-        if (state is FormFieldClearedState) {
-          textFieldController.text = formFieldBloc.result;
-        } else if (state is FormFieldChangedState) {
+        cubit: formFieldBloc,
+        listener: (context, state) {
+          if (state is FormFieldClearedState) {
+            textFieldController.text = formFieldBloc.result;
+          }
+        },
+        builder: (context, state) {
           textFieldController.selection = TextSelection.fromPosition(
-              TextPosition(offset: textFieldController.text.length));
-        }
-      },
-      builder: (context, state) {
-        return CustomTextFormField.normal(
-          textEditingController: textFieldController,
-          enabled: formFieldBloc.editingEnabled,
-          placeholder: formFieldBloc.placeholder != null
-              ? formFieldBloc.placeholder(context)
-              : '',
-          onChanged: (String text) {
-            if (formFieldBloc.editingEnabled)
-              formDataBloc.add(
-                FormDataEditingEvent(
-                  formFieldBloc: formFieldBloc,
-                  result: text,
-                ),
-              );
-          },
-        );
-      },
-    );
+            TextPosition(offset: textFieldController.text.length),
+          );
+
+          return CustomTextFormField.normal(
+              textEditingController: textFieldController,
+              enabled: formFieldBloc.editingEnabled,
+              placeholder: formFieldBloc.placeholder != null
+                  ? formFieldBloc.placeholder(context)
+                  : '',
+              onChanged: (String text) {
+                if (formFieldBloc.editingEnabled)
+                  formDataBloc.add(
+                    FormDataEditingEvent(
+                      formFieldBloc: formFieldBloc,
+                      result: text,
+                    ),
+                  );
+              });
+        });
   }
 }

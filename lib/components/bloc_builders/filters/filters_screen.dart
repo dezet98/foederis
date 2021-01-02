@@ -70,7 +70,7 @@ class FiltersScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: Dimensions.gutterSmall),
               child: Align(
-                child: CustomText.menuTitle('title'),
+                child: CustomText.menuTitle(title),
                 alignment: Alignment.centerLeft,
               ),
             ),

@@ -24,9 +24,10 @@ class ActivityRepository {
     return Activity.fromDocument(documentSnapshot);
   }
 
-  Future<List<Activity>> fetchAllNotUserActivities({
+  Future<List<Activity>> fetchAllFutureActivities({
     @required String lowerGeohash,
     @required String upperGeohash,
+    DocumentReference userRef,
   }) async {
     List<FetchFilter> filters = [];
     filters.addAll([
@@ -42,8 +43,13 @@ class ActivityRepository {
       ),
     ]);
 
-    return await _remoteRepository.getCollection<List<Activity>>(
-        filters, ActivityCollection.collectionName, _fromQuerySnapshot);
+    List<Activity> activities =
+        await _remoteRepository.getCollection<List<Activity>>(
+            filters, ActivityCollection.collectionName, _fromQuerySnapshot);
+
+    return activities
+        .where((element) => element.startDate.isAfter(DateTime.now()))
+        .toList();
   }
 
   // Stream<List<Activity>> getMyActivitiesStream(DocumentReference userRef) {

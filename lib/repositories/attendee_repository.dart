@@ -39,6 +39,27 @@ class AttendeeRepository {
         filters, collectionPath, _fromQuerySnapshot);
   }
 
+  Future<Attendee> fetchAttendee(
+      DocumentReference activityRef, DocumentReference userRef) async {
+    List<FetchFilter> filters = [
+      FetchFilter(
+        fieldName: AttendeeCollection.activityRef.fieldName,
+        fieldValue: activityRef,
+        filterType: FetchFilterType.isEqualTo,
+      ),
+      FetchFilter(
+        fieldName: AttendeeCollection.userRef.fieldName,
+        fieldValue: userRef,
+        filterType: FetchFilterType.isEqualTo,
+      )
+    ];
+
+    List<Attendee> attendees =
+        await _remoteRepository.getCollection<List<Attendee>>(
+            filters, collectionPath, _fromQuerySnapshot);
+    return attendees.length == 1 ? attendees[0] : null;
+  }
+
   Stream<List<Attendee>> getAttendeesStreamByActivity(
       DocumentReference activityRef) {
     List<FetchFilter> filters = [];

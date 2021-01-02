@@ -20,6 +20,7 @@ class FormDataWithSendScreen extends StatelessWidget {
   final String formNextButtonText;
   final SendBloc sendBloc;
   final Function afterSuccess;
+  final Function afterError;
   final bool useStepper;
 
   FormDataWithSendScreen({
@@ -29,6 +30,7 @@ class FormDataWithSendScreen extends StatelessWidget {
     this.useStepper = false,
     this.formAppBarTitle,
     this.afterSuccess,
+    this.afterError,
   });
 
   @override
@@ -105,20 +107,36 @@ class FormDataWithSendScreen extends StatelessWidget {
 
   void _sendBlocListener(BuildContext context, dynamic state) {
     if (state is SendDataFailureState) {
-      formDataBloc.add(FormDataEditingEnabledEvent());
-      CustomSnackBar.showErrorSnackBar(context,
-          message: S.of(context).form_with_send_success_snackbar_info);
+      _sendError(context);
     } else if (state is SendDataSuccessState) {
-      formDataBloc.add(FormDataClearEvent());
-      formDataBloc.add(FormDataEditingEnabledEvent());
-      if (afterSuccess == null) {
-        Routing.pop(context);
-        CustomSnackBar.showInfoSnackBar(context,
-            message: S.of(context).form_with_send_success_snackbar_info);
-      } else
-        afterSuccess();
+      _sendSuccess(context);
     } else if (state is SendDataInProgressState) {
-      formDataBloc.add(FormDataEditingDisableEvent());
+      _sendInProgress(context);
     }
+  }
+
+  void _sendSuccess(BuildContext context) {
+    formDataBloc.add(FormDataClearEvent());
+    formDataBloc.add(FormDataEditingEnabledEvent());
+    if (afterSuccess == null) {
+      Routing.pop(context);
+      CustomSnackBar.showInfoSnackBar(context,
+          message: S.of(context).snackbar_form_send_error_success);
+    } else
+      afterSuccess();
+  }
+
+  void _sendError(BuildContext context) {
+    formDataBloc.add(FormDataEditingEnabledEvent());
+
+    if (afterError == null) {
+      CustomSnackBar.showErrorSnackBar(context,
+          message: S.of(context).snackbar_form_send_error);
+    } else
+      afterError();
+  }
+
+  void _sendInProgress(BuildContext context) {
+    formDataBloc.add(FormDataEditingDisableEvent());
   }
 }

@@ -1,4 +1,6 @@
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/shared/utils/enums.dart';
+import 'package:flutter/material.dart';
 
 import 'query_field.dart';
 
@@ -18,6 +20,20 @@ class AttendeeCollection {
 
   static List<CollectionField> get allFields =>
       [activityRef, userRef, joinDate];
+
+  static attendeeToString(BuildContext context, AttendeeRole role) {
+    switch (role) {
+      case AttendeeRole.attendee:
+        return S.of(context).activity_role_attendee;
+        break;
+      case AttendeeRole.coorganizer:
+        return S.of(context).activity_role_coorganizator;
+        break;
+      case AttendeeRole.maker:
+        return S.of(context).activity_role_maker;
+        break;
+    }
+  }
 }
 
 enum AttendeeRole { attendee, coorganizer, maker }
