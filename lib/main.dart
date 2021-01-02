@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:engineering_thesis/shared/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,6 +34,8 @@ class _MyAppState extends State<MyApp> {
         child: PlatformProvider(
           builder: (BuildContext context) => PlatformApp(
             title: 'Engineering thesis',
+            locale: Locale(SharedPreferences().languageCode,
+                SharedPreferences().countryCode),
             localizationsDelegates: getLocalizationsDelegates,
             supportedLocales: S.delegate.supportedLocales,
             material: getMaterialAppData,

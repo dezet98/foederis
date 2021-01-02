@@ -1,5 +1,6 @@
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/create_activity/create_activity_send_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/home_screen/home_screen_bottom_nav_bar_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_distance_send_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_fetching_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_filters_bloc.dart';
@@ -87,6 +88,9 @@ dynamic getMainBlocProviders() => [
     ];
 
 dynamic getHomeScreenBlocProviders() => [
+      BlocProvider(
+        create: (context) => HomeScreenBottomNavBarBloc(),
+      ),
       BlocProvider(
         create: (context) =>
             SharedPreferencesBloc(DatabaseHelper.instance, SharedPreferences()),

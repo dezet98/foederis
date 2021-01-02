@@ -683,6 +683,26 @@ class S {
     );
   }
 
+  /// `Edycja profilu`
+  String get update_user_form_nav_bar_title {
+    return Intl.message(
+      'Edycja profilu',
+      name: 'update_user_form_nav_bar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `zatwierdź`
+  String get update_user_form_apply_button {
+    return Intl.message(
+      'zatwierdź',
+      name: 'update_user_form_apply_button',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Zdjęcie profilowe`
   String get update_user_form_photo_label {
     return Intl.message(
@@ -942,6 +962,46 @@ class S {
       args: [],
     );
   }
+
+  /// `angielski(USA)`
+  String get localization_en_US {
+    return Intl.message(
+      'angielski(USA)',
+      name: 'localization_en_US',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `polski(Polska)`
+  String get localization_pl_PL {
+    return Intl.message(
+      'polski(Polska)',
+      name: 'localization_pl_PL',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `wyloguj się`
+  String get home_screen_settings_tab_log_out {
+    return Intl.message(
+      'wyloguj się',
+      name: 'home_screen_settings_tab_log_out',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `edytuj profil`
+  String get home_screen_settings_tab_edit_profile {
+    return Intl.message(
+      'edytuj profil',
+      name: 'home_screen_settings_tab_edit_profile',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -950,7 +1010,6 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en', countryCode: 'US'),
-      Locale.fromSubtags(languageCode: 'messages'),
       Locale.fromSubtags(languageCode: 'pl', countryCode: 'PL'),
     ];
   }

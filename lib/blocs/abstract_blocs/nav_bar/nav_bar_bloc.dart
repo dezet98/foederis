@@ -35,6 +35,9 @@ abstract class NavBarBloc extends Bloc<NavBarEvent, NavBarState> {
         currentTab: navBarTabs[currentIndex],
         currentIndex: currentIndex,
       );
+    } else if (event is NavBarRefreshEvent) {
+      yield NavBarRefreshInProgressState();
+      yield NavBarRefreshSuccessState();
     }
   }
 }

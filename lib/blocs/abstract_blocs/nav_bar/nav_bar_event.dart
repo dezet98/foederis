@@ -12,3 +12,5 @@ class NavBarItemChangedEvent extends NavBarEvent {
 
   NavBarItemChangedEvent({@required this.index});
 }
+
+class NavBarRefreshEvent extends NavBarEvent {}

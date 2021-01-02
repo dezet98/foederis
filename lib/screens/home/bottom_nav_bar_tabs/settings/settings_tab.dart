@@ -13,6 +13,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../../../blocs/specific_blocs/authorization/auth/auth_bloc.dart';
 import '../../../../generated/l10n.dart';
+import 'localization_change.dart';
 
 class SettingsTab extends NavBarTab {
   @override
@@ -23,14 +24,16 @@ class SettingsTab extends NavBarTab {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           CustomButton.applyForm(
-            text: 'Edit profile',
+            text: S.of(context).home_screen_settings_tab_edit_profile,
             onPressed: () {
               Routing.pushNamed(context, UserRoutes.form, options: {
                 RoutingOption.formDataBloc: UpdateUserDataFormBloc(
                   appUser: BlocProvider.of<UserDataBloc>(context).user,
                 ),
-                RoutingOption.formAppBarTitle: 'title',
-                RoutingOption.formNextButtonText: 'next',
+                RoutingOption.formAppBarTitle:
+                    S.of(context).update_user_form_nav_bar_title,
+                RoutingOption.formNextButtonText:
+                    S.of(context).update_user_form_apply_button,
                 RoutingOption.sendBloc: UpdateUserDataSendBloc(
                   RepositoryProvider.of<UserRepository>(context),
                   BlocProvider.of<UserDataBloc>(context),
@@ -45,22 +48,7 @@ class SettingsTab extends NavBarTab {
               });
             },
           ),
-          PlatformButton(
-            child: Text('en'),
-            onPressed: () {
-              S.load(
-                Locale('en', 'US'),
-              );
-            },
-          ),
-          PlatformButton(
-            child: Text('pl'),
-            onPressed: () {
-              S.load(
-                Locale('pl', 'PL'),
-              );
-            },
-          ),
+          LocalizationChange(),
           PlatformButton(
             child: isMaterial(context)
                 ? Text('change to Cupertino')
@@ -73,10 +61,8 @@ class SettingsTab extends NavBarTab {
               }
             },
           ),
-          PlatformButton(
-            child: Text(
-              'sign out',
-            ), // TODO be aware that somebody can click that more than one time
+          CustomButton.goToOtherScreen(
+            text: S.of(context).home_screen_settings_tab_log_out,
             onPressed: () =>
                 BlocProvider.of<AuthBloc>(context).add(AuthSignOutEvent()),
           ),

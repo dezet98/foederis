@@ -64,6 +64,8 @@
     "create_activity_screen_address_description": "Adres aktywności, ważne by podać poprawny adres ponieważ użytkownicy wyszukują aktywności ze względu na lokalizację",
     "create_activity_screen_description_label": "Opis",
     "create_activity_screen_description_placeholder": "...",
+    "update_user_form_nav_bar_title": "Edycja profilu",
+    "update_user_form_apply_button": "zatwierdź",
     "update_user_form_photo_label": "Zdjęcie profilowe",
     "update_user_form_first_name_label": "Imię",
     "update_user_form_second_name_label": "Nazwisko",
@@ -89,6 +91,9 @@
     "gender_male": "męszczyzna",
     "gender_female": "kobieta",
     "gender_prefer_not_to_say": "wolę nie mówić",
-    "form_field_photo_choose_photo": "wybierz zdjęcie"
-
+    "form_field_photo_choose_photo": "wybierz zdjęcie",
+    "localization_en_US": "angielski(USA)",
+    "localization_pl_PL": "polski(Polska)",
+    "home_screen_settings_tab_log_out": "wyloguj się",
+    "home_screen_settings_tab_edit_profile": "edytuj profil"
 }

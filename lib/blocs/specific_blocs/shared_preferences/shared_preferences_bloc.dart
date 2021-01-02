@@ -30,6 +30,31 @@ class SharedPreferencesBloc
           await _databaseHelper.getUserPreferences(event.fieldName));
       yield SharedPreferencesUpdateSuccessState(
           sharedPreferences: _sharedPreferences);
+    } else if (event is SharedPreferencesLocalizationChangeEvent) {
+      yield* mapLocalizationChangeEvent(event.locale);
+    }
+  }
+
+  Stream<SharedPreferencesState> mapLocalizationChangeEvent(
+      Locale locale) async* {
+    try {
+      yield SharedPreferenceLocalizationChangeInProgressState();
+      await _databaseHelper.updateUserPreferences(
+          SharedPreferencesName.languageCode, locale.languageCode);
+      _sharedPreferences.setPreferencesCode(
+          SharedPreferencesName.languageCode,
+          await _databaseHelper
+              .getUserPreferences(SharedPreferencesName.languageCode));
+      await _databaseHelper.updateUserPreferences(
+          SharedPreferencesName.countryCode, locale.countryCode);
+      _sharedPreferences.setPreferencesCode(
+          SharedPreferencesName.countryCode,
+          await _databaseHelper
+              .getUserPreferences(SharedPreferencesName.countryCode));
+      yield SharedPreferenceLocalizationChangeSuccessState(locale: locale);
+    } catch (e) {
+      yield SharedPreferenceLocalizationChangeFailureState(
+          message: e.toString());
     }
   }
 }

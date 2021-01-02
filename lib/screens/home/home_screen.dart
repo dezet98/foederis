@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
   Widget _buildNavBarScreen(BuildContext context) {
     return TemplateScreen.bottomNavbar(
       context: context,
-      navBarBloc: HomeScreenBottomNavBarBloc(),
+      navBarBloc: BlocProvider.of<HomeScreenBottomNavBarBloc>(context),
       usePadding: false,
     );
   }
