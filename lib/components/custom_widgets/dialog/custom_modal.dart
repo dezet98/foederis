@@ -9,7 +9,7 @@ class CustomDialog {
   static Future<void> showModal(
     BuildContext context, {
     @required String title,
-    @required String content,
+    @required Widget content,
     List<CustomDialogAction> actions,
     bool okButton = false,
   }) async {
@@ -24,7 +24,7 @@ class CustomDialog {
       context: context,
       builder: (_) => PlatformAlertDialog(
         title: CustomText.menuTitle(title),
-        content: CustomText.modalText(content),
+        content: content,
         actions: actions,
       ),
     );

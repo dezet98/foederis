@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomDropdownButton extends StatelessWidget {
   final List<dynamic> dropdownItems;
-  final String Function(dynamic) getItemLabel;
+  final String Function(BuildContext, dynamic) getItemLabel;
   final bool enabled;
   final Function(dynamic) onChanged;
   final dynamic value;
@@ -20,16 +20,17 @@ class CustomDropdownButton extends StatelessWidget {
     return DropdownButton(
       value: value,
       items: [
-        for (dynamic item in dropdownItems) _buildDropdownMenuItem(item),
+        for (dynamic item in dropdownItems)
+          _buildDropdownMenuItem(context, item),
       ],
       onChanged: !enabled ? null : onChanged,
     );
   }
 
-  DropdownMenuItem _buildDropdownMenuItem(dynamic item) {
+  DropdownMenuItem _buildDropdownMenuItem(context, dynamic item) {
     return DropdownMenuItem(
       child: Text(
-        getItemLabel(item),
+        getItemLabel(context, item),
       ),
       value: item,
     );

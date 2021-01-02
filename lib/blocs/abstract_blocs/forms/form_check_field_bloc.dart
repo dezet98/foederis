@@ -10,16 +10,19 @@ class FormCheckFieldBloc extends FormFieldBloc<bool> {
   final List<Validator> Function(bool) validators;
   final List<QueryField> Function(bool) queryFieldFromResult;
   final String Function(BuildContext) getLabel;
+  final String Function(BuildContext) getDescription;
 
   FormCheckFieldBloc({
     @required this.initialResult,
     @required this.validators,
     @required this.getLabel,
     @required this.queryFieldFromResult,
+    this.getDescription,
   }) : super(
           initialResult: initialResult,
           queryFieldFromResult: queryFieldFromResult,
           validators: validators,
           getLabel: getLabel,
+          getDescription: getDescription,
         );
 }

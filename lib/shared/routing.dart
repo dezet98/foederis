@@ -9,7 +9,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../blocs/specific_blocs/authorization/auth/auth_bloc.dart';
 import '../components/bloc_builders/filters/filters_screen.dart';
-import '../components/bloc_builders/forms/form_data_screen.dart';
+import '../components/bloc_builders/forms/form_screen/form_with_send_screen.dart';
 import '../screens/activity_details/activity_details_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/login/login_screen.dart';
@@ -46,6 +46,8 @@ enum RoutingOption {
   activity,
   filtersBloc,
   userRef,
+  useStepper,
+  afterSuccess,
 }
 
 class Routing {
@@ -70,11 +72,13 @@ class Routing {
       case UserRoutes.profile:
         return ProfileScreen(userRef: options[RoutingOption.userRef]);
       case UserRoutes.form:
-        return FormDataScreen(
+        return FormDataWithSendScreen(
           formDataBloc: options[RoutingOption.formDataBloc],
           formAppBarTitle: options[RoutingOption.formAppBarTitle],
           formNextButtonText: options[RoutingOption.formNextButtonText],
           sendBloc: options[RoutingOption.sendBloc],
+          useStepper: options[RoutingOption.useStepper] ?? false,
+          afterSuccess: options[RoutingOption.afterSuccess],
         );
       default:
         assert(false, '{ error: $routeName is not define as a routeName }');

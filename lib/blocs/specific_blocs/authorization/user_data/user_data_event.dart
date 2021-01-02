@@ -20,3 +20,5 @@ class UserDataCreateEvent extends UserDataEvent {
 }
 
 class UserDataClearEvent extends UserDataEvent {}
+
+class UserDataRefreshEvent extends UserDataEvent {}

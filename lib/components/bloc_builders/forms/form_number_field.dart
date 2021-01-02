@@ -1,4 +1,3 @@
-import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/components/custom_widgets/text_form_field/custom_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,36 +18,20 @@ class FormNumberField extends StatelessWidget {
   Widget build(BuildContext context) {
     textFieldController.text = formFieldBloc.result.toString();
 
-    return Column(
-      children: [
-        BlocBuilder(
-          cubit: formFieldBloc,
-          builder: (context, state) {
-            return formFieldBloc.isValid
-                ? CustomText.validFormTitle(
-                    formFieldBloc.getLabel(context),
-                  )
-                : CustomText.invalidFormTitle(
-                    formFieldBloc.getLabel(context),
-                  );
-          },
-        ),
-        BlocBuilder(
-            cubit: formDataBloc,
-            builder: (context, state) {
-              return CustomTextFormField.digits(
-                textEditingController: textFieldController,
-                enabled: formFieldBloc.editingEnabled,
-                onChamged: (String result) {
-                  if (formFieldBloc.editingEnabled)
-                    formDataBloc.add(FormDataEditingEvent(
-                      formFieldBloc: formFieldBloc,
-                      result: int.parse(result.isEmpty ? '0' : result),
-                    ));
-                },
-              );
-            }),
-      ],
-    );
+    return BlocBuilder(
+        cubit: formDataBloc,
+        builder: (context, state) {
+          return CustomTextFormField.digits(
+            textEditingController: textFieldController,
+            enabled: formFieldBloc.editingEnabled,
+            onChamged: (String result) {
+              if (formFieldBloc.editingEnabled)
+                formDataBloc.add(FormDataEditingEvent(
+                  formFieldBloc: formFieldBloc,
+                  result: int.parse(result.isEmpty ? '0' : result),
+                ));
+            },
+          );
+        });
   }
 }

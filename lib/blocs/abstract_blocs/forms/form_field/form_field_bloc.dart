@@ -16,6 +16,7 @@ abstract class FormFieldBloc<ResultType>
   List<Validator> Function(ResultType) validators;
   List<QueryField> Function(ResultType) queryFieldFromResult;
   String Function(BuildContext) getLabel;
+  String Function(BuildContext) getDescription;
   bool editingEnabled;
   ResultType initialResult;
 
@@ -24,10 +25,13 @@ abstract class FormFieldBloc<ResultType>
     @required this.validators,
     @required this.getLabel,
     @required this.queryFieldFromResult,
+    @required this.getDescription,
     this.editingEnabled = true,
   }) : super(FormFieldInitialState()) {
     _result = initialResult;
   }
+
+  List<Validator> get currentValidators => validators(_result);
 
   bool _checkValid(result) => Validator.checkValid(validators(result));
 

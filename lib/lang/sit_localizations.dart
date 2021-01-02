@@ -33,6 +33,9 @@ class S {
   //       name: 'plural_days',
   //       args: [howManyDays],
   //     );
+
+  String distance_short(double distanceInKilometres) =>
+      Intl.message('${distanceInKilometres}km', args: [distanceInKilometres]);
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

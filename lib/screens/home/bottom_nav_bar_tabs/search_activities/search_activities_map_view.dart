@@ -70,7 +70,7 @@ class SearchActivityMapView extends StatelessWidget {
       context,
       (context) => CustomScrollView(
         slivers: [
-          buildActivitiesList(
+          _buildActivitiesList(
             context,
             activities,
           ),
@@ -79,19 +79,14 @@ class SearchActivityMapView extends StatelessWidget {
     );
   }
 
-  Widget buildActivitiesList(BuildContext context, List<Activity> activities) {
-    // todo a little repetition here
+  Widget _buildActivitiesList(BuildContext context, List<Activity> activities) {
     return SliverList(
       delegate: SliverChildListDelegate(
         [
           for (Activity activity in activities)
-            buildActivityTile(context, activity)
+            ActivityCard.searchCard(context, activity: activity)
         ],
       ),
     );
-  }
-
-  Widget buildActivityTile(BuildContext context, Activity activity) {
-    return ActivityCard.searchCard(context, activity: activity);
   }
 }

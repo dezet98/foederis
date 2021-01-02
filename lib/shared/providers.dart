@@ -12,7 +12,6 @@ import 'package:engineering_thesis/shared/remote_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/abstract_blocs/choice_filters/filter_option/filter_option_bloc.dart';
-import '../blocs/abstract_blocs/choice_filters/multi_choice_filter_bloc.dart';
 import '../blocs/abstract_blocs/choice_filters/sort_choice_filter_bloc.dart';
 import '../blocs/specific_blocs/authorization/auth/auth_bloc.dart';
 import '../blocs/specific_blocs/authorization/login/login_bloc.dart';
@@ -128,25 +127,6 @@ dynamic getHomeScreenBlocProviders() => [
               getTitle: (context) =>
                   S.of(context).filters_screen_filter_subtitile_sort_by,
             ),
-            MultiChoiceFilterBloc<Activity, bool>(
-              getField: (Activity activity) => activity.regular,
-              options: [
-                FilterOptionBloc<bool>(
-                  filterFieldValue: true,
-                  isSelected: true,
-                  getLabel: (context) =>
-                      S.of(context).filters_screen_filter_value_regular,
-                ),
-                FilterOptionBloc<bool>(
-                  filterFieldValue: false,
-                  isSelected: true,
-                  getLabel: (context) =>
-                      S.of(context).filters_screen_filter_value_one_time,
-                )
-              ],
-              getTitle: (context) =>
-                  S.of(context).filters_screen_filter_subtitile_frequency,
-            )
           ],
         ),
       ),

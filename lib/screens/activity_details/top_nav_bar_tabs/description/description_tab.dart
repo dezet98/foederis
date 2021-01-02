@@ -24,7 +24,7 @@ class DescriptionTab extends NavBarTab {
             context, 'maxEntry', activity.maxEntry.toString()),
         _buildSingleAttribute(
             context, 'minEntry', activity.minEntry.toString()),
-        _buildSingleAttribute(context, 'regular', activity.regular.toString()),
+        _buildSingleAttribute(context, 'description', activity.description),
         _buildSingleAttribute(
             context, 'startDate', activity.startDate.toString()),
         _buildCategoryAttribute(context, 'category'),
@@ -52,7 +52,11 @@ class DescriptionTab extends NavBarTab {
       ),
       buildSuccess: (data) {
         return _buildSingleAttribute(
-            context, subtitle, (data as Category).title);
+            context,
+            subtitle,
+            (data as Category).titleAsString(
+              context,
+            ));
       },
     );
   }

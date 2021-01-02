@@ -6,6 +6,8 @@ import 'package:engineering_thesis/components/bloc_builders/search_screen.dart';
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
 import 'package:engineering_thesis/components/custom_widgets/gesture_detector/custom_gesture_detector.dart';
 import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
+import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -37,8 +39,11 @@ class SearchActivitiesAppBar {
             await SearchScreen.show(context,
                 BlocProvider.of<SearchActivitiesSearchFilterBloc>(context));
           },
-          child: Text(
-            SharedPreferences().address ?? 'Choose City',
+          child: CustomText.pageTitle(
+            SharedPreferences().address ??
+                S
+                    .of(context)
+                    .home_screen_search_activities_address_field_placeholder,
           ),
         );
       },
@@ -65,7 +70,9 @@ class SearchActivitiesAppBar {
               child: Builder(
                 builder: (context) {
                   return CustomButton.iconWithTextButton(
-                    text: "${SharedPreferences().distanceKm}km",
+                    text: S
+                        .of(context)
+                        .kilometres_short(SharedPreferences().distanceKm),
                     customIcon: CustomIcon.distancePicker,
                     onPressed: () {
                       Routing.pushNamed(
@@ -75,8 +82,10 @@ class SearchActivitiesAppBar {
                           RoutingOption.formDataBloc:
                               BlocProvider.of<SearchActivityDistanceChoiceBloc>(
                                   context),
-                          RoutingOption.formAppBarTitle: 'dsa',
-                          RoutingOption.formNextButtonText: 'fsd',
+                          RoutingOption.formAppBarTitle:
+                              S.of(context).form_distance_nav_bar_title,
+                          RoutingOption.formNextButtonText:
+                              S.of(context).form_distance_apply_text,
                           RoutingOption.sendBloc:
                               BlocProvider.of<SearchActivitiesDistanceSendBloc>(
                                   context),

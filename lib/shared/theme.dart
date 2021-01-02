@@ -27,6 +27,7 @@ class Dimensions {
   static const double gutterVeryHuge = 40.0;
 
   static const double screenPadding = 16.0;
+  static const double refreshDisplacement = 80.0;
 }
 
 // material themes

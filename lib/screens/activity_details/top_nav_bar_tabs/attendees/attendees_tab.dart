@@ -3,7 +3,7 @@ import 'package:engineering_thesis/blocs/specific_blocs/activity_details/attende
 import 'package:engineering_thesis/blocs/specific_blocs/common/user_fetch_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
-import 'package:engineering_thesis/components/bloc_builders/send_with_validator/send_builder_button.dart';
+import 'package:engineering_thesis/components/bloc_builders/send/send_builder_button.dart';
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
 import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:engineering_thesis/components/custom_widgets/list/custom_list.dart';

@@ -1,5 +1,6 @@
 import 'package:engineering_thesis/components/custom_widgets/gesture_detector/custom_gesture_detector.dart';
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
+import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -76,6 +77,8 @@ class CustomButton {
     return PlatformIconButton(
       onPressed: enabled ? onPressed : null,
       icon: customIcon,
+      material: (_, __) =>
+          MaterialIconButtonData(splashRadius: Dimensions.gutterLarge),
     );
   }
 

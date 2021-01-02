@@ -1,6 +1,5 @@
 import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/components/custom_widgets/dropdown/custom_dropdown_button.dart';
-import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,32 +16,21 @@ class FormOptionListField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        BlocBuilder(
-          cubit: formFieldBloc,
-          builder: (context, state) {
-            return Column(
-              children: [
-                formFieldBloc.isValid
-                    ? CustomText.validFormTitle(
-                        formFieldBloc.getLabel(context),
-                      )
-                    : CustomText.invalidFormTitle(
-                        formFieldBloc.getLabel(context),
-                      ),
-                formFieldBloc.listOption == null
-                    ? FetchingBlocBuilder(
-                        fetchingCubit: formFieldBloc.listOptionFetchingBloc,
-                        buildSuccess: (data) {
-                          return _getDropdown(data);
-                        })
-                    : _getDropdown(formFieldBloc.listOption),
-              ],
-            );
-          },
-        ),
-      ],
+    return BlocBuilder(
+      cubit: formFieldBloc,
+      builder: (context, state) {
+        return Column(
+          children: [
+            formFieldBloc.listOption == null
+                ? FetchingBlocBuilder(
+                    fetchingCubit: formFieldBloc.listOptionFetchingBloc,
+                    buildSuccess: (data) {
+                      return _getDropdown(data);
+                    })
+                : _getDropdown(formFieldBloc.listOption),
+          ],
+        );
+      },
     );
   }
 

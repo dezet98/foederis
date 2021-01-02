@@ -165,6 +165,56 @@ class S {
     );
   }
 
+  /// `Choose address`
+  String get home_screen_search_activities_address_field_placeholder {
+    return Intl.message(
+      'Choose address',
+      name: 'home_screen_search_activities_address_field_placeholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose search area`
+  String get form_distance_nav_bar_title {
+    return Intl.message(
+      'Choose search area',
+      name: 'form_distance_nav_bar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `choose`
+  String get form_distance_apply_text {
+    return Intl.message(
+      'choose',
+      name: 'form_distance_apply_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `clear`
+  String get form_clear_button_text {
+    return Intl.message(
+      'clear',
+      name: 'form_clear_button_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sukces wysyłania formularza!`
+  String get form_with_send_success_snackbar_info {
+    return Intl.message(
+      'Sukces wysyłania formularza!',
+      name: 'form_with_send_success_snackbar_info',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `My activity`
   String get home_screen_my_activity_tab_name {
     return Intl.message(
@@ -260,16 +310,6 @@ class S {
     return Intl.message(
       'one-time',
       name: 'filters_screen_filter_value_one_time',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Create activity`
-  String get create_activity_screen_nav_title {
-    return Intl.message(
-      'Create activity',
-      name: 'create_activity_screen_nav_title',
       desc: '',
       args: [],
     );
@@ -490,6 +530,416 @@ class S {
       name: 'plural_days',
       desc: '',
       args: [howManyDays],
+    );
+  }
+
+  /// `{kilometres}km`
+  String kilometres_short(Object kilometres) {
+    return Intl.message(
+      '${kilometres}km',
+      name: 'kilometres_short',
+      desc: '',
+      args: [kilometres],
+    );
+  }
+
+  /// `Create activity`
+  String get create_activity_screen_nav_bar_title {
+    return Intl.message(
+      'Create activity',
+      name: 'create_activity_screen_nav_bar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `create`
+  String get create_activity_screen_apply_button_text {
+    return Intl.message(
+      'create',
+      name: 'create_activity_screen_apply_button_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `tytuł`
+  String get create_activity_screen_title_placeholder {
+    return Intl.message(
+      'tytuł',
+      name: 'create_activity_screen_title_placeholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tytuł aktywności`
+  String get create_activity_screen_title_label {
+    return Intl.message(
+      'Tytuł aktywności',
+      name: 'create_activity_screen_title_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bez zatwierdzania uczestników`
+  String get create_activity_screen_free_join_label {
+    return Intl.message(
+      'Bez zatwierdzania uczestników',
+      name: 'create_activity_screen_free_join_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bez zatwierdzania uczestników sprawi że każdy kto zapiszę się na aktywność będzie już jej uczestnikiem. W przeciwnym razie może wysłąć prośbę o dołączenie którą ty musisz zaakceptować`
+  String get create_activity_screen_free_join_description {
+    return Intl.message(
+      'Bez zatwierdzania uczestników sprawi że każdy kto zapiszę się na aktywność będzie już jej uczestnikiem. W przeciwnym razie może wysłąć prośbę o dołączenie którą ty musisz zaakceptować',
+      name: 'create_activity_screen_free_join_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data rozpoczęcia aktywności`
+  String get create_activity_screen_start_date_label {
+    return Intl.message(
+      'Data rozpoczęcia aktywności',
+      name: 'create_activity_screen_start_date_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Liczba uczestników`
+  String get create_activity_screen_min_max_entry_label {
+    return Intl.message(
+      'Liczba uczestników',
+      name: 'create_activity_screen_min_max_entry_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Określenie liczby uczestników mogących się zapisać na aktywność, bez wymaganej liczby aktywność zostanie uznana za nie odbytą.`
+  String get create_activity_screen_min_max_entry_description {
+    return Intl.message(
+      'Określenie liczby uczestników mogących się zapisać na aktywność, bez wymaganej liczby aktywność zostanie uznana za nie odbytą.',
+      name: 'create_activity_screen_min_max_entry_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Kategoria`
+  String get create_activity_screen_category_label {
+    return Intl.message(
+      'Kategoria',
+      name: 'create_activity_screen_category_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Adres`
+  String get create_activity_screen_address_label {
+    return Intl.message(
+      'Adres',
+      name: 'create_activity_screen_address_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Adres aktywności, ważne by podać poprawny adres ponieważ użytkownicy wyszukują aktywności ze względu na lokalizację`
+  String get create_activity_screen_address_description {
+    return Intl.message(
+      'Adres aktywności, ważne by podać poprawny adres ponieważ użytkownicy wyszukują aktywności ze względu na lokalizację',
+      name: 'create_activity_screen_address_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Opis`
+  String get create_activity_screen_description_label {
+    return Intl.message(
+      'Opis',
+      name: 'create_activity_screen_description_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `...`
+  String get create_activity_screen_description_placeholder {
+    return Intl.message(
+      '...',
+      name: 'create_activity_screen_description_placeholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zdjęcie profilowe`
+  String get update_user_form_photo_label {
+    return Intl.message(
+      'Zdjęcie profilowe',
+      name: 'update_user_form_photo_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Imię`
+  String get update_user_form_first_name_label {
+    return Intl.message(
+      'Imię',
+      name: 'update_user_form_first_name_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nazwisko`
+  String get update_user_form_second_name_label {
+    return Intl.message(
+      'Nazwisko',
+      name: 'update_user_form_second_name_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `O sobie`
+  String get update_user_form_about_label {
+    return Intl.message(
+      'O sobie',
+      name: 'update_user_form_about_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Telefon`
+  String get update_user_form_phone_label {
+    return Intl.message(
+      'Telefon',
+      name: 'update_user_form_phone_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data urodzin`
+  String get update_user_form_birthday_label {
+    return Intl.message(
+      'Data urodzin',
+      name: 'update_user_form_birthday_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Płeć`
+  String get update_user_form_gender_label {
+    return Intl.message(
+      'Płeć',
+      name: 'update_user_form_gender_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `dalej`
+  String get stepper_next_button_text {
+    return Intl.message(
+      'dalej',
+      name: 'stepper_next_button_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `wróć`
+  String get stepper_cancel_button_text {
+    return Intl.message(
+      'wróć',
+      name: 'stepper_cancel_button_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Szczegóły dla pola {validatorName}`
+  String form_field_info_dialog_title(Object validatorName) {
+    return Intl.message(
+      'Szczegóły dla pola $validatorName',
+      name: 'form_field_info_dialog_title',
+      desc: '',
+      args: [validatorName],
+    );
+  }
+
+  /// `wartość musi być liczbą całkowitą`
+  String get form_field_info_digits_validator {
+    return Intl.message(
+      'wartość musi być liczbą całkowitą',
+      name: 'form_field_info_digits_validator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `długość danego wyrażenia powinna się zawierać w przedziale <{min}, {max}>`
+  String form_field_info_lenght_validator(Object min, Object max) {
+    return Intl.message(
+      'długość danego wyrażenia powinna się zawierać w przedziale <$min, $max>',
+      name: 'form_field_info_lenght_validator',
+      desc: '',
+      args: [min, max],
+    );
+  }
+
+  /// `wartość musi znajdować się w przedziale <{min}, {max}>`
+  String form_field_info_numbers_range_validator(Object min, Object max) {
+    return Intl.message(
+      'wartość musi znajdować się w przedziale <$min, $max>',
+      name: 'form_field_info_numbers_range_validator',
+      desc: '',
+      args: [min, max],
+    );
+  }
+
+  /// `data musi być przed {minDate} a po {maxDate}`
+  String form_field_info_date_time_range_validator(Object minDate, Object maxDate) {
+    return Intl.message(
+      'data musi być przed $minDate a po $maxDate',
+      name: 'form_field_info_date_time_range_validator',
+      desc: '',
+      args: [minDate, maxDate],
+    );
+  }
+
+  /// `musisz wypełnić to pole`
+  String get form_field_info_not_null_validator {
+    return Intl.message(
+      'musisz wypełnić to pole',
+      name: 'form_field_info_not_null_validator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `numer telefonu musi być w postaci xxx xxx xxx`
+  String get form_field_info_phone_validator {
+    return Intl.message(
+      'numer telefonu musi być w postaci xxx xxx xxx',
+      name: 'form_field_info_phone_validator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `musi być spełniony warunek: wartość1 {znak} wartość2`
+  String form_field_info_numbers_validator(Object znak) {
+    return Intl.message(
+      'musi być spełniony warunek: wartość1 $znak wartość2',
+      name: 'form_field_info_numbers_validator',
+      desc: '',
+      args: [znak],
+    );
+  }
+
+  /// `opis`
+  String get form_field_info_additional_info {
+    return Intl.message(
+      'opis',
+      name: 'form_field_info_additional_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `walidacja`
+  String get form_field_info_additional_validation {
+    return Intl.message(
+      'walidacja',
+      name: 'form_field_info_additional_validation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `wybierz datę`
+  String get date_time_picker_text {
+    return Intl.message(
+      'wybierz datę',
+      name: 'date_time_picker_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `football`
+  String get category_football {
+    return Intl.message(
+      'football',
+      name: 'category_football',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `beer`
+  String get category_beer {
+    return Intl.message(
+      'beer',
+      name: 'category_beer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `męszczyzna`
+  String get gender_male {
+    return Intl.message(
+      'męszczyzna',
+      name: 'gender_male',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `kobieta`
+  String get gender_female {
+    return Intl.message(
+      'kobieta',
+      name: 'gender_female',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `wolę nie mówić`
+  String get gender_prefer_not_to_say {
+    return Intl.message(
+      'wolę nie mówić',
+      name: 'gender_prefer_not_to_say',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `wybierz zdjęcie`
+  String get form_field_photo_choose_photo {
+    return Intl.message(
+      'wybierz zdjęcie',
+      name: 'form_field_photo_choose_photo',
+      desc: '',
+      args: [],
     );
   }
 }

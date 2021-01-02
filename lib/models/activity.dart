@@ -3,6 +3,7 @@ import 'package:geohash/geohash.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../shared/extensions.dart';
+import 'attendee.dart';
 import 'category.dart';
 import 'collections/activity_collection.dart';
 
@@ -15,12 +16,13 @@ class Activity {
   int maxEntry;
   int minEntry;
   bool freeJoin;
-  bool regular;
+  String description;
   String geohash;
   String address;
 
   // additional fields
   Category category;
+  Attendee attendee;
 
   Activity.fromDocument(DocumentSnapshot doc) {
     this.ref = doc.reference;
@@ -31,7 +33,7 @@ class Activity {
     this.maxEntry = doc.getField(ActivityCollection.maxEntry);
     this.minEntry = doc.getField(ActivityCollection.minEntry);
     this.freeJoin = doc.getField(ActivityCollection.freeJoin);
-    this.regular = doc.getField(ActivityCollection.regular);
+    this.description = doc.getField(ActivityCollection.description);
     this.geohash = doc.getField(ActivityCollection.geohash);
     this.address = doc.getField(ActivityCollection.address);
   }
@@ -44,7 +46,7 @@ class Activity {
     this.maxEntry = data[ActivityCollection.maxEntry.fieldName];
     this.minEntry = data[ActivityCollection.minEntry.fieldName];
     this.freeJoin = data[ActivityCollection.freeJoin.fieldName];
-    this.regular = data[ActivityCollection.regular.fieldName];
+    this.description = data[ActivityCollection.description.fieldName];
     this.geohash = data[ActivityCollection.geohash.fieldName];
     this.address = data[ActivityCollection.address.fieldName];
   }
@@ -53,7 +55,7 @@ class Activity {
     return {
       ActivityCollection.userRef.fieldName: userRef,
       ActivityCollection.title.fieldName: title,
-      ActivityCollection.regular.fieldName: regular,
+      ActivityCollection.description.fieldName: description,
       ActivityCollection.startDate.fieldName: startDate,
       ActivityCollection.freeJoin.fieldName: freeJoin,
       ActivityCollection.geohash.fieldName: geohash,

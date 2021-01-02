@@ -12,17 +12,20 @@ class FormPhotoFieldBloc extends FormFieldBloc<File> {
   final List<Validator> Function(File) validators;
   final List<QueryField> Function(File) queryFieldFromResult;
   final String Function(BuildContext) getLabel;
+  final String Function(BuildContext) getDescription;
 
-  FormPhotoFieldBloc({
-    @required this.initialResult,
-    @required this.initialPhotoUrl,
-    @required this.validators,
-    @required this.queryFieldFromResult,
-    @required this.getLabel,
-  }) : super(
+  FormPhotoFieldBloc(
+      {@required this.initialResult,
+      @required this.initialPhotoUrl,
+      @required this.validators,
+      @required this.queryFieldFromResult,
+      @required this.getLabel,
+      this.getDescription})
+      : super(
           initialResult: initialResult,
           queryFieldFromResult: queryFieldFromResult,
           validators: validators,
           getLabel: getLabel,
+          getDescription: getDescription,
         );
 }

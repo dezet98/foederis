@@ -6,18 +6,20 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class CustomTextFormField {
   static Widget normal({
     @required TextEditingController textEditingController,
-    Function(String) onChamged,
+    Function(String) onChanged,
     bool enabled,
     bool obscureText,
     String placeholder,
   }) {
     return PlatformTextField(
       controller: textEditingController,
-      onChanged: onChamged,
+      onChanged: onChanged,
       enabled: enabled,
       obscureText: obscureText,
       material: (_, __) => MaterialTextFieldData(
-        decoration: InputDecoration(hintText: placeholder),
+        decoration: InputDecoration(
+          hintText: placeholder,
+        ),
       ),
       cupertino: (_, __) => CupertinoTextFieldData(placeholder: placeholder),
     );

@@ -1,21 +1,17 @@
 import 'package:engineering_thesis/blocs/specific_blocs/activity_details/activity_stream_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
-import 'package:engineering_thesis/blocs/specific_blocs/common/user_fetch_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/create_activity/create_activity_send_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/my_activities/my_activities_stream_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/bloc_builders/cards/activity_card.dart';
-import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/components/bloc_builders/stream_bloc_builder.dart';
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
 import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:engineering_thesis/components/custom_widgets/list/custom_list.dart';
 import 'package:engineering_thesis/models/activity.dart';
-import 'package:engineering_thesis/models/app_user.dart';
 import 'package:engineering_thesis/models/attendee.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/attendee_repository.dart';
-import 'package:engineering_thesis/repositories/user_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -30,7 +26,7 @@ class MyActivitiesTab extends NavBarTab {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
-      _buildTabProviders(),
+      _buildTabContent(),
       Positioned(
         child: _buildFloatingButton(context),
         right: Dimensions.gutterMedium,
@@ -39,7 +35,8 @@ class MyActivitiesTab extends NavBarTab {
     ]);
   }
 
-  Widget _buildTabProviders() {
+  /// deal with attendees with user stream and build it
+  Widget _buildTabContent() {
     return BlocProvider(
       create: (context) => MyActivitiesStreamBloc(
         RepositoryProvider.of<AttendeeRepository>(context),
@@ -56,35 +53,21 @@ class MyActivitiesTab extends NavBarTab {
     );
   }
 
+  /// deal with activity stream and build it
   Widget _buildList(context, List<Attendee> attendees) {
     return CustomList(
       items: attendees,
       buildTile: (Attendee attendee) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) => ActivityStreamBloc(
-                RepositoryProvider.of<ActivityRepository>(context),
-                activityRef: attendee.activityRef,
-              ),
-            ),
-          ],
+        return BlocProvider(
+          create: (context) => ActivityStreamBloc(
+            RepositoryProvider.of<ActivityRepository>(context),
+            activityRef: attendee.activityRef,
+          ),
           child: Builder(
             builder: (context) => StreamBlocBuilder(
               streamBloc: BlocProvider.of<ActivityStreamBloc>(context),
-              buildSuccess: (activity) => FetchingBlocBuilder(
-                fetchingCubit: UserFetchBloc(
-                    RepositoryProvider.of<UserRepository>(context),
-                    userRef: attendee.userRef),
-                buildSuccess: (user) {
-                  return _buildTile(
-                    context,
-                    activity as Activity,
-                    attendee,
-                    user as AppUser,
-                  );
-                },
-              ),
+              buildSuccess: (activity) =>
+                  _buildTile(context, activity as Activity),
             ),
           ),
         );
@@ -92,9 +75,7 @@ class MyActivitiesTab extends NavBarTab {
     );
   }
 
-// attendee here without sense
-  Widget _buildTile(BuildContext context, Activity activity, Attendee attendee,
-      AppUser appUser) {
+  Widget _buildTile(BuildContext context, Activity activity) {
     return ActivityCard.myActivityCard(context, activity: activity);
   }
 
@@ -109,10 +90,12 @@ class MyActivitiesTab extends NavBarTab {
             RoutingOption.formDataBloc:
                 BlocProvider.of<CreateActvityFormDataBloc>(context),
             RoutingOption.formAppBarTitle:
-                S.of(context).create_activity_screen_nav_title,
-            RoutingOption.formNextButtonText: 'fsd',
+                S.of(context).create_activity_screen_nav_bar_title,
+            RoutingOption.formNextButtonText:
+                S.of(context).create_activity_screen_apply_button_text,
             RoutingOption.sendBloc:
                 BlocProvider.of<CreateActivitySendBloc>(context),
+            RoutingOption.useStepper: true,
           },
         );
       },

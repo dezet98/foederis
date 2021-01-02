@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/collections/user_collection.dart';
 import 'package:engineering_thesis/shared/extensions.dart';
 import 'package:engineering_thesis/shared/utils/enums.dart';
@@ -58,5 +59,20 @@ class AppUser {
       UserCollection.phone.fieldName: phone,
       UserCollection.photoUrl.fieldName: photoUrl,
     };
+  }
+
+  static String genderAsString(context, Gender gender) {
+    switch (gender) {
+      case Gender.male:
+        return S.of(context).gender_male;
+        break;
+      case Gender.female:
+        return S.of(context).gender_female;
+        break;
+      case Gender.prefer_not_to_say:
+        return S.of(context).gender_prefer_not_to_say;
+        break;
+    }
+    return enumToString(gender);
   }
 }

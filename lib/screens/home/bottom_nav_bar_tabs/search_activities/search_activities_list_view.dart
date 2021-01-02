@@ -5,6 +5,7 @@ import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builde
 import 'package:engineering_thesis/components/bloc_builders/filters/filtered_data.dart';
 import 'package:engineering_thesis/components/custom_widgets/refresh_indicator/custom_refresh_indicator.dart';
 import 'package:engineering_thesis/shared/exceptions.dart';
+import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -23,7 +24,7 @@ class SearchActivitiesListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return PlatformWidget(
       material: (_, __) => CustomRefreshIndicator(
-        displacement: 60.0,
+        displacement: Dimensions.refreshDisplacement,
         onRefresh: () => onRefresh(context),
         child: _buildCustomScrollView(context),
       ),
@@ -37,12 +38,12 @@ class SearchActivitiesListView extends StatelessWidget {
         SearchActivitiesAppBar.getSliverAppBar(context),
         CustomRefreshIndicator.cupertinoRefreshIndicator(
             () => onRefresh(context)),
-        _fetchActivities(context),
+        _fetchandFilterActivities(context),
       ],
     );
   }
 
-  Widget _fetchActivities(BuildContext context) {
+  Widget _fetchandFilterActivities(BuildContext context) {
     return FetchingBlocBuilder(
       fetchingCubit: BlocProvider.of<SearchActivitiesFetchingBloc>(context),
       buildSuccess: (activities) {
@@ -53,14 +54,8 @@ class SearchActivitiesListView extends StatelessWidget {
               _buildActivitiesList(context, activities),
         );
       },
-      buildError: (error) => SliverFillRemaining(
-        child: Text(error is FetchingException
-            ? '${error.message}'
-            : 'Error occur: ${error.toString()}'),
-      ),
-      buildInProgress: SliverFillRemaining(
-        child: Center(child: CircularProgressIndicator()),
-      ),
+      buildError: _buildError,
+      buildInProgress: _buildInProgress(),
     );
   }
 
@@ -69,13 +64,29 @@ class SearchActivitiesListView extends StatelessWidget {
       delegate: SliverChildListDelegate(
         [
           for (Activity activity in activities)
-            buildActivityTile(context, activity)
+            _buildActivityTile(context, activity)
         ],
       ),
     );
   }
 
-  Widget buildActivityTile(BuildContext context, Activity activity) {
+  Widget _buildError(error) {
+    return SliverFillRemaining(
+      child: Text(
+        error is FetchingException
+            ? '${error.message}'
+            : 'Error occur: ${error.toString()}',
+      ),
+    );
+  }
+
+  Widget _buildInProgress() {
+    return SliverFillRemaining(
+      child: Center(child: CircularProgressIndicator()),
+    );
+  }
+
+  Widget _buildActivityTile(BuildContext context, Activity activity) {
     return ActivityCard.searchCard(
       context,
       activity: activity,

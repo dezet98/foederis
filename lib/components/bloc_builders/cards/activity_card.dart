@@ -27,7 +27,7 @@ class ActivityCard {
       title: activity.title,
       content: Wrap(
         children: [
-          CustomChip.label(label: activity.category.title),
+          CustomChip.label(label: activity.category.titleAsString(context)),
           SizedBox(width: Dimensions.gutterSmall),
           _attendeeChip(context, activity),
           SizedBox(width: Dimensions.gutterSmall),
@@ -110,11 +110,12 @@ class ActivityCard {
         categoryRepository: RepositoryProvider.of<CategoryRepository>(context),
         categoryRef: activity.categoryRef,
       ),
-      buildSuccess: (category) =>
-          CustomChip.label(label: (category as Category).title),
+      buildSuccess: (category) => CustomChip.label(
+          label: (category as Category).titleAsString(context)),
     );
   }
 
+  // ignore: unused_element
   static Widget _makerChip(BuildContext context, activity) {
     return FetchingBlocBuilder(
       fetchingCubit: UserFetchBloc(

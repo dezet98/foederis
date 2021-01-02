@@ -9,16 +9,21 @@ class FormTextFieldBloc extends FormFieldBloc<String> {
   final List<Validator> Function(String) validators;
   final List<QueryField> Function(String) queryFieldFromResult;
   final String Function(BuildContext) getLabel;
+  final String Function(BuildContext) getDescription;
+  final String Function(BuildContext) placeholder;
 
-  FormTextFieldBloc({
-    @required this.initialResult,
-    @required this.validators,
-    @required this.queryFieldFromResult,
-    @required this.getLabel,
-  }) : super(
-          initialResult: initialResult,
+  FormTextFieldBloc(
+      {this.initialResult,
+      @required this.validators,
+      @required this.queryFieldFromResult,
+      @required this.getLabel,
+      this.placeholder,
+      this.getDescription})
+      : super(
+          initialResult: initialResult ?? '',
           queryFieldFromResult: queryFieldFromResult,
           validators: validators,
           getLabel: getLabel,
+          getDescription: getDescription,
         );
 }

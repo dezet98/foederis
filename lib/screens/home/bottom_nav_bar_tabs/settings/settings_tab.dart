@@ -36,6 +36,12 @@ class SettingsTab extends NavBarTab {
                   BlocProvider.of<UserDataBloc>(context),
                   RepositoryProvider.of<RemoteStorage>(context),
                 ),
+                RoutingOption.afterSuccess: () {
+                  Navigator.pop(context);
+
+                  BlocProvider.of<UserDataBloc>(context)
+                      .add(UserDataRefreshEvent());
+                }
               });
             },
           ),

@@ -5,12 +5,13 @@ import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_photo_field_b
 import 'package:engineering_thesis/components/custom_widgets/avatar/custom_user_avatar.dart';
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
 import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
-import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:path/path.dart';
 
 import '../../../blocs/abstract_blocs/forms/form_data/form_data_bloc.dart';
 
@@ -30,18 +31,11 @@ class FormPhotoField extends StatelessWidget {
       builder: (context, state) {
         return Column(
           children: [
-            formFieldBloc.isValid
-                ? CustomText.validFormTitle(
-                    formFieldBloc.getLabel(context),
-                  )
-                : CustomText.invalidFormTitle(
-                    formFieldBloc.getLabel(context),
-                  ),
             _buildPhoto(context),
             CustomButton.goToOtherScreen(
                 text: formFieldBloc.result == null
-                    ? 'Choose file'
-                    : formFieldBloc.result.path,
+                    ? S.of(context).form_field_photo_choose_photo
+                    : basename(formFieldBloc.result.path),
                 onPressed: () async {
                   FilePickerResult pickedFile =
                       await FilePicker.platform.pickFiles(type: FileType.image);
@@ -71,13 +65,14 @@ class FormPhotoField extends StatelessWidget {
       return CustomUserAvatar.fromUrl(context, formFieldBloc.initialPhotoUrl,
           diameter: MediaQuery.of(context).size.width / 3);
 
-    return CustomUserAvatar.fromIcon(CustomIcon.userAvatar);
+    return CustomUserAvatar.fromIcon(
+        CustomIcon.userAvatar, MediaQuery.of(context).size.width);
   }
 
   Widget _buildPhotoWithCropPosibility(context, File file) {
     return Stack(
       children: [
-        CustomUserAvatar.fromFile(context, file),
+        CustomUserAvatar.fromFile(file, MediaQuery.of(context).size.width / 3),
         Positioned(
           right: 0,
           child: CustomButton.floatingButton(
@@ -93,9 +88,6 @@ class FormPhotoField extends StatelessWidget {
                       CropAspectRatioPreset.ratio16x9
                     ],
                     androidUiSettings: AndroidUiSettings(
-                        toolbarTitle: 'Cropper',
-                        toolbarColor: Colors.deepOrange,
-                        toolbarWidgetColor: Colors.white,
                         initAspectRatio: CropAspectRatioPreset.original,
                         lockAspectRatio: false),
                     iosUiSettings: IOSUiSettings(

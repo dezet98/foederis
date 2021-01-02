@@ -17,8 +17,8 @@ class ActivityCollection {
       CollectionField(fieldName: 'minEntry', isRequired: true);
   static CollectionField freeJoin =
       CollectionField(fieldName: 'freeJoin', isRequired: true);
-  static CollectionField regular =
-      CollectionField(fieldName: 'regular', isRequired: true);
+  static CollectionField description =
+      CollectionField(fieldName: 'description', isRequired: true);
   static CollectionField geohash =
       CollectionField(fieldName: 'geohash', isRequired: true);
   static CollectionField address =
@@ -32,7 +32,7 @@ class ActivityCollection {
         maxEntry,
         minEntry,
         freeJoin,
-        regular,
+        description,
         geohash,
         address,
       ];

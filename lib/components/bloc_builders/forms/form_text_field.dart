@@ -1,5 +1,4 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_field/form_field_bloc.dart';
-import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/components/custom_widgets/text_form_field/custom_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,39 +17,34 @@ class FormTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    textFieldController.text = formFieldBloc.result;
+    textFieldController.text = formFieldBloc.result ?? '';
 
     return BlocConsumer(
       cubit: formFieldBloc,
       listener: (context, state) {
         if (state is FormFieldClearedState) {
           textFieldController.text = formFieldBloc.result;
+        } else if (state is FormFieldChangedState) {
+          textFieldController.selection = TextSelection.fromPosition(
+              TextPosition(offset: textFieldController.text.length));
         }
       },
       builder: (context, state) {
-        return Column(
-          children: [
-            formFieldBloc.isValid
-                ? CustomText.validFormTitle(
-                    formFieldBloc.getLabel(context),
-                  )
-                : CustomText.invalidFormTitle(
-                    formFieldBloc.getLabel(context),
-                  ),
-            CustomTextFormField.normal(
-              textEditingController: textFieldController,
-              enabled: formFieldBloc.editingEnabled,
-              onChamged: (String text) {
-                if (formFieldBloc.editingEnabled)
-                  formDataBloc.add(
-                    FormDataEditingEvent(
-                      formFieldBloc: formFieldBloc,
-                      result: text,
-                    ),
-                  );
-              },
-            )
-          ],
+        return CustomTextFormField.normal(
+          textEditingController: textFieldController,
+          enabled: formFieldBloc.editingEnabled,
+          placeholder: formFieldBloc.placeholder != null
+              ? formFieldBloc.placeholder(context)
+              : '',
+          onChanged: (String text) {
+            if (formFieldBloc.editingEnabled)
+              formDataBloc.add(
+                FormDataEditingEvent(
+                  formFieldBloc: formFieldBloc,
+                  result: text,
+                ),
+              );
+          },
         );
       },
     );

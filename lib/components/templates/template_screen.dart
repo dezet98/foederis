@@ -29,14 +29,12 @@ class TemplateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PlatformScaffold(
       appBar: platformAppBar?.getPlatformAppBar(context),
-      body: SafeArea(
-        child: usePadding
-            ? Padding(
-                padding: const EdgeInsets.all(Dimensions.screenPadding),
-                child: body,
-              )
-            : body,
-      ),
+      body: usePadding
+          ? Padding(
+              padding: const EdgeInsets.all(Dimensions.screenPadding),
+              child: body,
+            )
+          : body,
     );
   }
 

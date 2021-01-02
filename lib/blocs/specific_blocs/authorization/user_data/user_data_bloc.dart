@@ -30,6 +30,8 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       yield* mapUserDataClearEvent();
     } else if (event is UserDataCreateEvent) {
       yield* mapUserDataCreateEvent(event.firebaseUser);
+    } else if (event is UserDataRefreshEvent) {
+      yield* mapUserDataRefreshEvent();
     }
   }
 
@@ -63,6 +65,19 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       yield UserDataCreateSuccessfullState();
     } catch (e) {
       yield UserDataClearFailureState(
+        userLoadDataError: UserLoadDataError.undefined,
+        message: e.toString(),
+      );
+    }
+  }
+
+  Stream<UserDataState> mapUserDataRefreshEvent() async* {
+    try {
+      yield UserDataRefreshInProgressState();
+      _user = await _userRepository.fetchUser(user.ref.id);
+      yield UserDataRefreshSuccessfullState();
+    } catch (e) {
+      yield UserDataRefreshFailureState(
         userLoadDataError: UserLoadDataError.undefined,
         message: e.toString(),
       );

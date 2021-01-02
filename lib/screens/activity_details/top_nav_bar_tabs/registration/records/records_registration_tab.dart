@@ -6,8 +6,8 @@ import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registr
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
-import 'package:engineering_thesis/components/bloc_builders/forms/form_data_screen.dart';
-import 'package:engineering_thesis/components/bloc_builders/send_with_validator/send_builder_button.dart';
+import 'package:engineering_thesis/components/bloc_builders/forms/form_screen/form_with_send_screen.dart';
+import 'package:engineering_thesis/components/bloc_builders/send/send_builder_button.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/appeal_to_join.dart';
 import 'package:engineering_thesis/models/attendee.dart';
@@ -49,7 +49,7 @@ class RecordsRegistrationTab extends NavBarTab {
 
   // situation when we can send request with comment to join
   Widget _buildAppealToJoinForm(context) {
-    return FormDataScreen(
+    return FormDataWithSendScreen(
       formDataBloc: AppealToJoinFormBloc(),
       formAppBarTitle: null,
       formNextButtonText: 'Appeal to join',

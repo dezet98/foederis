@@ -9,15 +9,16 @@ class FormOptionListFieldBloc<OptionType> extends FormFieldBloc<OptionType> {
   final FetchBloc listOptionFetchingBloc; //todo
   final List<OptionType> listOption;
   final OptionType initialResult;
-  final String Function(dynamic) getLabelFromOption;
+  final String Function(BuildContext, dynamic) getLabelFromOption;
   List<Validator> Function(OptionType) validators;
   final List<QueryField> Function(OptionType) queryFieldFromResult;
   String Function(BuildContext) getLabel;
-
+  final String Function(BuildContext) getDescription;
   FormOptionListFieldBloc({
     this.listOptionFetchingBloc,
     this.listOption,
     this.initialResult,
+    this.getDescription,
     @required this.getLabelFromOption,
     @required this.getLabel,
     @required this.validators,
@@ -27,5 +28,6 @@ class FormOptionListFieldBloc<OptionType> extends FormFieldBloc<OptionType> {
           getLabel: getLabel,
           queryFieldFromResult: queryFieldFromResult,
           validators: validators,
+          getDescription: getDescription,
         );
 }

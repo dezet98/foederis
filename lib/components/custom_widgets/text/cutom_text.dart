@@ -39,6 +39,14 @@ class CustomText {
         );
       });
 
+  static Widget na(String text, {TextAlign textAlign}) =>
+      Builder(builder: (context) {
+        return Text(
+          text,
+          style: Theme.of(context).textTheme.bodyText2,
+        );
+      });
+
   static Widget textButton(String text, {TextAlign textAlign}) =>
       Builder(builder: (context) {
         return Text(

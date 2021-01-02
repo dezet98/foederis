@@ -11,16 +11,19 @@ class FormAddressFieldBloc extends FormFieldBloc<Geolocation> {
   final List<Validator> Function(Geolocation) validators;
   final List<QueryField> Function(Geolocation) queryFieldFromResult;
   final String Function(BuildContext) getLabel;
+  final String Function(BuildContext) getDescription;
 
   FormAddressFieldBloc({
     @required this.initialResult,
     @required this.validators,
     @required this.getLabel,
     @required this.queryFieldFromResult,
+    this.getDescription,
   }) : super(
           initialResult: initialResult,
           queryFieldFromResult: queryFieldFromResult,
           validators: validators,
           getLabel: getLabel,
+          getDescription: getDescription,
         );
 }

@@ -10,7 +10,6 @@ import '../../../blocs/abstract_blocs/search_filter/search_filter_bloc.dart';
 import '../../../blocs/specific_blocs/search_places_bloc.dart';
 import '../../../models/geolocation.dart';
 import '../../custom_widgets/buttons/custom_button.dart';
-import '../../custom_widgets/text/cutom_text.dart';
 import '../search_screen.dart';
 
 class FormAddressField extends StatelessWidget {
@@ -52,13 +51,6 @@ class FormAddressField extends StatelessWidget {
                 builder: (context, state) {
                   return Column(
                     children: [
-                      formFieldBloc.isValid
-                          ? CustomText.validFormTitle(
-                              formFieldBloc.getLabel(context))
-                          : CustomText.invalidFormTitle(
-                              formFieldBloc.getLabel(context)),
-                      //alignment: Alignment.centerLeft,
-
                       CustomButton.goToOtherScreen(
                         text: 'Choose location',
                         enabled: formFieldBloc.editingEnabled,

@@ -31,6 +31,10 @@ class CustomIcon {
         return Icon(PlatformIcons(context).personOutline);
       });
 
+  static Widget get info => Builder(builder: (context) {
+        return Icon(PlatformIcons(context).info);
+      });
+
   /// use for clear data in form
   static Widget get clear => Builder(builder: (context) {
         return Icon(PlatformIcons(context).clear);
@@ -51,7 +55,8 @@ class CustomIcon {
 
   /// use for show filter screen
   static Widget get filter => Builder(builder: (context) {
-        return _buildPlatformIcon(Icons.filter, CupertinoIcons.color_filter);
+        return _buildPlatformIcon(
+            Icons.filter_list_alt, CupertinoIcons.color_filter);
       });
 
   static Widget get distancePicker => Builder(builder: (context) {

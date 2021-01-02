@@ -12,37 +12,44 @@ class CustomUserAvatar {
     Widget errorWidget,
   }) {
     if (photoUrl != null)
-      return Container(
-        width: diameter,
-        height: diameter,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
+      return getAvatar(
+        image: FadeInImage.memoryNetwork(
+          placeholder: kTransparentImage,
+          image: photoUrl,
+          imageErrorBuilder: (context, error, stackTrace) {
+            if (errorWidget != null) return errorWidget;
+            return fromIcon(CustomIcon.closeScreen, diameter);
+          },
         ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(diameter / 2),
-          child: FadeInImage.memoryNetwork(
-            placeholder: kTransparentImage,
-            image: photoUrl,
-            imageErrorBuilder: (context, error, stackTrace) {
-              if (errorWidget != null) return errorWidget;
-              return fromIcon(CustomIcon.closeScreen);
-            },
-          ),
-        ),
+        diameter: diameter,
       );
 
-    return _nullImage(context);
+    return fromIcon(CustomIcon.person, diameter);
   }
 
-  static Widget fromFile(context, File imageFile) {
-    if (imageFile != null) return Image.file(imageFile);
+  static Widget fromFile(File imageFile, double diameter) {
+    if (imageFile != null)
+      return getAvatar(image: Image.file(imageFile), diameter: diameter);
 
-    return _nullImage(context);
+    return fromIcon(CustomIcon.person, diameter);
   }
 
-  static Widget fromIcon(Widget customIcon) {
-    return customIcon;
+  static Widget fromIcon(Widget customIcon, double diameter) {
+    return getAvatar(image: customIcon, diameter: diameter);
   }
 
-  static Widget _nullImage(context) => CustomIcon.person;
+  static Widget getAvatar({@required Widget image, @required double diameter}) {
+    return Container(
+      width: diameter,
+      height: diameter,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.black87,
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(diameter / 2),
+        child: image,
+      ),
+    );
+  }
 }
