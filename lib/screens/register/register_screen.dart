@@ -13,10 +13,8 @@ import '../../generated/l10n.dart';
 import '../../shared/routing.dart';
 
 class RegisterScreen extends StatelessWidget {
-  final TextEditingController _emailController =
-      TextEditingController(text: "d@g.com");
-  final TextEditingController _passwordController =
-      TextEditingController(text: "123456aa");
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

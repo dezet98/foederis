@@ -13,10 +13,8 @@ import '../../generated/l10n.dart';
 import '../../shared/routing.dart';
 
 class LoginScreen extends StatelessWidget {
-  final TextEditingController _emailController =
-      TextEditingController(text: "d@g.com");
-  final TextEditingController _passwordController =
-      TextEditingController(text: "123456aa");
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -68,41 +66,9 @@ class LoginScreen extends StatelessWidget {
             if (loading) CustomButton.loadingButton(),
           ],
         ),
-        // Positioned(
-        //   child: _buildSettingsButton(context),
-        //   right: 0,
-        // ),
       ],
     );
   }
-
-  // Widget _buildSettingsButton(BuildContext context) {
-  //   return CustomButton.floatingButton(
-  //     customIcon: CustomIcon.settings,
-  //     onPressed: () {
-  //       CustomBottomSheet.show(
-  //         context,
-  //         (context) => Stack(
-  //           children: [
-  //             Padding(
-  //               padding: const EdgeInsets.all(Dimensions.screenPadding),
-  //               child: Wrap(
-  //                 children: [
-  //                   CustomText.modalText(
-  //                       S.of(context).login_screen_change_language_label),
-  //                   Align(
-  //                     alignment: Alignment.center,
-  //                     child: LocalizationWithoutPreferences(),
-  //                   )
-  //                 ],
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
 
   void _loginBlocListener(BuildContext context, LoginState state) {
     if (state is LoginSuccessState) {

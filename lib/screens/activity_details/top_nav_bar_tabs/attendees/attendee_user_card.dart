@@ -4,7 +4,6 @@ import 'package:engineering_thesis/blocs/specific_blocs/common/user_fetch_bloc.d
 import 'package:engineering_thesis/components/bloc_builders/send/send_builder_button.dart';
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
 import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
-import 'package:engineering_thesis/components/custom_widgets/list/custom_list_tile.dart';
 import 'package:engineering_thesis/components/custom_widgets/popup_menu/custom_popup_menu.dart';
 import 'package:engineering_thesis/components/custom_widgets/popup_menu/custom_popup_menu_item.dart';
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
@@ -15,6 +14,7 @@ import 'package:engineering_thesis/models/collections/attendee_collection.dart';
 import 'package:engineering_thesis/repositories/attendee_repository.dart';
 import 'package:engineering_thesis/repositories/user_repository.dart';
 import 'package:engineering_thesis/shared/routing.dart';
+import 'package:engineering_thesis/shared/theme.dart';
 import 'package:engineering_thesis/shared/utils/dates.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -36,10 +36,8 @@ class AttendeeUserCard extends StatelessWidget {
         userRef: attendee.userRef,
       ),
       buildSuccess: (appUser) {
-        return CustomListTile(
-          title:
-              '${(appUser as AppUser).firstName} ${(appUser as AppUser).secondName}',
-          content: _buildContent(context),
+        return GestureDetector(
+          child: Card(child: _buildContent(context, appUser)),
           onTap: () {
             Routing.pushNamed(context, UserRoutes.profile, options: {
               RoutingOption.userRef: (appUser as AppUser).ref,
@@ -51,35 +49,44 @@ class AttendeeUserCard extends StatelessWidget {
     );
   }
 
-  Widget _buildContent(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                CustomText.menuTitle(S
-                    .of(context)
-                    .activity_details_screen_attendee_tab_join_date),
-                CustomText.bodyText(
-                    formatDate('dd-MM-yyyy hh:mm', attendee.joinDate)),
-              ],
-            ),
-            Row(
-              children: [
-                CustomText.menuTitle(
-                    S.of(context).activity_details_screen_attendee_tab_role),
-                CustomText.bodyText(
-                  AttendeeCollection.attendeeToString(context, attendee.role),
-                ),
-              ],
-            ),
-          ],
-        ),
-        _buildMenuButton(context, attendee) ?? Container(),
-      ],
+  Widget _buildContent(BuildContext context, AppUser appUser) {
+    return Padding(
+      padding: EdgeInsets.all(Dimensions.gutterSmall),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              CustomText.menuTitle(
+                  '${appUser.firstName} ${appUser.secondName}'),
+              SizedBox(height: Dimensions.gutterSmall),
+              Row(
+                children: [
+                  CustomText.menuTitle(S
+                      .of(context)
+                      .activity_details_screen_attendee_tab_join_date),
+                  SizedBox(width: Dimensions.gutterVerySmall),
+                  CustomText.bodyText(
+                      formatDate('dd-MM-yyyy hh:mm', attendee.joinDate)),
+                ],
+              ),
+              SizedBox(height: Dimensions.gutterVerySmall),
+              Row(
+                children: [
+                  CustomText.menuTitle(
+                      S.of(context).activity_details_screen_attendee_tab_role),
+                  SizedBox(width: Dimensions.gutterVerySmall),
+                  CustomText.bodyText(
+                    AttendeeCollection.attendeeToString(context, attendee.role),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          _buildMenuButton(context, attendee) ?? Container(),
+        ],
+      ),
     );
   }
 

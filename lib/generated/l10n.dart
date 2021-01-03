@@ -35,390 +35,390 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Zaloguj się`
+  /// `Log in`
   String get login_screen_login {
     return Intl.message(
-      'Zaloguj się',
+      'Log in',
       name: 'login_screen_login',
       desc: '',
       args: [],
     );
   }
 
-  /// `Załóż konto`
+  /// `Create account`
   String get login_screen_go_to_register {
     return Intl.message(
-      'Załóż konto',
+      'Create account',
       name: 'login_screen_go_to_register',
       desc: '',
       args: [],
     );
   }
 
-  /// `Wejdź jako gość`
+  /// `Visit as a guest`
   String get login_screen_visit_as_a_guest {
     return Intl.message(
-      'Wejdź jako gość',
+      'Visit as a guest',
       name: 'login_screen_visit_as_a_guest',
       desc: '',
       args: [],
     );
   }
 
-  /// `Adres email`
+  /// `E-mail`
   String get login_screen_email_placeholder {
     return Intl.message(
-      'Adres email',
+      'E-mail',
       name: 'login_screen_email_placeholder',
       desc: '',
       args: [],
     );
   }
 
-  /// `Hasło`
+  /// `Password`
   String get login_screen_password_placeholder {
     return Intl.message(
-      'Hasło',
+      'Password',
       name: 'login_screen_password_placeholder',
       desc: '',
       args: [],
     );
   }
 
-  /// `Utwórz`
+  /// `Create`
   String get register_screen_register {
     return Intl.message(
-      'Utwórz',
+      'Create',
       name: 'register_screen_register',
       desc: '',
       args: [],
     );
   }
 
-  /// `Zakładanie konta`
+  /// `Create account`
   String get register_screen_nav_bar_title {
     return Intl.message(
-      'Zakładanie konta',
+      'Create account',
       name: 'register_screen_nav_bar_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `Podaj swój email`
+  /// `Pass your email`
   String get register_screen_email_placeholder {
     return Intl.message(
-      'Podaj swój email',
+      'Pass your email',
       name: 'register_screen_email_placeholder',
       desc: '',
       args: [],
     );
   }
 
-  /// `Wymyśl hasło`
+  /// `Come up with a password`
   String get register_screen_password_placeholder {
     return Intl.message(
-      'Wymyśl hasło',
+      'Come up with a password',
       name: 'register_screen_password_placeholder',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tworzenie konta`
+  /// `Create account`
   String get app_bar_title_register {
     return Intl.message(
-      'Tworzenie konta',
+      'Create account',
       name: 'app_bar_title_register',
       desc: '',
       args: [],
     );
   }
 
-  /// `idź do logowania`
+  /// `go to login`
   String get text_button_go_to_login {
     return Intl.message(
-      'idź do logowania',
+      'go to login',
       name: 'text_button_go_to_login',
       desc: '',
       args: [],
     );
   }
 
-  /// `ustawienia`
+  /// `settings`
   String get settings {
     return Intl.message(
-      'ustawienia',
+      'settings',
       name: 'settings',
       desc: '',
       args: [],
     );
   }
 
-  /// `Szukaj`
+  /// `Search`
   String get home_screen_search_activities_tab_name {
     return Intl.message(
-      'Szukaj',
+      'Search',
       name: 'home_screen_search_activities_tab_name',
       desc: '',
       args: [],
     );
   }
 
-  /// `Wybierz adres`
+  /// `Choose address`
   String get home_screen_search_activities_address_field_placeholder {
     return Intl.message(
-      'Wybierz adres',
+      'Choose address',
       name: 'home_screen_search_activities_address_field_placeholder',
       desc: '',
       args: [],
     );
   }
 
-  /// `Brak aktywności, spróbuj zmienić lokalizację bądź obszar poszukiwań`
+  /// `No activity found, try to change the location or area of ​​search`
   String get home_screen_search_activities_no_results {
     return Intl.message(
-      'Brak aktywności, spróbuj zmienić lokalizację bądź obszar poszukiwań',
+      'No activity found, try to change the location or area of ​​search',
       name: 'home_screen_search_activities_no_results',
       desc: '',
       args: [],
     );
   }
 
-  /// `Błąd podczas wyszukiwania aktywności`
+  /// `Error while searching for activity`
   String get home_screen_search_activities_error {
     return Intl.message(
-      'Błąd podczas wyszukiwania aktywności',
+      'Error while searching for activity',
       name: 'home_screen_search_activities_error',
       desc: '',
       args: [],
     );
   }
 
-  /// `wyczyść`
+  /// `clear`
   String get form_clear_button_text {
     return Intl.message(
-      'wyczyść',
+      'clear',
       name: 'form_clear_button_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `Moje aktywności`
+  /// `My activities`
   String get home_screen_my_activity_tab_name {
     return Intl.message(
-      'Moje aktywności',
+      'My activities',
       name: 'home_screen_my_activity_tab_name',
       desc: '',
       args: [],
     );
   }
 
-  /// `Konto`
+  /// `Account`
   String get home_screen_account_tab_name {
     return Intl.message(
-      'Konto',
+      'Account',
       name: 'home_screen_account_tab_name',
       desc: '',
       args: [],
     );
   }
 
-  /// `Filtry`
+  /// `Filters`
   String get filter_screen_nav_title {
     return Intl.message(
-      'Filtry',
+      'Filters',
       name: 'filter_screen_nav_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `Zastosuj filtry`
+  /// `Apply filters`
   String get filter_screen_apply_button_text {
     return Intl.message(
-      'Zastosuj filtry',
+      'Apply filters',
       name: 'filter_screen_apply_button_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `Sortuj poprzez nazwę`
+  /// `Sort by name`
   String get filters_screen_filter_subtitile_sort_by {
     return Intl.message(
-      'Sortuj poprzez nazwę',
+      'Sort by name',
       name: 'filters_screen_filter_subtitile_sort_by',
       desc: '',
       args: [],
     );
   }
 
-  /// `malejąco`
+  /// `desc`
   String get filters_screen_filter_value_desc {
     return Intl.message(
-      'malejąco',
+      'desc',
       name: 'filters_screen_filter_value_desc',
       desc: '',
       args: [],
     );
   }
 
-  /// `rosnąco`
+  /// `asc`
   String get filters_screen_filter_value_asc {
     return Intl.message(
-      'rosnąco',
+      'asc',
       name: 'filters_screen_filter_value_asc',
       desc: '',
       args: [],
     );
   }
 
-  /// `Typ zapisów`
+  /// `Type of records`
   String get filters_screen_filter_value_records_type {
     return Intl.message(
-      'Typ zapisów',
+      'Type of records',
       name: 'filters_screen_filter_value_records_type',
       desc: '',
       args: [],
     );
   }
 
-  /// `wolne zapisy`
+  /// `free join records`
   String get filters_screen_filter_value_free_join {
     return Intl.message(
-      'wolne zapisy',
+      'free join records',
       name: 'filters_screen_filter_value_free_join',
       desc: '',
       args: [],
     );
   }
 
-  /// `do zatwierdzenia`
+  /// `for approval`
   String get filters_screen_filter_value_with_appeal {
     return Intl.message(
-      'do zatwierdzenia',
+      'for approval',
       name: 'filters_screen_filter_value_with_appeal',
       desc: '',
       args: [],
     );
   }
 
-  /// `Nie poprawny login bądź hasło`
+  /// `Incorrect login or password`
   String get login_error_bad_credentials {
     return Intl.message(
-      'Nie poprawny login bądź hasło',
+      'Incorrect login or password',
       name: 'login_error_bad_credentials',
       desc: '',
       args: [],
     );
   }
 
-  /// `Wystąpił niezidentyfikowany problem przy logowaniu`
+  /// `There was an unidentified login problem`
   String get login_error_undefined {
     return Intl.message(
-      'Wystąpił niezidentyfikowany problem przy logowaniu',
+      'There was an unidentified login problem',
       name: 'login_error_undefined',
       desc: '',
       args: [],
     );
   }
 
-  /// `Wystąpił niezidentyfikowany problem przy rejestracji`
+  /// `There was an unidentified register problem`
   String get register_error_undefined {
     return Intl.message(
-      'Wystąpił niezidentyfikowany problem przy rejestracji',
+      'There was an unidentified register problem',
       name: 'register_error_undefined',
       desc: '',
       args: [],
     );
   }
 
-  /// `Podany email jest już zajęty`
+  /// `Given email is already taken`
   String get register_error_email_already_in_use {
     return Intl.message(
-      'Podany email jest już zajęty',
+      'Given email is already taken',
       name: 'register_error_email_already_in_use',
       desc: '',
       args: [],
     );
   }
 
-  /// `Niepoprawny email`
+  /// `Invalid email`
   String get register_error_invalid_email {
     return Intl.message(
-      'Niepoprawny email',
+      'Invalid email',
       name: 'register_error_invalid_email',
       desc: '',
       args: [],
     );
   }
 
-  /// `Zbyt słabe hasło`
+  /// `Weak password`
   String get register_error_email_weak_password {
     return Intl.message(
-      'Zbyt słabe hasło',
+      'Weak password',
       name: 'register_error_email_weak_password',
       desc: '',
       args: [],
     );
   }
 
-  /// `Operacja niedozwolona`
+  /// `Operation not allowed`
   String get register_error_operation_not_allowed {
     return Intl.message(
-      'Operacja niedozwolona',
+      'Operation not allowed',
       name: 'register_error_operation_not_allowed',
       desc: '',
       args: [],
     );
   }
 
-  /// `Aby w pełni korzystać z aplikacji zaloguj się bądź załóż konto`
+  /// `To fully use the application, log in or create an account`
   String get guest_prohibited_access_info {
     return Intl.message(
-      'Aby w pełni korzystać z aplikacji zaloguj się bądź załóż konto',
+      'To fully use the application, log in or create an account',
       name: 'guest_prohibited_access_info',
       desc: '',
       args: [],
     );
   }
 
-  /// `Aby móc tworzyć własne aktywności, przeglądać i uczestniczyć w innych dołącz do nas już teraz!`
+  /// `To be able to create your own activities, view and participate in others, join us now!`
   String get guest_prohibited_access_info_tab_content {
     return Intl.message(
-      'Aby móc tworzyć własne aktywności, przeglądać i uczestniczyć w innych dołącz do nas już teraz!',
+      'To be able to create your own activities, view and participate in others, join us now!',
       name: 'guest_prohibited_access_info_tab_content',
       desc: '',
       args: [],
     );
   }
 
-  /// `Odmowa dostępu`
+  /// `Access denied`
   String get guest_prohibited_access_title {
     return Intl.message(
-      'Odmowa dostępu',
+      'Access denied',
       name: 'guest_prohibited_access_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `Zaloguj się`
+  /// `Log in`
   String get guest_prohibited_go_to_login {
     return Intl.message(
-      'Zaloguj się',
+      'Log in',
       name: 'guest_prohibited_go_to_login',
       desc: '',
       args: [],
     );
   }
 
-  /// `Zarejestruj`
+  /// `Register`
   String get guest_prohibited_go_to_register {
     return Intl.message(
-      'Zarejestruj',
+      'Register',
       name: 'guest_prohibited_go_to_register',
       desc: '',
       args: [],
@@ -435,40 +435,40 @@ class S {
     );
   }
 
-  /// `wolny udział`
+  /// `free join`
   String get activity_card_free_join {
     return Intl.message(
-      'wolny udział',
+      'free join',
       name: 'activity_card_free_join',
       desc: '',
       args: [],
     );
   }
 
-  /// `zapisy`
+  /// `records`
   String get activity_card_registration {
     return Intl.message(
-      'zapisy',
+      'records',
       name: 'activity_card_registration',
       desc: '',
       args: [],
     );
   }
 
-  /// `ukończone`
+  /// `finish`
   String get activity_card_complete {
     return Intl.message(
-      'ukończone',
+      'finish',
       name: 'activity_card_complete',
       desc: '',
       args: [],
     );
   }
 
-  /// `przyszłe`
+  /// `future`
   String get activity_card_future {
     return Intl.message(
-      'przyszłe',
+      'future',
       name: 'activity_card_future',
       desc: '',
       args: [],
@@ -485,38 +485,38 @@ class S {
     );
   }
 
-  /// `{howManyMinutes,plural, =1{{howManyMinutes} minuta}=2{{howManyMinutes} minuty}other{{howManyMinutes} minut}}`
+  /// `{howManyMinutes,plural, =1{{howManyMinutes} minute}=2{{howManyMinutes} minutes}other{{howManyMinutes} minutes}}`
   String plural_minutes(num howManyMinutes) {
     return Intl.plural(
       howManyMinutes,
-      one: '$howManyMinutes minuta',
-      two: '$howManyMinutes minuty',
-      other: '$howManyMinutes minut',
+      one: '$howManyMinutes minute',
+      two: '$howManyMinutes minutes',
+      other: '$howManyMinutes minutes',
       name: 'plural_minutes',
       desc: '',
       args: [howManyMinutes],
     );
   }
 
-  /// `{howManyHours,plural, =1{{howManyHours} godzina}=2{{howManyHours} godziny}other{{howManyHours} godzin}}`
+  /// `{howManyHours,plural, =1{{howManyHours} hour}=2{{howManyHours} hours}other{{howManyHours} hours}}`
   String plural_hours(num howManyHours) {
     return Intl.plural(
       howManyHours,
-      one: '$howManyHours godzina',
-      two: '$howManyHours godziny',
-      other: '$howManyHours godzin',
+      one: '$howManyHours hour',
+      two: '$howManyHours hours',
+      other: '$howManyHours hours',
       name: 'plural_hours',
       desc: '',
       args: [howManyHours],
     );
   }
 
-  /// `{howManyDays,plural, =1{{howManyDays} dzień}other{{howManyDays} dni}}`
+  /// `{howManyDays,plural, =1{{howManyDays} day}other{{howManyDays} days}}`
   String plural_days(num howManyDays) {
     return Intl.plural(
       howManyDays,
-      one: '$howManyDays dzień',
-      other: '$howManyDays dni',
+      one: '$howManyDays day',
+      other: '$howManyDays days',
       name: 'plural_days',
       desc: '',
       args: [howManyDays],
@@ -533,130 +533,130 @@ class S {
     );
   }
 
-  /// `Tworzenie aktywności`
+  /// `Create activity`
   String get create_activity_screen_nav_bar_title {
     return Intl.message(
-      'Tworzenie aktywności',
+      'Create activity',
       name: 'create_activity_screen_nav_bar_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `utwórz`
+  /// `create`
   String get create_activity_screen_apply_button_text {
     return Intl.message(
-      'utwórz',
+      'create',
       name: 'create_activity_screen_apply_button_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `tytuł`
+  /// `title`
   String get create_activity_screen_title_placeholder {
     return Intl.message(
-      'tytuł',
+      'title',
       name: 'create_activity_screen_title_placeholder',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tytuł aktywności`
+  /// `Activity title`
   String get create_activity_screen_title_label {
     return Intl.message(
-      'Tytuł aktywności',
+      'Activity title',
       name: 'create_activity_screen_title_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `Bez zatwierdzania uczestników`
+  /// `No attendees approval`
   String get create_activity_screen_free_join_label {
     return Intl.message(
-      'Bez zatwierdzania uczestników',
+      'No attendees approval',
       name: 'create_activity_screen_free_join_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `Bez zatwierdzania uczestników sprawi że każdy kto zapiszę się na aktywność będzie już jej uczestnikiem. W przeciwnym razie może wysłąć prośbę o dołączenie którą ty musisz zaakceptować`
+  /// `Without approval of participants, it will make everyone who signs up for the activity a participant. Otherwise, it can send a request to join which you must accept`
   String get create_activity_screen_free_join_description {
     return Intl.message(
-      'Bez zatwierdzania uczestników sprawi że każdy kto zapiszę się na aktywność będzie już jej uczestnikiem. W przeciwnym razie może wysłąć prośbę o dołączenie którą ty musisz zaakceptować',
+      'Without approval of participants, it will make everyone who signs up for the activity a participant. Otherwise, it can send a request to join which you must accept',
       name: 'create_activity_screen_free_join_description',
       desc: '',
       args: [],
     );
   }
 
-  /// `Data rozpoczęcia aktywności`
+  /// `Start date`
   String get create_activity_screen_start_date_label {
     return Intl.message(
-      'Data rozpoczęcia aktywności',
+      'Start date',
       name: 'create_activity_screen_start_date_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `Liczba uczestników`
+  /// `A number of participants`
   String get create_activity_screen_min_max_entry_label {
     return Intl.message(
-      'Liczba uczestników',
+      'A number of participants',
       name: 'create_activity_screen_min_max_entry_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `Określenie liczby uczestników mogących się zapisać na aktywność, bez wymaganej liczby aktywność zostanie uznana za nie odbytą.`
+  /// `Determining the number of participants who can enroll in an activity without the required number of participants will be considered not completed.`
   String get create_activity_screen_min_max_entry_description {
     return Intl.message(
-      'Określenie liczby uczestników mogących się zapisać na aktywność, bez wymaganej liczby aktywność zostanie uznana za nie odbytą.',
+      'Determining the number of participants who can enroll in an activity without the required number of participants will be considered not completed.',
       name: 'create_activity_screen_min_max_entry_description',
       desc: '',
       args: [],
     );
   }
 
-  /// `Kategoria`
+  /// `Category`
   String get create_activity_screen_category_label {
     return Intl.message(
-      'Kategoria',
+      'Category',
       name: 'create_activity_screen_category_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `Adres`
+  /// `Address`
   String get create_activity_screen_address_label {
     return Intl.message(
-      'Adres',
+      'Address',
       name: 'create_activity_screen_address_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `Adres aktywności, ważne by podać poprawny adres ponieważ użytkownicy wyszukują aktywności ze względu na lokalizację`
+  /// `Activity address, it is important to enter the correct address because users search for activity based on location`
   String get create_activity_screen_address_description {
     return Intl.message(
-      'Adres aktywności, ważne by podać poprawny adres ponieważ użytkownicy wyszukują aktywności ze względu na lokalizację',
+      'Activity address, it is important to enter the correct address because users search for activity based on location',
       name: 'create_activity_screen_address_description',
       desc: '',
       args: [],
     );
   }
 
-  /// `Opis`
+  /// `Description`
   String get create_activity_screen_description_label {
     return Intl.message(
-      'Opis',
+      'Description',
       name: 'create_activity_screen_description_label',
       desc: '',
       args: [],
@@ -673,130 +673,130 @@ class S {
     );
   }
 
-  /// `Edycja profilu`
+  /// `Profile edition`
   String get update_user_form_nav_bar_title {
     return Intl.message(
-      'Edycja profilu',
+      'Profile edition',
       name: 'update_user_form_nav_bar_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `zatwierdź`
+  /// `submit`
   String get update_user_form_apply_button {
     return Intl.message(
-      'zatwierdź',
+      'submit',
       name: 'update_user_form_apply_button',
       desc: '',
       args: [],
     );
   }
 
-  /// `Zdjęcie profilowe`
+  /// `Profile photo`
   String get update_user_form_photo_label {
     return Intl.message(
-      'Zdjęcie profilowe',
+      'Profile photo',
       name: 'update_user_form_photo_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `Imię`
+  /// `Name`
   String get update_user_form_first_name_label {
     return Intl.message(
-      'Imię',
+      'Name',
       name: 'update_user_form_first_name_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `Nazwisko`
+  /// `Surname`
   String get update_user_form_second_name_label {
     return Intl.message(
-      'Nazwisko',
+      'Surname',
       name: 'update_user_form_second_name_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `O sobie`
+  /// `About`
   String get update_user_form_about_label {
     return Intl.message(
-      'O sobie',
+      'About',
       name: 'update_user_form_about_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `Telefon`
+  /// `Phone`
   String get update_user_form_phone_label {
     return Intl.message(
-      'Telefon',
+      'Phone',
       name: 'update_user_form_phone_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `Data urodzin`
+  /// `Birthday`
   String get update_user_form_birthday_label {
     return Intl.message(
-      'Data urodzin',
+      'Birthday',
       name: 'update_user_form_birthday_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `Płeć`
+  /// `Gender`
   String get update_user_form_gender_label {
     return Intl.message(
-      'Płeć',
+      'Gender',
       name: 'update_user_form_gender_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `dalej`
+  /// `next`
   String get stepper_next_button_text {
     return Intl.message(
-      'dalej',
+      'next',
       name: 'stepper_next_button_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `wróć`
+  /// `cancel`
   String get stepper_cancel_button_text {
     return Intl.message(
-      'wróć',
+      'cancel',
       name: 'stepper_cancel_button_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `Szczegóły dla pola {validatorName}`
+  /// `Details for the field {validatorName}`
   String form_field_info_dialog_title(Object validatorName) {
     return Intl.message(
-      'Szczegóły dla pola $validatorName',
+      'Details for the field $validatorName',
       name: 'form_field_info_dialog_title',
       desc: '',
       args: [validatorName],
     );
   }
 
-  /// `wartość musi być liczbą całkowitą`
+  /// `value must be an integer`
   String get form_field_info_digits_validator {
     return Intl.message(
-      'wartość musi być liczbą całkowitą',
+      'value must be an integer',
       name: 'form_field_info_digits_validator',
       desc: '',
       args: [],
@@ -813,350 +813,350 @@ class S {
     );
   }
 
-  /// `wartość musi znajdować się w przedziale <{min}, {max}>`
+  /// `the length of a given expression should be within the range <{min}, {max}>`
   String form_field_info_numbers_range_validator(Object min, Object max) {
     return Intl.message(
-      'wartość musi znajdować się w przedziale <$min, $max>',
+      'the length of a given expression should be within the range <$min, $max>',
       name: 'form_field_info_numbers_range_validator',
       desc: '',
       args: [min, max],
     );
   }
 
-  /// `data musi być przed {minDate} a po {maxDate}`
+  /// `date must be before {minDate} and after {maxDate}`
   String form_field_info_date_time_range_validator(Object minDate, Object maxDate) {
     return Intl.message(
-      'data musi być przed $minDate a po $maxDate',
+      'date must be before $minDate and after $maxDate',
       name: 'form_field_info_date_time_range_validator',
       desc: '',
       args: [minDate, maxDate],
     );
   }
 
-  /// `musisz wypełnić to pole`
+  /// `mandatory field`
   String get form_field_info_not_null_validator {
     return Intl.message(
-      'musisz wypełnić to pole',
+      'mandatory field',
       name: 'form_field_info_not_null_validator',
       desc: '',
       args: [],
     );
   }
 
-  /// `numer telefonu musi być w postaci xxx xxx xxx`
+  /// `phone number must be in the form xxx xxx xxx`
   String get form_field_info_phone_validator {
     return Intl.message(
-      'numer telefonu musi być w postaci xxx xxx xxx',
+      'phone number must be in the form xxx xxx xxx',
       name: 'form_field_info_phone_validator',
       desc: '',
       args: [],
     );
   }
 
-  /// `musi być spełniony warunek: wartość1 {znak} wartość2`
-  String form_field_info_numbers_validator(Object znak) {
+  /// `the condition must be met: value1 {character} value2`
+  String form_field_info_numbers_validator(Object character) {
     return Intl.message(
-      'musi być spełniony warunek: wartość1 $znak wartość2',
+      'the condition must be met: value1 $character value2',
       name: 'form_field_info_numbers_validator',
       desc: '',
-      args: [znak],
+      args: [character],
     );
   }
 
-  /// `opis`
+  /// `description`
   String get form_field_info_additional_info {
     return Intl.message(
-      'opis',
+      'description',
       name: 'form_field_info_additional_info',
       desc: '',
       args: [],
     );
   }
 
-  /// `walidacja`
+  /// `validation`
   String get form_field_info_additional_validation {
     return Intl.message(
-      'walidacja',
+      'validation',
       name: 'form_field_info_additional_validation',
       desc: '',
       args: [],
     );
   }
 
-  /// `wybierz datę`
+  /// `choose date`
   String get date_time_picker_text {
     return Intl.message(
-      'wybierz datę',
+      'choose date',
       name: 'date_time_picker_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `piłka nożna`
+  /// `football`
   String get category_football {
     return Intl.message(
-      'piłka nożna',
+      'football',
       name: 'category_football',
       desc: '',
       args: [],
     );
   }
 
-  /// `piwo`
+  /// `beer`
   String get category_beer {
     return Intl.message(
-      'piwo',
+      'beer',
       name: 'category_beer',
       desc: '',
       args: [],
     );
   }
 
-  /// `męszczyzna`
+  /// `man`
   String get gender_male {
     return Intl.message(
-      'męszczyzna',
+      'man',
       name: 'gender_male',
       desc: '',
       args: [],
     );
   }
 
-  /// `kobieta`
+  /// `female`
   String get gender_female {
     return Intl.message(
-      'kobieta',
+      'female',
       name: 'gender_female',
       desc: '',
       args: [],
     );
   }
 
-  /// `wolę nie mówić`
+  /// `prefere not to say`
   String get gender_prefer_not_to_say {
     return Intl.message(
-      'wolę nie mówić',
+      'prefere not to say',
       name: 'gender_prefer_not_to_say',
       desc: '',
       args: [],
     );
   }
 
-  /// `wybierz zdjęcie`
+  /// `choose photo`
   String get form_field_photo_choose_photo {
     return Intl.message(
-      'wybierz zdjęcie',
+      'choose photo',
       name: 'form_field_photo_choose_photo',
       desc: '',
       args: [],
     );
   }
 
-  /// `angielski(USA)`
+  /// `english(USA)`
   String get localization_en_US {
     return Intl.message(
-      'angielski(USA)',
+      'english(USA)',
       name: 'localization_en_US',
       desc: '',
       args: [],
     );
   }
 
-  /// `polski(Polska)`
+  /// `polish(Poland)`
   String get localization_pl_PL {
     return Intl.message(
-      'polski(Polska)',
+      'polish(Poland)',
       name: 'localization_pl_PL',
       desc: '',
       args: [],
     );
   }
 
-  /// `wyloguj się`
+  /// `log out`
   String get home_screen_settings_tab_log_out {
     return Intl.message(
-      'wyloguj się',
+      'log out',
       name: 'home_screen_settings_tab_log_out',
       desc: '',
       args: [],
     );
   }
 
-  /// `pokaż profil`
+  /// `show profile`
   String get home_screen_settings_tab_show_profile {
     return Intl.message(
-      'pokaż profil',
+      'show profile',
       name: 'home_screen_settings_tab_show_profile',
       desc: '',
       args: [],
     );
   }
 
-  /// `zmiana języka:`
+  /// `language change:`
   String get home_screen_settings_tab_change_language {
     return Intl.message(
-      'zmiana języka:',
+      'language change:',
       name: 'home_screen_settings_tab_change_language',
       desc: '',
       args: [],
     );
   }
 
-  /// `Zakres poszukiwań`
+  /// `Search area`
   String get search_area_form_nav_bar_title {
     return Intl.message(
-      'Zakres poszukiwań',
+      'Search area',
       name: 'search_area_form_nav_bar_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `szukaj`
+  /// `search`
   String get search_area_form_apply_text {
     return Intl.message(
-      'szukaj',
+      'search',
       name: 'search_area_form_apply_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `Dystans`
+  /// `Distance`
   String get search_area_form_distance_label {
     return Intl.message(
-      'Dystans',
+      'Distance',
       name: 'search_area_form_distance_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `Zakres poszukiwań określa promień od jakiego będą szukane aktywności od punktu wybranego wcześniej adresu`
+  /// `The search range determines the radius from which activities will be searched from the point of the previously selected address`
   String get search_area_form_distance_description {
     return Intl.message(
-      'Zakres poszukiwań określa promień od jakiego będą szukane aktywności od punktu wybranego wcześniej adresu',
+      'The search range determines the radius from which activities will be searched from the point of the previously selected address',
       name: 'search_area_form_distance_description',
       desc: '',
       args: [],
     );
   }
 
-  /// `założyciel`
+  /// `maker`
   String get activity_role_maker {
     return Intl.message(
-      'założyciel',
+      'maker',
       name: 'activity_role_maker',
       desc: '',
       args: [],
     );
   }
 
-  /// `wspołorganizator`
+  /// `co-organizer`
   String get activity_role_coorganizator {
     return Intl.message(
-      'wspołorganizator',
+      'co-organizer',
       name: 'activity_role_coorganizator',
       desc: '',
       args: [],
     );
   }
 
-  /// `uczestnik`
+  /// `attendee`
   String get activity_role_attendee {
     return Intl.message(
-      'uczestnik',
+      'attendee',
       name: 'activity_role_attendee',
       desc: '',
       args: [],
     );
   }
 
-  /// `Błąd przy wysyłaniu formularza`
+  /// `Error sending the form`
   String get snackbar_form_send_error {
     return Intl.message(
-      'Błąd przy wysyłaniu formularza',
+      'Error sending the form',
       name: 'snackbar_form_send_error',
       desc: '',
       args: [],
     );
   }
 
-  /// `Błąd przy tworzeniu aktywności`
+  /// `Error creating activity`
   String get snackbar_create_activity_form_send_error {
     return Intl.message(
-      'Błąd przy tworzeniu aktywności',
+      'Error creating activity',
       name: 'snackbar_create_activity_form_send_error',
       desc: '',
       args: [],
     );
   }
 
-  /// `Aktywność została utworzona pomyślnie`
+  /// `The activity was created successfully`
   String get snackbar_create_activity_form_send_success {
     return Intl.message(
-      'Aktywność została utworzona pomyślnie',
+      'The activity was created successfully',
       name: 'snackbar_create_activity_form_send_success',
       desc: '',
       args: [],
     );
   }
 
-  /// `Sukces wysyłania formularza`
+  /// `Success in submitting the form`
   String get snackbar_form_send_error_success {
     return Intl.message(
-      'Sukces wysyłania formularza',
+      'Success in submitting the form',
       name: 'snackbar_form_send_error_success',
       desc: '',
       args: [],
     );
   }
 
-  /// `Uczestnicy`
+  /// `Attendees`
   String get activity_details_screen_attendee_tab_nav_bar_title {
     return Intl.message(
-      'Uczestnicy',
+      'Attendees',
       name: 'activity_details_screen_attendee_tab_nav_bar_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `Nadaj prawa organizatora`
+  /// `Give co-organizer rights`
   String get activity_details_screen_attendee_tab_grant_organizator_grants {
     return Intl.message(
-      'Nadaj prawa organizatora',
+      'Give co-organizer rights',
       name: 'activity_details_screen_attendee_tab_grant_organizator_grants',
       desc: '',
       args: [],
     );
   }
 
-  /// `Odbierz prawa organizatora`
+  /// `Take away the rights of the co-organizer`
   String get activity_details_screen_attendee_tab_give_organizator_rights_up {
     return Intl.message(
-      'Odbierz prawa organizatora',
+      'Take away the rights of the co-organizer',
       name: 'activity_details_screen_attendee_tab_give_organizator_rights_up',
       desc: '',
       args: [],
     );
   }
 
-  /// `data dołączenia:`
+  /// `date of joining:`
   String get activity_details_screen_attendee_tab_join_date {
     return Intl.message(
-      'data dołączenia:',
+      'date of joining:',
       name: 'activity_details_screen_attendee_tab_join_date',
       desc: '',
       args: [],
     );
   }
 
-  /// `rola:`
+  /// `role:`
   String get activity_details_screen_attendee_tab_role {
     return Intl.message(
-      'rola:',
+      'role:',
       name: 'activity_details_screen_attendee_tab_role',
       desc: '',
       args: [],
@@ -1173,230 +1173,230 @@ class S {
     );
   }
 
-  /// `Szczegóły`
+  /// `Details`
   String get activity_details_screen_details_tab_nav_bar_title {
     return Intl.message(
-      'Szczegóły',
+      'Details',
       name: 'activity_details_screen_details_tab_nav_bar_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `Charakter zapisów`
+  /// `The nature of the records`
   String get activity_details_screen_details_tab_records_label {
     return Intl.message(
-      'Charakter zapisów',
+      'The nature of the records',
       name: 'activity_details_screen_details_tab_records_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `wolne`
+  /// `free`
   String get activity_details_screen_details_tab_records_free_join {
     return Intl.message(
-      'wolne',
+      'free',
       name: 'activity_details_screen_details_tab_records_free_join',
       desc: '',
       args: [],
     );
   }
 
-  /// `wymagające akceptacji organizatora`
+  /// `requiring approval`
   String get activity_details_screen_details_tab_records_with_appeal {
     return Intl.message(
-      'wymagające akceptacji organizatora',
+      'requiring approval',
       name: 'activity_details_screen_details_tab_records_with_appeal',
       desc: '',
       args: [],
     );
   }
 
-  /// `Adres`
+  /// `Address`
   String get activity_details_screen_details_tab_address {
     return Intl.message(
-      'Adres',
+      'Address',
       name: 'activity_details_screen_details_tab_address',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ilość uczestników`
+  /// `Number of attendees`
   String get activity_details_screen_details_tab_attendees_label {
     return Intl.message(
-      'Ilość uczestników',
+      'Number of attendees',
       name: 'activity_details_screen_details_tab_attendees_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `Możliwa ilość uczestników`
+  /// `Possible number of attendees`
   String get activity_details_screen_details_tab_attendees_range_label {
     return Intl.message(
-      'Możliwa ilość uczestników',
+      'Possible number of attendees',
       name: 'activity_details_screen_details_tab_attendees_range_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `Od {min} do {max}`
+  /// `From {min} to {max}`
   String activity_details_screen_details_tab_attendees_range(Object min, Object max) {
     return Intl.message(
-      'Od $min do $max',
+      'From $min to $max',
       name: 'activity_details_screen_details_tab_attendees_range',
       desc: '',
       args: [min, max],
     );
   }
 
-  /// `Opis aktywności`
+  /// `About activity`
   String get activity_details_screen_details_tab_description {
     return Intl.message(
-      'Opis aktywności',
+      'About activity',
       name: 'activity_details_screen_details_tab_description',
       desc: '',
       args: [],
     );
   }
 
-  /// `Status aktywności`
+  /// `Status`
   String get activity_details_screen_details_tab_status {
     return Intl.message(
-      'Status aktywności',
+      'Status',
       name: 'activity_details_screen_details_tab_status',
       desc: '',
       args: [],
     );
   }
 
-  /// `Data rozpoczęcia`
+  /// `Start date`
   String get activity_details_screen_details_tab_start_date {
     return Intl.message(
-      'Data rozpoczęcia',
+      'Start date',
       name: 'activity_details_screen_details_tab_start_date',
       desc: '',
       args: [],
     );
   }
 
-  /// `Kategoria`
+  /// `Category`
   String get activity_details_screen_details_tab_category {
     return Intl.message(
-      'Kategoria',
+      'Category',
       name: 'activity_details_screen_details_tab_category',
       desc: '',
       args: [],
     );
   }
 
-  /// `Zapisy`
+  /// `Records`
   String get activity_details_screen_free_join_tab_nav_bar_title {
     return Intl.message(
-      'Zapisy',
+      'Records',
       name: 'activity_details_screen_free_join_tab_nav_bar_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `Dołącz do aktywności`
+  /// `Join to activity`
   String get activity_details_screen_free_join_tab_join_button {
     return Intl.message(
-      'Dołącz do aktywności',
+      'Join to activity',
       name: 'activity_details_screen_free_join_tab_join_button',
       desc: '',
       args: [],
     );
   }
 
-  /// `Prośby o dołączenie`
+  /// `Requests to join`
   String get activity_details_screen_requests_tab_join_title {
     return Intl.message(
-      'Prośby o dołączenie',
+      'Requests to join',
       name: 'activity_details_screen_requests_tab_join_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `akceptuj prośbę o dołączenie`
+  /// `accept the request to join`
   String get activity_details_screen_requests_tab_accept_request {
     return Intl.message(
-      'akceptuj prośbę o dołączenie',
+      'accept the request to join',
       name: 'activity_details_screen_requests_tab_accept_request',
       desc: '',
       args: [],
     );
   }
 
-  /// `anuluj prośbę o dołączenie`
+  /// `cancel the request to join`
   String get activity_details_screen_records_cancel_request {
     return Intl.message(
-      'anuluj prośbę o dołączenie',
+      'cancel the request to join',
       name: 'activity_details_screen_records_cancel_request',
       desc: '',
       args: [],
     );
   }
 
-  /// `Zapisy`
+  /// `Records`
   String get activity_details_screen_records_nav_bar_tab {
     return Intl.message(
-      'Zapisy',
+      'Records',
       name: 'activity_details_screen_records_nav_bar_tab',
       desc: '',
       args: [],
     );
   }
 
-  /// `poproś o dołączenie do aktywności`
+  /// `ask to join the activity`
   String get activity_details_screen_records_send_appeal {
     return Intl.message(
-      'poproś o dołączenie do aktywności',
+      'ask to join the activity',
       name: 'activity_details_screen_records_send_appeal',
       desc: '',
       args: [],
     );
   }
 
-  /// `Twoja prośba oczekuje na decyzję organizatora`
+  /// `Your request is awaiting the decision of the organizer`
   String get activity_details_screen_records_cancel_info {
     return Intl.message(
-      'Twoja prośba oczekuje na decyzję organizatora',
+      'Your request is awaiting the decision of the organizer',
       name: 'activity_details_screen_records_cancel_info',
       desc: '',
       args: [],
     );
   }
 
-  /// `Brak próśb o dołączenie do aktywności`
+  /// `No requests to join the activity`
   String get activity_details_screen_request_tab_no_results {
     return Intl.message(
-      'Brak próśb o dołączenie do aktywności',
+      'No requests to join the activity',
       name: 'activity_details_screen_request_tab_no_results',
       desc: '',
       args: [],
     );
   }
 
-  /// `Wiadomość`
+  /// `Message`
   String get appeal_join_form_comment_label {
     return Intl.message(
-      'Wiadomość',
+      'Message',
       name: 'appeal_join_form_comment_label',
       desc: '',
       args: [],
     );
   }
 
-  /// `Komentarz do prośby`
+  /// `Comment to request`
   String get appeal_join_form_comment_placeholder {
     return Intl.message(
-      'Komentarz do prośby',
+      'Comment to request',
       name: 'appeal_join_form_comment_placeholder',
       desc: '',
       args: [],
@@ -1413,70 +1413,70 @@ class S {
     );
   }
 
-  /// `anuluj aktywność`
+  /// `cancel activity`
   String get activity_details_screen_cancel_activity_button_text {
     return Intl.message(
-      'anuluj aktywność',
+      'cancel activity',
       name: 'activity_details_screen_cancel_activity_button_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `anuluj udział w aktywności`
+  /// `cancel participation in the activity`
   String get activity_details_screen_cancel_involvement_button_text {
     return Intl.message(
-      'anuluj udział w aktywności',
+      'cancel participation in the activity',
       name: 'activity_details_screen_cancel_involvement_button_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `odwołana`
+  /// `canceled`
   String get activity_cancel_status {
     return Intl.message(
-      'odwołana',
+      'canceled',
       name: 'activity_cancel_status',
       desc: '',
       args: [],
     );
   }
 
-  /// `w trakcie zapisów`
+  /// `during registration`
   String get activity_open_status {
     return Intl.message(
-      'w trakcie zapisów',
+      'during registration',
       name: 'activity_open_status',
       desc: '',
       args: [],
     );
   }
 
-  /// `zakończona`
+  /// `finished`
   String get activity_finish_status {
     return Intl.message(
-      'zakończona',
+      'finished',
       name: 'activity_finish_status',
       desc: '',
       args: [],
     );
   }
 
-  /// `brak miejsc`
+  /// `no places`
   String get activity_no_places_status {
     return Intl.message(
-      'brak miejsc',
+      'no places',
       name: 'activity_no_places_status',
       desc: '',
       args: [],
     );
   }
 
-  /// `Profil`
+  /// `Profile`
   String get user_profile_screen_basic_info_tab {
     return Intl.message(
-      'Profil',
+      'Profile',
       name: 'user_profile_screen_basic_info_tab',
       desc: '',
       args: [],
@@ -1493,110 +1493,110 @@ class S {
     );
   }
 
-  /// `Imię`
+  /// `Name`
   String get user_profile_screen_basic_info_first_name {
     return Intl.message(
-      'Imię',
+      'Name',
       name: 'user_profile_screen_basic_info_first_name',
       desc: '',
       args: [],
     );
   }
 
-  /// `Nazwisko`
+  /// `Surname`
   String get user_profile_screen_basic_info_second_name {
     return Intl.message(
-      'Nazwisko',
+      'Surname',
       name: 'user_profile_screen_basic_info_second_name',
       desc: '',
       args: [],
     );
   }
 
-  /// `O mnie`
+  /// `About me`
   String get user_profile_screen_basic_info_about {
     return Intl.message(
-      'O mnie',
+      'About me',
       name: 'user_profile_screen_basic_info_about',
       desc: '',
       args: [],
     );
   }
 
-  /// `Płeć`
+  /// `Gender`
   String get user_profile_screen_basic_info_gender {
     return Intl.message(
-      'Płeć',
+      'Gender',
       name: 'user_profile_screen_basic_info_gender',
       desc: '',
       args: [],
     );
   }
 
-  /// `Wiek`
+  /// `Age`
   String get user_profile_screen_basic_info_age {
     return Intl.message(
-      'Wiek',
+      'Age',
       name: 'user_profile_screen_basic_info_age',
       desc: '',
       args: [],
     );
   }
 
-  /// `Telefon`
+  /// `Phone`
   String get user_profile_screen_basic_info_phone {
     return Intl.message(
-      'Telefon',
+      'Phone',
       name: 'user_profile_screen_basic_info_phone',
       desc: '',
       args: [],
     );
   }
 
-  /// `Statystyki`
+  /// `Statistics`
   String get user_profile_screen_statistics_nav_bar_title {
     return Intl.message(
-      'Statystyki',
+      'Statistics',
       name: 'user_profile_screen_statistics_nav_bar_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `Własnych aktywności:`
+  /// `Own activities:`
   String get user_profile_screen_statistics_as_maker {
     return Intl.message(
-      'Własnych aktywności:',
+      'Own activities:',
       name: 'user_profile_screen_statistics_as_maker',
       desc: '',
       args: [],
     );
   }
 
-  /// `Aktywności jako koorganizator:`
+  /// `Activities as a co-organizerr:`
   String get user_profile_screen_statistics_as_coorganizer {
     return Intl.message(
-      'Aktywności jako koorganizator:',
+      'Activities as a co-organizerr:',
       name: 'user_profile_screen_statistics_as_coorganizer',
       desc: '',
       args: [],
     );
   }
 
-  /// `Aktywności jako uczestnik:`
+  /// `Activities as a participant:`
   String get user_profile_screen_statistics_as_attendee {
     return Intl.message(
-      'Aktywności jako uczestnik:',
+      'Activities as a participant:',
       name: 'user_profile_screen_statistics_as_attendee',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ilość anulowanego uczestnistwa w aktywnościach:`
+  /// `Amount of canceled participation in activities:`
   String get user_profile_screen_statistics_cancel_involvement {
     return Intl.message(
-      'Ilość anulowanego uczestnistwa w aktywnościach:',
+      'Amount of canceled participation in activities:',
       name: 'user_profile_screen_statistics_cancel_involvement',
       desc: '',
       args: [],

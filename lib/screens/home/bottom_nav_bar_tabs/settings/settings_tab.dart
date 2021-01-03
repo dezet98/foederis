@@ -52,8 +52,8 @@ class SettingsTab extends NavBarTab {
               SizedBox(height: Dimensions.gutterMedium),
               PlatformButton(
                 child: isMaterial(context)
-                    ? Text('change to Cupertino')
-                    : Text('change to Material'),
+                    ? CustomText.button('Cupertino')
+                    : CustomText.button('Material'),
                 onPressed: () {
                   if (isMaterial(context)) {
                     PlatformProvider.of(context).changeToCupertinoPlatform();
