@@ -23,6 +23,11 @@ class CustomIcon {
         return Icon(PlatformIcons(context).back);
       });
 
+  static Widget get edit => Builder(builder: (context) {
+        return _buildPlatformIcon(
+            Icons.edit, CupertinoIcons.checkmark_rectangle);
+      });
+
   static Widget get settings => Builder(builder: (context) {
         return Icon(PlatformIcons(context).settings);
       });

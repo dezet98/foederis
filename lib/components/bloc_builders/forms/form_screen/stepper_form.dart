@@ -17,24 +17,26 @@ class StepperForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Stack(
-        children: [
-          Column(
-            children: [
-              CustomStepper(
-                steps: [
-                  for (FormFieldBloc optionBloc in formDataBloc.formsData)
-                    _buildStep(context, optionBloc),
-                ],
-              ),
-              buildApplyButton(context),
-              SizedBox(
-                height: Dimensions.screenPadding,
-              )
-            ],
-          ),
-        ],
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                CustomStepper(
+                  steps: [
+                    for (FormFieldBloc optionBloc in formDataBloc.formsData)
+                      _buildStep(context, optionBloc),
+                  ],
+                ),
+                buildApplyButton(context),
+                SizedBox(
+                  height: Dimensions.screenPadding,
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

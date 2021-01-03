@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class CustomText {
   static Widget screenInfoHeader(String text, {TextAlign textAlign}) =>
       Builder(builder: (context) {
-        return Text(text, style: Theme.of(context).textTheme.headline2);
+        return PlatformWidget(
+          material: (_, __) =>
+              Text(text, style: Theme.of(context).textTheme.headline2),
+          cupertino: (_, __) =>
+              Text(text, style: Theme.of(context).textTheme.headline6),
+        );
       });
 
   static Widget menuTitle(String text, {TextAlign textAlign}) =>
       Builder(builder: (context) {
-        return Text(
-          text,
-          style: Theme.of(context).textTheme.headline3,
+        return PlatformWidget(
+          material: (_, __) => Text(
+            text,
+            style: Theme.of(context).textTheme.headline3,
+          ),
+          cupertino: (_, __) => Text(
+            text,
+            style: Theme.of(context).textTheme.subtitle1,
+          ),
         );
       });
 
@@ -32,14 +44,6 @@ class CustomText {
       });
 
   static Widget formText(String text, {TextAlign textAlign}) =>
-      Builder(builder: (context) {
-        return Text(
-          text,
-          style: Theme.of(context).textTheme.bodyText2,
-        );
-      });
-
-  static Widget na(String text, {TextAlign textAlign}) =>
       Builder(builder: (context) {
         return Text(
           text,
@@ -116,9 +120,15 @@ class CustomText {
 
   static Widget pageTitle(String text, {TextAlign textAlign}) =>
       Builder(builder: (context) {
-        return Text(
-          text,
-          style: Theme.of(context).textTheme.headline1,
+        return PlatformWidget(
+          material: (_, __) => Text(
+            text,
+            style: Theme.of(context).textTheme.headline1,
+          ),
+          cupertino: (_, __) => Text(
+            text,
+            style: Theme.of(context).textTheme.subtitle1,
+          ),
         );
       });
 

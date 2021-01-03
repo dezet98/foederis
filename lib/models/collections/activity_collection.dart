@@ -24,7 +24,7 @@ class ActivityCollection {
   static CollectionField address =
       CollectionField(fieldName: 'address', isRequired: true);
   static CollectionField isCancel =
-      CollectionField(fieldName: 'isCancel', isRequired: true);
+      CollectionField(fieldName: 'isCancel', isRequired: false);
 
   static List<CollectionField> get allFields => [
         userRef,

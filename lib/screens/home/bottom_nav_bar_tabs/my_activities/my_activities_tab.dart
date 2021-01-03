@@ -19,6 +19,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../../../blocs/specific_blocs/create_activity/create_activity_form_data.dart';
 import '../../../../generated/l10n.dart';
@@ -33,7 +34,9 @@ class MyActivitiesTab extends NavBarTab {
       Positioned(
         child: _buildFloatingButton(context),
         right: Dimensions.gutterMedium,
-        bottom: Dimensions.gutterMedium,
+        bottom: isCupertino(context)
+            ? Dimensions.cupertinoBottomPadding
+            : Dimensions.gutterMedium,
       ),
     ]);
   }

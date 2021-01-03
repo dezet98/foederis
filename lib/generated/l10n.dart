@@ -175,6 +175,26 @@ class S {
     );
   }
 
+  /// `Brak aktywności, spróbuj zmienić lokalizację bądź obszar poszukiwań`
+  String get home_screen_search_activities_no_results {
+    return Intl.message(
+      'Brak aktywności, spróbuj zmienić lokalizację bądź obszar poszukiwań',
+      name: 'home_screen_search_activities_no_results',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Błąd podczas wyszukiwania aktywności`
+  String get home_screen_search_activities_error {
+    return Intl.message(
+      'Błąd podczas wyszukiwania aktywności',
+      name: 'home_screen_search_activities_error',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `wyczyść`
   String get form_clear_button_text {
     return Intl.message(
@@ -963,11 +983,21 @@ class S {
     );
   }
 
-  /// `edytuj profil`
-  String get home_screen_settings_tab_edit_profile {
+  /// `pokaż profil`
+  String get home_screen_settings_tab_show_profile {
     return Intl.message(
-      'edytuj profil',
-      name: 'home_screen_settings_tab_edit_profile',
+      'pokaż profil',
+      name: 'home_screen_settings_tab_show_profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `zmiana języka:`
+  String get home_screen_settings_tab_change_language {
+    return Intl.message(
+      'zmiana języka:',
+      name: 'home_screen_settings_tab_change_language',
       desc: '',
       args: [],
     );
@@ -1438,6 +1468,136 @@ class S {
     return Intl.message(
       'brak miejsc',
       name: 'activity_no_places_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profil`
+  String get user_profile_screen_basic_info_tab {
+    return Intl.message(
+      'Profil',
+      name: 'user_profile_screen_basic_info_tab',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get user_profile_screen_basic_info_email_label {
+    return Intl.message(
+      'Email',
+      name: 'user_profile_screen_basic_info_email_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Imię`
+  String get user_profile_screen_basic_info_first_name {
+    return Intl.message(
+      'Imię',
+      name: 'user_profile_screen_basic_info_first_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nazwisko`
+  String get user_profile_screen_basic_info_second_name {
+    return Intl.message(
+      'Nazwisko',
+      name: 'user_profile_screen_basic_info_second_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `O mnie`
+  String get user_profile_screen_basic_info_about {
+    return Intl.message(
+      'O mnie',
+      name: 'user_profile_screen_basic_info_about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Płeć`
+  String get user_profile_screen_basic_info_gender {
+    return Intl.message(
+      'Płeć',
+      name: 'user_profile_screen_basic_info_gender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wiek`
+  String get user_profile_screen_basic_info_age {
+    return Intl.message(
+      'Wiek',
+      name: 'user_profile_screen_basic_info_age',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Telefon`
+  String get user_profile_screen_basic_info_phone {
+    return Intl.message(
+      'Telefon',
+      name: 'user_profile_screen_basic_info_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Statystyki`
+  String get user_profile_screen_statistics_nav_bar_title {
+    return Intl.message(
+      'Statystyki',
+      name: 'user_profile_screen_statistics_nav_bar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Własnych aktywności:`
+  String get user_profile_screen_statistics_as_maker {
+    return Intl.message(
+      'Własnych aktywności:',
+      name: 'user_profile_screen_statistics_as_maker',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aktywności jako koorganizator:`
+  String get user_profile_screen_statistics_as_coorganizer {
+    return Intl.message(
+      'Aktywności jako koorganizator:',
+      name: 'user_profile_screen_statistics_as_coorganizer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aktywności jako uczestnik:`
+  String get user_profile_screen_statistics_as_attendee {
+    return Intl.message(
+      'Aktywności jako uczestnik:',
+      name: 'user_profile_screen_statistics_as_attendee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ilość anulowanego uczestnistwa w aktywnościach:`
+  String get user_profile_screen_statistics_cancel_involvement {
+    return Intl.message(
+      'Ilość anulowanego uczestnistwa w aktywnościach:',
+      name: 'user_profile_screen_statistics_cancel_involvement',
       desc: '',
       args: [],
     );

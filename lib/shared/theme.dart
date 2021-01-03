@@ -28,6 +28,7 @@ class Dimensions {
 
   static const double screenPadding = 16.0;
   static const double refreshDisplacement = 80.0;
+  static const double cupertinoBottomPadding = 52.0;
 }
 
 // material themes
@@ -99,4 +100,5 @@ ThemeData darkTheme = ThemeData(
 
 //cupertino themes
 CupertinoThemeData cupertinoTheme = CupertinoThemeData(
-    primaryColor: Palette.blue, textTheme: CupertinoTextThemeData());
+  primaryColor: Palette.blue,
+);

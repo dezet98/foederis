@@ -10,7 +10,12 @@ class CustomButton {
       {@required String text,
       bool enabled = true,
       final void Function() onPressed}) {
-    return _raisedButton(enabled: enabled, onPressed: onPressed, text: text);
+    return PlatformWidget(
+      material: (_, __) =>
+          _raisedButton(enabled: enabled, onPressed: onPressed, text: text),
+      cupertino: (_, __) =>
+          _raisedButton(enabled: enabled, onPressed: onPressed, text: text),
+    );
   }
 
   static Widget dialog(
@@ -24,7 +29,12 @@ class CustomButton {
       {@required String text,
       bool enabled = true,
       final void Function() onPressed}) {
-    return _flatButton(enabled: enabled, onPressed: onPressed, text: text);
+    return PlatformWidget(
+      material: (_, __) =>
+          _flatButton(enabled: enabled, onPressed: onPressed, text: text),
+      cupertino: (_, __) =>
+          _raisedButton(enabled: enabled, onPressed: onPressed, text: text),
+    );
   }
 
   static Widget _raisedButton(
@@ -55,7 +65,9 @@ class CustomButton {
       ),
       onPressed: enabled ? onPressed : null,
       materialFlat: (context, platform) => MaterialFlatButtonData(),
-      cupertinoFilled: (context, platform) => CupertinoFilledButtonData(),
+      cupertinoFilled: (context, platform) => CupertinoFilledButtonData(
+        padding: EdgeInsets.all(Dimensions.gutterVerySmall),
+      ),
     );
   }
 

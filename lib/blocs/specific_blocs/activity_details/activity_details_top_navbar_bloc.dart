@@ -9,7 +9,6 @@ import 'package:engineering_thesis/models/collections/attendee_collection.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/attendee_repository.dart';
 import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/attendees/attendees_tab.dart';
-import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/chat/chat_tab.dart';
 import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/description/description_tab.dart';
 import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/map/activity_details_map_tab.dart';
 import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/registration/free_join/free_join_registration_tab.dart';
@@ -79,7 +78,7 @@ class ActivityDetailsTopNavbarBloc extends NavBarBloc {
         .where((el) => el.userRef.id == _userDataBloc.user.ref.id)
         .first;
 
-    List<NavBarTab> resultList = [ChatTab(activity: activity)];
+    List<NavBarTab> resultList = [];
 
     resultList.add(
       DescriptionTab(

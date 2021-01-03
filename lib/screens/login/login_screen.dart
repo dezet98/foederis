@@ -1,11 +1,7 @@
-import 'package:engineering_thesis/components/custom_widgets/bottom_sheet/custom_bottom_sheet.dart';
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
-import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:engineering_thesis/components/custom_widgets/snack_bar.dart/custom_snack_bar.dart';
-import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/components/custom_widgets/text_form_field/custom_text_form_field.dart';
 import 'package:engineering_thesis/components/templates/template_screen.dart';
-import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/settings/localization_change.dart';
 import 'package:engineering_thesis/shared/constants/enums.dart';
 import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/widgets.dart';
@@ -72,41 +68,41 @@ class LoginScreen extends StatelessWidget {
             if (loading) CustomButton.loadingButton(),
           ],
         ),
-        Positioned(
-          child: _buildSettingsButton(context),
-          right: 0,
-        ),
+        // Positioned(
+        //   child: _buildSettingsButton(context),
+        //   right: 0,
+        // ),
       ],
     );
   }
 
-  Widget _buildSettingsButton(BuildContext context) {
-    return CustomButton.floatingButton(
-      customIcon: CustomIcon.settings,
-      onPressed: () {
-        CustomBottomSheet.show(
-          context,
-          (context) => Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(Dimensions.screenPadding),
-                child: Wrap(
-                  children: [
-                    CustomText.modalText(
-                        S.of(context).login_screen_change_language_label),
-                    Align(
-                      alignment: Alignment.center,
-                      child: LocalizationWithoutPreferences(),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+  // Widget _buildSettingsButton(BuildContext context) {
+  //   return CustomButton.floatingButton(
+  //     customIcon: CustomIcon.settings,
+  //     onPressed: () {
+  //       CustomBottomSheet.show(
+  //         context,
+  //         (context) => Stack(
+  //           children: [
+  //             Padding(
+  //               padding: const EdgeInsets.all(Dimensions.screenPadding),
+  //               child: Wrap(
+  //                 children: [
+  //                   CustomText.modalText(
+  //                       S.of(context).login_screen_change_language_label),
+  //                   Align(
+  //                     alignment: Alignment.center,
+  //                     child: LocalizationWithoutPreferences(),
+  //                   )
+  //                 ],
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   void _loginBlocListener(BuildContext context, LoginState state) {
     if (state is LoginSuccessState) {

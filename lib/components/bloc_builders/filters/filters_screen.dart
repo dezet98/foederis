@@ -28,15 +28,17 @@ class FiltersScreen extends StatelessWidget {
         customIcon: CustomIcon.closeScreen,
         title: S.of(context).filter_screen_nav_title,
       ),
-      body: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(Dimensions.screenPadding),
-          child: CustomScrollView(
-            slivers: [
-              SliverList(
-                delegate: SliverChildListDelegate(_buildFilters(context)),
-              ),
-            ],
+      body: SafeArea(
+        child: Scaffold(
+          body: Padding(
+            padding: EdgeInsets.all(Dimensions.screenPadding),
+            child: CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate(_buildFilters(context)),
+                ),
+              ],
+            ),
           ),
         ),
       ),

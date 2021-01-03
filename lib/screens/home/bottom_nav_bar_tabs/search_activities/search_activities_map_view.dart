@@ -68,13 +68,15 @@ class SearchActivityMapView extends StatelessWidget {
     List<Activity> activities = cluster.markers.map((e) => e.item).toList();
     CustomBottomSheet.show(
       context,
-      (context) => CustomScrollView(
-        slivers: [
-          _buildActivitiesList(
-            context,
-            activities,
-          ),
-        ],
+      (context) => SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            _buildActivitiesList(
+              context,
+              activities,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -49,6 +49,7 @@ enum RoutingOption {
   useStepper,
   afterSuccess,
   afterError,
+  withContactInfo,
 }
 
 class Routing {
@@ -71,7 +72,10 @@ class Routing {
       case UserRoutes.activityDetails:
         return ActivityDetailsScreen(activity: options[RoutingOption.activity]);
       case UserRoutes.profile:
-        return ProfileScreen(userRef: options[RoutingOption.userRef]);
+        return ProfileScreen(
+          userRef: options[RoutingOption.userRef],
+          withContactInfo: options[RoutingOption.withContactInfo],
+        );
       case UserRoutes.form:
         return FormDataWithSendScreen(
           formDataBloc: options[RoutingOption.formDataBloc],
@@ -96,9 +100,10 @@ class Routing {
       {Map<RoutingOption, dynamic> options}) {
     if (_routeGuard(context, routeName)) {
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (_) => onGenerate(routeName, options: options)));
+        context,
+        MaterialPageRoute(
+            builder: (_) => onGenerate(routeName, options: options)),
+      );
     }
   }
 
@@ -106,9 +111,10 @@ class Routing {
       {Map<RoutingOption, dynamic> options}) {
     if (_routeGuard(context, routeName)) {
       Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (_) => onGenerate(routeName, options: options)));
+        context,
+        MaterialPageRoute(
+            builder: (_) => onGenerate(routeName, options: options)),
+      );
     }
   }
 

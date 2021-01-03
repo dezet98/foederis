@@ -61,6 +61,8 @@ class AppUser {
     };
   }
 
+  int get age => DateTime.now().year - this.birthday.year;
+
   static String genderAsString(context, Gender gender) {
     switch (gender) {
       case Gender.male:

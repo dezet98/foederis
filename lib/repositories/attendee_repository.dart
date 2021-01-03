@@ -68,6 +68,26 @@ class AttendeeRepository {
     return attendees.length == 1 ? attendees[0] : null;
   }
 
+  Future<List<Attendee>> getAttendeesByUser(DocumentReference userRef,
+      {bool withoutCancel = true}) {
+    List<FetchFilter> filters = [
+      FetchFilter(
+        fieldName: AttendeeCollection.userRef.fieldName,
+        fieldValue: userRef,
+        filterType: FetchFilterType.isEqualTo,
+      ),
+      if (withoutCancel)
+        FetchFilter(
+          fieldName: AttendeeCollection.isCancel.fieldName,
+          fieldValue: false,
+          filterType: FetchFilterType.isEqualTo,
+        )
+    ];
+
+    return _remoteRepository.getCollection<List<Attendee>>(
+        filters, collectionPath, _fromQuerySnapshot);
+  }
+
   Stream<List<Attendee>> getAttendeesStreamByActivity(
       DocumentReference activityRef,
       {bool withoutCancel = true}) {

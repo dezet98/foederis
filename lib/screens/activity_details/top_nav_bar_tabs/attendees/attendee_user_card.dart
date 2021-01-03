@@ -41,8 +41,10 @@ class AttendeeUserCard extends StatelessWidget {
               '${(appUser as AppUser).firstName} ${(appUser as AppUser).secondName}',
           content: _buildContent(context),
           onTap: () {
-            Routing.pushNamed(context, UserRoutes.profile,
-                options: {RoutingOption.userRef: (appUser as AppUser).ref});
+            Routing.pushNamed(context, UserRoutes.profile, options: {
+              RoutingOption.userRef: (appUser as AppUser).ref,
+              RoutingOption.withContactInfo: true,
+            });
           },
         );
       },

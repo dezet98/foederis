@@ -4,7 +4,8 @@ import 'package:engineering_thesis/components/bloc_builders/cards/activity_card.
 import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/components/bloc_builders/filters/filtered_data.dart';
 import 'package:engineering_thesis/components/custom_widgets/refresh_indicator/custom_refresh_indicator.dart';
-import 'package:engineering_thesis/shared/exceptions.dart';
+import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -54,28 +55,29 @@ class SearchActivitiesListView extends StatelessWidget {
               _buildActivitiesList(context, activities),
         );
       },
-      buildError: _buildError,
+      buildError: (_) => _buildError(context),
       buildInProgress: _buildInProgress(),
     );
   }
 
   Widget _buildActivitiesList(BuildContext context, List<Activity> activities) {
-    return SliverList(
-      delegate: SliverChildListDelegate(
-        [
-          for (Activity activity in activities)
-            _buildActivityTile(context, activity)
-        ],
-      ),
-    );
+    return activities.length == 0
+        ? _buildNoResults(context)
+        : SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                for (Activity activity in activities)
+                  _buildActivityTile(context, activity)
+              ],
+            ),
+          );
   }
 
-  Widget _buildError(error) {
+  Widget _buildError(context) {
     return SliverFillRemaining(
-      child: Text(
-        error is FetchingException
-            ? '${error.message}'
-            : 'Error occur: ${error.toString()}',
+      child: Center(
+        child: CustomText.errorText(
+            S.of(context).home_screen_search_activities_error),
       ),
     );
   }
@@ -83,6 +85,20 @@ class SearchActivitiesListView extends StatelessWidget {
   Widget _buildInProgress() {
     return SliverFillRemaining(
       child: Center(child: CircularProgressIndicator()),
+    );
+  }
+
+  Widget _buildNoResults(BuildContext context) {
+    return SliverFillRemaining(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(Dimensions.screenPadding),
+          child: Align(
+            child: CustomText.screenInfoHeader(
+                S.of(context).home_screen_search_activities_no_results),
+          ),
+        ),
+      ),
     );
   }
 
