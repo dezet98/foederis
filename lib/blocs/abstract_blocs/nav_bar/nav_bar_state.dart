@@ -18,3 +18,7 @@ class NavBarItemChangedState extends NavBarState {
   NavBarItemChangedState(
       {@required this.currentTab, @required this.currentIndex});
 }
+
+class NavBarRefreshInProgressState extends NavBarState {}
+
+class NavBarRefreshSuccessState extends NavBarState {}

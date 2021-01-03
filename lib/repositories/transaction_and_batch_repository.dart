@@ -37,7 +37,7 @@ class TransactionAndBatchRepository {
   // references (for translaction)
   Future<DocumentReference> referenceFromCollection(
       String collectionPath) async {
-    return await _remoteRepository.insertToCollectionReference(
+    return await _remoteRepository.referenceToItem(
       collectionPath,
     );
   }
@@ -46,7 +46,7 @@ class TransactionAndBatchRepository {
     String collectionPath,
     DocumentReference ref,
   ) async {
-    return await _remoteRepository.deleteWithNameFromCollectionReference(
+    return await _remoteRepository.referenceToExistingItem(
       collectionPath,
       ref.id,
     );

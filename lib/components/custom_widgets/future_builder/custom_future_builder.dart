@@ -10,8 +10,8 @@ class CustomFutureBuilder<DataType> extends StatelessWidget {
   CustomFutureBuilder({
     @required this.future,
     @required this.buildSuccess,
-    this.buildError,
-    this.buildInProgress,
+    @required this.buildError,
+    @required this.buildInProgress,
   });
 
   Widget build(BuildContext context) {

@@ -18,10 +18,9 @@ class FetchInitialSuccessState<T> extends FetchState {
 }
 
 class FetchInitialFailureState extends FetchState {
-  final FetchingError fetchingError;
-  final String message;
+  final FetchingException fetchingException;
 
-  FetchInitialFailureState({@required this.fetchingError, this.message});
+  FetchInitialFailureState({@required this.fetchingException});
 }
 
 class FetchRefreshInProgressState extends FetchState {}
@@ -33,8 +32,7 @@ class FetchRefreshSuccessState<DataType> extends FetchState {
 }
 
 class FetchRefreshFailureState extends FetchState {
-  final FetchingError fetchingError;
-  final String message;
+  final FetchingException fetchingException;
 
-  FetchRefreshFailureState({@required this.fetchingError, this.message});
+  FetchRefreshFailureState({@required this.fetchingException});
 }

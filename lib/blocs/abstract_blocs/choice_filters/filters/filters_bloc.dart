@@ -10,9 +10,9 @@ part 'filters_state.dart';
 
 abstract class FiltersBloc<FilterDataType>
     extends Bloc<FiltersEvent, FiltersState> {
-  FiltersBloc() : super(FiltersInitialState());
+  final List<FilterBloc> filtersBlocs;
 
-  List<FilterBloc> get filtersBlocs;
+  FiltersBloc(this.filtersBlocs) : super(FiltersInitialState());
 
   List<FilterDataType> filter(List<FilterDataType> data) {
     List<FilterDataType> filteredData = data;

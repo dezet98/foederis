@@ -1,5 +1,6 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_args.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/category_repository.dart';
@@ -20,10 +21,14 @@ class SearchActivitiesFetchingArgsBloc extends FetchArgs {
 
 class SearchActivitiesFetchingBloc
     extends FetchBloc<List<Activity>, SearchActivitiesFetchingArgsBloc> {
-  ActivityRepository activityRepository;
-  CategoryRepository categoryRepository;
+  final ActivityRepository activityRepository;
+  final CategoryRepository categoryRepository;
+  final UserDataBloc userDataBloc;
+
   SearchActivitiesFetchingBloc(
-      {@required this.activityRepository, @required this.categoryRepository});
+      {@required this.activityRepository,
+      @required this.categoryRepository,
+      @required this.userDataBloc});
 
   @override
   Future<List<Activity>> fetch(
@@ -31,10 +36,11 @@ class SearchActivitiesFetchingBloc
     Map<String, String> geohashResults =
         _getGeohash(searchActivitiesFetchingArgsBloc);
 
-    List<Activity> activities = await activityRepository.fetchAllActivities(
-      lowerGeohash: geohashResults['lowerGeohash'],
-      upperGeohash: geohashResults['upperGeohash'],
-    );
+    List<Activity> activities =
+        await activityRepository.fetchAllNotMyFutureActivities(
+            lowerGeohash: geohashResults['lowerGeohash'],
+            upperGeohash: geohashResults['upperGeohash'],
+            userRef: userDataBloc?.user?.ref);
 
     for (Activity activity in activities)
       activity.category =

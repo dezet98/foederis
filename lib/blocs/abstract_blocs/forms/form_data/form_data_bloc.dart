@@ -46,8 +46,10 @@ abstract class FormDataBloc extends Bloc<FormDataEvent, FormDataState> {
       for (FormFieldBloc formFieldBloc in formsData)
         formFieldBloc.add(FormFieldEditingDisableEvent());
     } else if (event is FormDataClearEvent) {
+      yield FormDataClearInProgressState();
       for (FormFieldBloc formFieldBloc in formsData)
         formFieldBloc.add(FormFieldClearEvent());
+      yield FormDataClearedState();
     }
   }
 

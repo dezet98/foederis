@@ -47,3 +47,10 @@ class SendingDataException implements Exception {
     return 'SendingDataException {errorCode: ${sendingDataError.toString()}, message: $message}';
   }
 }
+
+class StorageException implements Exception {
+  final StorageError storageError;
+  final String message;
+
+  StorageException({@required this.storageError, this.message});
+}

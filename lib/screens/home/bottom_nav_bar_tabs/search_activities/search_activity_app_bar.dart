@@ -5,6 +5,9 @@ import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activ
 import 'package:engineering_thesis/components/bloc_builders/search_screen.dart';
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
 import 'package:engineering_thesis/components/custom_widgets/gesture_detector/custom_gesture_detector.dart';
+import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
+import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -36,8 +39,11 @@ class SearchActivitiesAppBar {
             await SearchScreen.show(context,
                 BlocProvider.of<SearchActivitiesSearchFilterBloc>(context));
           },
-          child: Text(
-            SharedPreferences().address ?? 'Choose City',
+          child: CustomText.pageTitle(
+            SharedPreferences().address ??
+                S
+                    .of(context)
+                    .home_screen_search_activities_address_field_placeholder,
           ),
         );
       },
@@ -64,8 +70,10 @@ class SearchActivitiesAppBar {
               child: Builder(
                 builder: (context) {
                   return CustomButton.iconWithTextButton(
-                    text: "${SharedPreferences().distanceKm}km",
-                    materialIconData: Icons.circle,
+                    text: S
+                        .of(context)
+                        .kilometres_short(SharedPreferences().distanceKm),
+                    customIcon: CustomIcon.distancePicker,
                     onPressed: () {
                       Routing.pushNamed(
                         context,
@@ -74,11 +82,16 @@ class SearchActivitiesAppBar {
                           RoutingOption.formDataBloc:
                               BlocProvider.of<SearchActivityDistanceChoiceBloc>(
                                   context),
-                          RoutingOption.formAppBarTitle: 'dsa',
-                          RoutingOption.formNextButtonText: 'fsd',
+                          RoutingOption.formAppBarTitle:
+                              S.of(context).search_area_form_nav_bar_title,
+                          RoutingOption.formNextButtonText:
+                              S.of(context).search_area_form_apply_text,
                           RoutingOption.sendBloc:
                               BlocProvider.of<SearchActivitiesDistanceSendBloc>(
                                   context),
+                          RoutingOption.afterSuccess: () {
+                            Routing.pop(context);
+                          }
                         },
                       );
                     },
@@ -94,8 +107,7 @@ class SearchActivitiesAppBar {
 
   static Widget _buildFilterButton(BuildContext context) {
     return CustomButton.iconButton(
-      cupertinoIconData: CupertinoIcons.color_filter,
-      materialIconData: Icons.filter_list,
+      customIcon: CustomIcon.filter,
       onPressed: () {
         Routing.pushNamed(
           context,
@@ -114,10 +126,10 @@ class SearchActivitiesAppBar {
       cubit: BlocProvider.of<SharedPreferencesBloc>(context),
       builder: (context, state) {
         return CustomButton.iconButton(
-          materialIconData: SharedPreferences().searchActivityView ==
+          customIcon: SharedPreferences().searchActivityView ==
                   SharedPreferencesSearchActivityCode.list
-              ? Icons.list
-              : Icons.map,
+              ? CustomIcon.list
+              : CustomIcon.map,
           onPressed: () => {
             if (SharedPreferences().searchActivityView ==
                 SharedPreferencesSearchActivityCode.list)

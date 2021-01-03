@@ -29,8 +29,8 @@ class ActivityDetailsScreen extends StatelessWidget {
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthUserUnauthenticatedState) {
-            Routing.pushNamedAndRemoveUntil(context, CommonRoutes.splash,
-                CommonRoutes.splash); // TODO change security maybe
+            Routing.pushNamedAndRemoveUntil(
+                context, CommonRoutes.splash, CommonRoutes.splash);
           }
         },
         child: _buildStreamProviders(),
@@ -44,7 +44,7 @@ class ActivityDetailsScreen extends StatelessWidget {
         BlocProvider(
           create: (context) => ActivityStreamBloc(
             RepositoryProvider.of<ActivityRepository>(context),
-            activity: activity,
+            activityRef: activity.ref,
           ),
         ),
         BlocProvider(

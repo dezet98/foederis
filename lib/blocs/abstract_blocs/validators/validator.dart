@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 abstract class Validator<ValueType> {
-  String Function(BuildContext) get validatorFailureInfo;
-  String Function(BuildContext) get validatorLabel;
+  String Function(BuildContext) get validatorInfo;
 
   bool isValid();
 

@@ -1,4 +1,5 @@
 import 'package:engineering_thesis/blocs/specific_blocs/validators/validators.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../models/category.dart';
@@ -27,7 +28,8 @@ class CreateActvityFormDataBloc extends FormDataBloc {
     @required this.categoryFetchingBloc,
   }) : super([
           FormTextFieldBloc(
-            initialResult: 'daniel',
+            placeholder: (context) =>
+                S.of(context).create_activity_screen_title_placeholder,
             queryFieldFromResult: (String result) => [
               QueryField(
                 fieldName: ActivityCollection.title.fieldName,
@@ -36,18 +38,21 @@ class CreateActvityFormDataBloc extends FormDataBloc {
             ],
             validators: (String result) =>
                 [LenghtValidator(result, min: 3, max: 130)],
-            getLabel: (BuildContext context) => "Activity title",
+            getLabel: (BuildContext context) =>
+                S.of(context).create_activity_screen_title_label,
           ),
-          FormCheckFieldBloc(
-            initialResult: false,
-            queryFieldFromResult: (bool result) => [
+          FormTextFieldBloc(
+            placeholder: (context) =>
+                S.of(context).create_activity_screen_description_placeholder,
+            queryFieldFromResult: (String result) => [
               QueryField(
-                fieldName: ActivityCollection.regular.fieldName,
+                fieldName: ActivityCollection.description.fieldName,
                 fieldValue: result,
               )
             ],
-            getLabel: (BuildContext context) => "Regular acitvity",
-            validators: (_) => [],
+            getLabel: (BuildContext context) =>
+                S.of(context).create_activity_screen_description_label,
+            validators: (result) => [LenghtValidator(result, min: 5, max: 200)],
           ),
           FormCheckFieldBloc(
             initialResult: true,
@@ -57,7 +62,10 @@ class CreateActvityFormDataBloc extends FormDataBloc {
                 fieldValue: result,
               )
             ],
-            getLabel: (BuildContext context) => "Free join",
+            getLabel: (BuildContext context) =>
+                S.of(context).create_activity_screen_free_join_label,
+            getDescription: (BuildContext context) =>
+                S.of(context).create_activity_screen_free_join_description,
             validators: (_) => [],
           ),
           FormDateFieldBloc(
@@ -72,12 +80,13 @@ class CreateActvityFormDataBloc extends FormDataBloc {
               DateTimeRangeValidator(
                 result,
                 minDate: DateTime.now(),
-                maxDate: DateTime.now().add(Duration(
-                    days:
-                        28)), //todo take from firebase, should not be static and unchangeable
+                maxDate: DateTime.now().add(
+                  Duration(days: 28),
+                ),
               )
             ],
-            getLabel: (BuildContext context) => "Start date",
+            getLabel: (BuildContext context) =>
+                S.of(context).create_activity_screen_start_date_label,
           ),
           FormNumberRangeFieldBloc(
             initialResult: [5, 5],
@@ -89,7 +98,10 @@ class CreateActvityFormDataBloc extends FormDataBloc {
                 NumberCompareType.isLessThanOrEqualTo,
               )
             ],
-            getLabel: (BuildContext context) => "Min and max entry",
+            getLabel: (BuildContext context) =>
+                S.of(context).create_activity_screen_min_max_entry_label,
+            getDescription: (BuildContext context) =>
+                S.of(context).create_activity_screen_min_max_entry_description,
             queryFieldFromResult: (List<int> result) => [
               QueryField(
                 fieldName: ActivityCollection.minEntry.fieldName,
@@ -102,7 +114,8 @@ class CreateActvityFormDataBloc extends FormDataBloc {
             ],
           ),
           FormOptionListFieldBloc<Category>(
-            getLabelFromOption: (dynamic category) => category.title,
+            getLabelFromOption: (BuildContext context, dynamic category) =>
+                category.titleAsString(context),
             queryFieldFromResult: (Category result) => [
               QueryField(
                 fieldName: ActivityCollection.categoryRef.fieldName,
@@ -110,13 +123,18 @@ class CreateActvityFormDataBloc extends FormDataBloc {
               )
             ],
             listOptionFetchingBloc: categoryFetchingBloc,
-            getLabel: (BuildContext context) => "Category",
+            listOption: null,
+            getLabel: (BuildContext context) =>
+                S.of(context).create_activity_screen_category_label,
             validators: (value) => [NotNullValidator(value)],
           ),
           FormAddressFieldBloc(
             initialResult: null,
             validators: (value) => [NotNullValidator(value)],
-            getLabel: (BuildContext context) => "Address",
+            getLabel: (BuildContext context) =>
+                S.of(context).create_activity_screen_address_label,
+            getDescription: (BuildContext context) =>
+                S.of(context).create_activity_screen_address_description,
             queryFieldFromResult: (Geolocation result) => [
               QueryField(
                 fieldName: ActivityCollection.geohash.fieldName,

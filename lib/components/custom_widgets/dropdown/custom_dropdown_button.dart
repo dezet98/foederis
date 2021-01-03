@@ -1,11 +1,12 @@
+import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:flutter/material.dart';
 
-class CustomDropdownButton extends StatelessWidget {
-  final List<dynamic> dropdownItems;
-  final String Function(dynamic) getItemLabel;
+class CustomDropdownButton<ItemType> extends StatelessWidget {
+  final List<ItemType> dropdownItems;
+  final String Function(BuildContext, ItemType) getItemLabel;
   final bool enabled;
-  final Function(dynamic) onChanged;
-  final dynamic value;
+  final Function(ItemType) onChanged;
+  final ItemType value;
 
   CustomDropdownButton({
     @required this.value,
@@ -17,19 +18,20 @@ class CustomDropdownButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton(
+    return DropdownButton<ItemType>(
       value: value,
       items: [
-        for (dynamic item in dropdownItems) _buildDropdownMenuItem(item),
+        for (ItemType item in dropdownItems)
+          _buildDropdownMenuItem(context, item),
       ],
       onChanged: !enabled ? null : onChanged,
     );
   }
 
-  DropdownMenuItem _buildDropdownMenuItem(dynamic item) {
-    return DropdownMenuItem(
-      child: Text(
-        getItemLabel(item),
+  DropdownMenuItem _buildDropdownMenuItem(context, ItemType item) {
+    return DropdownMenuItem<ItemType>(
+      child: CustomText.formText(
+        getItemLabel(context, item),
       ),
       value: item,
     );

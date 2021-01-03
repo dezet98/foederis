@@ -1,4 +1,5 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/validators/validator.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
@@ -9,8 +10,7 @@ class CustomValidator<ArgType> extends Validator {
   CustomValidator(
       {@required this.isValidFunction,
       @required this.argValue,
-      this.validatorFailureInfo,
-      this.validatorLabel});
+      @required this.validatorInfo});
 
   @override
   bool isValid() {
@@ -18,10 +18,7 @@ class CustomValidator<ArgType> extends Validator {
   }
 
   @override
-  String Function(BuildContext) validatorFailureInfo;
-
-  @override
-  String Function(BuildContext) validatorLabel;
+  String Function(BuildContext) validatorInfo;
 }
 
 class DigitsValidator extends Validator {
@@ -40,22 +37,47 @@ class DigitsValidator extends Validator {
   }
 
   @override
-  String Function(BuildContext) validatorFailureInfo;
+  String Function(BuildContext) get validatorInfo =>
+      (context) => S.of(context).form_field_info_digits_validator;
+}
+
+class PhoneValidator extends Validator {
+  final String value;
+  final bool zeroIsValid;
+  PhoneValidator(this.value, {this.zeroIsValid = false});
 
   @override
-  String Function(BuildContext) validatorLabel;
+  bool isValid() {
+    try {
+      if (zeroIsValid && value.length == 0) return true;
+      var number = value.replaceAll(new RegExp(r"\s+"), "");
+      if (number.length != 9) return false;
+      int.parse(number);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @override
+  String Function(BuildContext) get validatorInfo =>
+      (context) => S.of(context).form_field_info_phone_validator;
 }
 
 class LenghtValidator extends Validator<String> {
   final int min;
   final int max;
   final String value;
+  final bool zeroIsValid;
 
-  LenghtValidator(this.value, {this.min, this.max});
+  LenghtValidator(this.value, {this.min, this.max, this.zeroIsValid = false});
 
   @override
   bool isValid() {
+    if (value == null) return false;
+
     int lenght = value.length;
+    if (zeroIsValid && lenght == 0) return true;
     if (min <= lenght && lenght <= max) {
       return true;
     }
@@ -64,10 +86,8 @@ class LenghtValidator extends Validator<String> {
   }
 
   @override
-  String Function(BuildContext) validatorFailureInfo;
-
-  @override
-  String Function(BuildContext) validatorLabel;
+  String Function(BuildContext) get validatorInfo => (context) =>
+      S.of(context).form_field_info_lenght_validator(min ?? '', max ?? '');
 }
 
 class DateTimeRangeValidator extends Validator<DateTime> {
@@ -83,30 +103,9 @@ class DateTimeRangeValidator extends Validator<DateTime> {
   }
 
   @override
-  String Function(BuildContext) validatorFailureInfo;
-
-  @override
-  String Function(BuildContext) validatorLabel;
-}
-
-class NumberRangeValidator extends Validator {
-  final int min;
-  final int max;
-  final int value;
-
-  NumberRangeValidator(this.value, {this.min, this.max});
-
-  @override
-  bool isValid() {
-    return (min == null ? value : min) <= value &&
-        value >= (max == null ? value : max);
-  }
-
-  @override
-  String Function(BuildContext) validatorFailureInfo;
-
-  @override
-  String Function(BuildContext) validatorLabel;
+  String Function(BuildContext) get validatorInfo =>
+      (context) => S.of(context).form_field_info_date_time_range_validator(
+          minDate.toString() ?? '', maxDate.toString() ?? '');
 }
 
 enum NumberCompareType {
@@ -150,11 +149,51 @@ class NumbersValidator extends Validator {
     return false;
   }
 
-  @override
-  String Function(BuildContext) validatorFailureInfo;
+  String toSign(NumberCompareType compareType) {
+    switch (compareType) {
+      case NumberCompareType.isEqualTo:
+        return '=';
+        break;
+      case NumberCompareType.isNotEqualTo:
+        return '!=';
+        break;
+      case NumberCompareType.isLessThan:
+        return '<';
+        break;
+      case NumberCompareType.isLessThanOrEqualTo:
+        return '<=';
+        break;
+      case NumberCompareType.isGreaterThan:
+        return '>';
+        break;
+      case NumberCompareType.isGreaterThanOrEqualTo:
+        return '>=';
+        break;
+    }
+    return '?';
+  }
 
   @override
-  String Function(BuildContext) validatorLabel;
+  String Function(BuildContext) get validatorInfo => (context) =>
+      S.of(context).form_field_info_numbers_validator(toSign(compareType));
+}
+
+class NumberRangeValidator extends Validator {
+  final int min;
+  final int max;
+  final int value;
+
+  NumberRangeValidator(this.value, {this.min, this.max});
+
+  @override
+  bool isValid() {
+    return (min == null ? value : min) <= value &&
+        value >= (max == null ? value : max);
+  }
+
+  @override
+  String Function(BuildContext) get validatorInfo => (context) =>
+      S.of(context).form_field_info_numbers_range_validator(min, max);
 }
 
 class NotNullValidator extends Validator {
@@ -168,8 +207,6 @@ class NotNullValidator extends Validator {
   }
 
   @override
-  String Function(BuildContext) validatorFailureInfo;
-
-  @override
-  String Function(BuildContext) validatorLabel;
+  String Function(BuildContext) get validatorInfo =>
+      (context) => S.of(context).form_field_info_not_null_validator;
 }

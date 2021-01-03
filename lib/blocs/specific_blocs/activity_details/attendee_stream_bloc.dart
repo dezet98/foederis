@@ -12,6 +12,6 @@ class AttendeeStreamBloc extends StreamBloc<List<Attendee>> {
 
   @override
   Stream<List<Attendee>> stream() {
-    return _attendeeRepository.getAttendeesStream(activityRef);
+    return _attendeeRepository.getAttendeesStreamByActivity(activityRef);
   }
 }

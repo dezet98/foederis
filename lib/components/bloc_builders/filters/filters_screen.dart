@@ -1,3 +1,4 @@
+import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:flutter/material.dart';
 
 import '../../../blocs/abstract_blocs/choice_filters/filter/filter_bloc.dart';
@@ -24,18 +25,20 @@ class FiltersScreen extends StatelessWidget {
     return TemplateScreen(
       usePadding: false,
       platformAppBar: CustomAppBar(
-        appBarType: AppBarType.close,
+        customIcon: CustomIcon.closeScreen,
         title: S.of(context).filter_screen_nav_title,
       ),
-      body: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(Dimensions.screenPadding),
-          child: CustomScrollView(
-            slivers: [
-              SliverList(
-                delegate: SliverChildListDelegate(_buildFilters(context)),
-              ),
-            ],
+      body: SafeArea(
+        child: Scaffold(
+          body: Padding(
+            padding: EdgeInsets.all(Dimensions.screenPadding),
+            child: CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate(_buildFilters(context)),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -47,7 +50,7 @@ class FiltersScreen extends StatelessWidget {
       for (FilterBloc bloc in filtersBloc.filtersBlocs)
         _buildFilterWrapping(
             filter: _getFilterWidget(bloc), title: bloc.getTitle(context)),
-      CustomButton.raisedButton(
+      CustomButton.applyForm(
         onPressed: () {
           filtersBloc.add(FiltersChangedEvent());
           Routing.pop(context);
@@ -69,7 +72,7 @@ class FiltersScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: Dimensions.gutterSmall),
               child: Align(
-                child: CustomText(title, textType: TextType.menu_title),
+                child: CustomText.menuTitle(title),
                 alignment: Alignment.centerLeft,
               ),
             ),

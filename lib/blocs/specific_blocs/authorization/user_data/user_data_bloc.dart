@@ -30,6 +30,8 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       yield* mapUserDataClearEvent();
     } else if (event is UserDataCreateEvent) {
       yield* mapUserDataCreateEvent(event.firebaseUser);
+    } else if (event is UserDataRefreshEvent) {
+      yield* mapUserDataRefreshEvent();
     }
   }
 
@@ -42,9 +44,15 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       if (e is FetchingException &&
           e.fetchingError == FetchingError.field_not_exist) {
         add(UserDataCreateEvent(firebaseUser: firebaseUser));
-        yield UserDataLoadFailureState(message: e.toString());
+        yield UserDataClearFailureState(
+          userLoadDataError: UserLoadDataError.undefined,
+          message: e.toString(),
+        );
       } else {
-        yield UserDataLoadFailureState(message: e.toString());
+        yield UserDataClearFailureState(
+          userLoadDataError: UserLoadDataError.undefined,
+          message: e.toString(),
+        );
       }
     }
   }
@@ -56,7 +64,23 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       add(UserDataLoadEvent(firebaseUser: firebaseUser));
       yield UserDataCreateSuccessfullState();
     } catch (e) {
-      yield UserDataCreateFailureState(message: e.toString());
+      yield UserDataClearFailureState(
+        userLoadDataError: UserLoadDataError.undefined,
+        message: e.toString(),
+      );
+    }
+  }
+
+  Stream<UserDataState> mapUserDataRefreshEvent() async* {
+    try {
+      yield UserDataRefreshInProgressState();
+      _user = await _userRepository.fetchUser(user.ref.id);
+      yield UserDataRefreshSuccessfullState();
+    } catch (e) {
+      yield UserDataRefreshFailureState(
+        userLoadDataError: UserLoadDataError.undefined,
+        message: e.toString(),
+      );
     }
   }
 
@@ -66,7 +90,10 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       _user = null;
       yield UserDataClearSuccessfullState();
     } catch (e) {
-      yield UserDataClearFailureState(message: e.toString());
+      yield UserDataClearFailureState(
+        userLoadDataError: UserLoadDataError.undefined,
+        message: e.toString(),
+      );
     }
   }
 }

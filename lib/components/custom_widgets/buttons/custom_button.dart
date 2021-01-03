@@ -1,31 +1,73 @@
 import 'package:engineering_thesis/components/custom_widgets/gesture_detector/custom_gesture_detector.dart';
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
+import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class CustomButton {
-  static Widget raisedButton(
-      {String text, bool enabled = true, final void Function() onPressed}) {
+  static Widget applyForm(
+      {@required String text,
+      bool enabled = true,
+      final void Function() onPressed}) {
+    return PlatformWidget(
+      material: (_, __) =>
+          _raisedButton(enabled: enabled, onPressed: onPressed, text: text),
+      cupertino: (_, __) =>
+          _raisedButton(enabled: enabled, onPressed: onPressed, text: text),
+    );
+  }
+
+  static Widget dialog(
+      {@required String text,
+      bool enabled = true,
+      final void Function() onPressed}) {
+    return _raisedButton(enabled: enabled, onPressed: onPressed, text: text);
+  }
+
+  static Widget goToOtherScreen(
+      {@required String text,
+      bool enabled = true,
+      final void Function() onPressed}) {
+    return PlatformWidget(
+      material: (_, __) =>
+          _flatButton(enabled: enabled, onPressed: onPressed, text: text),
+      cupertino: (_, __) =>
+          _raisedButton(enabled: enabled, onPressed: onPressed, text: text),
+    );
+  }
+
+  static Widget _raisedButton(
+      {@required String text,
+      bool enabled = true,
+      final void Function() onPressed}) {
     return PlatformButton(
-      child: CustomText(text,
-          textType:
-              !enabled ? TextType.unavailable_text_button : TextType.button),
+      child: Builder(
+        builder: (context) => !enabled
+            ? CustomText.unavailableTextButton(text)
+            : CustomText.button(text),
+      ),
       onPressed: enabled ? onPressed : null,
       material: (context, platform) => MaterialRaisedButtonData(),
       cupertino: (context, platform) => CupertinoButtonData(),
     );
   }
 
-  static Widget flatButton(
-      {String text, bool enabled = true, final void Function() onPressed}) {
+  static Widget _flatButton(
+      {@required String text,
+      bool enabled = true,
+      final void Function() onPressed}) {
     return PlatformButton(
-      child: CustomText(text,
-          textType:
-              !enabled ? TextType.unavailable_text_button : TextType.button),
+      child: Builder(
+        builder: (context) => !enabled
+            ? CustomText.unavailableTextButton(text)
+            : CustomText.button(text),
+      ),
       onPressed: enabled ? onPressed : null,
       materialFlat: (context, platform) => MaterialFlatButtonData(),
-      cupertinoFilled: (context, platform) => CupertinoFilledButtonData(),
+      cupertinoFilled: (context, platform) => CupertinoFilledButtonData(
+        padding: EdgeInsets.all(Dimensions.gutterVerySmall),
+      ),
     );
   }
 
@@ -39,73 +81,46 @@ class CustomButton {
     );
   }
 
-  static Widget iconButton(
-      {bool enabled = true,
-      IconData materialIconData,
-      IconData cupertinoIconData,
-      final void Function() onPressed}) {
-    // return PlatformWidget(
-    //   material: (_, __) => IconButton(
-    //     icon: Icon(materialIconData),
-    //     onPressed: onPressed != null ? onPressed : () {},
-    //   ),
-    //   cupertino: (_, __) => CupertinoButton(
-    //     child: Icon(Icons.ac_unit),
-    //     onPressed: onPressed != null ? onPressed : () {},
-    //   ),
-    // );
+  static Widget iconButton({
+    bool enabled = true,
+    @required Widget customIcon,
+    final void Function() onPressed,
+  }) {
     return PlatformIconButton(
       onPressed: enabled ? onPressed : null,
-      materialIcon: Icon(materialIconData),
-      cupertinoIcon: Icon(cupertinoIconData),
-      material: (_, __) => MaterialIconButtonData(),
-      cupertino: (_, __) => CupertinoIconButtonData(),
+      icon: customIcon,
+      material: (_, __) =>
+          MaterialIconButtonData(splashRadius: Dimensions.gutterLarge),
     );
   }
 
   static Widget floatingButton(
       {bool enabled = true,
-      IconData materialIconData,
-      IconData cupertinoIconData,
+      Widget customIcon,
       final void Function() onPressed}) {
-    return PlatformWidget(
-      material: (_, __) => FloatingActionButton(
-        heroTag: null,
-        child: Icon(materialIconData),
-        onPressed: enabled ? onPressed : null,
-        mini: true,
-      ),
-      cupertino: (_, __) => FloatingActionButton(
-        heroTag: null,
-        child: Icon(cupertinoIconData),
-        onPressed: enabled ? onPressed : null,
-        mini: true,
-      ),
+    return FloatingActionButton(
+      heroTag: null,
+      child: customIcon,
+      onPressed: enabled ? onPressed : null,
+      mini: true,
     );
   }
 
   static Widget iconWithTextButton({
     @required String text,
     bool enabled = true,
-    IconData materialIconData,
-    IconData cupertinoIconData,
+    Widget customIcon,
     final void Function() onPressed,
   }) {
     return CustomGestureDetector(
       onTap: enabled ? onPressed : null,
-      child: PlatformWidget(
-        material: (_, __) => Row(
-          children: [
-            Icon(Icons.ac_unit_outlined),
-            CustomText(text, textType: TextType.button),
-          ],
-        ),
-        cupertino: (_, __) => Row(
-          children: [
-            Icon(Icons.ac_unit_outlined),
-            CustomText(text, textType: TextType.button),
-          ],
-        ),
+      child: Row(
+        children: [
+          customIcon,
+          Builder(
+            builder: (context) => CustomText.button(text),
+          ),
+        ],
       ),
     );
   }

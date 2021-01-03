@@ -13,3 +13,9 @@ class SharedPreferencesUpdateEvent extends SharedPreferencesEvent {
 
   SharedPreferencesUpdateEvent(this.fieldName, this.fieldValue);
 }
+
+class SharedPreferencesLocalizationChangeEvent extends SharedPreferencesEvent {
+  final Locale locale;
+
+  SharedPreferencesLocalizationChangeEvent({@required this.locale});
+}

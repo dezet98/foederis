@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:engineering_thesis/shared/constants/enums.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../../repositories/auth_repository.dart';
-import '../../../../shared/app_logger.dart';
 import '../../../../shared/exceptions.dart';
 
 part 'login_event.dart';
@@ -22,7 +22,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginEvent event,
   ) async* {
     if (event is LoginWithEmailAndPasswordEvent) {
-      yield LoginInProgressState();
       yield* mapLoginWithEmailAndPasswordEvent(
           email: event.email, password: event.password);
     }
@@ -31,14 +30,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> mapLoginWithEmailAndPasswordEvent(
       {@required String email, @required String password}) async* {
     try {
+      yield LoginInProgressState();
       await _authRepository.signInWithEmailAndPassword(
           email: email, password: password);
       yield LoginSuccessState();
-    } on LoginException catch (loginException) {
-      AppLogger().log(
-          message: loginException.loginError.toString(),
-          logLevel: LogLevel.warning);
-      yield LoginFailureState(loginException: loginException);
+    } catch (e) {
+      if (e is LoginException) {
+        yield LoginFailureState(loginException: e);
+      } else {
+        LoginFailureState(
+          loginException: LoginException(loginError: LoginError.undefined),
+        );
+      }
     }
   }
 }

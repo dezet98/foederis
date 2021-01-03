@@ -1,3 +1,6 @@
+import 'package:engineering_thesis/screens/guest/guest_home_screen.dart';
+import 'package:engineering_thesis/screens/guest/guest_prohibited_dialog.dart';
+import 'package:engineering_thesis/screens/profile/profile_screen.dart';
 import 'package:engineering_thesis/screens/splash/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +9,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../blocs/specific_blocs/authorization/auth/auth_bloc.dart';
 import '../components/bloc_builders/filters/filters_screen.dart';
-import '../components/bloc_builders/forms/form_data_screen.dart';
+import '../components/bloc_builders/forms/form_screen/form_with_send_screen.dart';
 import '../screens/activity_details/activity_details_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/login/login_screen.dart';
@@ -22,16 +25,17 @@ class CommonRoutes {
 class GuestRoutes {
   static const String login = "/login";
   static const String register = "/register";
+  static const String guestHome = "/guestHome";
 
-  static List<String> get props => [login, register];
+  static List<String> get props => [login, register, guestHome];
 }
 
 class UserRoutes {
   static const String home = "/";
   static const String activityDetails = '/activityDetails';
   static const String form = "/form";
-
-  static List<String> get props => [home, activityDetails, form];
+  static const String profile = "/profile";
+  static List<String> get props => [home, activityDetails, form, profile];
 }
 
 enum RoutingOption {
@@ -41,6 +45,11 @@ enum RoutingOption {
   formAppBarTitle,
   activity,
   filtersBloc,
+  userRef,
+  useStepper,
+  afterSuccess,
+  afterError,
+  withContactInfo,
 }
 
 class Routing {
@@ -52,18 +61,30 @@ class Routing {
         return LoginScreen();
       case GuestRoutes.register:
         return RegisterScreen();
+      case GuestRoutes.register:
+        return RegisterScreen();
+      case GuestRoutes.guestHome:
+        return HomeGuestScreen();
       case CommonRoutes.splash:
         return SplashScreen();
       case CommonRoutes.filter:
         return FiltersScreen(filtersBloc: options[RoutingOption.filtersBloc]);
       case UserRoutes.activityDetails:
         return ActivityDetailsScreen(activity: options[RoutingOption.activity]);
+      case UserRoutes.profile:
+        return ProfileScreen(
+          userRef: options[RoutingOption.userRef],
+          withContactInfo: options[RoutingOption.withContactInfo],
+        );
       case UserRoutes.form:
-        return FormDataScreen(
+        return FormDataWithSendScreen(
           formDataBloc: options[RoutingOption.formDataBloc],
           formAppBarTitle: options[RoutingOption.formAppBarTitle],
           formNextButtonText: options[RoutingOption.formNextButtonText],
           sendBloc: options[RoutingOption.sendBloc],
+          useStepper: options[RoutingOption.useStepper] ?? false,
+          afterSuccess: options[RoutingOption.afterSuccess],
+          afterError: options[RoutingOption.afterError],
         );
       default:
         assert(false, '{ error: $routeName is not define as a routeName }');
@@ -79,9 +100,10 @@ class Routing {
       {Map<RoutingOption, dynamic> options}) {
     if (_routeGuard(context, routeName)) {
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (_) => onGenerate(routeName, options: options)));
+        context,
+        MaterialPageRoute(
+            builder: (_) => onGenerate(routeName, options: options)),
+      );
     }
   }
 
@@ -89,9 +111,10 @@ class Routing {
       {Map<RoutingOption, dynamic> options}) {
     if (_routeGuard(context, routeName)) {
       Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (_) => onGenerate(routeName, options: options)));
+        context,
+        MaterialPageRoute(
+            builder: (_) => onGenerate(routeName, options: options)),
+      );
     }
   }
 
@@ -118,8 +141,7 @@ bool _routeGuard(BuildContext context, String routeName) {
 
   if (UserRoutes.props.contains(routeName)) {
     if (authenticated) return true;
-    Routing.pushNamedAndRemoveUntil(
-        context, GuestRoutes.login, GuestRoutes.login);
+    GuestProhibitedDialog.showDialog(context);
   } else if (GuestRoutes.props.contains(routeName)) {
     if (!authenticated) return true;
     showPlatformModalSheet(

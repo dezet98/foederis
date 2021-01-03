@@ -7,21 +7,27 @@ import 'form_field/form_field_bloc.dart';
 
 class FormOptionListFieldBloc<OptionType> extends FormFieldBloc<OptionType> {
   final FetchBloc listOptionFetchingBloc; //todo
-  final String Function(dynamic) getLabelFromOption;
+  final List<OptionType> listOption;
+  final OptionType initialResult;
+  final String Function(BuildContext, dynamic) getLabelFromOption;
   List<Validator> Function(OptionType) validators;
   final List<QueryField> Function(OptionType) queryFieldFromResult;
   String Function(BuildContext) getLabel;
-
+  final String Function(BuildContext) getDescription;
   FormOptionListFieldBloc({
-    @required this.listOptionFetchingBloc,
+    this.listOptionFetchingBloc,
+    this.listOption,
+    this.initialResult,
+    this.getDescription,
     @required this.getLabelFromOption,
     @required this.getLabel,
     @required this.validators,
     @required this.queryFieldFromResult,
   }) : super(
-          initialResult: null,
+          initialResult: initialResult,
           getLabel: getLabel,
           queryFieldFromResult: queryFieldFromResult,
           validators: validators,
+          getDescription: getDescription,
         );
 }

@@ -1,4 +1,3 @@
-import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/components/custom_widgets/text_form_field/custom_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,37 +18,20 @@ class FormNumberField extends StatelessWidget {
   Widget build(BuildContext context) {
     textFieldController.text = formFieldBloc.result.toString();
 
-    return Column(
-      children: [
-        BlocBuilder(
-          cubit: formFieldBloc,
-          builder: (context, state) {
-            return CustomText(
-              formFieldBloc.getLabel(context),
-              textType: formFieldBloc.isValid
-                  ? TextType.valid_form_title
-                  : TextType.invalid_form_title,
-              alignment: Alignment.centerLeft,
-            );
-          },
-        ),
-        BlocBuilder(
-            cubit: formDataBloc,
-            builder: (context, state) {
-              return CustomTextFormField(
-                textEditingController: textFieldController,
-                textFormType: TextFormType.digits,
-                enabled: formFieldBloc.editingEnabled,
-                onChamged: (String result) {
-                  if (formFieldBloc.editingEnabled)
-                    formDataBloc.add(FormDataEditingEvent(
-                      formFieldBloc: formFieldBloc,
-                      result: int.parse(result.isEmpty ? '0' : result),
-                    ));
-                },
-              );
-            }),
-      ],
-    );
+    return BlocBuilder(
+        cubit: formDataBloc,
+        builder: (context, state) {
+          return CustomTextFormField.digits(
+            textEditingController: textFieldController,
+            enabled: formFieldBloc.editingEnabled,
+            onChamged: (String result) {
+              if (formFieldBloc.editingEnabled)
+                formDataBloc.add(FormDataEditingEvent(
+                  formFieldBloc: formFieldBloc,
+                  result: int.parse(result.isEmpty ? '0' : result),
+                ));
+            },
+          );
+        });
   }
 }

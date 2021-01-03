@@ -1,53 +1,36 @@
-import 'package:engineering_thesis/blocs/specific_blocs/common/user_fetch_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
-import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/components/custom_widgets/list/custom_list.dart';
-import 'package:engineering_thesis/components/custom_widgets/list/custom_list_tile.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/activity.dart';
-import 'package:engineering_thesis/models/app_user.dart';
 import 'package:engineering_thesis/models/attendee.dart';
-import 'package:engineering_thesis/repositories/user_repository.dart';
-import 'package:engineering_thesis/shared/utils/enums.dart';
+import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/attendees/attendee_user_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AttendeesTab extends NavBarTab {
   final Activity activity;
   final List<Attendee> attendees;
+  final Attendee attendee;
 
-  AttendeesTab({@required this.activity, @required this.attendees});
+  AttendeesTab(
+      {@required this.activity,
+      @required this.attendees,
+      @required this.attendee});
 
   @override
   Widget build(BuildContext context) {
-    return _buildList(context);
-  }
-
-  Widget _buildList(context) {
     return CustomList<Attendee>(
       items: attendees,
-      buildTile: (Attendee attendee) => _buildUserTile(context, attendee),
-    );
-  }
-
-  Widget _buildUserTile(context, Attendee attendee) {
-    return FetchingBlocBuilder(
-      fetchingCubit: UserFetchBloc(
-        RepositoryProvider.of<UserRepository>(context),
-        userRef: attendee.userRef,
+      buildTile: (Attendee attendee) => AttendeeUserCard(
+        attendee: attendee,
+        attendeeRole: attendee.role,
       ),
-      buildSuccess: (appUser) {
-        return CustomListTile(
-          title:
-              '${(appUser as AppUser).firstName} ${(appUser as AppUser).secondName}',
-          subtitle: enumToString(attendee.role),
-        );
-      },
     );
   }
 
   @override
-  Icon getIcon(BuildContext context) => null;
+  Widget getIcon(BuildContext context) => null;
 
   @override
-  String getLabel(BuildContext context) => 'Attendees';
+  String getLabel(BuildContext context) =>
+      S.of(context).activity_details_screen_attendee_tab_nav_bar_title;
 }

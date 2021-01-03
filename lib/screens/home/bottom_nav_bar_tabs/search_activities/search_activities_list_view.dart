@@ -1,9 +1,12 @@
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_fetching_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_filters_bloc.dart';
+import 'package:engineering_thesis/components/bloc_builders/cards/activity_card.dart';
 import 'package:engineering_thesis/components/bloc_builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/components/bloc_builders/filters/filtered_data.dart';
-import 'package:engineering_thesis/components/custom_widgets/card/custom_card.dart';
 import 'package:engineering_thesis/components/custom_widgets/refresh_indicator/custom_refresh_indicator.dart';
+import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
+import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -11,7 +14,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../../../models/activity.dart';
-import '../../../../shared/routing.dart';
 import 'search_activity_app_bar.dart';
 
 class SearchActivitiesListView extends StatelessWidget {
@@ -23,7 +25,7 @@ class SearchActivitiesListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return PlatformWidget(
       material: (_, __) => CustomRefreshIndicator(
-        displacement: 60.0,
+        displacement: Dimensions.refreshDisplacement,
         onRefresh: () => onRefresh(context),
         child: _buildCustomScrollView(context),
       ),
@@ -37,12 +39,12 @@ class SearchActivitiesListView extends StatelessWidget {
         SearchActivitiesAppBar.getSliverAppBar(context),
         CustomRefreshIndicator.cupertinoRefreshIndicator(
             () => onRefresh(context)),
-        _fetchActivities(context),
+        _fetchandFilterActivities(context),
       ],
     );
   }
 
-  Widget _fetchActivities(BuildContext context) {
+  Widget _fetchandFilterActivities(BuildContext context) {
     return FetchingBlocBuilder(
       fetchingCubit: BlocProvider.of<SearchActivitiesFetchingBloc>(context),
       buildSuccess: (activities) {
@@ -50,37 +52,60 @@ class SearchActivitiesListView extends StatelessWidget {
           data: activities,
           filtersBloc: BlocProvider.of<SearchActivitiesFiltersBloc>(context),
           child: (context, activities) =>
-              buildActivitiesList(context, activities),
+              _buildActivitiesList(context, activities),
         );
       },
-      buildError: (error) => SliverFillRemaining(
-        child: Text('Error occur: ${error.toString()}'),
-      ),
-      buildInProgress: SliverFillRemaining(
-        child: Center(child: CircularProgressIndicator()),
+      buildError: (_) => _buildError(context),
+      buildInProgress: _buildInProgress(),
+    );
+  }
+
+  Widget _buildActivitiesList(BuildContext context, List<Activity> activities) {
+    return activities.length == 0
+        ? _buildNoResults(context)
+        : SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                for (Activity activity in activities)
+                  _buildActivityTile(context, activity)
+              ],
+            ),
+          );
+  }
+
+  Widget _buildError(context) {
+    return SliverFillRemaining(
+      child: Center(
+        child: CustomText.errorText(
+            S.of(context).home_screen_search_activities_error),
       ),
     );
   }
 
-  Widget buildActivitiesList(BuildContext context, List<Activity> activities) {
-    return SliverList(
-      delegate: SliverChildListDelegate(
-        [
-          for (Activity activity in activities)
-            buildActivityTile(context, activity)
-        ],
+  Widget _buildInProgress() {
+    return SliverFillRemaining(
+      child: Center(child: CircularProgressIndicator()),
+    );
+  }
+
+  Widget _buildNoResults(BuildContext context) {
+    return SliverFillRemaining(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(Dimensions.screenPadding),
+          child: Align(
+            child: CustomText.screenInfoHeader(
+                S.of(context).home_screen_search_activities_no_results),
+          ),
+        ),
       ),
     );
   }
 
-  Widget buildActivityTile(BuildContext context, Activity activity) {
-    return CustomCard(
-      title: activity.title,
-      subtitle: activity.categoryRef.toString(),
-      onTap: () {
-        Routing.pushNamed(context, UserRoutes.activityDetails,
-            options: {RoutingOption.activity: activity});
-      },
+  Widget _buildActivityTile(BuildContext context, Activity activity) {
+    return ActivityCard.searchCard(
+      context,
+      activity: activity,
     );
   }
 }

@@ -13,8 +13,8 @@ part 'fetch_state.dart';
 
 abstract class FetchBloc<ResultType, FetchArgsType extends FetchArgs>
     extends Bloc<FetchEvent, FetchState> {
-  FetchBloc() : super(FetchInitialState()) {
-    add(FetchInitialEvent());
+  FetchBloc({FetchArgs initialFetchArgs}) : super(FetchInitialState()) {
+    add(FetchInitialEvent(initialFetchArgs: initialFetchArgs));
   }
 
   Future<ResultType> fetch(FetchArgsType fetchArgs);
@@ -37,11 +37,14 @@ abstract class FetchBloc<ResultType, FetchArgsType extends FetchArgs>
       yield FetchInitialSuccessState(data: data);
     } catch (e) {
       if (e is FetchingException)
-        yield FetchInitialFailureState(
-            fetchingError: e.fetchingError, message: e.message);
+        yield FetchInitialFailureState(fetchingException: e);
       else
         yield FetchInitialFailureState(
-            fetchingError: FetchingError.undefined, message: e.toString());
+          fetchingException: FetchingException(
+            fetchingError: FetchingError.undefined,
+            message: e.toString(),
+          ),
+        );
     }
   }
 
@@ -52,11 +55,14 @@ abstract class FetchBloc<ResultType, FetchArgsType extends FetchArgs>
       yield FetchRefreshSuccessState(data: data);
     } catch (e) {
       if (e is FetchingException)
-        yield FetchRefreshFailureState(
-            fetchingError: e.fetchingError, message: e.message);
+        yield FetchRefreshFailureState(fetchingException: e);
       else
         yield FetchRefreshFailureState(
-            fetchingError: FetchingError.undefined, message: e.toString());
+          fetchingException: FetchingException(
+            fetchingError: FetchingError.undefined,
+            message: e.toString(),
+          ),
+        );
     }
   }
 }

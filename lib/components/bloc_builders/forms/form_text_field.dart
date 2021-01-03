@@ -1,5 +1,4 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_field/form_field_bloc.dart';
-import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/components/custom_widgets/text_form_field/custom_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,29 +17,27 @@ class FormTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    textFieldController.text = formFieldBloc.result;
+    textFieldController.text = formFieldBloc.result ?? '';
 
     return BlocConsumer(
-      cubit: formFieldBloc,
-      listener: (context, state) {
-        if (state is FormFieldClearedState) {
-          textFieldController.text = formFieldBloc.result;
-        }
-      },
-      builder: (context, state) {
-        return Column(
-          children: [
-            CustomText(
-              formFieldBloc.getLabel(context),
-              textType: formFieldBloc.isValid
-                  ? TextType.valid_form_title
-                  : TextType.invalid_form_title,
-              alignment: Alignment.centerLeft,
-            ),
-            CustomTextFormField(
+        cubit: formFieldBloc,
+        listener: (context, state) {
+          if (state is FormFieldClearedState) {
+            textFieldController.text = formFieldBloc.result;
+          }
+        },
+        builder: (context, state) {
+          textFieldController.selection = TextSelection.fromPosition(
+            TextPosition(offset: textFieldController.text.length),
+          );
+
+          return CustomTextFormField.normal(
               textEditingController: textFieldController,
               enabled: formFieldBloc.editingEnabled,
-              onChamged: (String text) {
+              placeholder: formFieldBloc.placeholder != null
+                  ? formFieldBloc.placeholder(context)
+                  : '',
+              onChanged: (String text) {
                 if (formFieldBloc.editingEnabled)
                   formDataBloc.add(
                     FormDataEditingEvent(
@@ -48,11 +45,7 @@ class FormTextField extends StatelessWidget {
                       result: text,
                     ),
                   );
-              },
-            )
-          ],
-        );
-      },
-    );
+              });
+        });
   }
 }

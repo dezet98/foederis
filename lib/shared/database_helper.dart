@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 import 'shared_preferences.dart';
 
 class DatabaseHelper {
-  static final _databaseName = "database7.db";
+  static final _databaseName = "database9.db";
   static final _databaseVersion = 1;
 
   static final DatabaseHelper instance = DatabaseHelper._internal();
@@ -57,7 +57,23 @@ class DatabaseHelper {
       'USER_PREFERENCES',
       {
         'NAME': SharedPreferencesName.address,
-        'VALUE': 'Warszawa, Poland', // todo now is Warsaw geohash
+        'VALUE': 'Warszawa, Poland',
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    await db.insert(
+      'USER_PREFERENCES',
+      {
+        'NAME': SharedPreferencesName.languageCode,
+        'VALUE': 'en',
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    await db.insert(
+      'USER_PREFERENCES',
+      {
+        'NAME': SharedPreferencesName.countryCode,
+        'VALUE': 'US',
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -72,10 +88,6 @@ class DatabaseHelper {
         ],
         where: 'NAME = ?',
         whereArgs: [sharedPreferencesName]);
-    // if (maps.length > 0 && maps.first['VALUE'] == 'MAP') {
-    //   return SharedPreferencesCode.map;
-    // }
-    // return SharedPreferencesCode.list;
     return maps.first['VALUE'].toString();
   }
 

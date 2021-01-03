@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_bloc.dart';
+import 'package:engineering_thesis/models/attendee.dart';
 import 'package:engineering_thesis/repositories/attendee_repository.dart';
 import 'package:meta/meta.dart';
 
@@ -10,7 +11,7 @@ class AttendeeFetchBloc extends FetchBloc {
   AttendeeFetchBloc(this._attendeeRepository, {@required this.activityRef});
 
   @override
-  Future fetch(_) async {
-    await _attendeeRepository.fetchAllAttendees(activityRef);
+  Future<List<Attendee>> fetch(_) async {
+    return await _attendeeRepository.fetchAllAttendees(activityRef);
   }
 }

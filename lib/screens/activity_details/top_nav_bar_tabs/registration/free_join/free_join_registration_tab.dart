@@ -1,8 +1,9 @@
 import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/free_join/free_join_registration_attendee_send_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
-import 'package:engineering_thesis/components/bloc_builders/send_with_validator/send_builder.dart';
+import 'package:engineering_thesis/components/bloc_builders/send/send_builder_button.dart';
 import 'package:engineering_thesis/components/templates/center_screen.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/attendee.dart';
 import 'package:engineering_thesis/repositories/attendee_repository.dart';
@@ -42,10 +43,11 @@ class FreeJoinRegistrationTab extends NavBarTab {
     return CenterScreen(
       content: Column(
         children: [
-          SendBuilder(
+          SendBuilderButton(
             sendBloc:
                 BlocProvider.of<FreeJoinRegistrationAttendeeSendBloc>(context),
-            sendButtonText: 'Zapisz się na aktywność.',
+            sendButtonText:
+                S.of(context).activity_details_screen_free_join_tab_join_button,
           )
         ],
       ),
@@ -53,8 +55,9 @@ class FreeJoinRegistrationTab extends NavBarTab {
   }
 
   @override
-  Icon getIcon(BuildContext context) => null;
+  Widget getIcon(BuildContext context) => null;
 
   @override
-  String getLabel(BuildContext context) => 'Registration';
+  String getLabel(BuildContext context) =>
+      S.of(context).activity_details_screen_free_join_tab_nav_bar_title;
 }

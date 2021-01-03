@@ -17,12 +17,14 @@ class ActivityCollection {
       CollectionField(fieldName: 'minEntry', isRequired: true);
   static CollectionField freeJoin =
       CollectionField(fieldName: 'freeJoin', isRequired: true);
-  static CollectionField regular =
-      CollectionField(fieldName: 'regular', isRequired: true);
+  static CollectionField description =
+      CollectionField(fieldName: 'description', isRequired: true);
   static CollectionField geohash =
       CollectionField(fieldName: 'geohash', isRequired: true);
   static CollectionField address =
       CollectionField(fieldName: 'address', isRequired: true);
+  static CollectionField isCancel =
+      CollectionField(fieldName: 'isCancel', isRequired: false);
 
   static List<CollectionField> get allFields => [
         userRef,
@@ -32,8 +34,9 @@ class ActivityCollection {
         maxEntry,
         minEntry,
         freeJoin,
-        regular,
+        description,
         geohash,
         address,
+        isCancel,
       ];
 }

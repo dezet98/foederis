@@ -19,10 +19,26 @@ class CustomChip extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: Dimensions.gutterVerySmall),
       child: ChoiceChip(
-        label: CustomText(text, textType: TextType.button),
+        label: CustomText.button(text),
         selected: selected,
         onSelected: onSelected,
       ),
+    );
+  }
+
+  static Widget label({
+    String label,
+  }) {
+    return Chip(
+      label: CustomText.chipLabel(label),
+    );
+  }
+
+  static Widget common({
+    Widget child,
+  }) {
+    return Chip(
+      label: child,
     );
   }
 }

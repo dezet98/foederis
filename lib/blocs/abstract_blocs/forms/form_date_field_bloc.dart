@@ -11,17 +11,22 @@ class FormDateFieldBloc extends FormFieldBloc<DateTime> {
   final List<Validator> Function(DateTime) validators;
   final List<QueryField> Function(DateTime) queryFieldFromResult;
   final String Function(BuildContext) getLabel;
+  final String Function(BuildContext) getDescription;
+  final bool withHour;
 
   FormDateFieldBloc({
-    @required this.initialResult,
+    this.initialResult,
     @required this.validators,
     @required this.getLabel,
     @required this.queryFieldFromResult,
+    this.getDescription,
+    this.withHour = true,
   }) : super(
           initialResult: initialResult,
           queryFieldFromResult: queryFieldFromResult,
           validators: validators,
           getLabel: getLabel,
+          getDescription: getDescription,
         );
 
   DateTime get maxDate => (validators(null)
