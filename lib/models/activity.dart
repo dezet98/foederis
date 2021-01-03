@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
+import 'package:flutter/material.dart';
 import 'package:geohash/geohash.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -19,6 +21,7 @@ class Activity {
   String description;
   String geohash;
   String address;
+  bool isCancel;
 
   // additional fields
   Category category;
@@ -36,6 +39,7 @@ class Activity {
     this.description = doc.getField(ActivityCollection.description);
     this.geohash = doc.getField(ActivityCollection.geohash);
     this.address = doc.getField(ActivityCollection.address);
+    this.isCancel = doc.getField(ActivityCollection.isCancel);
   }
 
   Activity.fromMap(Map<String, dynamic> data) {
@@ -49,6 +53,7 @@ class Activity {
     this.description = data[ActivityCollection.description.fieldName];
     this.geohash = data[ActivityCollection.geohash.fieldName];
     this.address = data[ActivityCollection.address.fieldName];
+    this.isCancel = data[ActivityCollection.isCancel.fieldName];
   }
 
   toMap() {
@@ -63,6 +68,7 @@ class Activity {
       ActivityCollection.maxEntry.fieldName: maxEntry,
       ActivityCollection.minEntry.fieldName: minEntry,
       ActivityCollection.address.fieldName: address,
+      ActivityCollection.isCancel.fieldName: isCancel,
     };
   }
 
@@ -70,4 +76,20 @@ class Activity {
         Geohash.decode(this.geohash).x,
         Geohash.decode(this.geohash).y,
       );
+
+  bool get isFinish => this.startDate.isBefore(DateTime.now());
+
+  String status(BuildContext context, List<Attendee> attendees) {
+    if (isCancel) return S.of(context).activity_cancel_status;
+
+    if (startDate.isBefore(DateTime.now()))
+      return S.of(context).activity_finish_status;
+
+    if (attendees.length > maxEntry)
+      return S.of(context).activity_no_places_status;
+
+    return S.of(context).activity_open_status;
+  }
+
+  Duration get timeToStart => startDate.difference(DateTime.now());
 }

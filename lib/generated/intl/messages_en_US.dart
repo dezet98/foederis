@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "activity_cancel_status" : MessageLookupByLibrary.simpleMessage("odwołana"),
     "activity_card_complete" : MessageLookupByLibrary.simpleMessage("ukończone"),
     "activity_card_free_join" : MessageLookupByLibrary.simpleMessage("wolny udział"),
     "activity_card_future" : MessageLookupByLibrary.simpleMessage("przyszłe"),
@@ -50,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "activity_details_screen_attendee_tab_join_date" : MessageLookupByLibrary.simpleMessage("data dołączenia:"),
     "activity_details_screen_attendee_tab_nav_bar_title" : MessageLookupByLibrary.simpleMessage("Uczestnicy"),
     "activity_details_screen_attendee_tab_role" : MessageLookupByLibrary.simpleMessage("rola:"),
+    "activity_details_screen_cancel_activity_button_text" : MessageLookupByLibrary.simpleMessage("anuluj aktywność"),
+    "activity_details_screen_cancel_involvement_button_text" : MessageLookupByLibrary.simpleMessage("anuluj udział w aktywności"),
     "activity_details_screen_details_tab_address" : MessageLookupByLibrary.simpleMessage("Adres"),
     "activity_details_screen_details_tab_attendees_label" : MessageLookupByLibrary.simpleMessage("Ilość uczestników"),
     "activity_details_screen_details_tab_attendees_range" : m0,
@@ -61,6 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "activity_details_screen_details_tab_records_label" : MessageLookupByLibrary.simpleMessage("Charakter zapisów"),
     "activity_details_screen_details_tab_records_with_appeal" : MessageLookupByLibrary.simpleMessage("wymagające akceptacji organizatora"),
     "activity_details_screen_details_tab_start_date" : MessageLookupByLibrary.simpleMessage("Data rozpoczęcia"),
+    "activity_details_screen_details_tab_status" : MessageLookupByLibrary.simpleMessage("Status aktywności"),
     "activity_details_screen_free_join_tab_join_button" : MessageLookupByLibrary.simpleMessage("Dołącz do aktywności"),
     "activity_details_screen_free_join_tab_nav_bar_title" : MessageLookupByLibrary.simpleMessage("Zapisy"),
     "activity_details_screen_map_tab_nav_bar_title" : MessageLookupByLibrary.simpleMessage("Map"),
@@ -71,6 +75,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "activity_details_screen_request_tab_no_results" : MessageLookupByLibrary.simpleMessage("Brak próśb o dołączenie do aktywności"),
     "activity_details_screen_requests_tab_accept_request" : MessageLookupByLibrary.simpleMessage("akceptuj prośbę o dołączenie"),
     "activity_details_screen_requests_tab_join_title" : MessageLookupByLibrary.simpleMessage("Prośby o dołączenie"),
+    "activity_finish_status" : MessageLookupByLibrary.simpleMessage("zakończona"),
+    "activity_no_places_status" : MessageLookupByLibrary.simpleMessage("brak miejsc"),
+    "activity_open_status" : MessageLookupByLibrary.simpleMessage("w trakcie zapisów"),
     "activity_role_attendee" : MessageLookupByLibrary.simpleMessage("uczestnik"),
     "activity_role_coorganizator" : MessageLookupByLibrary.simpleMessage("wspołorganizator"),
     "activity_role_maker" : MessageLookupByLibrary.simpleMessage("założyciel"),
@@ -135,6 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "localization_pl_PL" : MessageLookupByLibrary.simpleMessage("polski(Polska)"),
     "login_error_bad_credentials" : MessageLookupByLibrary.simpleMessage("Nie poprawny login bądź hasło"),
     "login_error_undefined" : MessageLookupByLibrary.simpleMessage("Wystąpił niezidentyfikowany problem przy logowaniu"),
+    "login_screen_change_language_label" : MessageLookupByLibrary.simpleMessage("Change language"),
     "login_screen_email_placeholder" : MessageLookupByLibrary.simpleMessage("Adres email"),
     "login_screen_go_to_register" : MessageLookupByLibrary.simpleMessage("Załóż konto"),
     "login_screen_login" : MessageLookupByLibrary.simpleMessage("Zaloguj się"),

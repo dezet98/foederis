@@ -37,10 +37,10 @@ class SearchActivitiesFetchingBloc
         _getGeohash(searchActivitiesFetchingArgsBloc);
 
     List<Activity> activities =
-        await activityRepository.fetchAllFutureActivities(
-      lowerGeohash: geohashResults['lowerGeohash'],
-      upperGeohash: geohashResults['upperGeohash'],
-    );
+        await activityRepository.fetchAllNotMyFutureActivities(
+            lowerGeohash: geohashResults['lowerGeohash'],
+            upperGeohash: geohashResults['upperGeohash'],
+            userRef: userDataBloc?.user?.ref);
 
     for (Activity activity in activities)
       activity.category =

@@ -120,6 +120,7 @@
     "activity_details_screen_details_tab_attendees_range_label": "Możliwa ilość uczestników",
     "activity_details_screen_details_tab_attendees_range": "Od {min} do {max}",
     "activity_details_screen_details_tab_description": "Opis aktywności",
+    "activity_details_screen_details_tab_status": "Status aktywności",
     "activity_details_screen_details_tab_start_date": "Data rozpoczęcia",
     "activity_details_screen_details_tab_category": "Kategoria",
     "activity_details_screen_free_join_tab_nav_bar_title": "Zapisy",
@@ -133,6 +134,13 @@
 
     "activity_details_screen_request_tab_no_results": "Brak próśb o dołączenie do aktywności",
     "appeal_join_form_comment_label": "Wiadomość",
-    "appeal_join_form_comment_placeholder": "Komentarz do prośby"
+    "appeal_join_form_comment_placeholder": "Komentarz do prośby",
+    "login_screen_change_language_label": "Change language",
+    "activity_details_screen_cancel_activity_button_text": "anuluj aktywność",
+    "activity_details_screen_cancel_involvement_button_text": "anuluj udział w aktywności",
+    "activity_cancel_status": "odwołana",
+    "activity_open_status": "w trakcie zapisów",
+    "activity_finish_status": "zakończona",
+    "activity_no_places_status": "brak miejsc"
 
 }

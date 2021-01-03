@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:engineering_thesis/blocs/abstract_blocs/nav_bar/nav_bar_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/home_screen_bottom_nav_bar_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/shared_preferences/shared_preferences_bloc.dart';
@@ -21,8 +23,10 @@ class LocalizationChange extends StatelessWidget {
       },
       builder: (context, state) {
         return CustomDropdownButton<Locale>(
-          value: Locale(SharedPreferences().languageCode,
-              SharedPreferences().countryCode),
+          value: Locale(
+            SharedPreferences().languageCode,
+            SharedPreferences().countryCode,
+          ),
           dropdownItems: [
             for (Locale locale in S.delegate.supportedLocales) locale,
           ],
@@ -37,7 +41,7 @@ class LocalizationChange extends StatelessWidget {
     );
   }
 
-  String toLabel(BuildContext context, String languageCode) {
+  static String toLabel(BuildContext context, String languageCode) {
     switch (languageCode) {
       case 'en':
         return S.of(context).localization_en_US;
@@ -48,5 +52,37 @@ class LocalizationChange extends StatelessWidget {
     }
 
     return '';
+  }
+}
+
+class LocalizationWithoutPreferences extends StatefulWidget {
+  @override
+  _LocalizationWithoutPreferencesState createState() =>
+      _LocalizationWithoutPreferencesState();
+}
+
+class _LocalizationWithoutPreferencesState
+    extends State<LocalizationWithoutPreferences> {
+  Locale locale = window.locale;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomDropdownButton<Locale>(
+      value: Locale(
+        locale.languageCode,
+        locale.countryCode,
+      ),
+      dropdownItems: [
+        for (Locale locale in S.delegate.supportedLocales) locale,
+      ],
+      getItemLabel: (context, Locale locale) =>
+          LocalizationChange.toLabel(context, locale.languageCode),
+      onChanged: (Locale newLocale) {
+        setState(() {
+          locale = newLocale;
+          S.load(Locale(newLocale.languageCode, newLocale.countryCode));
+        });
+      },
+    );
   }
 }

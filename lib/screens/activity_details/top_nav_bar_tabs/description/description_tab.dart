@@ -15,13 +15,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class DescriptionTab extends NavBarTab {
   final Activity activity;
   final List<Attendee> attendees;
+  final Widget cancelActivityButton;
+  final Widget cancelInvolvementButton;
 
-  DescriptionTab({@required this.activity, @required this.attendees});
+  DescriptionTab({
+    @required this.activity,
+    @required this.attendees,
+    this.cancelActivityButton,
+    this.cancelInvolvementButton,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        _getActivityStatus,
         _getRecordsAttribute,
         _getAttendesAttribute,
         _getAddressAttribute,
@@ -29,6 +37,9 @@ class DescriptionTab extends NavBarTab {
         _getDescriptionAttribute,
         _getStartDateAttribute,
         _buildCategoryAttribute,
+        SizedBox(height: Dimensions.gutterMedium),
+        if (cancelActivityButton != null) cancelActivityButton,
+        if (cancelInvolvementButton != null) cancelInvolvementButton,
       ],
     );
   }
@@ -44,6 +55,16 @@ class DescriptionTab extends NavBarTab {
           ),
           CustomText.listItem(text),
         ],
+      ),
+    );
+  }
+
+  Widget get _getActivityStatus {
+    return Builder(
+      builder: (context) => _buildSingleAttribute(
+        context,
+        S.of(context).activity_details_screen_details_tab_status,
+        activity.status(context, attendees),
       ),
     );
   }

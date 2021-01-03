@@ -23,6 +23,10 @@ class CustomIcon {
         return Icon(PlatformIcons(context).back);
       });
 
+  static Widget get settings => Builder(builder: (context) {
+        return Icon(PlatformIcons(context).settings);
+      });
+
   static Widget get person => Builder(builder: (context) {
         return Icon(PlatformIcons(context).person);
       });

@@ -3,19 +3,18 @@ import 'package:engineering_thesis/components/custom_widgets/list/custom_list.da
 import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/attendee.dart';
-import 'package:engineering_thesis/models/collections/attendee_collection.dart';
 import 'package:engineering_thesis/screens/activity_details/top_nav_bar_tabs/attendees/attendee_user_card.dart';
 import 'package:flutter/material.dart';
 
 class AttendeesTab extends NavBarTab {
   final Activity activity;
   final List<Attendee> attendees;
-  final AttendeeRole attendeeRole;
+  final Attendee attendee;
 
   AttendeesTab(
       {@required this.activity,
       @required this.attendees,
-      @required this.attendeeRole});
+      @required this.attendee});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class AttendeesTab extends NavBarTab {
       items: attendees,
       buildTile: (Attendee attendee) => AttendeeUserCard(
         attendee: attendee,
-        attendeeRole: attendeeRole,
+        attendeeRole: attendee.role,
       ),
     );
   }

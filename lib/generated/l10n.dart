@@ -1233,6 +1233,16 @@ class S {
     );
   }
 
+  /// `Status aktywności`
+  String get activity_details_screen_details_tab_status {
+    return Intl.message(
+      'Status aktywności',
+      name: 'activity_details_screen_details_tab_status',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Data rozpoczęcia`
   String get activity_details_screen_details_tab_start_date {
     return Intl.message(
@@ -1358,6 +1368,76 @@ class S {
     return Intl.message(
       'Komentarz do prośby',
       name: 'appeal_join_form_comment_placeholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change language`
+  String get login_screen_change_language_label {
+    return Intl.message(
+      'Change language',
+      name: 'login_screen_change_language_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `anuluj aktywność`
+  String get activity_details_screen_cancel_activity_button_text {
+    return Intl.message(
+      'anuluj aktywność',
+      name: 'activity_details_screen_cancel_activity_button_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `anuluj udział w aktywności`
+  String get activity_details_screen_cancel_involvement_button_text {
+    return Intl.message(
+      'anuluj udział w aktywności',
+      name: 'activity_details_screen_cancel_involvement_button_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `odwołana`
+  String get activity_cancel_status {
+    return Intl.message(
+      'odwołana',
+      name: 'activity_cancel_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `w trakcie zapisów`
+  String get activity_open_status {
+    return Intl.message(
+      'w trakcie zapisów',
+      name: 'activity_open_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `zakończona`
+  String get activity_finish_status {
+    return Intl.message(
+      'zakończona',
+      name: 'activity_finish_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `brak miejsc`
+  String get activity_no_places_status {
+    return Intl.message(
+      'brak miejsc',
+      name: 'activity_no_places_status',
       desc: '',
       args: [],
     );

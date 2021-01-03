@@ -20,27 +20,29 @@ class AttendeeRepository {
         .toList();
   }
 
-  // Attendee _fromDocumentSnapshot(DocumentSnapshot documentSnapshot) {
-  //   return Attendee.fromDocument(documentSnapshot);
-  // }
-
-  Future<List<Attendee>> fetchAllAttendees(
-      DocumentReference activityRef) async {
-    List<FetchFilter> filters = [];
-    filters.add(
+  Future<List<Attendee>> fetchAllAttendees(DocumentReference activityRef,
+      {bool withoutCancel = true}) async {
+    List<FetchFilter> filters = [
       FetchFilter(
         fieldName: AttendeeCollection.activityRef.fieldName,
         fieldValue: activityRef,
         filterType: FetchFilterType.isEqualTo,
       ),
-    );
+      if (withoutCancel)
+        FetchFilter(
+          fieldName: AttendeeCollection.isCancel.fieldName,
+          fieldValue: false,
+          filterType: FetchFilterType.isEqualTo,
+        ),
+    ];
 
     return await _remoteRepository.getCollection<List<Attendee>>(
         filters, collectionPath, _fromQuerySnapshot);
   }
 
   Future<Attendee> fetchAttendee(
-      DocumentReference activityRef, DocumentReference userRef) async {
+      DocumentReference activityRef, DocumentReference userRef,
+      {bool withoutCancel = true}) async {
     List<FetchFilter> filters = [
       FetchFilter(
         fieldName: AttendeeCollection.activityRef.fieldName,
@@ -51,7 +53,13 @@ class AttendeeRepository {
         fieldName: AttendeeCollection.userRef.fieldName,
         fieldValue: userRef,
         filterType: FetchFilterType.isEqualTo,
-      )
+      ),
+      if (withoutCancel)
+        FetchFilter(
+          fieldName: AttendeeCollection.isCancel.fieldName,
+          fieldValue: false,
+          filterType: FetchFilterType.isEqualTo,
+        )
     ];
 
     List<Attendee> attendees =
@@ -61,37 +69,61 @@ class AttendeeRepository {
   }
 
   Stream<List<Attendee>> getAttendeesStreamByActivity(
-      DocumentReference activityRef) {
-    List<FetchFilter> filters = [];
-    filters.add(
+      DocumentReference activityRef,
+      {bool withoutCancel = true}) {
+    List<FetchFilter> filters = [
       FetchFilter(
         fieldName: AttendeeCollection.activityRef.fieldName,
         fieldValue: activityRef,
         filterType: FetchFilterType.isEqualTo,
       ),
-    );
+      if (withoutCancel)
+        FetchFilter(
+          fieldName: AttendeeCollection.isCancel.fieldName,
+          fieldValue: false,
+          filterType: FetchFilterType.isEqualTo,
+        )
+    ];
 
     return _remoteRepository.getCollectionStream<List<Attendee>>(
         collectionPath, filters, _fromQuerySnapshot);
   }
 
-  Stream<List<Attendee>> getAttendeesStreamByUser(DocumentReference userRef) {
-    List<FetchFilter> filters = [];
-    filters.add(
+  Stream<List<Attendee>> getAttendeesStreamByUser(DocumentReference userRef,
+      {bool withoutCancel = true}) {
+    List<FetchFilter> filters = [
       FetchFilter(
         fieldName: AttendeeCollection.userRef.fieldName,
         fieldValue: userRef,
         filterType: FetchFilterType.isEqualTo,
       ),
-    );
+      if (withoutCancel)
+        FetchFilter(
+          fieldName: AttendeeCollection.isCancel.fieldName,
+          fieldValue: false,
+          filterType: FetchFilterType.isEqualTo,
+        ),
+    ];
 
     return _remoteRepository.getCollectionStream<List<Attendee>>(
         collectionPath, filters, _fromQuerySnapshot);
   }
 
+  Future<void> cancelAttendee(Attendee attendee) async {
+    Map<String, dynamic> activityMap = Collection.fillRemainsData(
+        attendee.toMap(), AttendeeCollection.allFields);
+
+    activityMap[AttendeeCollection.isCancel.fieldName] = true;
+
+    return await _remoteRepository.insertWithNameToCollection(
+        activityMap, AttendeeCollection.collectionName, attendee.ref.id);
+  }
+
   Future<DocumentReference> createAttendee(Attendee attendee) async {
     Map<String, dynamic> data = Collection.fillRemainsData(
         attendee.toMap(), AttendeeCollection.allFields);
+
+    data[AttendeeCollection.isCancel.fieldName] = false;
 
     return await _remoteRepository.insertToCollection(
       data,

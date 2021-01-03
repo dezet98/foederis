@@ -24,7 +24,7 @@ class ActivityRepository {
     return Activity.fromDocument(documentSnapshot);
   }
 
-  Future<List<Activity>> fetchAllFutureActivities({
+  Future<List<Activity>> fetchAllNotMyFutureActivities({
     @required String lowerGeohash,
     @required String upperGeohash,
     DocumentReference userRef,
@@ -49,22 +49,20 @@ class ActivityRepository {
 
     return activities
         .where((element) => element.startDate.isAfter(DateTime.now()))
+        .toList()
+        .where((element) => element.userRef.id != userRef?.id)
         .toList();
   }
 
-  // Stream<List<Activity>> getMyActivitiesStream(DocumentReference userRef) {
-  //   List<FetchFilter> filters = [];
-  //   filters.addAll([
-  //     FetchFilter(
-  //       fieldName: ActivityCollection.us.fieldName,
-  //       fieldValue: lowerGeohash,
-  //       filterType: FetchFilterType.isGreaterThanOrEqualTo,
-  //     ),
-  //   ]);
+  Future<void> cancelActivity(Activity activity) async {
+    Map<String, dynamic> activityMap = Collection.fillRemainsData(
+        activity.toMap(), ActivityCollection.allFields);
 
-  //   return _remoteRepository.getCollectionStream(
-  //       ActivityCollection.collectionName, _fromQuerySnapshot);
-  // }
+    activityMap[ActivityCollection.isCancel.fieldName] = true;
+
+    return await _remoteRepository.insertWithNameToCollection(
+        activityMap, ActivityCollection.collectionName, activity.ref.id);
+  }
 
   Stream<Activity> getCollectionItemStream(DocumentReference activityRef) {
     return _remoteRepository.getCollectionItemStream(
@@ -76,6 +74,8 @@ class ActivityRepository {
     activity.userRef = userDataBloc.user.ref;
     Map<String, dynamic> activityMap = Collection.fillRemainsData(
         activity.toMap(), ActivityCollection.allFields);
+
+    activityMap[ActivityCollection.isCancel.fieldName] = false;
 
     return await _remoteRepository.insertToCollection(
         activityMap, ActivityCollection.collectionName);

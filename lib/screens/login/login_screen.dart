@@ -1,8 +1,13 @@
+import 'package:engineering_thesis/components/custom_widgets/bottom_sheet/custom_bottom_sheet.dart';
 import 'package:engineering_thesis/components/custom_widgets/buttons/custom_button.dart';
+import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:engineering_thesis/components/custom_widgets/snack_bar.dart/custom_snack_bar.dart';
+import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/components/custom_widgets/text_form_field/custom_text_form_field.dart';
 import 'package:engineering_thesis/components/templates/template_screen.dart';
+import 'package:engineering_thesis/screens/home/bottom_nav_bar_tabs/settings/localization_change.dart';
 import 'package:engineering_thesis/shared/constants/enums.dart';
+import 'package:engineering_thesis/shared/theme.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,35 +38,73 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget _buildLoginContent(context, bool loading) {
-    return Column(
+    return Stack(
       children: [
-        CustomTextFormField.normal(
-          textEditingController: _emailController,
-          enabled: !loading,
-          placeholder: S.of(context).login_screen_email_placeholder,
+        Column(
+          children: [
+            SizedBox(height: Dimensions.gutterLarge),
+            CustomTextFormField.normal(
+              textEditingController: _emailController,
+              enabled: !loading,
+              placeholder: S.of(context).login_screen_email_placeholder,
+            ),
+            SizedBox(height: Dimensions.gutterMedium),
+            CustomTextFormField.normal(
+                textEditingController: _passwordController,
+                enabled: !loading,
+                obscureText: true,
+                placeholder: S.of(context).login_screen_password_placeholder),
+            CustomButton.goToOtherScreen(
+              text: S.of(context).login_screen_go_to_register,
+              onPressed: () => _navigateToRegister(context),
+              enabled: !loading,
+            ),
+            CustomButton.goToOtherScreen(
+              text: S.of(context).login_screen_visit_as_a_guest,
+              onPressed: () => _navigateToHomeAsAGuest(context),
+              enabled: !loading,
+            ),
+            if (!loading)
+              CustomButton.applyForm(
+                text: S.of(context).login_screen_login,
+                onPressed: () => _loginOnPressed(context),
+              ),
+            if (loading) CustomButton.loadingButton(),
+          ],
         ),
-        CustomTextFormField.normal(
-            textEditingController: _passwordController,
-            enabled: !loading,
-            obscureText: true,
-            placeholder: S.of(context).login_screen_password_placeholder),
-        CustomButton.goToOtherScreen(
-          text: S.of(context).login_screen_go_to_register,
-          onPressed: () => _navigateToRegister(context),
-          enabled: !loading,
+        Positioned(
+          child: _buildSettingsButton(context),
+          right: 0,
         ),
-        CustomButton.goToOtherScreen(
-          text: S.of(context).login_screen_visit_as_a_guest,
-          onPressed: () => _navigateToHomeAsAGuest(context),
-          enabled: !loading,
-        ),
-        if (!loading)
-          CustomButton.applyForm(
-            text: S.of(context).login_screen_login,
-            onPressed: () => _loginOnPressed(context),
-          ),
-        if (loading) CustomButton.loadingButton(),
       ],
+    );
+  }
+
+  Widget _buildSettingsButton(BuildContext context) {
+    return CustomButton.floatingButton(
+      customIcon: CustomIcon.settings,
+      onPressed: () {
+        CustomBottomSheet.show(
+          context,
+          (context) => Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(Dimensions.screenPadding),
+                child: Wrap(
+                  children: [
+                    CustomText.modalText(
+                        S.of(context).login_screen_change_language_label),
+                    Align(
+                      alignment: Alignment.center,
+                      child: LocalizationWithoutPreferences(),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 

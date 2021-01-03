@@ -73,7 +73,7 @@ class ActivityCard {
 
   // chips
   static Widget _startDateClockChip(BuildContext context, Activity activity) {
-    Duration timeToStart = activity.startDate.difference(DateTime.now());
+    Duration timeToStart = activity.timeToStart;
     String text =
         '${S.of(context).plural_days(timeToStart.inDays)} ${S.of(context).plural_hours(timeToStart.inHours % 60)} ${S.of(context).plural_minutes(timeToStart.inMinutes % 60)}';
 
@@ -82,11 +82,14 @@ class ActivityCard {
   }
 
   static Widget _activityStatusChip(BuildContext context, Activity activity) {
-    bool completed = activity.startDate.isAfter(DateTime.now());
-    return CustomChip.label(
-      label: completed
-          ? S.of(context).activity_card_future
-          : S.of(context).activity_card_complete,
+    return FetchingBlocBuilder(
+      fetchingCubit: AttendeeFetchBloc(
+        RepositoryProvider.of<AttendeeRepository>(context),
+        activityRef: activity.ref,
+      ),
+      buildSuccess: (attendees) => CustomChip.label(
+        label: activity.status(context, attendees),
+      ),
     );
   }
 

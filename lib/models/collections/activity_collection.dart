@@ -23,6 +23,8 @@ class ActivityCollection {
       CollectionField(fieldName: 'geohash', isRequired: true);
   static CollectionField address =
       CollectionField(fieldName: 'address', isRequired: true);
+  static CollectionField isCancel =
+      CollectionField(fieldName: 'isCancel', isRequired: true);
 
   static List<CollectionField> get allFields => [
         userRef,
@@ -35,5 +37,6 @@ class ActivityCollection {
         description,
         geohash,
         address,
+        isCancel,
       ];
 }

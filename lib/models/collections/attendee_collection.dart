@@ -13,13 +13,15 @@ class AttendeeCollection {
       CollectionField(fieldName: 'userRef', isRequired: true);
   static CollectionField joinDate =
       CollectionField(fieldName: 'joinDate', isRequired: true);
+  static CollectionField isCancel =
+      CollectionField(fieldName: 'isCancel', isRequired: false);
   static CollectionField role = CollectionField(
       fieldName: 'role',
       isRequired: true,
       defaultValue: enumToString(AttendeeRole.attendee));
 
   static List<CollectionField> get allFields =>
-      [activityRef, userRef, joinDate];
+      [activityRef, userRef, joinDate, isCancel];
 
   static attendeeToString(BuildContext context, AttendeeRole role) {
     switch (role) {

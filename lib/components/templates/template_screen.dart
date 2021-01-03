@@ -18,11 +18,13 @@ class TemplateScreen extends StatelessWidget {
   final Widget body;
   final CustomAppBar platformAppBar;
   final bool usePadding;
+  final bool safeArea;
 
   TemplateScreen({
     @required this.body,
     this.platformAppBar,
     this.usePadding = true,
+    this.safeArea = true,
   });
 
   @override
@@ -30,9 +32,11 @@ class TemplateScreen extends StatelessWidget {
     return PlatformScaffold(
       appBar: platformAppBar?.getPlatformAppBar(context),
       body: usePadding
-          ? Padding(
-              padding: const EdgeInsets.all(Dimensions.screenPadding),
-              child: body,
+          ? SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(Dimensions.screenPadding),
+                child: body,
+              ),
             )
           : body,
     );
