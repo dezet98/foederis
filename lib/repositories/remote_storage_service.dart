@@ -1,14 +1,14 @@
 import 'dart:io';
 
-import 'package:engineering_thesis/shared/constants/enums.dart';
-import 'package:engineering_thesis/shared/exceptions.dart';
+import 'package:engineering_thesis/shared/constants/errors.dart';
+import 'package:engineering_thesis/shared/exceptions/exceptions.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:meta/meta.dart';
 
-class RemoteStorage {
+class RemoteStorageService {
   final FirebaseStorage _firebaseStorage;
 
-  RemoteStorage({FirebaseStorage firebaseStorage})
+  RemoteStorageService({FirebaseStorage firebaseStorage})
       : _firebaseStorage = firebaseStorage ?? FirebaseStorage.instance;
 
   Future<String> loadFile(String path) async {

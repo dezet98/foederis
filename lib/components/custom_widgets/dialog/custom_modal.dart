@@ -1,7 +1,7 @@
 import 'package:engineering_thesis/components/custom_widgets/dialog/custom_dialog_action.dart';
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
-import 'package:engineering_thesis/shared/routing.dart';
+import 'package:engineering_thesis/shared/routing/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 

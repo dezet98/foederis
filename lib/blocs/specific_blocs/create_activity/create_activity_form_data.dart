@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 
 import '../../../models/category.dart';
 import '../../../models/collections/activity_collection.dart';
-import '../../../models/collections/query_field.dart';
-import '../../../models/geolocation.dart';
+import '../../../models/utils/geolocation.dart';
+import '../../../models/utils/query_field.dart';
 import '../../../repositories/activity_repository.dart';
 import '../../../repositories/category_repository.dart';
 import '../../abstract_blocs/forms/form_address_field_bloc.dart';

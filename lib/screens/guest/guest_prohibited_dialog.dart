@@ -2,7 +2,7 @@ import 'package:engineering_thesis/components/custom_widgets/dialog/custom_dialo
 import 'package:engineering_thesis/components/custom_widgets/dialog/custom_modal.dart';
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
-import 'package:engineering_thesis/shared/routing.dart';
+import 'package:engineering_thesis/shared/routing/routing.dart';
 
 class GuestProhibitedDialog {
   static showDialog(context) {

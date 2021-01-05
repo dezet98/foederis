@@ -5,7 +5,7 @@ import 'package:engineering_thesis/blocs/specific_blocs/home_screen/home_screen_
 import 'package:engineering_thesis/blocs/specific_blocs/shared_preferences/shared_preferences_bloc.dart';
 import 'package:engineering_thesis/components/custom_widgets/dropdown/custom_dropdown_button.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
-import 'package:engineering_thesis/shared/shared_preferences.dart';
+import 'package:engineering_thesis/shared/local_database/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

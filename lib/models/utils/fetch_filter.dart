@@ -1,4 +1,4 @@
-import 'package:engineering_thesis/shared/constants/enums.dart';
+import 'package:engineering_thesis/shared/constants/errors.dart';
 import 'package:flutter/cupertino.dart';
 
 class FetchFilter<FieldValueType> {

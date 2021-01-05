@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../blocs/specific_blocs/authorization/auth/auth_bloc.dart';
-import '../../shared/routing.dart';
+import '../../shared/routing/routing.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

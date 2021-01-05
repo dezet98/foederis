@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:engineering_thesis/blocs/abstract_blocs/validators/validator.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../../models/collections/query_field.dart';
+import '../../../models/utils/query_field.dart';
 import 'form_field/form_field_bloc.dart';
 
 class FormPhotoFieldBloc extends FormFieldBloc<File> {

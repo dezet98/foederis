@@ -1,16 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
-import 'package:engineering_thesis/models/collections/collection.dart';
-import 'package:engineering_thesis/shared/constants/enums.dart';
+import 'package:engineering_thesis/models/utils/collection.dart';
+import 'package:engineering_thesis/shared/constants/errors.dart';
 import 'package:meta/meta.dart';
 
 import '../models/activity.dart';
 import '../models/collections/activity_collection.dart';
-import '../models/fetch_filter.dart';
-import '../shared/remote_repository.dart';
+import '../models/utils/fetch_filter.dart';
+import 'remote_database_service.dart';
 
 class ActivityRepository {
-  final RemoteRepository _remoteRepository;
+  final RemoteDatabaseService _remoteRepository;
+  final String collectionName = ActivityCollection.collectionName;
 
   ActivityRepository(this._remoteRepository);
 
@@ -45,7 +46,7 @@ class ActivityRepository {
 
     List<Activity> activities =
         await _remoteRepository.getCollection<List<Activity>>(
-            filters, ActivityCollection.collectionName, _fromQuerySnapshot);
+            filters, collectionName, _fromQuerySnapshot);
 
     return activities
         .where((element) => element.startDate.isAfter(DateTime.now()))
@@ -61,7 +62,7 @@ class ActivityRepository {
     activityMap[ActivityCollection.isCancel.fieldName] = true;
 
     return await _remoteRepository.insertWithNameToCollection(
-        activityMap, ActivityCollection.collectionName, activity.ref.id);
+        activityMap, collectionName, activity.ref.id);
   }
 
   Stream<Activity> getCollectionItemStream(DocumentReference activityRef) {
@@ -78,6 +79,6 @@ class ActivityRepository {
     activityMap[ActivityCollection.isCancel.fieldName] = false;
 
     return await _remoteRepository.insertToCollection(
-        activityMap, ActivityCollection.collectionName);
+        activityMap, collectionName);
   }
 }

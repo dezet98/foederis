@@ -1,19 +1,19 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/shared/constants/enums.dart';
+import 'package:engineering_thesis/shared/constants/errors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../../repositories/auth_repository.dart';
-import '../../../../shared/exceptions.dart';
+import '../../../../repositories/remote_auth_service.dart';
+import '../../../../shared/exceptions/exceptions.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final AuthRepository _authRepository;
-  LoginBloc({@required AuthRepository authRepository})
+  final RemoteAuthService _authRepository;
+  LoginBloc({@required RemoteAuthService authRepository})
       : _authRepository = authRepository,
         super(LoginInitialState());
 

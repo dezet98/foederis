@@ -1,17 +1,18 @@
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/shared/shared_preferences.dart';
+import 'package:engineering_thesis/shared/local_database/shared_preferences.dart';
+import 'package:engineering_thesis/shared/providers/main_bloc_providers.dart';
+import 'package:engineering_thesis/shared/providers/main_repository_providers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import 'generated/l10n.dart';
-import 'shared/initialize_app.dart';
-import 'shared/localizations.dart';
-import 'shared/providers.dart';
-import 'shared/routing.dart';
-import 'shared/simple_bloc_observer.dart';
-import 'shared/theme.dart';
+import 'shared/initialization/initialize_app.dart';
+import 'shared/logger/simple_bloc_observer.dart';
+import 'shared/routing/routing.dart';
+import 'shared/utils/localizations.dart';
+import 'shared/view/theme.dart';
 
 void main() async {
   await InitializeApp.initializeApp();

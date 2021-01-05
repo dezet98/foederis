@@ -1,6 +1,6 @@
-import 'package:engineering_thesis/shared/constants/enums.dart';
+import 'package:engineering_thesis/shared/constants/errors.dart';
 
-import '../../shared/exceptions.dart';
+import '../../shared/exceptions/exceptions.dart';
 import 'query_field.dart';
 
 abstract class Collection {

@@ -5,7 +5,7 @@ import 'package:engineering_thesis/components/custom_widgets/dialog/custom_modal
 import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
-import 'package:engineering_thesis/shared/theme.dart';
+import 'package:engineering_thesis/shared/view/theme.dart';
 import 'package:flutter/material.dart';
 
 class FormFieldAdditionalInfo extends StatelessWidget {

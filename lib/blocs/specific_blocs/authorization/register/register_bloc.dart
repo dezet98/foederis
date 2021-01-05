@@ -1,20 +1,20 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/shared/constants/enums.dart';
+import 'package:engineering_thesis/shared/constants/errors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../repositories/auth_repository.dart';
-import '../../../../shared/exceptions.dart';
+import '../../../../repositories/remote_auth_service.dart';
+import '../../../../shared/exceptions/exceptions.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-  final AuthRepository _authRepository;
+  final RemoteAuthService _authRepository;
 
-  RegisterBloc({@required AuthRepository authRepository})
+  RegisterBloc({@required RemoteAuthService authRepository})
       : _authRepository = authRepository,
         super(RegisterInitialState());
 

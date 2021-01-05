@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/abstract_blocs/choice_filters/filter/filter_bloc.dart';
 import '../../../blocs/abstract_blocs/choice_filters/filter_option/filter_option_bloc.dart';
-import '../../../shared/theme.dart';
+import '../../../shared/view/theme.dart';
 import '../../custom_widgets/chips/custom_chip.dart';
 
 class FilterChoice extends StatelessWidget {

@@ -7,7 +7,7 @@ import 'package:engineering_thesis/models/app_user.dart';
 import 'package:engineering_thesis/models/attendee.dart';
 import 'package:engineering_thesis/models/collections/attendee_collection.dart';
 import 'package:engineering_thesis/repositories/attendee_repository.dart';
-import 'package:engineering_thesis/shared/theme.dart';
+import 'package:engineering_thesis/shared/view/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';

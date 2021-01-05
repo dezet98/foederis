@@ -2,7 +2,7 @@ import 'package:engineering_thesis/components/custom_widgets/avatar/custom_user_
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/app_user.dart';
-import 'package:engineering_thesis/shared/theme.dart';
+import 'package:engineering_thesis/shared/view/theme.dart';
 import 'package:flutter/cupertino.dart';
 
 class UserData extends StatelessWidget {

@@ -1,15 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:engineering_thesis/shared/constants/enums.dart';
+import 'package:engineering_thesis/shared/constants/errors.dart';
 import 'package:meta/meta.dart';
 
 import '../models/category.dart';
 import '../models/collections/category_collection.dart';
-import '../models/fetch_filter.dart';
-import '../shared/remote_repository.dart';
+import '../models/utils/fetch_filter.dart';
+import 'remote_database_service.dart';
 
 class CategoryRepository {
-  final RemoteRepository database;
+  final RemoteDatabaseService database;
   final String collectionName = CategoryCollection.collectionName;
+
   CategoryRepository({@required this.database});
 
   List<Category> _fromQuerySnapshot(QuerySnapshot querySnapshot) {

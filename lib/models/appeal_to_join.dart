@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../shared/extensions.dart';
+import '../shared/extensions/extensions.dart';
 import 'app_user.dart';
 import 'collections/appeal_to_join_collection.dart';
 

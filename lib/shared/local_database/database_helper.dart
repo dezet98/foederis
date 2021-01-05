@@ -49,7 +49,7 @@ class DatabaseHelper {
       'USER_PREFERENCES',
       {
         'NAME': SharedPreferencesName.geohash,
-        'VALUE': 'u3qcnhhk3yy', // todo now is Warsaw geohash
+        'VALUE': 'u3qcnhhk3yy',
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );

@@ -4,8 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../shared/database_helper.dart';
-import '../../../shared/shared_preferences.dart';
+import '../../../shared/local_database/database_helper.dart';
+import '../../../shared/local_database/shared_preferences.dart';
 
 part 'shared_preferences_event.dart';
 part 'shared_preferences_state.dart';

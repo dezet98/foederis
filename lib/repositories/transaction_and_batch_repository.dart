@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/models/attendee.dart';
 import 'package:engineering_thesis/models/collections/appeal_to_join_collection.dart';
 import 'package:engineering_thesis/models/collections/attendee_collection.dart';
-import 'package:engineering_thesis/models/collections/collection.dart';
-import 'package:engineering_thesis/shared/remote_repository.dart';
+import 'package:engineering_thesis/models/utils/collection.dart';
+import 'package:engineering_thesis/repositories/remote_database_service.dart';
 import 'package:meta/meta.dart';
 
 class TransactionAndBatchRepository {
-  final RemoteRepository _remoteRepository;
+  final RemoteDatabaseService _remoteRepository;
 
   TransactionAndBatchRepository(this._remoteRepository);
 
@@ -34,7 +34,7 @@ class TransactionAndBatchRepository {
     await _remoteRepository.commitBatch(batch);
   }
 
-  // references (for translaction)
+  // references (for translaction and bathes)
   Future<DocumentReference> referenceFromCollection(
       String collectionPath) async {
     return await _remoteRepository.referenceToItem(

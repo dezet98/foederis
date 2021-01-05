@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/shared/constants/enums.dart';
-import 'package:engineering_thesis/shared/exceptions.dart';
+import 'package:engineering_thesis/shared/constants/errors.dart';
+import 'package:engineering_thesis/shared/exceptions/exceptions.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 

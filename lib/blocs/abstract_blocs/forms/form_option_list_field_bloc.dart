@@ -1,7 +1,7 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/validators/validator.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../models/collections/query_field.dart';
+import '../../../models/utils/query_field.dart';
 import '../fetch/fetch_bloc.dart';
 import 'form_field/form_field_bloc.dart';
 

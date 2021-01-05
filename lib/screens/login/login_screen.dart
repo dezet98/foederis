@@ -2,15 +2,15 @@ import 'package:engineering_thesis/components/custom_widgets/buttons/custom_butt
 import 'package:engineering_thesis/components/custom_widgets/snack_bar.dart/custom_snack_bar.dart';
 import 'package:engineering_thesis/components/custom_widgets/text_form_field/custom_text_form_field.dart';
 import 'package:engineering_thesis/components/templates/template_screen.dart';
-import 'package:engineering_thesis/shared/constants/enums.dart';
-import 'package:engineering_thesis/shared/theme.dart';
+import 'package:engineering_thesis/shared/constants/errors.dart';
+import 'package:engineering_thesis/shared/view/theme.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/specific_blocs/authorization/auth/auth_bloc.dart';
 import '../../blocs/specific_blocs/authorization/login/login_bloc.dart';
 import '../../generated/l10n.dart';
-import '../../shared/routing.dart';
+import '../../shared/routing/routing.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();

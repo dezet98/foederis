@@ -4,7 +4,7 @@ import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/
 import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/repositories/activity_repository.dart';
 import 'package:engineering_thesis/repositories/category_repository.dart';
-import 'package:engineering_thesis/shared/shared_preferences.dart';
+import 'package:engineering_thesis/shared/local_database/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:geohash/geohash.dart';
 import 'package:google_maps_webservice/geocoding.dart';

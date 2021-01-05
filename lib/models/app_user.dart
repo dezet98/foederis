@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/collections/user_collection.dart';
-import 'package:engineering_thesis/shared/extensions.dart';
+import 'package:engineering_thesis/shared/extensions/extensions.dart';
 import 'package:engineering_thesis/shared/utils/enums.dart';
 
-import 'collections/collection.dart';
+import 'utils/collection.dart';
 
 enum Gender {
   male,

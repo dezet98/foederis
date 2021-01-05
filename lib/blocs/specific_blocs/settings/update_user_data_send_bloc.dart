@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
 import 'package:engineering_thesis/models/collections/user_collection.dart';
+import 'package:engineering_thesis/repositories/remote_storage_service.dart';
 import 'package:engineering_thesis/repositories/user_repository.dart';
-import 'package:engineering_thesis/shared/remote_storage.dart';
 
 class UpdateUserDataSendBloc extends SendBloc {
   final UserRepository _userRepository;
   final UserDataBloc _userDataBloc;
-  final RemoteStorage _remoteStorage;
+  final RemoteStorageService _remoteStorage;
 
   UpdateUserDataSendBloc(
       this._userRepository, this._userDataBloc, this._remoteStorage);

@@ -3,7 +3,7 @@ import 'package:engineering_thesis/components/templates/template_screen.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../shared/providers.dart';
+import '../../shared/providers/home_screen_providers.dart';
 
 class HomeGuestScreen extends StatelessWidget {
   @override

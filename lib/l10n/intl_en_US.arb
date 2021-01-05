@@ -62,6 +62,7 @@
     "create_activity_screen_address_label": "Address",
     "create_activity_screen_address_description": "Activity address, it is important to enter the correct address because users search for activity based on location",
     "create_activity_screen_description_label": "Description",
+    "create_activity_screen_address_choose": "choose location",
     "create_activity_screen_description_placeholder": "...",
     "update_user_form_nav_bar_title": "Profile edition",
     "update_user_form_apply_button": "submit",

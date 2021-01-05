@@ -2,7 +2,7 @@ import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_data/form_dat
 import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_field/form_field_bloc.dart';
 import 'package:engineering_thesis/components/bloc_builders/forms/form_screen/form_field_aditional_info.dart';
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
-import 'package:engineering_thesis/shared/theme.dart';
+import 'package:engineering_thesis/shared/view/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

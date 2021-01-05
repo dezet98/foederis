@@ -2,7 +2,7 @@ import 'package:engineering_thesis/blocs/abstract_blocs/validators/validator.dar
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
-import '../../../models/collections/query_field.dart';
+import '../../../models/utils/query_field.dart';
 import 'form_field/form_field_bloc.dart';
 
 class FormNumberFieldBloc extends FormFieldBloc<int> {

@@ -2,7 +2,7 @@ import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/shared/utils/enums.dart';
 import 'package:flutter/material.dart';
 
-import 'query_field.dart';
+import '../utils/query_field.dart';
 
 class AttendeeCollection {
   static String collectionName = 'attendee';

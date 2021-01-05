@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../models/collections/query_field.dart';
+import '../../../../models/utils/query_field.dart';
 import '../form_field/form_field_bloc.dart';
 
 part 'form_data_event.dart';

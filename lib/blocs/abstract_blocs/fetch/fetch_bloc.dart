@@ -4,8 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../../../shared/constants/enums.dart';
-import '../../../shared/exceptions.dart';
+import '../../../shared/constants/errors.dart';
+import '../../../shared/exceptions/exceptions.dart';
 import 'fetch_args.dart';
 
 part 'fetch_event.dart';

@@ -17,8 +17,8 @@ import 'package:engineering_thesis/models/collections/attendee_collection.dart';
 import 'package:engineering_thesis/repositories/attendee_repository.dart';
 import 'package:engineering_thesis/repositories/category_repository.dart';
 import 'package:engineering_thesis/repositories/user_repository.dart';
-import 'package:engineering_thesis/shared/routing.dart';
-import 'package:engineering_thesis/shared/theme.dart';
+import 'package:engineering_thesis/shared/routing/routing.dart';
+import 'package:engineering_thesis/shared/view/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'database_helper.dart';
-import 'shared_preferences.dart';
+import '../local_database/database_helper.dart';
+import '../local_database/shared_preferences.dart';
 
 class InitializeApp {
   static Future<void> initializeApp() async {

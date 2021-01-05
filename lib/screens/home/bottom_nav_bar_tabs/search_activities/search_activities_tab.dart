@@ -14,7 +14,7 @@ import '../../../../blocs/abstract_blocs/fetch/fetch_bloc.dart';
 import '../../../../blocs/abstract_blocs/search_filter/search_filter_bloc.dart';
 import '../../../../blocs/specific_blocs/shared_preferences/shared_preferences_bloc.dart';
 import '../../../../generated/l10n.dart';
-import '../../../../shared/shared_preferences.dart';
+import '../../../../shared/local_database/shared_preferences.dart';
 import 'search_activities_list_view.dart';
 import 'search_activities_map_view.dart';
 

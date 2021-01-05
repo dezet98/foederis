@@ -1,4 +1,4 @@
-import 'query_field.dart';
+import '../utils/query_field.dart';
 
 class AppealToJoinCollection {
   static String collectionName = 'appeal_to_join';

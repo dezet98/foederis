@@ -7,8 +7,8 @@ import '../../../blocs/abstract_blocs/choice_filters/multi_choice_filter_bloc.da
 import '../../../blocs/abstract_blocs/choice_filters/single_choice_filter_bloc.dart';
 import '../../../blocs/abstract_blocs/choice_filters/sort_choice_filter_bloc.dart';
 import '../../../generated/l10n.dart';
-import '../../../shared/routing.dart';
-import '../../../shared/theme.dart';
+import '../../../shared/routing/routing.dart';
+import '../../../shared/view/theme.dart';
 import '../../custom_widgets/app_bars/custom_app_bar.dart';
 import '../../custom_widgets/buttons/custom_button.dart';
 import '../../custom_widgets/text/cutom_text.dart';

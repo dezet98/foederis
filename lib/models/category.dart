@@ -3,7 +3,7 @@ import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/shared/utils/enums.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../shared/extensions.dart';
+import '../shared/extensions/extensions.dart';
 import 'collections/category_collection.dart';
 
 enum CategoryName {

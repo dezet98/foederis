@@ -5,7 +5,7 @@ import 'package:engineering_thesis/blocs/abstract_blocs/validators/validator.dar
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../../models/collections/query_field.dart';
+import '../../../../models/utils/query_field.dart';
 
 part 'form_field_event.dart';
 part 'form_field_state.dart';

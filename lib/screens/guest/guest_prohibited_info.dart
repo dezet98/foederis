@@ -2,8 +2,8 @@ import 'package:engineering_thesis/components/custom_widgets/buttons/custom_butt
 import 'package:engineering_thesis/components/custom_widgets/text/cutom_text.dart';
 import 'package:engineering_thesis/components/templates/center_screen.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
-import 'package:engineering_thesis/shared/routing.dart';
-import 'package:engineering_thesis/shared/theme.dart';
+import 'package:engineering_thesis/shared/routing/routing.dart';
+import 'package:engineering_thesis/shared/view/theme.dart';
 import 'package:flutter/widgets.dart';
 
 class GuestProhibitedInfo {

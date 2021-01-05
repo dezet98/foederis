@@ -7,8 +7,8 @@ import 'package:engineering_thesis/models/activity.dart';
 import 'package:engineering_thesis/models/attendee.dart';
 import 'package:engineering_thesis/models/category.dart';
 import 'package:engineering_thesis/repositories/category_repository.dart';
-import 'package:engineering_thesis/shared/theme.dart';
 import 'package:engineering_thesis/shared/utils/dates.dart';
+import 'package:engineering_thesis/shared/view/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

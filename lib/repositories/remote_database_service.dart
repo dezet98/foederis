@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../models/fetch_filter.dart';
-import 'constants/enums.dart';
-import 'exceptions.dart';
-import 'extensions.dart';
+import '../models/utils/fetch_filter.dart';
+import '../shared/constants/errors.dart';
+import '../shared/exceptions/exceptions.dart';
+import '../shared/extensions/extensions.dart';
 
-class RemoteRepository {
+class RemoteDatabaseService {
   final FirebaseFirestore _firestore;
 
-  RemoteRepository({FirebaseFirestore firestore})
+  RemoteDatabaseService({FirebaseFirestore firestore})
       : _firestore = firestore ?? FirebaseFirestore.instance;
 
   // get data:

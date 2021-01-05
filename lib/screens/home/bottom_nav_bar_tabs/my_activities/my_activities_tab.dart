@@ -23,8 +23,8 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../../../blocs/specific_blocs/create_activity/create_activity_form_data.dart';
 import '../../../../generated/l10n.dart';
-import '../../../../shared/routing.dart';
-import '../../../../shared/theme.dart';
+import '../../../../shared/routing/routing.dart';
+import '../../../../shared/view/theme.dart';
 
 class MyActivitiesTab extends NavBarTab {
   @override

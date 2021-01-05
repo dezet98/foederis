@@ -1,6 +1,4 @@
 class Geolocation {
-  //double latitude;
-  // double longitude;
   String geohash;
   String address;
 

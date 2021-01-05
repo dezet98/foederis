@@ -10,9 +10,9 @@ import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.da
 import 'package:engineering_thesis/components/templates/template_screen.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/app_user.dart';
+import 'package:engineering_thesis/repositories/remote_storage_service.dart';
 import 'package:engineering_thesis/repositories/user_repository.dart';
-import 'package:engineering_thesis/shared/remote_storage.dart';
-import 'package:engineering_thesis/shared/routing.dart';
+import 'package:engineering_thesis/shared/routing/routing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -71,7 +71,7 @@ class ProfileScreen extends StatelessWidget {
             RoutingOption.sendBloc: UpdateUserDataSendBloc(
               RepositoryProvider.of<UserRepository>(context),
               BlocProvider.of<UserDataBloc>(context),
-              RepositoryProvider.of<RemoteStorage>(context),
+              RepositoryProvider.of<RemoteStorageService>(context),
             ),
             RoutingOption.afterSuccess: () {
               Navigator.pop(context);

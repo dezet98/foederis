@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:engineering_thesis/models/collections/query_field.dart';
+import 'package:engineering_thesis/models/utils/query_field.dart';
 
-import '../models/fetch_filter.dart';
-import 'constants/enums.dart';
-import 'exceptions.dart';
+import '../../models/utils/fetch_filter.dart';
+import '../constants/errors.dart';
+import '../exceptions/exceptions.dart';
 
 extension catchQueryExceptions on DocumentSnapshot {
   /// use `get(String field)` method with handle exceptions

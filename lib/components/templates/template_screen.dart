@@ -2,7 +2,7 @@ import 'package:engineering_thesis/blocs/abstract_blocs/nav_bar/nav_bar_bloc.dar
 import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/components/custom_widgets/app_bars/custom_app_bar.dart';
 import 'package:engineering_thesis/components/custom_widgets/icon/custom_icon.dart';
-import 'package:engineering_thesis/shared/theme.dart';
+import 'package:engineering_thesis/shared/view/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

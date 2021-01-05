@@ -6,14 +6,14 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../repositories/auth_repository.dart';
-import '../../../../shared/exceptions.dart';
+import '../../../../repositories/remote_auth_service.dart';
+import '../../../../shared/exceptions/exceptions.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthRepository _authRepository;
+  final RemoteAuthService _authRepository;
   final UserDataBloc _userDataBloc;
 
   StreamSubscription<User> _userStreamSubscription;

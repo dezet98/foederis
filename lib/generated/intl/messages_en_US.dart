@@ -86,6 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "appeal_join_form_comment_placeholder" : MessageLookupByLibrary.simpleMessage("Comment to request"),
     "category_beer" : MessageLookupByLibrary.simpleMessage("beer"),
     "category_football" : MessageLookupByLibrary.simpleMessage("football"),
+    "create_activity_screen_address_choose" : MessageLookupByLibrary.simpleMessage("choose location"),
     "create_activity_screen_address_description" : MessageLookupByLibrary.simpleMessage("Activity address, it is important to enter the correct address because users search for activity based on location"),
     "create_activity_screen_address_label" : MessageLookupByLibrary.simpleMessage("Address"),
     "create_activity_screen_apply_button_text" : MessageLookupByLibrary.simpleMessage("create"),

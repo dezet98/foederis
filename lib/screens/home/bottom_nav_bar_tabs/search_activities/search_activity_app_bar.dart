@@ -14,8 +14,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../blocs/specific_blocs/shared_preferences/shared_preferences_bloc.dart';
-import '../../../../shared/routing.dart';
-import '../../../../shared/shared_preferences.dart';
+import '../../../../shared/local_database/shared_preferences.dart';
+import '../../../../shared/routing/routing.dart';
 
 class SearchActivitiesAppBar {
   static SliverAppBar getSliverAppBar(BuildContext context) => SliverAppBar(

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/models/collections/attendee_collection.dart';
 import 'package:engineering_thesis/shared/utils/enums.dart';
 
-import '../shared/extensions.dart';
+import '../shared/extensions/extensions.dart';
 
 class Attendee {
   DocumentReference ref;

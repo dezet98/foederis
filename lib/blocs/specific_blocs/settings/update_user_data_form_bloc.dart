@@ -8,8 +8,8 @@ import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_text_field_bl
 import 'package:engineering_thesis/blocs/specific_blocs/validators/validators.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/models/app_user.dart';
-import 'package:engineering_thesis/models/collections/query_field.dart';
 import 'package:engineering_thesis/models/collections/user_collection.dart';
+import 'package:engineering_thesis/models/utils/query_field.dart';
 import 'package:engineering_thesis/shared/utils/enums.dart';
 import 'package:flutter/cupertino.dart';
 

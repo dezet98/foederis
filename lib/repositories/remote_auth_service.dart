@@ -1,13 +1,13 @@
-import 'package:engineering_thesis/shared/constants/enums.dart';
+import 'package:engineering_thesis/shared/constants/errors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
-import '../shared/exceptions.dart';
+import '../shared/exceptions/exceptions.dart';
 
-class AuthRepository {
+class RemoteAuthService {
   final FirebaseAuth _firebaseAuth;
 
-  AuthRepository({FirebaseAuth firebaseAuth})
+  RemoteAuthService({FirebaseAuth firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   Future<void> signInWithEmailAndPassword(

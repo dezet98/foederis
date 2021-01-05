@@ -663,6 +663,16 @@ class S {
     );
   }
 
+  /// `choose location`
+  String get create_activity_screen_address_choose {
+    return Intl.message(
+      'choose location',
+      name: 'create_activity_screen_address_choose',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `...`
   String get create_activity_screen_description_placeholder {
     return Intl.message(

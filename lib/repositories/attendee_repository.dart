@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/models/attendee.dart';
 import 'package:engineering_thesis/models/collections/attendee_collection.dart';
-import 'package:engineering_thesis/models/collections/collection.dart';
-import 'package:engineering_thesis/models/fetch_filter.dart';
-import 'package:engineering_thesis/shared/constants/enums.dart';
+import 'package:engineering_thesis/models/utils/collection.dart';
+import 'package:engineering_thesis/models/utils/fetch_filter.dart';
+import 'package:engineering_thesis/shared/constants/errors.dart';
 import 'package:engineering_thesis/shared/utils/enums.dart';
 
-import '../shared/remote_repository.dart';
+import 'remote_database_service.dart';
 
 class AttendeeRepository {
-  final RemoteRepository _remoteRepository;
+  final RemoteDatabaseService _remoteRepository;
   final String collectionPath = AttendeeCollection.collectionName;
 
   AttendeeRepository(this._remoteRepository);

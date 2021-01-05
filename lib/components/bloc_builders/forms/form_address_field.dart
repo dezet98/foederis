@@ -8,7 +8,7 @@ import '../../../blocs/abstract_blocs/forms/form_address_field_bloc.dart';
 import '../../../blocs/abstract_blocs/forms/form_data/form_data_bloc.dart';
 import '../../../blocs/abstract_blocs/search_filter/search_filter_bloc.dart';
 import '../../../blocs/specific_blocs/search_places_bloc.dart';
-import '../../../models/geolocation.dart';
+import '../../../models/utils/geolocation.dart';
 import '../../custom_widgets/buttons/custom_button.dart';
 import '../search_screen.dart';
 

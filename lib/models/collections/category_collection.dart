@@ -1,4 +1,4 @@
-import 'query_field.dart';
+import '../utils/query_field.dart';
 
 class CategoryCollection {
   static String collectionName = 'category';
