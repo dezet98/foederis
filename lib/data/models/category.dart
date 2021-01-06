@@ -15,8 +15,6 @@ class Category {
   DocumentReference ref;
   CategoryName title;
 
-  Category({@required this.ref, this.title});
-
   Category.fromDocument(DocumentSnapshot doc) {
     this.ref = doc.reference;
     this.title = enumFromString<CategoryName>(

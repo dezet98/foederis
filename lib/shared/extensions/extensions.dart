@@ -32,7 +32,8 @@ extension catchQueryExceptions on DocumentSnapshot {
           message: "${e.message} / for $field field",
         ));
       }
-      throw FetchingException(fetchingError: FetchingError.undefined);
+      throw FetchingException(
+          fetchingError: FetchingError.undefined, message: e.toString());
     }
   }
 }
