@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/validators/validator.dart';
+import 'package:engineering_thesis/data/models/utils/query_field.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-
-import '../../../../models/utils/query_field.dart';
 
 part 'form_field_event.dart';
 part 'form_field_state.dart';

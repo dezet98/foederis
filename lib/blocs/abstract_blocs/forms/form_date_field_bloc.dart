@@ -1,9 +1,9 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/validators/validator.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/validators/validators.dart';
+import 'package:engineering_thesis/data/models/utils/query_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
-import '../../../models/utils/query_field.dart';
 import 'form_field/form_field_bloc.dart';
 
 class FormDateFieldBloc extends FormFieldBloc<DateTime> {

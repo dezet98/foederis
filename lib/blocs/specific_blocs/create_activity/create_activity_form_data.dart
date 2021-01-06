@@ -1,13 +1,13 @@
 import 'package:engineering_thesis/blocs/specific_blocs/validators/validators.dart';
+import 'package:engineering_thesis/data/models/category.dart';
+import 'package:engineering_thesis/data/models/collections/activity_collection.dart';
+import 'package:engineering_thesis/data/models/utils/geolocation.dart';
+import 'package:engineering_thesis/data/models/utils/query_field.dart';
+import 'package:engineering_thesis/data/repositories/activity_repository.dart';
+import 'package:engineering_thesis/data/repositories/category_repository.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../models/category.dart';
-import '../../../models/collections/activity_collection.dart';
-import '../../../models/utils/geolocation.dart';
-import '../../../models/utils/query_field.dart';
-import '../../../repositories/activity_repository.dart';
-import '../../../repositories/category_repository.dart';
 import '../../abstract_blocs/forms/form_address_field_bloc.dart';
 import '../../abstract_blocs/forms/form_check_field_bloc.dart';
 import '../../abstract_blocs/forms/form_data/form_data_bloc.dart';

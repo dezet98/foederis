@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:engineering_thesis/models/utils/query_field.dart';
+import 'package:engineering_thesis/data/models/utils/fetch_filter.dart';
+import 'package:engineering_thesis/data/models/utils/query_field.dart';
 
-import '../../models/utils/fetch_filter.dart';
 import '../constants/errors.dart';
 import '../exceptions/exceptions.dart';
 

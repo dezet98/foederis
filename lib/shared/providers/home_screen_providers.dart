@@ -5,14 +5,14 @@ import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activ
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_fetching_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_filters_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/home_screen/search_activities/search_activities_search_filter_bloc.dart';
-import 'package:engineering_thesis/repositories/attendee_repository.dart';
+import 'package:engineering_thesis/data/repositories/activity_repository.dart';
+import 'package:engineering_thesis/data/repositories/attendee_repository.dart';
+import 'package:engineering_thesis/data/repositories/category_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/specific_blocs/common/categories_fetching_bloc.dart';
 import '../../blocs/specific_blocs/create_activity/create_activity_form_data.dart';
 import '../../blocs/specific_blocs/shared_preferences/shared_preferences_bloc.dart';
-import '../../repositories/activity_repository.dart';
-import '../../repositories/category_repository.dart';
 import '../local_database/database_helper.dart';
 import '../local_database/shared_preferences.dart';
 

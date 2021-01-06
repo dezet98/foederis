@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:engineering_thesis/data/services/remote_auth_service.dart';
 import 'package:engineering_thesis/shared/constants/errors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../repositories/remote_auth_service.dart';
 import '../../../../shared/exceptions/exceptions.dart';
 
 part 'register_event.dart';

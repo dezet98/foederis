@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_bloc.dart';
-import 'package:engineering_thesis/models/attendee.dart';
-import 'package:engineering_thesis/repositories/attendee_repository.dart';
+import 'package:engineering_thesis/data/models/attendee.dart';
+import 'package:engineering_thesis/data/repositories/attendee_repository.dart';
 import 'package:meta/meta.dart';
 
 class UserAttendeesFetchBloc extends FetchBloc {

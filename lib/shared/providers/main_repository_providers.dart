@@ -1,14 +1,13 @@
-import 'package:engineering_thesis/repositories/appeal_to_join_repository.dart';
-import 'package:engineering_thesis/repositories/attendee_repository.dart';
-import 'package:engineering_thesis/repositories/remote_storage_service.dart';
-import 'package:engineering_thesis/repositories/transaction_and_batch_repository.dart';
-import 'package:engineering_thesis/repositories/user_repository.dart';
+import 'package:engineering_thesis/data/repositories/activity_repository.dart';
+import 'package:engineering_thesis/data/repositories/appeal_to_join_repository.dart';
+import 'package:engineering_thesis/data/repositories/attendee_repository.dart';
+import 'package:engineering_thesis/data/repositories/category_repository.dart';
+import 'package:engineering_thesis/data/repositories/transaction_and_batch_repository.dart';
+import 'package:engineering_thesis/data/repositories/user_repository.dart';
+import 'package:engineering_thesis/data/services/remote_auth_service.dart';
+import 'package:engineering_thesis/data/services/remote_database_service.dart';
+import 'package:engineering_thesis/data/services/remote_storage_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../repositories/activity_repository.dart';
-import '../../repositories/category_repository.dart';
-import '../../repositories/remote_auth_service.dart';
-import '../../repositories/remote_database_service.dart';
 
 dynamic getMainRepositoryProviders() => [
       RepositoryProvider<RemoteAuthService>(

@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
-import 'package:engineering_thesis/models/activity.dart';
-import 'package:engineering_thesis/models/attendee.dart';
-import 'package:engineering_thesis/models/collections/attendee_collection.dart';
-import 'package:engineering_thesis/repositories/transaction_and_batch_repository.dart';
+import 'package:engineering_thesis/data/models/activity.dart';
+import 'package:engineering_thesis/data/models/attendee.dart';
+import 'package:engineering_thesis/data/models/collections/attendee_collection.dart';
+import 'package:engineering_thesis/data/repositories/transaction_and_batch_repository.dart';
 import 'package:meta/meta.dart';
 
 class MakerRegistrationAttendeeSendBloc extends SendBloc {

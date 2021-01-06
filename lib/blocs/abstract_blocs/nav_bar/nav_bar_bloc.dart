@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/components/abstract/nav_bar_tab.dart';
+import 'package:engineering_thesis/ui/components/abstract/nav_bar_tab.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';

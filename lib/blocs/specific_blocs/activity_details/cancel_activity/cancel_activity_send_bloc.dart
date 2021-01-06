@@ -1,6 +1,6 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
-import 'package:engineering_thesis/models/activity.dart';
-import 'package:engineering_thesis/repositories/activity_repository.dart';
+import 'package:engineering_thesis/data/models/activity.dart';
+import 'package:engineering_thesis/data/repositories/activity_repository.dart';
 import 'package:meta/meta.dart';
 
 class CancelActivitySendBloc extends SendBloc {

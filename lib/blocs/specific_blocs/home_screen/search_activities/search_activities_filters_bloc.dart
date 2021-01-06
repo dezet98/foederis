@@ -2,8 +2,8 @@ import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/filter_op
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/filters/filters_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/multi_choice_filter_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/choice_filters/sort_choice_filter_bloc.dart';
+import 'package:engineering_thesis/data/models/activity.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
-import 'package:engineering_thesis/models/activity.dart';
 
 class SearchActivitiesFiltersBloc extends FiltersBloc<Activity> {
   SearchActivitiesFiltersBloc()

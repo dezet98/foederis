@@ -1,6 +1,6 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/send/send_bloc.dart';
-import 'package:engineering_thesis/models/attendee.dart';
-import 'package:engineering_thesis/repositories/attendee_repository.dart';
+import 'package:engineering_thesis/data/models/attendee.dart';
+import 'package:engineering_thesis/data/repositories/attendee_repository.dart';
 import 'package:meta/meta.dart';
 
 class GiveUpCoorganizerRightsSendBloc extends SendBloc {

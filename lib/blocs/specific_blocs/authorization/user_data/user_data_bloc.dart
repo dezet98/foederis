@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:engineering_thesis/models/app_user.dart';
-import 'package:engineering_thesis/repositories/user_repository.dart';
+import 'package:engineering_thesis/data/models/app_user.dart';
+import 'package:engineering_thesis/data/repositories/user_repository.dart';
 import 'package:engineering_thesis/shared/constants/errors.dart';
 import 'package:engineering_thesis/shared/exceptions/exceptions.dart';
 import 'package:equatable/equatable.dart';

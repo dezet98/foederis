@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
+import 'package:engineering_thesis/data/services/remote_auth_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../repositories/remote_auth_service.dart';
 import '../../../../shared/exceptions/exceptions.dart';
 
 part 'auth_event.dart';
