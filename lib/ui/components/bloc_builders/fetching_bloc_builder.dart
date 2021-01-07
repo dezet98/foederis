@@ -1,4 +1,5 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_bloc.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/ui/components/custom_widgets/text/cutom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -26,8 +27,7 @@ class FetchingBlocBuilder extends StatelessWidget {
           if (state is FetchInitialFailureState ||
               state is FetchRefreshFailureState) {
             return buildError != null
-                ? buildError(
-                    state.fetchingException) //todo hard bug to find to change
+                ? buildError(state.fetchingException)
                 : _buildError(context);
           } else if (state is FetchInitialSuccessState ||
               state is FetchRefreshSuccessState) {
@@ -47,13 +47,13 @@ class FetchingBlocBuilder extends StatelessWidget {
     return CircularProgressIndicator();
   }
 
-  Widget _buildError(context) {
+  Widget _buildError(BuildContext context) {
     if (isSliver) {
       return SliverFillRemaining(
         child: Container(),
       );
     }
 
-    return CustomText.errorText('Error');
+    return CustomText.errorText(S.of(context).fetching_error_info);
   }
 }

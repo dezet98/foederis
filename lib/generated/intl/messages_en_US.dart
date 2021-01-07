@@ -103,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "create_activity_screen_title_placeholder" : MessageLookupByLibrary.simpleMessage("title"),
     "date_time_picker_text" : MessageLookupByLibrary.simpleMessage("choose date"),
     "dialog_ok" : MessageLookupByLibrary.simpleMessage("OK"),
+    "fetching_error_info" : MessageLookupByLibrary.simpleMessage("Error when fetching data"),
     "filter_screen_apply_button_text" : MessageLookupByLibrary.simpleMessage("Apply filters"),
     "filter_screen_nav_title" : MessageLookupByLibrary.simpleMessage("Filters"),
     "filters_screen_filter_subtitile_sort_by" : MessageLookupByLibrary.simpleMessage("Sort by name"),

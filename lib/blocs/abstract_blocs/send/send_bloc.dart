@@ -26,15 +26,7 @@ abstract class SendBloc extends Bloc<SendEvent, SendState> {
   Stream<SendState> mapSendDataEvent(Map<String, dynamic> valuesMap) async* {
     try {
       yield SendDataInProgressState();
-      // if (sendValidators == null || sendValidators.isValid())
       await query(valuesMap);
-      // else
-      //   yield SendDataFailureState(
-      //     sendingDataException: SendingDataException(
-      //       sendingDataError: UploadDataError.data_not_valid,
-      //       message: 'Send data was invalid, not pass validators',
-      //     ),
-      //   );
       yield SendDataSuccessState();
     } catch (e) {
       if (e is SendingDataException)

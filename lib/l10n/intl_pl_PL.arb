@@ -45,6 +45,7 @@
     "activity_card_complete": "ukończone",
     "activity_card_future": "przyszłe",
     "dialog_ok": "OK",
+    "fetching_error_info": "Błąd pobierania danych",
     "plural_minutes": "{howManyMinutes,plural, =1{{howManyMinutes} minuta}=2{{howManyMinutes} minuty}other{{howManyMinutes} minut}}",
     "plural_hours": "{howManyHours,plural, =1{{howManyHours} godzina}=2{{howManyHours} godziny}other{{howManyHours} godzin}}",
     "plural_days": "{howManyDays,plural, =1{{howManyDays} dzień}other{{howManyDays} dni}}",

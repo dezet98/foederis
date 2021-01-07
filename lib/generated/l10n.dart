@@ -485,6 +485,16 @@ class S {
     );
   }
 
+  /// `Error when fetching data`
+  String get fetching_error_info {
+    return Intl.message(
+      'Error when fetching data',
+      name: 'fetching_error_info',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `{howManyMinutes,plural, =1{{howManyMinutes} minute}=2{{howManyMinutes} minutes}other{{howManyMinutes} minutes}}`
   String plural_minutes(num howManyMinutes) {
     return Intl.plural(

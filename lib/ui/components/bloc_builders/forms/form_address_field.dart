@@ -1,7 +1,7 @@
 import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_address_field_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/forms/form_data/form_data_bloc.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/search_filter/search_filter_bloc.dart';
-import 'package:engineering_thesis/blocs/specific_blocs/search_places_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/common/search_places_bloc.dart';
 import 'package:engineering_thesis/data/models/utils/geolocation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

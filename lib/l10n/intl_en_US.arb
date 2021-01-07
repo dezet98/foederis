@@ -45,6 +45,7 @@
     "activity_card_complete": "finish",
     "activity_card_future": "future",
     "dialog_ok": "OK",
+    "fetching_error_info": "Error when fetching data",
     "plural_minutes": "{howManyMinutes,plural, =1{{howManyMinutes} minute}=2{{howManyMinutes} minutes}other{{howManyMinutes} minutes}}",
     "plural_hours": "{howManyHours,plural, =1{{howManyHours} hour}=2{{howManyHours} hours}other{{howManyHours} hours}}",
     "plural_days": "{howManyDays,plural, =1{{howManyDays} day}other{{howManyDays} days}}",

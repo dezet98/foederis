@@ -6,12 +6,12 @@ import '../constants/errors.dart';
 import '../exceptions/exceptions.dart';
 
 extension catchQueryExceptions on DocumentSnapshot {
-  /// use `get(String field)` method with handle exceptions
-  T getField<T>(CollectionField collectionField) {
-    if (T == double) {
+  /// use `get(dynamic field)` method with handle exceptions
+  DataType getField<DataType>(CollectionField collectionField) {
+    if (DataType == double) {
       return _query(collectionField.fieldName, collectionField.isRequired)
           ?.toDouble();
-    } else if (T == DateTime) {
+    } else if (DataType == DateTime) {
       return _query(collectionField.fieldName, collectionField.isRequired)
           ?.toDate();
     }

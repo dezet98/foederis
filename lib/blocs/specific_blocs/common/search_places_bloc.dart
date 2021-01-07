@@ -1,7 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_maps_webservice/places.dart';
 
-import '../abstract_blocs/search_filter/search_filter_bloc.dart';
+import '../../abstract_blocs/search_filter/search_filter_bloc.dart';
 
 class SearchPlacesBloc extends SearchFilterBloc<PlacesSearchResult> {
   final places =
