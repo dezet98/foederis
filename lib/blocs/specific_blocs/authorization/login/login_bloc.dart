@@ -38,7 +38,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       if (e is LoginException) {
         yield LoginFailureState(loginException: e);
       } else {
-        LoginFailureState(
+        yield LoginFailureState(
           loginException: LoginException(loginError: LoginError.undefined),
         );
       }

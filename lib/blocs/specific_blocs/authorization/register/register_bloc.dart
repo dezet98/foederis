@@ -39,7 +39,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       if (e is RegisterException) {
         yield RegisterFailureState(registerException: e);
       } else {
-        RegisterFailureState(
+        yield RegisterFailureState(
           registerException: RegisterException(
             registerError: RegisterError.undefined,
           ),
