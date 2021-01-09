@@ -97,9 +97,6 @@ class CustomIcon {
 
   static Widget _buildPlatformIcon(
       IconData materialData, IconData cupertinoData) {
-    return PlatformWidget(
-      material: (context, _) => Icon(materialData),
-      cupertino: (context, _) => Icon(cupertinoData),
-    );
+    return Icon(materialData);
   }
 }

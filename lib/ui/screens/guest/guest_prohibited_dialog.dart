@@ -8,8 +8,8 @@ class GuestProhibitedDialog {
   static showDialog(context) {
     CustomDialog.showModal(context,
         content:
-            CustomText.modalText(S.of(context).guest_prohibited_access_title),
-        title: S.of(context).guest_prohibited_access_info,
+            CustomText.modalText(S.of(context).guest_prohibited_access_info),
+        title: S.of(context).guest_prohibited_access_title,
         actions: [
           CustomDialogAction(
               buttonText: S.of(context).guest_prohibited_go_to_login,

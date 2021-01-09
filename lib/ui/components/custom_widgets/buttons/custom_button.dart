@@ -49,7 +49,9 @@ class CustomButton {
       ),
       onPressed: enabled ? onPressed : null,
       material: (context, platform) => MaterialRaisedButtonData(),
-      cupertino: (context, platform) => CupertinoButtonData(),
+      cupertino: (context, platform) => CupertinoButtonData(
+        padding: EdgeInsets.all(Dimensions.gutterVerySmall),
+      ),
     );
   }
 
@@ -86,11 +88,15 @@ class CustomButton {
     @required Widget customIcon,
     final void Function() onPressed,
   }) {
-    return PlatformIconButton(
-      onPressed: enabled ? onPressed : null,
-      icon: customIcon,
-      material: (_, __) =>
-          MaterialIconButtonData(splashRadius: Dimensions.gutterLarge),
+    return PlatformWidget(
+      material: (_, __) => IconButton(
+        icon: customIcon,
+        onPressed: enabled ? onPressed : null,
+      ),
+      cupertino: (_, __) => CustomGestureDetector(
+        onTap: enabled ? onPressed : null,
+        child: customIcon,
+      ),
     );
   }
 

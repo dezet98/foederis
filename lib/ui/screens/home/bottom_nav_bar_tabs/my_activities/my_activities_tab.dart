@@ -19,6 +19,8 @@ import 'package:engineering_thesis/ui/components/custom_widgets/buttons/custom_b
 import 'package:engineering_thesis/ui/components/custom_widgets/icon/custom_icon.dart';
 import 'package:engineering_thesis/ui/components/custom_widgets/list/custom_list.dart';
 import 'package:engineering_thesis/ui/components/custom_widgets/snack_bar.dart/custom_snack_bar.dart';
+import 'package:engineering_thesis/ui/components/custom_widgets/text/cutom_text.dart';
+import 'package:engineering_thesis/ui/components/templates/center_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -51,7 +53,9 @@ class MyActivitiesTab extends NavBarTab {
         builder: (context) => StreamBlocBuilder(
           streamBloc: BlocProvider.of<MyActivitiesStreamBloc>(context),
           buildSuccess: (attendees) {
-            return _buildList(context, attendees as List<Attendee>);
+            return (attendees as List<Attendee>).length == 0
+                ? _buildNoResults(context)
+                : _buildList(context, attendees as List<Attendee>);
           },
         ),
       ),
@@ -77,6 +81,13 @@ class MyActivitiesTab extends NavBarTab {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildNoResults(BuildContext context) {
+    return CenterScreen(
+      content: CustomText.screenInfoHeader(
+          S.of(context).home_screen_my_activity_no_results),
     );
   }
 

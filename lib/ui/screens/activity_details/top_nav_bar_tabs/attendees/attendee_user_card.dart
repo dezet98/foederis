@@ -12,6 +12,7 @@ import 'package:engineering_thesis/shared/utils/dates.dart';
 import 'package:engineering_thesis/shared/view/theme.dart';
 import 'package:engineering_thesis/ui/components/bloc_builders/send/send_builder_button.dart';
 import 'package:engineering_thesis/ui/components/custom_widgets/buttons/custom_button.dart';
+import 'package:engineering_thesis/ui/components/custom_widgets/gesture_detector/custom_gesture_detector.dart';
 import 'package:engineering_thesis/ui/components/custom_widgets/icon/custom_icon.dart';
 import 'package:engineering_thesis/ui/components/custom_widgets/popup_menu/custom_popup_menu.dart';
 import 'package:engineering_thesis/ui/components/custom_widgets/popup_menu/custom_popup_menu_item.dart';
@@ -36,8 +37,8 @@ class AttendeeUserCard extends StatelessWidget {
         userRef: attendee.userRef,
       ),
       buildSuccess: (appUser) {
-        return GestureDetector(
-          child: Card(child: _buildContent(context, appUser)),
+        return CustomGestureDetector(
+          child: Card(child: _buildTile(context, appUser)),
           onTap: () {
             Routing.pushNamed(context, UserRoutes.profile, options: {
               RoutingOption.userRef: (appUser as AppUser).ref,
@@ -49,53 +50,55 @@ class AttendeeUserCard extends StatelessWidget {
     );
   }
 
-  Widget _buildContent(BuildContext context, AppUser appUser) {
+  Widget _buildTile(BuildContext context, AppUser appUser) {
     return Padding(
       padding: EdgeInsets.all(Dimensions.gutterSmall),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              CustomText.menuTitle(
-                  '${appUser.firstName} ${appUser.secondName}'),
-              SizedBox(height: Dimensions.gutterSmall),
-              Row(
-                children: [
-                  CustomText.menuTitle(S
-                      .of(context)
-                      .activity_details_screen_attendee_tab_join_date),
-                  SizedBox(width: Dimensions.gutterVerySmall),
-                  CustomText.bodyText(
-                      formatDate('dd-MM-yyyy hh:mm', attendee.joinDate)),
-                ],
-              ),
-              SizedBox(height: Dimensions.gutterVerySmall),
-              Row(
-                children: [
-                  CustomText.menuTitle(
-                      S.of(context).activity_details_screen_attendee_tab_role),
-                  SizedBox(width: Dimensions.gutterVerySmall),
-                  CustomText.bodyText(
-                    AttendeeCollection.attendeeToString(context, attendee.role),
-                  ),
-                ],
-              ),
-            ],
-          ),
+          _buildContent(context, appUser),
           _buildMenuButton(context, attendee) ?? Container(),
         ],
       ),
     );
   }
 
+  Widget _buildContent(BuildContext context, AppUser appUser) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomText.menuTitle('${appUser.firstName} ${appUser.secondName}'),
+        SizedBox(height: Dimensions.gutterSmall),
+        Row(
+          children: [
+            CustomText.menuTitle(
+                S.of(context).activity_details_screen_attendee_tab_join_date),
+            SizedBox(width: Dimensions.gutterVerySmall),
+            CustomText.bodyText(
+                formatDate('dd-MM-yyyy hh:mm', attendee.joinDate)),
+          ],
+        ),
+        SizedBox(height: Dimensions.gutterVerySmall),
+        Row(
+          children: [
+            CustomText.menuTitle(
+                S.of(context).activity_details_screen_attendee_tab_role),
+            SizedBox(width: Dimensions.gutterVerySmall),
+            CustomText.bodyText(
+              AttendeeCollection.attendeeToString(context, attendee.role),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
   CustomPopupMenu _buildMenuButton(context, Attendee attendee) {
     List<PopupMenuItem> menuItems = [];
 
-    if (!isMaker) return null;
+    if (isMaker) return null;
 
-    if (isMaker) {
+    if (!isMaker) {
       Widget item = _grantRightsMenuItem(context);
       if (item != null) menuItems.add(item);
       item = _giveRightsUpMenuItem(context);

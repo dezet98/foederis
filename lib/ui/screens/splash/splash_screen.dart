@@ -1,5 +1,6 @@
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/auth/auth_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/authorization/user_data/user_data_bloc.dart';
+import 'package:engineering_thesis/generated/l10n.dart';
 import 'package:engineering_thesis/shared/routing/routing.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               PlatformCircularProgressIndicator(),
               SizedBox(height: 4.0),
-              Text('Check user'),
+              Text(S.of(context).splash_screen_load_data),
             ],
           ),
         ),
@@ -38,7 +39,6 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  // todo add loading data
   void _determine(context, AuthState authState, UserDataState dataState) {
     Future.delayed(Duration(seconds: 1)).then((value) {
       if (authState is AuthUserAuthenticatedState && !_determined) {

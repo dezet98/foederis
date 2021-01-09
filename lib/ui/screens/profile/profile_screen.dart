@@ -47,8 +47,10 @@ class ProfileScreen extends StatelessWidget {
     return TemplateScreen.topNavbar(
         context: context,
         navBarBloc: ProfileScreenTopNavbarBloc(
-            appUser: appUser, withContactInfo: withContactInfo),
-        appBarTitle: '${appUser.email}',
+            appUser: appUser, withContactInfo: withContactInfo ?? false),
+        appBarTitle: withContactInfo ?? false
+            ? appUser.email
+            : '${appUser.firstName} ${appUser.secondName}',
         trailingActions: [
           if (userRef.id == BlocProvider.of<UserDataBloc>(context).user.ref.id)
             editProfile(context)

@@ -26,6 +26,8 @@ class TransactionAndBatchRepository {
     Map<String, dynamic> data = Collection.fillRemainsData(
         attendee.toMap(), AttendeeCollection.allFields);
 
+    data[AttendeeCollection.isCancel.fieldName] = false;
+
     batch.set(newAttendeeRef, data);
 
     // delete appealToJoin

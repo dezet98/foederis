@@ -9,6 +9,7 @@ class ProfileScreenTopNavbarBloc extends NavBarBloc {
   final int initialIndex;
   final AppUser appUser;
   final bool withContactInfo;
+
   ProfileScreenTopNavbarBloc({
     this.initialIndex = 0,
     @required this.appUser,
@@ -21,9 +22,10 @@ class ProfileScreenTopNavbarBloc extends NavBarBloc {
         appUser: appUser,
         withContactInfo: withContactInfo,
       ),
-      UserStatisticsTab(
-        appUser: appUser,
-      ),
+      if (withContactInfo)
+        UserStatisticsTab(
+          appUser: appUser,
+        ),
     ];
   }
 }

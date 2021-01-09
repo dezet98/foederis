@@ -19,9 +19,7 @@ class FormFieldAdditionalInfo extends StatelessWidget {
       customIcon: CustomIcon.info,
       onPressed: () async {
         await CustomDialog.showModal(context,
-            title: S
-                .of(context)
-                .form_field_info_dialog_title(optionBloc.getLabel(context)),
+            title: optionBloc.getLabel(context),
             content: Wrap(
               children: [
                 Column(
@@ -40,6 +38,7 @@ class FormFieldAdditionalInfo extends StatelessWidget {
   }
 
   Widget description(context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomText.menuTitle(S.of(context).form_field_info_additional_info),
           CustomText.bodyText(optionBloc.getDescription(context)),

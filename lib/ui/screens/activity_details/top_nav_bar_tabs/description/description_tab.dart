@@ -27,21 +27,26 @@ class DescriptionTab extends NavBarTab {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _getActivityStatus,
-        _getRecordsAttribute,
-        _getAttendesAttribute,
-        _getAddressAttribute,
-        _attendeesRange,
-        _getDescriptionAttribute,
-        _getStartDateAttribute,
-        _buildCategoryAttribute,
-        SizedBox(height: Dimensions.gutterMedium),
-        if (cancelActivityButton != null) cancelActivityButton,
-        if (cancelInvolvementButton != null) cancelInvolvementButton,
-      ],
-    );
+    return Stack(children: [
+      SingleChildScrollView(
+        child: Column(
+          children: [
+            _getActivityStatus,
+            _getRecordsAttribute,
+            _getAttendesAttribute,
+            _getAddressAttribute,
+            _attendeesRange,
+            _getDescriptionAttribute,
+            _getStartDateAttribute,
+            _buildCategoryAttribute,
+            SizedBox(height: Dimensions.gutterMedium),
+            if (cancelActivityButton != null) cancelActivityButton,
+            if (cancelInvolvementButton != null) cancelInvolvementButton,
+            SizedBox(height: Dimensions.gutterMedium),
+          ],
+        ),
+      ),
+    ]);
   }
 
   Widget _buildSingleAttribute(context, String subtitle, String text) {
@@ -52,6 +57,9 @@ class DescriptionTab extends NavBarTab {
           Align(
             alignment: Alignment.centerLeft,
             child: CustomText.menuTitle(subtitle, textAlign: TextAlign.left),
+          ),
+          SizedBox(
+            height: Dimensions.gutterVerySmall,
           ),
           CustomText.listItem(text),
         ],

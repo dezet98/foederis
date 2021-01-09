@@ -215,6 +215,16 @@ class S {
     );
   }
 
+  /// `You don't have any activity`
+  String get home_screen_my_activity_no_results {
+    return Intl.message(
+      'You don\'t have any activity',
+      name: 'home_screen_my_activity_no_results',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Account`
   String get home_screen_account_tab_name {
     return Intl.message(
@@ -480,6 +490,16 @@ class S {
     return Intl.message(
       'OK',
       name: 'dialog_ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading user data`
+  String get splash_screen_load_data {
+    return Intl.message(
+      'Loading user data',
+      name: 'splash_screen_load_data',
       desc: '',
       args: [],
     );
@@ -933,6 +953,66 @@ class S {
     );
   }
 
+  /// `hitchhiking`
+  String get category_hitchhiking {
+    return Intl.message(
+      'hitchhiking',
+      name: 'category_hitchhiking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `other`
+  String get category_other {
+    return Intl.message(
+      'other',
+      name: 'category_other',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `volleyball`
+  String get category_volleyball {
+    return Intl.message(
+      'volleyball',
+      name: 'category_volleyball',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `mountains`
+  String get category_mountains {
+    return Intl.message(
+      'mountains',
+      name: 'category_mountains',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `escape room`
+  String get category_escape_room {
+    return Intl.message(
+      'escape room',
+      name: 'category_escape_room',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `sport`
+  String get category_sport {
+    return Intl.message(
+      'sport',
+      name: 'category_sport',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `man`
   String get gender_male {
     return Intl.message(
@@ -1003,20 +1083,30 @@ class S {
     );
   }
 
-  /// `show profile`
-  String get home_screen_settings_tab_show_profile {
+  /// `edit profile`
+  String get home_screen_settings_tab_edit_profile {
     return Intl.message(
-      'show profile',
-      name: 'home_screen_settings_tab_show_profile',
+      'edit profile',
+      name: 'home_screen_settings_tab_edit_profile',
       desc: '',
       args: [],
     );
   }
 
-  /// `language change:`
+  /// `Settings`
+  String get home_screen_settings_tab_settings_label {
+    return Intl.message(
+      'Settings',
+      name: 'home_screen_settings_tab_settings_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `language:`
   String get home_screen_settings_tab_change_language {
     return Intl.message(
-      'language change:',
+      'language:',
       name: 'home_screen_settings_tab_change_language',
       desc: '',
       args: [],
@@ -1343,11 +1433,21 @@ class S {
     );
   }
 
-  /// `accept the request to join`
+  /// `accept`
   String get activity_details_screen_requests_tab_accept_request {
     return Intl.message(
-      'accept the request to join',
+      'accept',
       name: 'activity_details_screen_requests_tab_accept_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `reject`
+  String get activity_details_screen_requests_tab_reject_request {
+    return Intl.message(
+      'reject',
+      name: 'activity_details_screen_requests_tab_reject_request',
       desc: '',
       args: [],
     );

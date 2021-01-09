@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_thesis/blocs/abstract_blocs/fetch/fetch_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/maker_appeal_to_join/appeals_to_join_fetch_bloc.dart';
+import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/maker_appeal_to_join/maker_registration_attendee_reject_send_bloc.dart';
 import 'package:engineering_thesis/blocs/specific_blocs/activity_details/registration/maker_appeal_to_join/maker_registration_attendee_send_bloc.dart';
 import 'package:engineering_thesis/data/models/activity.dart';
 import 'package:engineering_thesis/data/models/appeal_to_join.dart';
@@ -8,9 +10,13 @@ import 'package:engineering_thesis/data/repositories/appeal_to_join_repository.d
 import 'package:engineering_thesis/data/repositories/transaction_and_batch_repository.dart';
 import 'package:engineering_thesis/data/repositories/user_repository.dart';
 import 'package:engineering_thesis/generated/l10n.dart';
+import 'package:engineering_thesis/shared/routing/routing.dart';
+import 'package:engineering_thesis/shared/utils/dates.dart';
+import 'package:engineering_thesis/shared/view/theme.dart';
 import 'package:engineering_thesis/ui/components/abstract/nav_bar_tab.dart';
 import 'package:engineering_thesis/ui/components/bloc_builders/fetching_bloc_builder.dart';
 import 'package:engineering_thesis/ui/components/bloc_builders/send/send_builder_button.dart';
+import 'package:engineering_thesis/ui/components/custom_widgets/gesture_detector/custom_gesture_detector.dart';
 import 'package:engineering_thesis/ui/components/custom_widgets/list/custom_list.dart';
 import 'package:engineering_thesis/ui/components/custom_widgets/list/custom_list_tile.dart';
 import 'package:engineering_thesis/ui/components/custom_widgets/text/cutom_text.dart';
@@ -69,17 +75,7 @@ class OrganizerAppealToJoinTab extends NavBarTab {
           ),
           child: Builder(
             builder: (context) {
-              return CustomListTile(
-                title: appealToJoin.submissionDate.toString(),
-                content: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText.bodyText(
-                        '${appealToJoin.user?.firstName} ${appealToJoin.user?.secondName}'),
-                    _buildActionButtons(context),
-                  ],
-                ),
-              );
+              return _buildTile(context, appealToJoin);
             },
           ),
         );
@@ -87,16 +83,55 @@ class OrganizerAppealToJoinTab extends NavBarTab {
     );
   }
 
-  Widget _buildActionButtons(context) {
-    return SendBuilderButton(
-      sendBloc: BlocProvider.of<MakerRegistrationAttendeeSendBloc>(context),
-      sendButtonText:
-          S.of(context).activity_details_screen_requests_tab_accept_request,
-      afterSuccess: () {
-        BlocProvider.of<AppealsToJoinFetchBloc>(context)
-            .add(FetchRefreshEvent());
+  Widget _buildTile(BuildContext context, AppealToJoin appealToJoin) {
+    return CustomGestureDetector(
+      onTap: () {
+        Routing.pushNamed(context, UserRoutes.profile, options: {
+          RoutingOption.userRef: appealToJoin.userRef,
+          RoutingOption.withContactInfo: true,
+        });
       },
+      child: CustomListTile(
+        title:
+            '${appealToJoin.user?.firstName} ${appealToJoin.user?.secondName} ${formatDate('dd-mm-yyyy hh:mm', appealToJoin.submissionDate)}',
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: Dimensions.gutterVerySmall),
+            CustomText.bodyText(
+              appealToJoin?.comment ?? '',
+            ),
+            Row(children: _buildActionButtons(context, appealToJoin.ref)),
+          ],
+        ),
+      ),
     );
+  }
+
+  List<Widget> _buildActionButtons(context, DocumentReference appealToJoinRef) {
+    return [
+      SendBuilderButton(
+        sendBloc: BlocProvider.of<MakerRegistrationAttendeeSendBloc>(context),
+        sendButtonText:
+            S.of(context).activity_details_screen_requests_tab_accept_request,
+        afterSuccess: () {
+          BlocProvider.of<AppealsToJoinFetchBloc>(context)
+              .add(FetchRefreshEvent());
+        },
+      ),
+      SendBuilderButton(
+        sendBloc: MakerRegistrationAttendeeRejectSendBloc(
+          RepositoryProvider.of<AppealToJoinRepository>(context),
+          appealToJoinRef: appealToJoinRef,
+        ),
+        sendButtonText:
+            S.of(context).activity_details_screen_requests_tab_reject_request,
+        afterSuccess: () {
+          BlocProvider.of<AppealsToJoinFetchBloc>(context)
+              .add(FetchRefreshEvent());
+        },
+      ),
+    ];
   }
 
   @override
